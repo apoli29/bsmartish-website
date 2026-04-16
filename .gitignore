@@ -1,0 +1,19 @@
+# Claude Code internal files
+.claude/
+
+# Node modules
+node_modules/
+bsmartish-site/node_modules/
+
+# Next.js
+bsmartish-site/.next/
+bsmartish-site/out/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
