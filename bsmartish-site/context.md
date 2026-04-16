@@ -1,3 +1,4 @@
+
 # BSMARTISH Website - Context & Session Memory
 
 ## Workflow Acordado
@@ -7,21 +8,14 @@
 - Regra Estrita: Para cada tarefa [Visual], desenha diretamente no Paper usando o MCP e para para validação
 
 ## Estado Atual do Projeto
-- Next.js 16.2.4 inicializado em `bsmartish-site/`
-- Template de demonstração removido (SVGs do Vercel/Next, conteúdo placeholder da page.js, estilos Geist)
-- Fontes registadas via `next/font/local` em `app/layout.js`:
-  - Radnika Medium → CSS var `--font-radnika` → Tailwind `font-heading`
-  - Garet Heavy → CSS var `--font-garet` → Tailwind `font-subheading`
-  - Aileron (Regular 400 / SemiBold 600 / Bold 700) → CSS var `--font-aileron` → Tailwind `font-body`
-- Cores da marca definidas em `app/globals.css` como CSS vars e tokens Tailwind:
-  - Slate Blue `#6b87a4`, Canvas White `#f8f8f8`, Deep Urban `#202831`, Slate Gray `#75797c`
-- Build de produção a funcionar sem erros
+- Repositório GitHub criado e ligado ao VS Code
+- Next.js ainda não inicializado — projeto a começar do zero
 - Nenhuma página construída ainda
 
-## Próxima Tarefa
-- Tarefa 01: Header (Visual)
+## Estado das Tarefas
+- Tarefa 01 (Header - Visual): ✅ Instruções definidas, MCP do Paper a configurar
 
-## Instruções Específicas do Header
+## Instruções do Header (para referência futura)
 - Referências Visuais:
   - Estilo do Menu: ficheiro `public/inspo.templates/referencia.menu`
   - Logotipo: ficheiro `public/images/logo.png`
@@ -30,7 +24,7 @@
 - Tipografia: Fonte Aileron em branco para o menu, Radnika para o logotipo
 - Links: Home, About Us, Portfolio, Contact
 - Estado Ativo: sublinhado elegante no link "Home"
-- Nota: Esta estrutura é a base, mas poderão ser feitos ajustes pontuais
+
 
 ## Correções à Interpretação do Spec
 
@@ -56,3 +50,6 @@
 ## Regras de Sessão
 - No início de cada sessão: lê o spec.md e o context.md antes de fazer qualquer coisa
 - No fim de cada sessão: atualiza o context.md com o que foi feito e os próximos passos
+
+## Observação
+- A estrutura pode nao ser seguida a 100%. Uma ou outra alteração podem ser feitas com o decorrer do projeto ,em função do que fizer mais  sentido para o mesmo. Se for esse o caso, fazz as alterações necessárias no spec.md para manter a nossa pasta atualizada e para não te confundires
