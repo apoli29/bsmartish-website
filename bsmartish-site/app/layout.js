@@ -1,5 +1,6 @@
 import localFont from 'next/font/local'
 import './globals.css'
+import Header from '@/app/components/Header'
 
 const radnika = localFont({
   src: [
@@ -35,7 +36,10 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${radnika.variable} ${garet.variable} ${aileron.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
