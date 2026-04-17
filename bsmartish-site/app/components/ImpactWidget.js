@@ -1,44 +1,64 @@
 const stats = [
-  { value: '+10', label: 'Curated Projects', bg: 'rgba(107, 135, 164, 0.72)' },
-  { value: '+6.2M €', label: 'In Investments', bg: 'rgba(32, 40, 49, 0.82)' },
-  { value: '100%', label: 'Client Satisfaction', bg: 'rgba(107, 135, 164, 0.72)' },
+  { value: '+10',     label: 'Curated Projects'    },
+  { value: '+6.2M €', label: 'In Investments'      },
+  { value: '100%',    label: 'Client Satisfaction' },
 ]
 
 export default function ImpactWidget() {
   return (
     <section
       id="impact-widget"
-      className="relative w-full overflow-hidden"
-      style={{ backgroundColor: '#F8F8F8' }}
+      className="w-full"
+      style={{ backgroundColor: '#f8f8f8' }}
     >
-      <div className="relative z-10 max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 py-8 md:py-10 lg:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-9">
-          {stats.map(({ value, label, bg }) => (
-            <div
-              key={label}
-              className="rounded-2xl p-10 md:p-12 lg:p-14 text-center"
+      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-16 md:pt-20 lg:pt-24 pb-8 md:pb-10 lg:pb-12">
+        <div className="flex flex-col md:flex-row gap-10 lg:gap-16 items-center">
+
+          {/* Left column — headline + button */}
+          <div className="flex flex-col md:w-[45%] shrink-0">
+            <h2
+              className="text-[2.4rem] md:text-[2.8rem] lg:text-[3.1rem]"
+              style={{ fontFamily: 'var(--font-radnika)', color: '#6b87a4', lineHeight: 1.1 }}
+            >
+              A track record<br />that proves our<br />excellence.
+            </h2>
+            <button
+              className="mt-5 self-start"
               style={{
-                backgroundColor: bg,
-                backdropFilter: 'blur(28px)',
-                WebkitBackdropFilter: 'blur(28px)',
-                border: '1px solid rgba(255, 255, 255, 0.30)',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.20)',
+                fontFamily: 'var(--font-aileron)',
+                fontWeight: 400,
+                color: '#202831',
+                background: 'transparent',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                fontSize: '1rem',
               }}
             >
-              <p
-                className="leading-none mb-4 text-[2.2rem] md:text-[2.6rem] lg:text-[3rem]"
-                style={{ fontFamily: 'var(--font-garet)', fontWeight: 800, color: '#F8F8F8' }}
-              >
-                {value}
-              </p>
-              <p
-                className="text-base md:text-lg lg:text-xl tracking-wide"
-                style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#F8F8F8' }}
-              >
-                {label}
-              </p>
-            </div>
-          ))}
+              Find out more about us →
+            </button>
+          </div>
+
+          {/* Right column — three stat widgets, no background */}
+          <div className="flex flex-col md:flex-row md:items-center flex-1">
+            {stats.map(({ value, label }, i) => (
+              <div key={label} className="flex-1 flex flex-col items-start text-left" style={i < stats.length - 1 ? { paddingRight: '4rem' } : {}}>
+                <p
+                  className="leading-none mb-3 text-[2.2rem] md:text-[2.6rem] lg:text-[3rem] whitespace-nowrap"
+                  style={{ fontFamily: 'var(--font-garet)', fontWeight: 800, color: '#202831' }}
+                >
+                  {value}
+                </p>
+                <p
+                  className="text-base md:text-lg whitespace-nowrap"
+                  style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c' }}
+                >
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

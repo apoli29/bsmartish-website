@@ -19,26 +19,29 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const trigger = document.getElementById('impact-widget')
-      if (!trigger) return
-      const triggerTop = trigger.getBoundingClientRect().top
-      setSolid(triggerTop <= 0)
+      setSolid(window.scrollY > 50)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <div
-      className="fixed top-0 left-0 right-0 z-50 transition-colors duration-500"
-      style={{ backgroundColor: solid ? '#6b87a4' : 'transparent' }}
-    >
-      <header className="w-full">
-        <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 h-[110px] md:h-[130px] lg:h-[150px] flex items-center justify-between">
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-6 md:px-12 lg:px-[4.5rem] pt-4 md:pt-5">
+      <header
+        className="w-full max-w-screen-xl rounded-2xl transition-all duration-500"
+        style={{
+          backgroundColor: solid ? '#6b87a4' : 'transparent',
+          backdropFilter: solid ? 'none' : 'blur(14px)',
+          WebkitBackdropFilter: solid ? 'none' : 'blur(14px)',
+          border: solid ? 'none' : '1px solid rgba(255,255,255,0.18)',
+          boxShadow: solid ? '0 4px 24px rgba(0,0,0,0.12)' : 'none',
+        }}
+      >
+        <div className="pl-1 md:pl-1 lg:pl-2 pr-3 md:pr-4 lg:pr-5 h-[64px] md:h-[72px] lg:h-[80px] flex items-center justify-between">
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center">
-            <div className="w-[160px] md:w-[240px] lg:w-[320px] ml-[-20px] md:ml-[-30px] lg:ml-[-40px]">
+            <div className="w-[198px] md:w-[231px] lg:w-[264px]">
               <Image
                 src="/Images/Logo/logo.svg"
                 alt="BSMARTISH"
@@ -93,38 +96,38 @@ export default function Header() {
           </button>
 
         </div>
-      </header>
 
-      {/* Menu dropdown — mobile */}
-      <div
-        className="md:hidden overflow-hidden transition-all duration-300"
-        style={{
-          backgroundColor: 'rgba(32, 40, 49, 0.95)',
-          maxHeight: menuOpen ? '300px' : '0px',
-          opacity: menuOpen ? 1 : 0,
-        }}
-      >
-        <nav className="flex flex-col items-center gap-7 py-8">
-          {links.map(({ label, href }) => {
-            const isActive = pathname === href
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className="flex flex-col items-center gap-[5px] text-white text-[13px] tracking-[0.12em] uppercase hover:opacity-75 transition-opacity"
-                style={{ fontFamily: 'var(--font-aileron)' }}
-              >
-                {label}
-                <span
-                  className="h-[1px] w-full"
-                  style={{ backgroundColor: isActive ? 'white' : 'transparent' }}
-                />
-              </Link>
-            )
-          })}
-        </nav>
-      </div>
+        {/* Menu dropdown — mobile */}
+        <div
+          className="md:hidden overflow-hidden transition-all duration-300 rounded-b-2xl"
+          style={{
+            backgroundColor: 'rgba(32, 40, 49, 0.95)',
+            maxHeight: menuOpen ? '300px' : '0px',
+            opacity: menuOpen ? 1 : 0,
+          }}
+        >
+          <nav className="flex flex-col items-center gap-7 py-8">
+            {links.map(({ label, href }) => {
+              const isActive = pathname === href
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex flex-col items-center gap-[5px] text-white text-[13px] tracking-[0.12em] uppercase hover:opacity-75 transition-opacity"
+                  style={{ fontFamily: 'var(--font-aileron)' }}
+                >
+                  {label}
+                  <span
+                    className="h-[1px] w-full"
+                    style={{ backgroundColor: isActive ? 'white' : 'transparent' }}
+                  />
+                </Link>
+              )
+            })}
+          </nav>
+        </div>
+      </header>
     </div>
   )
 }
