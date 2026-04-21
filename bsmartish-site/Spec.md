@@ -22,17 +22,23 @@
 | **Vercel** | The hosting platform where the site will live, ensuring ultra-fast delivery and automatic updates. |
 
 ## 3. Workflow
-
-- **Structure & Visual Alignment:**
-    1. **Initial Build:** Claude Code builds the initial technical structure and layout (the "skeleton") of the site.
-    2. **Visual Verification (Paper):** Paper is used as the visual bridge to verify the structure's aesthetics, ensuring colors, spacing, and typography meet BSMARTISH's premium standards.
-    3. **Aesthetic Refinement:** Any necessary visual adjustments are made within Paper to achieve design perfection.
-    4. **Final Sync:** Claude Code subsequently updates the source code structure to reflect the validated visual changes from Paper, ensuring the final product matches the approved design.
+- The workflow is simple and flexible: the process is focused section by section. Reference screenshots for each section will be provided at `C:\bsmartish\bsmartish-website-folder\bsmartish-site\public\inspo.templates`.  Your job is to first clone/replicate those screenshots as accurately as possible, and only after apply the necessary adjustments to align the aesthetics with the project identity (colours, fonts, and logo if needed), following the instructions provided. NOTE: Even though the focus is section by section, this does NOT mean 
+we won't eventually go back to different sections to make improvements.
+- Furthermore, you will use the screenshot workflow both when cloning the reference screenshots and when adjusting the sections to integrate the project identity.
+- Puppeteer is installed at `C:\bsmartish\bsmartish-website-folder\bsmartish-site\node_modules\puppeteer`. Chrome cache is at `C:\Users\António Policarpo\.cache\puppeteer\chrome\win64-147.0.7727.57\chrome-win64\chrome.exe`.  
+- **Always screenshot from localhost:** `node screenshot.mjs http://localhost:3000`
+- Screenshots are saved automatically to `C:\bsmartish\bsmartish-website-folder\bsmartish-site\public\temp.screenshots` (auto-incremented, never overwritten).
+- Optional label suffix: `node screenshot.mjs http://localhost:3000 label` -> saves as `screenshot-N-label.png`
+- `screenshot.mjs` lives in the project root. Use it as-is.
+- After screenshotting, read the PNG from `temporary screenshots/` with the Read tool – Claude can see and analyze the image directly.
+- When comparing, be specific: "heading is 32px but reference shows ~24px", "card gap is 16px but should be 24px"
+- Check: spacing/padding, font size/weight/line-height, colors (exact hex), alignment, border-radius, shadows, image sizing
 
 ## 3. Visual Identity (Strict Rules)
 
 - **Colors:**
     - Primary: `Slate Blue (#6b87a4)`
+    
     - Secondary: `Canvas White (#F8F8F8)`
     - Accent/Call-to-Action: `Deep Urban (#202831)`
     - Text/Neutral: `Slate Gray (#75797c)`
@@ -73,71 +79,7 @@
 
 - **In all pages - Fat Footer:** Comprehensive footer with branding, contacts, social media links, legal navigation, and AMI license.
 
-### **List, in order, of the tasks
 
- #  │                 Tarefa                  │  Tipo  │ Página / Componente │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 01  │ Header                                  │ Visual │ Global              │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 02  │ Hero Intro                              │ Visual │ Home                │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 03  │ Our Mission                             │ Visual │ Home                │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 04  │ Impact Widget                           │ Visual │ Home                │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 05  │ Featured Properties                     │ Visual │ Home                │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 06  │ Trajectory & Vision                     │ Visual │ About Us            │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 07  │ What We Do                              │ Visual │ About Us            │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 08  │ Mission & Vision                        │ Visual │ About Us            │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 09  │ Values                                  │ Visual │ About Us            │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 10  │ Portfolio Grid + Property Cards         │ Visual │ Portfolio           │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 11  │ Identity Hero                           │ Visual │ Individual Property │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 12  │ Essentials Info                         │ Visual │ Individual Property │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 13  │ Visual Gallery                          │ Visual │ Individual Property │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 14  │ Media Tour                              │ Visual │ Individual Property │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 15  │ Map Integration                         │ Visual │ Individual Property │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 16  │ The Insider Guide                       │ Visual │ Individual Property │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 17  │ Footer                                  │ Visual │ Global              │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ —   │ —                                       │ —      │ —                   │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 18  │ Setup Next.js + config base             │ Dev    │ Projeto             │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 19  │ Header                                  │ Dev    │ Global              │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 20  │ Hero Intro                              │ Dev    │ Home                │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 21  │ Our Mission                             │ Dev    │ Home                │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 22  │ Impact Widget                           │ Dev    │ Home                │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 23  │ Featured Properties                     │ Dev    │ Home                │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 24  │ Trajectory & Vision                     │ Dev    │ About Us            │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 25  │ What We Do                              │ Dev    │ About Us            │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 26  │ Mission & Vision                        │ Dev    │ About Us            │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 27  │ Values                                  │ Dev    │ About Us            │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 28  │ Portfolio Grid + Property Cards         │ Dev    │ Portfolio           │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 29  │ Individual Property (template completo) │ Dev    │ Individual Property │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 30  │ Footer                                  │ Dev    │ Global              │
-  ├─────┼─────────────────────────────────────────┼────────┼─────────────────────┤
-  │ 31  │ Deploy para Vercel                      │ Dev    │ Projeto             │
-  └─────┴─────────────────────────────────────────┴────────┴─────────────────────┘
+## Always Do First - Before start building the website
+## Always Do First
+- **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.

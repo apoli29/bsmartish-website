@@ -26,9 +26,10 @@ export default function Header() {
   }, [])
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-6 md:px-12 lg:px-[4.5rem] pt-4 md:pt-5">
+    <div className="fixed top-0 left-0 right-0 z-50 pt-4 md:pt-5">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20">
       <header
-        className="w-full max-w-screen-xl rounded-2xl transition-all duration-500"
+        className="w-full rounded transition-all duration-500"
         style={{
           backgroundColor: solid ? '#6b87a4' : 'transparent',
           backdropFilter: solid ? 'none' : 'blur(14px)',
@@ -37,18 +38,18 @@ export default function Header() {
           boxShadow: solid ? '0 4px 24px rgba(0,0,0,0.12)' : 'none',
         }}
       >
-        <div className="pl-1 md:pl-1 lg:pl-2 pr-3 md:pr-4 lg:pr-5 h-[64px] md:h-[72px] lg:h-[80px] flex items-center justify-between">
+        <div className="pl-1 md:pl-1 lg:pl-2 pr-7 md:pr-8 lg:pr-10 h-[64px] md:h-[72px] lg:h-[80px] flex items-center justify-between">
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center">
             <div className="w-[198px] md:w-[231px] lg:w-[264px]">
               <Image
-                src="/Images/Logo/logo.svg"
+                src="/images/Logo/logo.png"
                 alt="BSMARTISH"
-                width={320}
-                height={80}
+                width={900}
+                height={900}
                 priority
-                unoptimized
+                sizes="(max-width: 768px) 198px, (max-width: 1024px) 231px, 264px"
                 style={{ width: '100%', height: 'auto', display: 'block' }}
               />
             </div>
@@ -99,7 +100,7 @@ export default function Header() {
 
         {/* Menu dropdown — mobile */}
         <div
-          className="md:hidden overflow-hidden transition-all duration-300 rounded-b-2xl"
+          className="md:hidden overflow-hidden transition-all duration-300 rounded-b"
           style={{
             backgroundColor: 'rgba(32, 40, 49, 0.95)',
             maxHeight: menuOpen ? '300px' : '0px',
@@ -128,6 +129,7 @@ export default function Header() {
           </nav>
         </div>
       </header>
+      </div>
     </div>
   )
 }
