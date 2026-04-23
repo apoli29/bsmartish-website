@@ -23,3 +23,25 @@ body {
   color: var(--color-deep-urban);
   font-family: var(--font-aileron), sans-serif;
 }
+
+.card-container {
+  perspective: 1200px;
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+.card-glare {
+  background: radial-gradient(
+    circle 220px at var(--mouse-x, -400px) var(--mouse-y, -400px),
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0.12) 30%,
+    transparent 65%
+  );
+  mix-blend-mode: screen;
+  border-radius: inherit;
+  transition: background-position 0.08s linear;
+}
