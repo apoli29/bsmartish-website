@@ -34,7 +34,7 @@ we won't eventually go back to different sections to make improvements.
 - When comparing, be specific: "heading is 32px but reference shows ~24px", "card gap is 16px but should be 24px"
 - Check: spacing/padding, font size/weight/line-height, colors (exact hex), alignment, border-radius, shadows, image sizing
 
-## 3. Visual Identity (Strict Rules)
+## 4. Visual Identity (Strict Rules)
 
 - **Colors:**
     - Primary: `Slate Blue (#6b87a4)`
@@ -47,13 +47,13 @@ we won't eventually go back to different sections to make improvements.
     - Sub-headings & CTAs: `Garet`
     - Body Text: `Aileron`
 
-## 3. Site Map & Sections
+## 5. Site Map & Sections
 
 #### **Page: Home (The Showcase)**
 
 - **Section 1 - Hero Intro:** High-impact brand statement with a title regarding urban renovation and explaining what the brand does. CTA’s linking to "About Us" and “Contact us” and “Portfolio”.
 - Section 2  - Our mission
-- **Section 3 - Impact Widget:** Data-driven section with an animated counter for "Projects Completed".
+- **Section 3 - Impact Widget:** Data-driven section with three metrics: number of completed projects, total value of those projects, and percentage of satisfied clients (animated counters).
 - **Section 4 - Featured Properties:** Two large, immersive cards for key apartments + "Explore all the properties" button (links to Portfolio).
 
 #### **Page: About Us (Identity & Activity)**
@@ -80,6 +80,5 @@ we won't eventually go back to different sections to make improvements.
 - **In all pages - Fat Footer:** Comprehensive footer with branding, contacts, social media links, legal navigation, and AMI license.
 
 
-## Always Do First - Before start building the website
-## Always Do First
+## 6. Always Do First - Before start building the website
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
