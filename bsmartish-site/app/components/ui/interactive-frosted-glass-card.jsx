@@ -10,6 +10,11 @@ export const FrostedGlassCard = ({
   bodyText,
   tone = 'image',
   className = '',
+  children,
+  contentClassName = 'p-6 md:p-8 lg:p-10 flex flex-col items-start',
+  overlayOpacity,
+  imageSizes = '(max-width: 1024px) 100vw, 720px',
+  imagePosition = 'center',
 }) => {
   const cardRef = useRef(null)
 
@@ -24,8 +29,8 @@ export const FrostedGlassCard = ({
       const centerX = rect.width / 2
       const centerY = rect.height / 2
 
-      const rotateY = ((x - centerX) / centerX) * 10
-      const rotateX = ((y - centerY) / centerY) * -10
+      const rotateY = ((x - centerX) / centerX) * 4.5
+      const rotateX = ((y - centerY) / centerY) * -4.5
 
       card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
       card.style.setProperty('--mouse-x', `${x}px`)
@@ -60,7 +65,8 @@ export const FrostedGlassCard = ({
             alt=""
             fill
             className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 400px"
+            style={{ objectPosition: imagePosition }}
+            sizes={imageSizes}
             priority
           />
         )}
@@ -78,7 +84,7 @@ export const FrostedGlassCard = ({
                   borderRadius: 'inherit',
                 }
               : {
-                  backgroundColor: 'rgba(32,40,49,0.50)',
+                  backgroundColor: `rgba(32,40,49,${overlayOpacity ?? 0.5})`,
                   border: '1px solid rgba(255,255,255,0.22)',
                   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.20)',
                   borderRadius: 'inherit',
@@ -90,30 +96,34 @@ export const FrostedGlassCard = ({
         <div className="card-glare absolute inset-0 pointer-events-none" />
 
         {/* Content */}
-        <div className="relative z-10 w-full h-full p-6 md:p-8 lg:p-10 flex flex-col items-start">
-          {title && (
-            <h3
-              className="text-white leading-none text-[2rem] md:text-[2.4rem] lg:text-[2.75rem]"
-              style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500 }}
-            >
-              {title}
-            </h3>
-          )}
-          {subtitle && (
-            <p
-              className="text-white mt-2 text-[0.85rem] md:text-[0.95rem] lg:text-[1rem]"
-              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400 }}
-            >
-              {subtitle}
-            </p>
-          )}
-          {bodyText && (
-            <p
-              className="text-white text-[0.9rem] md:text-[0.95rem] leading-relaxed"
-              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400 }}
-            >
-              {bodyText}
-            </p>
+        <div className={`relative z-10 w-full h-full ${contentClassName}`}>
+          {children ?? (
+            <>
+              {title && (
+                <h3
+                  className="text-white leading-none text-[2rem] md:text-[2.4rem] lg:text-[2.75rem]"
+                  style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500 }}
+                >
+                  {title}
+                </h3>
+              )}
+              {subtitle && (
+                <p
+                  className="text-white mt-2 text-[0.85rem] md:text-[0.95rem] lg:text-[1rem]"
+                  style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400 }}
+                >
+                  {subtitle}
+                </p>
+              )}
+              {bodyText && (
+                <p
+                  className="text-white text-[0.9rem] md:text-[0.95rem] leading-relaxed"
+                  style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400 }}
+                >
+                  {bodyText}
+                </p>
+              )}
+            </>
           )}
         </div>
       </div>

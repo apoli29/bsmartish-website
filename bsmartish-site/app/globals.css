@@ -30,18 +30,17 @@ body {
 
 .card {
   transform-style: preserve-3d;
-  transition: transform 0.2s ease-out;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 
 .card-glare {
   background: radial-gradient(
-    circle 220px at var(--mouse-x, -400px) var(--mouse-y, -400px),
-    rgba(255, 255, 255, 0.55),
-    rgba(255, 255, 255, 0.12) 30%,
-    transparent 65%
+    circle 240px at var(--mouse-x, -400px) var(--mouse-y, -400px),
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0) 70%
   );
   mix-blend-mode: screen;
   border-radius: inherit;
-  transition: background-position 0.08s linear;
+  transition: opacity 0.3s ease-out;
 }

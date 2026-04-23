@@ -1,0 +1,159 @@
+'use client'
+
+import { useState } from 'react'
+import FadeIn from '@/app/components/FadeIn'
+
+const faqs = [
+  {
+    q: 'What types of properties does BSMARTISH renovate?',
+    a: 'We focus on urban properties suited to mid-term residential rental — typically apartments and small buildings in central locations. We renovate both for our own portfolio and on behalf of investors and owners who commission us to develop their projects.',
+  },
+  {
+    q: 'What is mid-term rental, and who is it for?',
+    a: 'Mid-term rental covers stays of roughly one to twelve months. It is designed for residents who need a fully furnished, ready-to-live home for a defined period — relocating professionals, remote workers, families in transition, and visitors who want more than a hotel and more flexibility than a long-term lease.',
+  },
+  {
+    q: 'Can I commission a renovation project for my own property?',
+    a: 'Yes. We work with property owners who want to renovate their building to a high standard — whether to live in it, to rent it, or to sell it. We bring the same procedures and standards we apply to our own portfolio.',
+  },
+  {
+    q: 'Where are your projects located?',
+    a: 'Today our operations are centralized in Porto, where most of our active properties and ongoing projects are located. Our previous activity in Spain — primarily in Barcelona and Girona — shaped our identity and is part of our trajectory.',
+  },
+  {
+    q: 'How long does a typical urban renovation project take?',
+    a: 'Timelines depend on the scope, the building, and any licensing involved. As a general reference, a full apartment renovation typically takes between four and nine months from project start to handover. We share a realistic schedule before any work begins.',
+  },
+  {
+    q: 'What is included in your rental properties?',
+    a: 'Every property we deliver is fully furnished and equipped — kitchen, bathroom, climate control, internet, and the day-to-day items needed to move in and start living. The exact specification is detailed on each property page.',
+  },
+  {
+    q: 'Do you work with international investors?',
+    a: 'Yes. A meaningful share of the projects we develop is for investors based outside Portugal. We handle the project end to end — sourcing, design, construction, licensing, and operation — so the relationship is straightforward to manage from anywhere.',
+  },
+  {
+    q: 'How can I get in touch about a property or a partnership?',
+    a: 'The fastest way is the contact section of this site. Tell us briefly whether you are looking to live in one of our properties, to invest, or to commission a renovation, and we will get back to you with the right next step.',
+  },
+]
+
+function FAQItem({ q, a, isOpen, onToggle }) {
+  return (
+    <li
+      className="block"
+      style={{ borderBottom: '1px solid #e4e4e4' }}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="w-full flex items-start justify-between gap-6 py-6 md:py-7 text-left transition-colors hover:opacity-80"
+      >
+        <span
+          className="text-[1.05rem] md:text-[1.15rem] lg:text-[1.2rem] leading-snug"
+          style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#202831' }}
+        >
+          {q}
+        </span>
+
+        {/* Plus / Cross icon */}
+        <span
+          aria-hidden="true"
+          className="relative flex-shrink-0 mt-[6px] md:mt-[8px]"
+          style={{ width: '18px', height: '18px' }}
+        >
+          <span
+            className="absolute left-0 top-1/2 block w-full"
+            style={{
+              height: '1.5px',
+              backgroundColor: '#6b87a4',
+              transform: 'translateY(-50%)',
+            }}
+          />
+          <span
+            className="absolute left-1/2 top-0 block h-full transition-transform duration-300"
+            style={{
+              width: '1.5px',
+              backgroundColor: '#6b87a4',
+              transform: isOpen ? 'translateX(-50%) rotate(90deg)' : 'translateX(-50%) rotate(0deg)',
+            }}
+          />
+        </span>
+      </button>
+
+      {/* Animated answer panel — grid-template-rows trick (no height animation) */}
+      <div
+        className="grid transition-[grid-template-rows] duration-400 ease-out"
+        style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+      >
+        <div className="overflow-hidden">
+          <p
+            className="pb-6 md:pb-8 pr-10 md:pr-16 text-[0.98rem] md:text-[1rem] leading-[1.7] max-w-[65ch]"
+            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#202831' }}
+          >
+            {a}
+          </p>
+        </div>
+      </div>
+    </li>
+  )
+}
+
+export default function AboutFAQ() {
+  const [openIndex, setOpenIndex] = useState(0)
+
+  return (
+    <section
+      id="about-faq"
+      className="w-full"
+      style={{ backgroundColor: '#f8f8f8', borderTop: '1px solid #e4e4e4' }}
+    >
+      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-16 md:pb-20 lg:pb-24">
+
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-12 lg:gap-20">
+
+          {/* Left column — heading */}
+          <FadeIn>
+            <p
+              className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
+              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
+            >
+              Questions
+            </p>
+            <h2
+              className="text-[2rem] md:text-[2.4rem] lg:text-[2.8rem] leading-[1.1] max-w-[420px]"
+              style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#6b87a4' }}
+            >
+              Frequently asked questions.
+            </h2>
+
+            <p
+              className="mt-6 max-w-[380px] text-[0.95rem] md:text-[1rem] leading-relaxed"
+              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c' }}
+            >
+              A few things people often ask us. If your question is not here, write to us directly and we will get back to you.
+            </p>
+          </FadeIn>
+
+          {/* Right column — accordion */}
+          <FadeIn delay={150}>
+            <ul style={{ borderTop: '1px solid #e4e4e4' }}>
+              {faqs.map((item, i) => (
+                <FAQItem
+                  key={i}
+                  q={item.q}
+                  a={item.a}
+                  isOpen={openIndex === i}
+                  onToggle={() => setOpenIndex(openIndex === i ? -1 : i)}
+                />
+              ))}
+            </ul>
+          </FadeIn>
+
+        </div>
+
+      </div>
+    </section>
+  )
+}
