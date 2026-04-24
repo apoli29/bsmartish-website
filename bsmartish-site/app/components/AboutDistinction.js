@@ -8,7 +8,7 @@ export default function AboutDistinction() {
       className="w-full"
       style={{ backgroundColor: '#f8f8f8', borderTop: '1px solid #e4e4e4' }}
     >
-      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-2.5 md:pb-3 lg:pb-3.5">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-0">
 
         <FadeIn>
           <FrostedGlassCard

@@ -9,8 +9,8 @@ const faqs = [
     a: 'We focus on urban properties suited to mid-term residential rental — typically apartments and small buildings in central locations. We renovate both for our own portfolio and on behalf of investors and owners who commission us to develop their projects.',
   },
   {
-    q: 'What is mid-term rental, and who is it for?',
-    a: 'Mid-term rental covers stays of roughly one to twelve months. It is designed for residents who need a fully furnished, ready-to-live home for a defined period — relocating professionals, remote workers, families in transition, and visitors who want more than a hotel and more flexibility than a long-term lease.',
+    q: 'What is a mid-term rent and who is it for?',
+    a: 'Mid-term rentals cover stays typically ranging from one to twelve months. These are designed for relocating professionals, families in transition, digital nomads, or long-term travelers seeking a fully furnished, ready-to-live home with greater flexibility than a traditional long-term lease.',
   },
   {
     q: 'Can I commission a renovation project for my own property?',
@@ -18,19 +18,11 @@ const faqs = [
   },
   {
     q: 'Where are your projects located?',
-    a: 'Today our operations are centralized in Porto, where most of our active properties and ongoing projects are located. Our previous activity in Spain — primarily in Barcelona and Girona — shaped our identity and is part of our trajectory.',
+    a: 'Today our operations are centralized in Porto, where most of our active properties and ongoing projects are located.',
   },
   {
     q: 'How long does a typical urban renovation project take?',
     a: 'Timelines depend on the scope, the building, and any licensing involved. As a general reference, a full apartment renovation typically takes between four and nine months from project start to handover. We share a realistic schedule before any work begins.',
-  },
-  {
-    q: 'What is included in your rental properties?',
-    a: 'Every property we deliver is fully furnished and equipped — kitchen, bathroom, climate control, internet, and the day-to-day items needed to move in and start living. The exact specification is detailed on each property page.',
-  },
-  {
-    q: 'Do you work with international investors?',
-    a: 'Yes. A meaningful share of the projects we develop is for investors based outside Portugal. We handle the project end to end — sourcing, design, construction, licensing, and operation — so the relationship is straightforward to manage from anywhere.',
   },
   {
     q: 'How can I get in touch about a property or a partnership?',

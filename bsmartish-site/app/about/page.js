@@ -21,7 +21,7 @@ export default function AboutPage() {
         style={{ height: 'clamp(320px, 48vh, 520px)' }}
       >
         <Image
-          src="/images/Website.images/About us/sec3-sec4.webp"
+          src="/images/Website.images/About us/bewteen.sec3.and.sec4.webp"
           alt=""
           fill
           className="object-cover"

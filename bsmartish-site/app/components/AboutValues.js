@@ -52,6 +52,8 @@ function useInView(threshold = 0.2) {
   return [ref, inView]
 }
 
+const RECT_WIDTH = 'clamp(220px, 32%, 360px)'
+
 function ValueRow({ value, index, isOpen, onToggle }) {
   const [ref, inView] = useInView(0.25)
   const baseDelay = 80 * index
@@ -71,22 +73,49 @@ function ValueRow({ value, index, isOpen, onToggle }) {
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="group block w-full text-left cursor-pointer"
+        className="group relative block w-full text-left cursor-pointer overflow-hidden"
+        style={{ minHeight: '132px' }}
       >
-        {/* Deep Urban header bar — full row width, fixed.
-            Stays in place on toggle; only the description below it animates. */}
+        {/* Description — sits behind the rectangle, revealed as it contracts to the left */}
+        <div
+          className="absolute inset-0 flex items-center"
+          style={{
+            paddingLeft: `calc(${RECT_WIDTH} + 32px)`,
+            paddingRight: '20px',
+          }}
+          aria-hidden={!isOpen}
+        >
+          <p
+            className="text-[1.04rem] md:text-[1.08rem] lg:text-[1.11rem] leading-[1.6] max-w-[68ch]"
+            style={{
+              fontFamily: 'var(--font-aileron)',
+              fontWeight: 400,
+              color: '#75797c',
+              opacity: isOpen ? 1 : 0,
+              transform: isOpen ? 'translateX(0)' : 'translateX(-10px)',
+              transition: `opacity 400ms ${EASE} ${isOpen ? '200ms' : '0ms'}, transform 400ms ${EASE} ${isOpen ? '200ms' : '0ms'}`,
+            }}
+          >
+            {value.description}
+          </p>
+        </div>
+
+        {/* Deep Urban rectangle — full row width when closed; contracts horizontally to only sit behind the value name when open */}
         <div
           style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: isOpen ? RECT_WIDTH : '100%',
+            backgroundColor: '#202831',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '2.5rem',
-            backgroundColor: '#202831',
-            paddingTop: '18px',
-            paddingBottom: '18px',
+            gap: '2rem',
             paddingLeft: '28px',
             paddingRight: '24px',
-            width: '100%',
+            transition: `width 620ms ${EASE}`,
           }}
         >
           <span
@@ -106,7 +135,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
             className="inline-flex items-center justify-center flex-shrink-0"
             style={{
               color: isOpen ? '#6b87a4' : '#f8f8f8',
-              transform: isOpen ? 'rotate(-90deg)' : 'rotate(90deg)',
+              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: `transform 500ms ${EASE}, color 450ms ${EASE}`,
             }}
           >
@@ -124,28 +153,6 @@ function ValueRow({ value, index, isOpen, onToggle }) {
               <polyline points="13 6 19 12 13 18" />
             </svg>
           </span>
-        </div>
-
-        {/* Description — below the rectangle, revealed as deep urban contracts */}
-        <div
-          className="grid"
-          style={{
-            gridTemplateRows: isOpen ? '1fr' : '0fr',
-            transition: `grid-template-rows 550ms ${EASE}`,
-          }}
-        >
-          <div className="overflow-hidden">
-            <p
-              className="pt-5 md:pt-6 pb-2 md:pb-3 pl-[28px] pr-5 md:pr-10 lg:pr-16 text-[0.98rem] md:text-[1.02rem] lg:text-[1.05rem] leading-[1.7] max-w-[78ch]"
-              style={{
-                fontFamily: 'var(--font-aileron)',
-                fontWeight: 400,
-                color: '#75797c',
-              }}
-            >
-              {value.description}
-            </p>
-          </div>
         </div>
       </button>
     </li>

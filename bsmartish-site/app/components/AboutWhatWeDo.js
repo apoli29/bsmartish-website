@@ -54,7 +54,7 @@ function Activity({ activity, delay }) {
   return (
     <div ref={ref}>
       <h3
-        className="leading-[1.15] text-[1.4rem] md:text-[1.55rem] lg:text-[1.7rem] max-w-[28ch]"
+        className="leading-[1.15] text-[1.525rem] md:text-[1.675rem] lg:text-[1.825rem] max-w-[28ch]"
         style={{
           fontFamily: 'var(--font-garet)',
           fontWeight: 800,
@@ -65,7 +65,7 @@ function Activity({ activity, delay }) {
         {activity.title}
       </h3>
       <p
-        className="mt-5 md:mt-6 max-w-[46ch] text-[0.98rem] md:text-[1.02rem] lg:text-[1.05rem] leading-[1.7] text-justify"
+        className="mt-3 md:mt-3 max-w-[46ch] text-[1.105rem] md:text-[1.145rem] lg:text-[1.175rem] leading-[1.7] text-justify"
         style={{
           fontFamily: 'var(--font-aileron)',
           fontWeight: 400,
