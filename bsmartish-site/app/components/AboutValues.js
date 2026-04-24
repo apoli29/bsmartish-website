@@ -61,8 +61,9 @@ function ValueRow({ value, index, isOpen, onToggle }) {
       ref={ref}
       className="block"
       style={{
+        marginTop: index === 0 ? 0 : '14px',
         opacity: inView ? 1 : 0,
-        transform: inView ? 'translateY(0)' : 'translateY(14px)',
+        transform: inView ? 'translateY(0)' : 'translateY(12px)',
         transition: `opacity 700ms ${EASE} ${baseDelay}ms, transform 700ms ${EASE} ${baseDelay}ms`,
       }}
     >
@@ -70,78 +71,72 @@ function ValueRow({ value, index, isOpen, onToggle }) {
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="group block w-full text-left"
+        className="group block w-full text-left cursor-pointer"
       >
-        {/* Pill row — name on Deep Urban, extender fills/collapses, arrow on right */}
-        <div className="flex items-stretch w-full">
-
-          {/* Value name pill */}
-          <div
-            className="flex items-center px-6 md:px-8 lg:px-10 py-4 md:py-5 lg:py-[22px]"
-            style={{ backgroundColor: '#202831' }}
+        {/* Deep Urban header bar — full row width, fixed.
+            Stays in place on toggle; only the description below it animates. */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '2.5rem',
+            backgroundColor: '#202831',
+            paddingTop: '18px',
+            paddingBottom: '18px',
+            paddingLeft: '28px',
+            paddingRight: '24px',
+            width: '100%',
+          }}
+        >
+          <span
+            className="leading-none text-[1.45rem] md:text-[1.75rem] lg:text-[2rem]"
+            style={{
+              fontFamily: 'var(--font-garet)',
+              fontWeight: 800,
+              color: '#f8f8f8',
+              whiteSpace: 'nowrap',
+            }}
           >
-            <span
-              className="leading-none uppercase tracking-tight text-[1.4rem] md:text-[1.7rem] lg:text-[1.95rem]"
-              style={{
-                fontFamily: 'var(--font-garet)',
-                fontWeight: 800,
-                color: '#f8f8f8',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {value.name}
-            </span>
-          </div>
+            {value.name}
+          </span>
 
-          {/* Extender — Deep Urban background that grows when closed, collapses when open */}
-          <div
+          <span
             aria-hidden="true"
+            className="inline-flex items-center justify-center flex-shrink-0"
             style={{
-              backgroundColor: '#202831',
-              flexGrow: isOpen ? 0 : 1,
-              flexShrink: 0,
-              flexBasis: 0,
-              transition: `flex-grow 700ms ${EASE}`,
-            }}
-          />
-
-          {/* Arrow indicator — sits on canvas-white when open, on Deep Urban tail when closed */}
-          <div
-            className="flex items-center pl-5 md:pl-7"
-            style={{
-              transition: `background-color 500ms ${EASE}`,
-              backgroundColor: 'transparent',
+              color: isOpen ? '#6b87a4' : '#f8f8f8',
+              transform: isOpen ? 'rotate(-90deg)' : 'rotate(90deg)',
+              transition: `transform 500ms ${EASE}, color 450ms ${EASE}`,
             }}
           >
-            <span
-              aria-hidden="true"
-              className="block transition-transform duration-500 ease-out"
-              style={{
-                transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
-                color: '#6b87a4',
-              }}
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              {/* simple SVG arrow */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="13 6 19 12 13 18" />
-              </svg>
-            </span>
-          </div>
-
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="13 6 19 12 13 18" />
+            </svg>
+          </span>
         </div>
 
-        {/* Description panel — animated open/close via grid-template-rows */}
+        {/* Description — below the rectangle, revealed as deep urban contracts */}
         <div
           className="grid"
           style={{
             gridTemplateRows: isOpen ? '1fr' : '0fr',
-            transition: `grid-template-rows 600ms ${EASE}`,
+            transition: `grid-template-rows 550ms ${EASE}`,
           }}
         >
           <div className="overflow-hidden">
             <p
-              className="pt-4 md:pt-5 pb-2 md:pb-3 pr-8 md:pr-16 text-[0.98rem] md:text-[1.02rem] lg:text-[1.05rem] leading-[1.7] max-w-[78ch]"
+              className="pt-5 md:pt-6 pb-2 md:pb-3 pl-[28px] pr-5 md:pr-10 lg:pr-16 text-[0.98rem] md:text-[1.02rem] lg:text-[1.05rem] leading-[1.7] max-w-[78ch]"
               style={{
                 fontFamily: 'var(--font-aileron)',
                 fontWeight: 400,
@@ -192,8 +187,8 @@ export default function AboutValues() {
           </h2>
         </div>
 
-        {/* Accordion list */}
-        <ul className="mt-10 md:mt-12 lg:mt-14 space-y-3 md:space-y-4">
+        {/* Values list */}
+        <ul className="mt-10 md:mt-12 lg:mt-14">
           {values.map((value, i) => (
             <ValueRow
               key={value.name}

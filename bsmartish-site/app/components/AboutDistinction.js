@@ -8,7 +8,7 @@ export default function AboutDistinction() {
       className="w-full"
       style={{ backgroundColor: '#f8f8f8', borderTop: '1px solid #e4e4e4' }}
     >
-      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-14 md:pb-18 lg:pb-22">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-2.5 md:pb-3 lg:pb-3.5">
 
         <FadeIn>
           <FrostedGlassCard
@@ -16,7 +16,7 @@ export default function AboutDistinction() {
             image="/images/Website.images/About us/photo6.webp"
             imageSizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1280px"
             imagePosition="center 62%"
-            overlayOpacity={0.6}
+            overlayOpacity={0.72}
             contentClassName="p-8 md:p-12 lg:p-16 flex flex-col justify-end h-full"
           >
             <p

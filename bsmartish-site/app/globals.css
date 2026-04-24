@@ -36,9 +36,11 @@ body {
 
 .card-glare {
   background: radial-gradient(
-    circle 240px at var(--mouse-x, -400px) var(--mouse-y, -400px),
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0) 70%
+    circle 80px at var(--mouse-x, -400px) var(--mouse-y, -400px),
+    rgba(255, 255, 255, 0.32) 0%,
+    rgba(255, 255, 255, 0.18) 22%,
+    rgba(255, 255, 255, 0.06) 48%,
+    rgba(255, 255, 255, 0) 78%
   );
   mix-blend-mode: screen;
   border-radius: inherit;

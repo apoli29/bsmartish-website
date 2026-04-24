@@ -56,7 +56,7 @@ export const FrostedGlassCard = ({
     <div className={`card-container ${className}`}>
       <div
         ref={cardRef}
-        className="card relative w-full h-full rounded-3xl shadow-2xl overflow-hidden"
+        className="card relative w-full h-full rounded-[7px] shadow-2xl overflow-hidden"
         style={{ isolation: 'isolate' }}
       >
         {tone === 'image' && image && (

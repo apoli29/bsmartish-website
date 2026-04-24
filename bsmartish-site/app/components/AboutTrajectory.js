@@ -8,7 +8,7 @@ export default function AboutTrajectory() {
       className="w-full"
       style={{ backgroundColor: '#f8f8f8' }}
     >
-      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-16 md:pt-20 lg:pt-24 pb-16 md:pb-20 lg:pb-24">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-16 md:pt-20 lg:pt-24 pb-0">
 
         {/* Eyebrow + Headline */}
         <FadeIn>
@@ -27,7 +27,7 @@ export default function AboutTrajectory() {
         </FadeIn>
 
         {/* Two-act timeline cards */}
-        <div className="mt-10 md:mt-12 lg:mt-14 flex flex-col lg:flex-row gap-4">
+        <div className="mt-10 md:mt-12 lg:mt-14 mb-6 flex flex-col lg:flex-row gap-4">
 
           {/* Spain era */}
           <FadeIn delay={150} className="w-full lg:flex-1">

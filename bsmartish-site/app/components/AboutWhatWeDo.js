@@ -2,16 +2,16 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-const items = [
+const activities = [
   {
-    label: 'Mission',
+    title: 'Portfolio Development & Management',
     text:
-      'To develop urban renovation projects of excellence that transform urban properties into intelligent, functional, and contemporary spaces, while offering medium-term housing solutions that combine comfort, quality of life, and sustainable value for residents.',
+      'We develop real estate urban renovation projects and operate them within the market through a mid-term rental strategy.',
   },
   {
-    label: 'Vision',
+    title: 'Third-Party Project Management & Consultancy',
     text:
-      'To be a reference in urban renovation and the real estate sector in general, recognized for the ability to create high-value properties that balance design, functionality, and ethics, and for offering excellence in service — personalized and focused on the well-being and convenience of every resident.',
+      'We partner with investors to deliver tailored real estate projects, providing hands-on guidance from acquisition and concept design through to execution and monetisation.',
   },
 ]
 
@@ -42,7 +42,7 @@ function useInView(threshold = 0.2) {
   return [ref, inView]
 }
 
-function Statement({ item, delay }) {
+function Activity({ activity, delay }) {
   const [ref, inView] = useInView(0.22)
 
   const style = (extra = 0) => ({
@@ -52,9 +52,9 @@ function Statement({ item, delay }) {
   })
 
   return (
-    <div ref={ref} className="text-left">
+    <div ref={ref}>
       <h3
-        className="leading-none text-[1.6rem] md:text-[1.9rem] lg:text-[2.2rem]"
+        className="leading-[1.15] text-[1.4rem] md:text-[1.55rem] lg:text-[1.7rem] max-w-[28ch]"
         style={{
           fontFamily: 'var(--font-garet)',
           fontWeight: 800,
@@ -62,10 +62,10 @@ function Statement({ item, delay }) {
           ...style(0),
         }}
       >
-        {item.label}
+        {activity.title}
       </h3>
       <p
-        className="mt-5 md:mt-6 max-w-[52ch] text-[1rem] md:text-[1.05rem] lg:text-[1.1rem] leading-[1.7] text-justify"
+        className="mt-5 md:mt-6 max-w-[46ch] text-[0.98rem] md:text-[1.02rem] lg:text-[1.05rem] leading-[1.7] text-justify"
         style={{
           fontFamily: 'var(--font-aileron)',
           fontWeight: 400,
@@ -74,13 +74,13 @@ function Statement({ item, delay }) {
           ...style(120),
         }}
       >
-        {item.text}
+        {activity.text}
       </p>
     </div>
   )
 }
 
-export default function AboutMissionVision() {
+export default function AboutWhatWeDo() {
   const [headRef, headIn] = useInView(0.3)
 
   const headStyle = (d) => ({
@@ -91,9 +91,9 @@ export default function AboutMissionVision() {
 
   return (
     <section
-      id="about-mission-vision"
+      id="about-what-we-do"
       className="w-full"
-      style={{ backgroundColor: '#f8f8f8' }}
+      style={{ backgroundColor: '#f8f8f8', borderTop: '1px solid #e4e4e4' }}
     >
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-14 md:pb-18 lg:pb-22">
 
@@ -108,7 +108,7 @@ export default function AboutMissionVision() {
               ...headStyle(0),
             }}
           >
-            Mission &amp; Vision
+            What We Do
           </p>
           <h2
             className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] max-w-[820px]"
@@ -119,14 +119,14 @@ export default function AboutMissionVision() {
               ...headStyle(120),
             }}
           >
-            Where we are going, and why we are going there.
+            Two ways we put our craft to work.
           </h2>
         </div>
 
-        {/* Mission / Vision — side-by-side, left-aligned */}
-        <div className="mt-12 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
-          {items.map((item, i) => (
-            <Statement key={item.label} item={item} delay={i * 140} />
+        {/* Two activities side-by-side */}
+        <div className="mt-12 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 justify-items-center md:justify-items-stretch">
+          {activities.map((activity, i) => (
+            <Activity key={activity.title} activity={activity} delay={i * 160} />
           ))}
         </div>
 

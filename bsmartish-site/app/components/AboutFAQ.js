@@ -109,7 +109,7 @@ export default function AboutFAQ() {
       className="w-full"
       style={{ backgroundColor: '#f8f8f8', borderTop: '1px solid #e4e4e4' }}
     >
-      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-16 md:pb-20 lg:pb-24">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-12 lg:gap-20">
 
