@@ -86,7 +86,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
           aria-hidden={!isOpen}
         >
           <p
-            className="text-[1.04rem] md:text-[1.08rem] lg:text-[1.11rem] leading-[1.6] max-w-[68ch]"
+            className="text-[1.10rem] md:text-[1.14rem] lg:text-[1.17rem] leading-[1.6] max-w-[68ch]"
             style={{
               fontFamily: 'var(--font-aileron)',
               fontWeight: 400,
@@ -135,7 +135,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
             className="inline-flex items-center justify-center flex-shrink-0"
             style={{
               color: isOpen ? '#6b87a4' : '#f8f8f8',
-              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
               transition: `transform 500ms ${EASE}, color 450ms ${EASE}`,
             }}
           >

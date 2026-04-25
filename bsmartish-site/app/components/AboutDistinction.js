@@ -8,16 +8,17 @@ export default function AboutDistinction() {
       className="w-full"
       style={{ backgroundColor: '#f8f8f8', borderTop: '1px solid #e4e4e4' }}
     >
-      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-0">
+      <div className="max-w-screen-xl mx-auto px-[29px] md:px-[50px] lg:px-[72px] pt-[50px] md:pt-[65px] lg:pt-[79px] pb-[72px] md:pb-[90px] lg:pb-[108px]">
 
-        <FadeIn>
+        <FadeIn delay={150}>
           <FrostedGlassCard
-            className="w-full min-h-[480px] md:min-h-[540px] lg:min-h-[600px]"
+            tiltStrength={0.8}
+            className="w-full min-h-[240px] md:min-h-[270px] lg:min-h-[300px]"
             image="/images/Website.images/About us/photo6.webp"
             imageSizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1280px"
             imagePosition="center 62%"
             overlayOpacity={0.72}
-            contentClassName="p-8 md:p-12 lg:p-16 flex flex-col justify-end h-full"
+            contentClassName="pt-[29px] px-[29px] pb-[29px] md:pt-[43px] md:px-[43px] md:pb-[36px] lg:pt-[58px] lg:px-[58px] lg:pb-[43px] flex flex-col justify-end h-full"
           >
             <p
               className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
@@ -34,7 +35,7 @@ export default function AboutDistinction() {
             </h2>
 
             <p
-              className="mt-5 md:mt-6 max-w-[680px] text-[0.98rem] md:text-[1.05rem] lg:text-[1.1rem] leading-[1.7]"
+              className="mt-5 md:mt-6 max-w-[680px] text-[1.04rem] md:text-[1.11rem] lg:text-[1.16rem] leading-[1.7] text-justify"
               style={{
                 fontFamily: 'var(--font-aileron)',
                 fontWeight: 400,

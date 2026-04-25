@@ -65,7 +65,7 @@ function Statement({ item, delay }) {
         {item.label}
       </h3>
       <p
-        className="mt-5 md:mt-6 max-w-[52ch] text-[1rem] md:text-[1.05rem] lg:text-[1.1rem] leading-[1.7] text-justify"
+        className="mt-5 md:mt-6 max-w-[52ch] text-[1.06rem] md:text-[1.11rem] lg:text-[1.16rem] leading-[1.7] text-justify"
         style={{
           fontFamily: 'var(--font-aileron)',
           fontWeight: 400,

@@ -65,7 +65,7 @@ function Activity({ activity, delay }) {
         {activity.title}
       </h3>
       <p
-        className="mt-3 md:mt-3 max-w-[46ch] text-[1.105rem] md:text-[1.145rem] lg:text-[1.175rem] leading-[1.7] text-justify"
+        className="mt-3 md:mt-3 max-w-[46ch] text-[1.17rem] md:text-[1.21rem] lg:text-[1.24rem] leading-[1.7] text-justify"
         style={{
           fontFamily: 'var(--font-aileron)',
           fontWeight: 400,

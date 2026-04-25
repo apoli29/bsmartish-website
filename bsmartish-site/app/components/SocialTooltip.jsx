@@ -11,7 +11,7 @@ const items = [
     imgSize: 38,
   },
   {
-    href: '#',
+    href: 'https://www.spotahome.com/porto/for-rent:apartments/1478660',
     ariaLabel: 'Spotahome',
     svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/spotahome.png',
     imgSize: 30,
@@ -23,7 +23,7 @@ const items = [
     imgSize: 30,
   },
   {
-    href: 'https://www.flatio.es/arrendador/24976',
+    href: 'https://www.flatio.com/owner/24976',
     ariaLabel: 'Flatio',
     svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/flatio.png',
     imgSize: 30,
