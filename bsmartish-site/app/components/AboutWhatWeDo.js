@@ -42,36 +42,51 @@ function useInView(threshold = 0.2) {
   return [ref, inView]
 }
 
-function Activity({ activity, delay }) {
-  const [ref, inView] = useInView(0.22)
+function ActivityRow({ activity, delay }) {
+  const [ref, inView] = useInView(0.18)
 
-  const style = (extra = 0) => ({
+  const anim = (extra = 0) => ({
     opacity: inView ? 1 : 0,
-    transform: inView ? 'translateY(0)' : 'translateY(14px)',
-    transition: `opacity 750ms ${EASE} ${delay + extra}ms, transform 750ms ${EASE} ${delay + extra}ms`,
+    transform: inView ? 'translateY(0)' : 'translateY(12px)',
+    transition: `opacity 700ms ${EASE} ${delay + extra}ms, transform 700ms ${EASE} ${delay + extra}ms`,
   })
 
   return (
-    <div ref={ref}>
-      <h3
-        className="leading-[1.15] text-[1.525rem] md:text-[1.675rem] lg:text-[1.825rem] max-w-[28ch]"
-        style={{
-          fontFamily: 'var(--font-garet)',
-          fontWeight: 800,
-          color: '#202831',
-          ...style(0),
-        }}
-      >
-        {activity.title}
-      </h3>
+    <div
+      ref={ref}
+      className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-6 md:gap-12 lg:gap-20 py-10 md:py-12 lg:py-14"
+      style={{ borderBottom: '1px solid #e2e2e2' }}
+    >
+      {/* Bullet + Title */}
+      <div className="flex items-start gap-3" style={anim(0)}>
+        <span
+          className="shrink-0 mt-[0.35em] text-[0.45rem]"
+          style={{ color: '#6b87a4' }}
+        >
+          ●
+        </span>
+        <span
+          className="text-[0.98rem] md:text-[1.03rem] leading-[1.4] max-w-[26ch]"
+          style={{
+            fontFamily: 'var(--font-garet)',
+            fontWeight: 700,
+            color: '#202831',
+            letterSpacing: '0.01em',
+          }}
+        >
+          {activity.title}
+        </span>
+      </div>
+
+      {/* Body */}
       <p
-        className="mt-3 md:mt-3 max-w-[46ch] text-[1.17rem] md:text-[1.21rem] lg:text-[1.24rem] leading-[1.7] text-justify"
+        className="text-[1.04rem] md:text-[1.08rem] lg:text-[1.12rem] leading-[1.75] text-justify max-w-[65ch]"
         style={{
           fontFamily: 'var(--font-aileron)',
           fontWeight: 400,
           color: '#75797c',
           hyphens: 'auto',
-          ...style(120),
+          ...anim(100),
         }}
       >
         {activity.text}
@@ -123,10 +138,13 @@ export default function AboutWhatWeDo() {
           </h2>
         </div>
 
-        {/* Two activities side-by-side */}
-        <div className="mt-12 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 justify-items-center md:justify-items-stretch">
+        {/* Rows */}
+        <div
+          className="mt-12 md:mt-16 lg:mt-20"
+          style={{ borderTop: '1px solid #e2e2e2' }}
+        >
           {activities.map((activity, i) => (
-            <Activity key={activity.title} activity={activity} delay={i * 160} />
+            <ActivityRow key={activity.title} activity={activity} delay={i * 150} />
           ))}
         </div>
 

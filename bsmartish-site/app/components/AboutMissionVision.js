@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from 'react'
 
 const items = [
   {
-    label: 'Mission',
+    label: 'Our Mission',
     text:
       'To develop urban renovation projects of excellence that transform urban properties into intelligent, functional, and contemporary spaces, while offering medium-term housing solutions that combine comfort, quality of life, and sustainable value for residents.',
   },
   {
-    label: 'Vision',
+    label: 'Our Vision',
     text:
       'To be a reference in urban renovation and the real estate sector in general, recognized for the ability to create high-value properties that balance design, functionality, and ethics, and for offering excellence in service — personalized and focused on the well-being and convenience of every resident.',
   },
@@ -42,36 +42,51 @@ function useInView(threshold = 0.2) {
   return [ref, inView]
 }
 
-function Statement({ item, delay }) {
-  const [ref, inView] = useInView(0.22)
+function StatementRow({ item, delay }) {
+  const [ref, inView] = useInView(0.18)
 
-  const style = (extra = 0) => ({
+  const anim = (extra = 0) => ({
     opacity: inView ? 1 : 0,
-    transform: inView ? 'translateY(0)' : 'translateY(14px)',
-    transition: `opacity 750ms ${EASE} ${delay + extra}ms, transform 750ms ${EASE} ${delay + extra}ms`,
+    transform: inView ? 'translateY(0)' : 'translateY(12px)',
+    transition: `opacity 700ms ${EASE} ${delay + extra}ms, transform 700ms ${EASE} ${delay + extra}ms`,
   })
 
   return (
-    <div ref={ref} className="text-left">
-      <h3
-        className="leading-none text-[1.6rem] md:text-[1.9rem] lg:text-[2.2rem]"
-        style={{
-          fontFamily: 'var(--font-garet)',
-          fontWeight: 800,
-          color: '#202831',
-          ...style(0),
-        }}
-      >
-        {item.label}
-      </h3>
+    <div
+      ref={ref}
+      className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-6 md:gap-12 lg:gap-20 py-10 md:py-12 lg:py-14"
+      style={{ borderBottom: '1px solid #e2e2e2' }}
+    >
+      {/* Bullet + Label */}
+      <div className="flex items-start gap-3" style={anim(0)}>
+        <span
+          className="shrink-0 mt-[0.35em] text-[0.45rem]"
+          style={{ color: '#6b87a4' }}
+        >
+          ●
+        </span>
+        <span
+          className="text-[0.98rem] md:text-[1.03rem]"
+          style={{
+            fontFamily: 'var(--font-garet)',
+            fontWeight: 700,
+            color: '#202831',
+            letterSpacing: '0.01em',
+          }}
+        >
+          {item.label}
+        </span>
+      </div>
+
+      {/* Body */}
       <p
-        className="mt-5 md:mt-6 max-w-[52ch] text-[1.06rem] md:text-[1.11rem] lg:text-[1.16rem] leading-[1.7] text-justify"
+        className="text-[1.04rem] md:text-[1.08rem] lg:text-[1.12rem] leading-[1.75] text-justify max-w-[65ch]"
         style={{
           fontFamily: 'var(--font-aileron)',
           fontWeight: 400,
           color: '#75797c',
           hyphens: 'auto',
-          ...style(120),
+          ...anim(100),
         }}
       >
         {item.text}
@@ -119,14 +134,17 @@ export default function AboutMissionVision() {
               ...headStyle(120),
             }}
           >
-            Where we are going, and why we are going there.
+            Our Purpose, Built on Two Pillars.
           </h2>
         </div>
 
-        {/* Mission / Vision — side-by-side, left-aligned */}
-        <div className="mt-12 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
+        {/* Rows */}
+        <div
+          className="mt-12 md:mt-16 lg:mt-20"
+          style={{ borderTop: '1px solid #e2e2e2' }}
+        >
           {items.map((item, i) => (
-            <Statement key={item.label} item={item} delay={i * 140} />
+            <StatementRow key={item.label} item={item} delay={i * 150} />
           ))}
         </div>
 
