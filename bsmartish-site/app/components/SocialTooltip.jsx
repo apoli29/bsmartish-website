@@ -3,7 +3,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 
-const items = [
+const defaultItems = [
   {
     href: 'https://www.airbnb.com/users/show/17887083',
     ariaLabel: 'Airbnb',
@@ -30,7 +30,9 @@ const items = [
   },
 ]
 
-const SocialTooltip = React.forwardRef(({ className, ...props }, ref) => (
+const SocialTooltip = React.forwardRef(({ className, items: customItems, ...props }, ref) => {
+  const items = customItems || defaultItems
+  return (
   <ul
     ref={ref}
     className={cn('flex items-center', className)}
@@ -46,8 +48,8 @@ const SocialTooltip = React.forwardRef(({ className, ...props }, ref) => (
           rel="noopener noreferrer"
           className="flex items-center justify-center rounded-full bg-white overflow-hidden"
           style={{
-            width: '46px',
-            height: '46px',
+            width: '40px',
+            height: '40px',
             boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
             transition: 'transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 600ms cubic-bezier(0.34, 1.56, 0.64, 1)',
             willChange: 'transform',
@@ -75,7 +77,8 @@ const SocialTooltip = React.forwardRef(({ className, ...props }, ref) => (
       </li>
     ))}
   </ul>
-))
+  )
+})
 
 SocialTooltip.displayName = 'SocialTooltip'
 

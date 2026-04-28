@@ -1,6 +1,8 @@
 import localFont from 'next/font/local'
 import './globals.css'
 import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
+import PageTransition from '@/app/components/PageTransition'
 
 const radnika = localFont({
   src: [
@@ -38,7 +40,8 @@ export default function RootLayout({ children }) {
     >
       <body>
         <Header />
-        {children}
+        <PageTransition>{children}</PageTransition>
+        <Footer />
       </body>
     </html>
   )

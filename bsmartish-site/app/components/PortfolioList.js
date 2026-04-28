@@ -1,5 +1,34 @@
 import Link from 'next/link'
+import FadeIn from '@/app/components/FadeIn'
 import { properties } from '@/app/lib/propertiesData'
+
+function LocationPinIcon() {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      style={{ color: '#6b87a4', flexShrink: 0 }}
+    >
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+    </svg>
+  )
+}
+
+function PersonIcon() {
+  return (
+    <svg
+      width="11"
+      height="11"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      style={{ flexShrink: 0 }}
+    >
+      <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+    </svg>
+  )
+}
 
 function PropertyRow({ property }) {
   return (
@@ -9,123 +38,154 @@ function PropertyRow({ property }) {
         padding: '40px 0 48px',
       }}
     >
+      <FadeIn delay={0}>
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20" style={{ display: 'flex', alignItems: 'stretch', gap: '40px' }}>
-      {/* Left: text content */}
-      <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {/* Logo mark */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-          <div
-            style={{
-              width: '28px',
-              height: '28px',
-              borderRadius: '6px',
-              backgroundColor: '#222',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <div
-              style={{
-                width: '14px',
-                height: '14px',
-                borderRadius: '50%',
-                border: '2px solid #fff',
-              }}
-            />
-          </div>
-          <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#555' }}>Brand®</span>
-        </div>
+        {/* Left: text content */}
+        <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '12px' }}>
 
-        {/* Name — clickable */}
-        <Link href={`/portfolio/${property.slug}`} style={{ textDecoration: 'none' }}>
-          <h2 style={{ margin: 0, fontSize: '1.6rem', fontWeight: '700', color: '#111', lineHeight: 1.2 }}>
-            {property.name}
-          </h2>
-        </Link>
-
-        {/* Price */}
-        {property.price && (
-          <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: '600', color: '#333' }}>
-            {property.price}
-          </p>
-        )}
-
-        {/* Description */}
-        <p style={{ margin: 0, fontSize: '0.875rem', color: '#555', lineHeight: 1.6, maxWidth: '480px' }}>
-          {property.description}
-        </p>
-
-        {/* Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
-          {property.tags.map((tag, i) => (
+          {/* Location */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+            <LocationPinIcon />
             <span
-              key={i}
               style={{
-                fontSize: '0.72rem',
-                padding: '4px 12px',
-                borderRadius: '999px',
-                border: '1px solid #ccc',
-                color: '#444',
-                backgroundColor: '#f5f5f5',
+                fontFamily: 'var(--font-aileron)',
+                fontWeight: 600,
+                fontSize: '0.68rem',
+                color: '#6b87a4',
+                textTransform: 'uppercase',
+                letterSpacing: '0.14em',
               }}
             >
-              {tag}
+              {property.location}
             </span>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div style={{ marginTop: '8px' }}>
-          <Link
-            href={`/portfolio/${property.slug}`}
-            style={{
-              display: 'inline-block',
-              fontSize: '0.8rem',
-              fontWeight: '600',
-              padding: '10px 24px',
-              borderRadius: '6px',
-              backgroundColor: '#111',
-              color: '#fff',
-              textDecoration: 'none',
-            }}
-          >
-            Learn more
-          </Link>
-        </div>
-      </div>
-
-      {/* Right: image */}
-      <div
-        style={{
-          flex: '1',
-          minHeight: '260px',
-          borderRadius: '8px',
-          backgroundColor: '#d0d0d0',
-          overflow: 'hidden',
-        }}
-      >
-        {property.image ? (
-          <img src={property.image} alt={property.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        ) : (
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              minHeight: '260px',
-              backgroundColor: '#c8c8c8',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#888',
-              fontSize: '0.8rem',
-            }}
-          >
-            Image placeholder
           </div>
-        )}
+
+          {/* Subtitle — clickable */}
+          <Link href={`/portfolio/${property.slug}`} style={{ textDecoration: 'none' }}>
+            <h2
+              style={{
+                margin: 0,
+                fontSize: '1.76rem',
+                fontFamily: 'var(--font-garet)',
+                fontWeight: 800,
+                color: '#6b87a4',
+                lineHeight: 1.2,
+              }}
+            >
+              {property.name}
+            </h2>
+          </Link>
+
+          {/* Description */}
+          <p
+            style={{
+              margin: 0,
+              fontFamily: 'var(--font-aileron)',
+              fontWeight: 400,
+              fontSize: '0.96rem',
+              color: '#75797c',
+              lineHeight: 1.6,
+              maxWidth: '480px',
+              textAlign: 'justify',
+            }}
+          >
+            {property.description}
+          </p>
+
+          {/* Tags */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
+            {property.tags.map((tag, i) => (
+              <span
+                key={i}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  fontSize: '0.79rem',
+                  padding: '4px 12px',
+                  borderRadius: '999px',
+                  border: '1px solid rgba(107, 135, 164, 0.35)',
+                  fontFamily: 'var(--font-aileron)',
+                  fontWeight: 400,
+                  color: '#6b87a4',
+                  backgroundColor: 'transparent',
+                }}
+              >
+                {tag.type === 'people' ? (
+                  <>
+                    <PersonIcon />
+                    <span>{tag.count}</span>
+                  </>
+                ) : (
+                  tag
+                )}
+              </span>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div style={{ marginTop: '8px' }}>
+            <Link
+              href={`/portfolio/${property.slug}`}
+              className="inline-block px-7 py-3 rounded transition-all text-[0.8rem] uppercase tracking-[0.1em] hover:opacity-80"
+              style={{
+                backgroundColor: '#202831',
+                color: '#F8F8F8',
+                fontFamily: 'var(--font-aileron)',
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
+            >
+              View Property
+            </Link>
+          </div>
+        </div>
+
+        {/* Right: image */}
+        <div
+          className="group"
+          style={{
+            flex: '0 0 52%',
+            position: 'relative',
+            minHeight: '360px',
+            borderRadius: '8px',
+            backgroundColor: '#d0d0d0',
+            overflow: 'hidden',
+          }}
+        >
+          {property.image ? (
+            <img
+              src={property.image}
+              alt={property.name}
+              className="transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundColor: '#c8c8c8',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#888',
+                fontSize: '0.8rem',
+              }}
+            >
+              Image placeholder
+            </div>
+          )}
+        </div>
       </div>
-      </div>
+      </FadeIn>
     </div>
   )
 }

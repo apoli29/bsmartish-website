@@ -9,7 +9,7 @@ const links = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
   { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact Us', href: '#footer', scroll: true },
 ]
 
 export default function Header() {
@@ -31,11 +31,11 @@ export default function Header() {
       <header
         className="w-full rounded transition-all duration-500"
         style={{
-          backgroundColor: solid ? '#6b87a4' : 'transparent',
-          backdropFilter: solid ? 'none' : 'blur(14px)',
-          WebkitBackdropFilter: solid ? 'none' : 'blur(14px)',
-          border: solid ? 'none' : '1px solid rgba(255,255,255,0.18)',
-          boxShadow: solid ? '0 4px 24px rgba(0,0,0,0.12)' : 'none',
+          backgroundColor: (solid || pathname.startsWith('/portfolio')) ? '#6b87a4' : 'transparent',
+          backdropFilter: (solid || pathname.startsWith('/portfolio')) ? 'none' : 'blur(14px)',
+          WebkitBackdropFilter: (solid || pathname.startsWith('/portfolio')) ? 'none' : 'blur(14px)',
+          border: (solid || pathname.startsWith('/portfolio')) ? 'none' : '1px solid rgba(255,255,255,0.18)',
+          boxShadow: (solid || pathname.startsWith('/portfolio')) ? '0 4px 24px rgba(0,0,0,0.12)' : 'none',
         }}
       >
         <div className="pl-1 md:pl-1 lg:pl-2 pr-7 md:pr-8 lg:pr-10 h-[64px] md:h-[72px] lg:h-[80px] flex items-center justify-between">
@@ -43,13 +43,9 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center">
             <div className="w-[198px] md:w-[231px] lg:w-[264px]">
-              <Image
-                src="/images/Logo/logo.png"
+              <img
+                src="/images/Logo/Logo.svg"
                 alt="BSMARTISH"
-                width={900}
-                height={900}
-                priority
-                sizes="(max-width: 768px) 198px, (max-width: 1024px) 231px, 264px"
                 style={{ width: '100%', height: 'auto', display: 'block' }}
               />
             </div>
@@ -57,14 +53,29 @@ export default function Header() {
 
           {/* Nav — tablet e desktop */}
           <nav className="hidden md:flex items-center gap-7 lg:gap-10">
-            {links.map(({ label, href }) => {
+            {links.map(({ label, href, scroll }) => {
               const isActive = pathname === href
+              const navClass = "flex flex-col items-center gap-[5px] text-white tracking-[0.12em] uppercase hover:opacity-75 transition-opacity text-[11px] lg:text-[13px]"
+              const navStyle = { fontFamily: 'var(--font-aileron)' }
+              if (scroll) {
+                return (
+                  <button
+                    key={href}
+                    onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })}
+                    className={navClass}
+                    style={{ ...navStyle, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                  >
+                    {label}
+                    <span className="h-[1px] w-full" style={{ backgroundColor: 'transparent' }} />
+                  </button>
+                )
+              }
               return (
                 <Link
                   key={href}
                   href={href}
-                  className="flex flex-col items-center gap-[5px] text-white tracking-[0.12em] uppercase hover:opacity-75 transition-opacity text-[11px] lg:text-[13px]"
-                  style={{ fontFamily: 'var(--font-aileron)' }}
+                  className={navClass}
+                  style={navStyle}
                 >
                   {label}
                   <span
@@ -108,15 +119,30 @@ export default function Header() {
           }}
         >
           <nav className="flex flex-col items-center gap-7 py-8">
-            {links.map(({ label, href }) => {
+            {links.map(({ label, href, scroll }) => {
               const isActive = pathname === href
+              const navClass = "flex flex-col items-center gap-[5px] text-white text-[13px] tracking-[0.12em] uppercase hover:opacity-75 transition-opacity"
+              const navStyle = { fontFamily: 'var(--font-aileron)' }
+              if (scroll) {
+                return (
+                  <button
+                    key={href}
+                    onClick={() => { setMenuOpen(false); document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' }) }}
+                    className={navClass}
+                    style={{ ...navStyle, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                  >
+                    {label}
+                    <span className="h-[1px] w-full" style={{ backgroundColor: 'transparent' }} />
+                  </button>
+                )
+              }
               return (
                 <Link
                   key={href}
                   href={href}
                   onClick={() => setMenuOpen(false)}
-                  className="flex flex-col items-center gap-[5px] text-white text-[13px] tracking-[0.12em] uppercase hover:opacity-75 transition-opacity"
-                  style={{ fontFamily: 'var(--font-aileron)' }}
+                  className={navClass}
+                  style={navStyle}
                 >
                   {label}
                   <span
