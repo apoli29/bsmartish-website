@@ -24,7 +24,7 @@ export default function AboutPage() {
           src="/images/Website.images/About us/bewteen.sec3.and.sec4.webp"
           alt=""
           fill
-          className="object-cover"
+          className="object-cover object-[center_30%]"
           sizes="100vw"
           quality={92}
         />

@@ -44,8 +44,8 @@ export default function ImpactWidget() {
                     {value}
                   </p>
                   <p
-                    className="text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] uppercase tracking-[0.15em] whitespace-nowrap"
-                    style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#75797c' }}
+                    className="text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] uppercase tracking-[0.15em]"
+                    style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#75797c', maxWidth: '120px', lineHeight: 1.3 }}
                   >
                     {label}
                   </p>

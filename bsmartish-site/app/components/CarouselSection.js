@@ -28,7 +28,9 @@ const IMAGES = [
 ]
 
 const GAP = 16
-const SPEED = 0.28
+const SPEED_DESKTOP = 0.28
+const SPEED_TABLET  = 0.55
+const SPEED_MOBILE  = 0.9
 
 export default function CarouselSection() {
   const trackRef = useRef(null)
@@ -36,14 +38,15 @@ export default function CarouselSection() {
   const posRef   = useRef(0)
   const rafRef   = useRef(null)
   const totalRef = useRef(IMAGES.length * (348 + GAP))
+  const speedRef = useRef(SPEED_DESKTOP)
 
   useEffect(() => {
     const update = () => {
       const vw = window.innerWidth
       let w
-      if (vw < 640)       w = Math.floor(vw * 0.78)
-      else if (vw < 1024) w = Math.floor((vw - 3 * GAP) / 2.5)
-      else                w = Math.floor((vw - 3 * GAP) / 4)
+      if (vw < 640)       { w = Math.floor(vw * 0.78);             speedRef.current = SPEED_MOBILE }
+      else if (vw < 1024) { w = Math.floor((vw - 3 * GAP) / 2.5); speedRef.current = SPEED_TABLET }
+      else                { w = Math.floor((vw - 3 * GAP) / 4);    speedRef.current = SPEED_DESKTOP }
       cardWRef.current = w
       totalRef.current = IMAGES.length * (w + GAP)
 
@@ -58,7 +61,7 @@ export default function CarouselSection() {
   }, [])
 
   const tick = useCallback(() => {
-    posRef.current += SPEED
+    posRef.current += speedRef.current
     if (posRef.current >= totalRef.current) posRef.current -= totalRef.current
     if (trackRef.current) {
       trackRef.current.style.transform = `translateX(${-posRef.current}px)`

@@ -36,7 +36,7 @@ export default function AboutTrajectory() {
               image="/images/Website.images/About us/photo2.webp"
               imageSizes="(max-width: 1024px) 100vw, 720px"
               overlayOpacity={0.72}
-              contentClassName="pt-7 px-7 pb-8 md:pt-9 md:px-9 md:pb-10 lg:pt-10 lg:px-10 lg:pb-12 flex flex-col justify-between h-full"
+              contentClassName="pt-7 px-7 pb-8 md:pt-9 md:px-9 md:pb-10 lg:pt-10 lg:px-10 lg:pb-12 flex flex-col gap-8 lg:gap-0 lg:justify-between h-full"
             >
               <span
                 className="self-start uppercase tracking-[0.18em] text-[0.7rem] px-3 py-[6px]"
@@ -60,7 +60,7 @@ export default function AboutTrajectory() {
                 </h3>
                 <p
                   className="mt-4 md:mt-5 text-[1.01rem] md:text-[1.06rem] leading-relaxed text-justify"
-                  style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: 'rgba(248,248,248,0.96)' }}
+                  style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: 'rgba(248,248,248,0.96)', hyphens: 'auto' }}
                 >
                   Our activity began in 1997, focused on developing urban renovation projects for the long-term rental market. We developed projects everywhere across the country, but mostly in beautiful cities like Barcelona and Girona.
                 </p>
@@ -75,7 +75,7 @@ export default function AboutTrajectory() {
               image="/images/Website.images/About us/photo1.webp"
               imageSizes="(max-width: 1024px) 100vw, 720px"
               overlayOpacity={0.72}
-              contentClassName="pt-7 px-7 pb-8 md:pt-9 md:px-9 md:pb-10 lg:pt-10 lg:px-10 lg:pb-12 flex flex-col justify-between h-full"
+              contentClassName="pt-7 px-7 pb-8 md:pt-9 md:px-9 md:pb-10 lg:pt-10 lg:px-10 lg:pb-12 flex flex-col gap-8 lg:gap-0 lg:justify-between h-full"
             >
               <span
                 className="self-start uppercase tracking-[0.18em] text-[0.7rem] px-3 py-[6px]"
@@ -99,7 +99,7 @@ export default function AboutTrajectory() {
                 </h3>
                 <p
                   className="mt-4 md:mt-5 text-[1.01rem] md:text-[1.06rem] leading-relaxed text-justify"
-                  style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: 'rgba(248,248,248,0.96)' }}
+                  style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: 'rgba(248,248,248,0.96)', hyphens: 'auto' }}
                 >
                   In 2017 we relocated our activity to Porto, where we have centralized all our operations to this day. All these years of activity were fundamental to define our identity and our philosophy — essentially how we operate.
                 </p>

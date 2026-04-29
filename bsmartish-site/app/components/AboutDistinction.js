@@ -40,6 +40,7 @@ export default function AboutDistinction() {
                 fontFamily: 'var(--font-aileron)',
                 fontWeight: 400,
                 color: 'rgba(248,248,248,0.96)',
+                hyphens: 'auto',
               }}
             >
               Our trajectory sets us apart, positioning us as urban renovation specialists with deep niche expertise. We are uniquely capable of developing complex, reliable, and high-standard real estate projects across various sectors — through the application of exceptional and efficient procedures that consistently guarantee the best results.

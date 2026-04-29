@@ -1,12 +1,37 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { createPortal } from 'react-dom'
+
+const SLIDE_CSS = `
+  @keyframes slide-out-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+  }
+  @keyframes slide-out-right {
+    from { transform: translateX(0); }
+    to   { transform: translateX(100%); }
+  }
+  @keyframes slide-in-from-right {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
+  @keyframes slide-in-from-left {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
+  }
+`
 
 export default function PropertyGallery({ photos }) {
   const [modalOpen, setModalOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [mounted, setMounted] = useState(false)
+  const [outgoing, setOutgoing] = useState(null) // { index, key }
+  const [transitionDir, setTransitionDir] = useState(0) // 1 = next, -1 = prev
+  const transitionKey = useRef(0)
+  const navigating = useRef(false)
+  const touchStartX = useRef(null)
+  const didSwipe = useRef(false)
 
   useEffect(() => setMounted(true), [])
 
@@ -15,20 +40,43 @@ export default function PropertyGallery({ photos }) {
 
   const openModal = (index = 0) => {
     setActiveIndex(index)
+    setOutgoing(null)
+    setTransitionDir(0)
+    navigating.current = false
     setModalOpen(true)
   }
 
   const closeModal = useCallback(() => setModalOpen(false), [])
 
-  const prev = useCallback(() =>
-    setActiveIndex(i => (i - 1 + validPhotos.length) % validPhotos.length),
-    [validPhotos.length]
-  )
+  const prev = useCallback(() => {
+    if (navigating.current) return
+    navigating.current = true
+    transitionKey.current += 1
+    const k = transitionKey.current
+    setOutgoing({ index: activeIndex, key: k })
+    setTransitionDir(-1)
+    setActiveIndex(i => (i - 1 + validPhotos.length) % validPhotos.length)
+    setTimeout(() => {
+      navigating.current = false
+      setOutgoing(null)
+      setTransitionDir(0)
+    }, 260)
+  }, [activeIndex, validPhotos.length])
 
-  const next = useCallback(() =>
-    setActiveIndex(i => (i + 1) % validPhotos.length),
-    [validPhotos.length]
-  )
+  const next = useCallback(() => {
+    if (navigating.current) return
+    navigating.current = true
+    transitionKey.current += 1
+    const k = transitionKey.current
+    setOutgoing({ index: activeIndex, key: k })
+    setTransitionDir(1)
+    setActiveIndex(i => (i + 1) % validPhotos.length)
+    setTimeout(() => {
+      navigating.current = false
+      setOutgoing(null)
+      setTransitionDir(0)
+    }, 260)
+  }, [activeIndex, validPhotos.length])
 
   useEffect(() => {
     if (!modalOpen) return
@@ -69,57 +117,70 @@ export default function PropertyGallery({ photos }) {
 
   const arrowBtn = (side) => ({
     position: 'absolute',
-    [side]: '24px',
+    [side]: '20px',
     top: '50%',
     transform: 'translateY(-50%)',
-    background: 'rgba(255,255,255,0.08)',
-    border: '1px solid rgba(255,255,255,0.15)',
-    borderRadius: '8px',
+    background: 'rgba(32,40,49,0.60)',
+    border: '1px solid rgba(255,255,255,0.28)',
+    borderRadius: '50%',
     color: '#f8f8f8',
-    width: '48px',
-    height: '48px',
+    width: '44px',
+    height: '44px',
+    minWidth: '44px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    zIndex: 1001,
+    zIndex: 1002,
     transition: 'background 0.15s',
+    backdropFilter: 'blur(6px)',
+    WebkitBackdropFilter: 'blur(6px)',
+    flexShrink: 0,
   })
 
   return (
     <>
       {/* ── Grid ── */}
       <div style={{ position: 'relative' }}>
-        {/* Top row: wide + narrow */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '12px', marginBottom: '12px' }}>
-          {[0, 1].map((i) => (
-            <button
-              key={i}
-              style={cellBtn()}
-              onClick={() => openModal(i)}
-              aria-label={`Open photo ${i + 1}`}
-            >
-              {gridPhotos[i]
-                ? <img src={gridPhotos[i]} alt={`Property photo ${i + 1}`} style={imgStyle('380px')} />
-                : <div style={{ height: '380px', backgroundColor: '#c4c8cc' }} />}
-            </button>
-          ))}
+
+        {/* Mobile layout: 1 big square + 2 small squares — hidden on sm+ */}
+        <div className="sm:hidden flex flex-col gap-3">
+          <button style={cellBtn()} onClick={() => openModal(0)} aria-label="Open photo 1">
+            {gridPhotos[0]
+              ? <img src={gridPhotos[0]} alt="Property photo 1" style={{ ...imgStyle('100%'), aspectRatio: '1/1' }} />
+              : <div style={{ aspectRatio: '1/1', backgroundColor: '#c4c8cc' }} />}
+          </button>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            {[1, 2].map((i) => (
+              <button key={i} style={cellBtn()} onClick={() => openModal(i)} aria-label={`Open photo ${i + 1}`}>
+                {gridPhotos[i]
+                  ? <img src={gridPhotos[i]} alt={`Property photo ${i + 1}`} style={{ ...imgStyle('100%'), aspectRatio: '1/1' }} />
+                  : <div style={{ aspectRatio: '1/1', backgroundColor: '#c4c8cc' }} />}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom row: 3 equal */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
-          {[2, 3, 4].map((i) => (
-            <button
-              key={i}
-              style={cellBtn()}
-              onClick={() => openModal(i)}
-              aria-label={`Open photo ${i + 1}`}
-            >
-              {gridPhotos[i]
-                ? <img src={gridPhotos[i]} alt={`Property photo ${i + 1}`} style={imgStyle('220px')} />
-                : <div style={{ height: '220px', backgroundColor: '#c4c8cc' }} />}
-            </button>
-          ))}
+        {/* Desktop layout: 2fr/1fr top + 3-equal bottom — hidden on mobile */}
+        <div className="hidden sm:block">
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '12px', marginBottom: '12px' }}>
+            {[0, 1].map((i) => (
+              <button key={i} style={cellBtn()} onClick={() => openModal(i)} aria-label={`Open photo ${i + 1}`}>
+                {gridPhotos[i]
+                  ? <img src={gridPhotos[i]} alt={`Property photo ${i + 1}`} style={imgStyle('380px')} />
+                  : <div style={{ height: '380px', backgroundColor: '#c4c8cc' }} />}
+              </button>
+            ))}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+            {[2, 3, 4].map((i) => (
+              <button key={i} style={cellBtn()} onClick={() => openModal(i)} aria-label={`Open photo ${i + 1}`}>
+                {gridPhotos[i]
+                  ? <img src={gridPhotos[i]} alt={`Property photo ${i + 1}`} style={imgStyle('220px')} />
+                  : <div style={{ height: '220px', backgroundColor: '#c4c8cc' }} />}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* View all photos button */}
@@ -172,9 +233,19 @@ export default function PropertyGallery({ photos }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            touchAction: 'none',
           }}
-          onClick={closeModal}
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; didSwipe.current = false }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return
+            const dx = e.changedTouches[0].clientX - touchStartX.current
+            if (Math.abs(dx) > 40) { didSwipe.current = true; dx < 0 ? next() : prev() }
+            touchStartX.current = null
+          }}
+          onClick={() => { if (!didSwipe.current) closeModal() }}
         >
+          <style>{SLIDE_CSS}</style>
+
           {/* Counter */}
           <div style={{
             position: 'absolute',
@@ -218,20 +289,50 @@ export default function PropertyGallery({ photos }) {
             </svg>
           </button>
 
-          {/* Image */}
+          {/* Image stage — overflow:hidden clips the sliding pair */}
           <div
-            style={{ maxWidth: '88vw', maxHeight: '82vh', position: 'relative' }}
+            style={{
+              position: 'relative',
+              width: '88vw',
+              height: '82vh',
+              overflow: 'hidden',
+            }}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Outgoing photo — slides out */}
+            {outgoing && (
+              <img
+                key={`out-${outgoing.key}`}
+                src={validPhotos[outgoing.index]}
+                alt=""
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  borderRadius: '6px',
+                  animation: `${transitionDir === 1 ? 'slide-out-left' : 'slide-out-right'} 250ms ease-out both`,
+                }}
+              />
+            )}
+
+            {/* Incoming photo — slides in */}
             <img
+              key={`in-${activeIndex}-${transitionKey.current}`}
               src={validPhotos[activeIndex]}
               alt={`Property photo ${activeIndex + 1}`}
               style={{
-                maxWidth: '88vw',
-                maxHeight: '82vh',
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
                 objectFit: 'contain',
                 borderRadius: '6px',
-                display: 'block',
+                animation: outgoing
+                  ? `${transitionDir === 1 ? 'slide-in-from-right' : 'slide-in-from-left'} 250ms ease-out both`
+                  : 'none',
               }}
             />
           </div>

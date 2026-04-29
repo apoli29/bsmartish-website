@@ -56,18 +56,93 @@ const RECT_WIDTH = 'clamp(220px, 32%, 360px)'
 
 function ValueRow({ value, index, isOpen, onToggle }) {
   const [ref, inView] = useInView(0.25)
+  const [isMobile, setIsMobile] = useState(false)
   const baseDelay = 80 * index
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const handle = (e) => setIsMobile(e.matches)
+    setIsMobile(mq.matches)
+    mq.addEventListener('change', handle)
+    return () => mq.removeEventListener('change', handle)
+  }, [])
+
+  const fadeStyle = {
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'translateY(0)' : 'translateY(12px)',
+    transition: `opacity 700ms ${EASE} ${baseDelay}ms, transform 700ms ${EASE} ${baseDelay}ms`,
+  }
+
+  if (isMobile) {
+    return (
+      <li
+        ref={ref}
+        className="block"
+        style={{ marginTop: index === 0 ? 0 : '14px', ...fadeStyle }}
+      >
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          className="block w-full text-left"
+        >
+          <div
+            style={{
+              backgroundColor: '#202831',
+              minHeight: '72px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingLeft: '24px',
+              paddingRight: '20px',
+            }}
+          >
+            <span
+              className="text-[1.3rem] leading-none"
+              style={{ fontFamily: 'var(--font-garet)', fontWeight: 800, color: '#f8f8f8' }}
+            >
+              {value.name}
+            </span>
+            <span
+              aria-hidden="true"
+              className="inline-flex items-center justify-center flex-shrink-0"
+              style={{
+                color: isOpen ? '#6b87a4' : '#f8f8f8',
+                transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
+                transition: `transform 500ms ${EASE}, color 450ms ${EASE}`,
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+          </div>
+        </button>
+        <div
+          className="grid"
+          style={{
+            gridTemplateRows: isOpen ? '1fr' : '0fr',
+            transition: `grid-template-rows 500ms ${EASE}`,
+          }}
+        >
+          <div className="overflow-hidden">
+            <p
+              className="text-[1rem] leading-[1.7] px-6 pt-4 pb-5 text-justify"
+              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c', hyphens: 'auto' }}
+            >
+              {value.description}
+            </p>
+          </div>
+        </div>
+      </li>
+    )
+  }
 
   return (
     <li
       ref={ref}
       className="block"
-      style={{
-        marginTop: index === 0 ? 0 : '14px',
-        opacity: inView ? 1 : 0,
-        transform: inView ? 'translateY(0)' : 'translateY(12px)',
-        transition: `opacity 700ms ${EASE} ${baseDelay}ms, transform 700ms ${EASE} ${baseDelay}ms`,
-      }}
+      style={{ marginTop: index === 0 ? 0 : '14px', ...fadeStyle }}
     >
       <button
         type="button"
@@ -76,7 +151,6 @@ function ValueRow({ value, index, isOpen, onToggle }) {
         className="group relative block w-full text-left cursor-pointer overflow-hidden"
         style={{ minHeight: '132px' }}
       >
-        {/* Description — sits behind the rectangle, revealed as it contracts to the left */}
         <div
           className="absolute inset-0 flex items-center"
           style={{
@@ -100,7 +174,6 @@ function ValueRow({ value, index, isOpen, onToggle }) {
           </p>
         </div>
 
-        {/* Deep Urban rectangle — full row width when closed; contracts horizontally to only sit behind the value name when open */}
         <div
           style={{
             position: 'absolute',
@@ -135,7 +208,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
             className="inline-flex items-center justify-center flex-shrink-0"
             style={{
               color: isOpen ? '#6b87a4' : '#f8f8f8',
-              transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
+              transform: isOpen ? 'rotate(-90deg)' : 'rotate(90deg)',
               transition: `transform 500ms ${EASE}, color 450ms ${EASE}`,
             }}
           >
@@ -145,12 +218,11 @@ function ValueRow({ value, index, isOpen, onToggle }) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="1.6"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="13 6 19 12 13 18" />
+              <polyline points="6 9 12 15 18 9" />
             </svg>
           </span>
         </div>
@@ -171,7 +243,6 @@ export default function AboutValues() {
     >
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-14 md:pb-18 lg:pb-22">
 
-        {/* Eyebrow + Headline */}
         <div
           ref={headRef}
           style={{
@@ -194,7 +265,6 @@ export default function AboutValues() {
           </h2>
         </div>
 
-        {/* Values list */}
         <ul className="mt-10 md:mt-12 lg:mt-14">
           {values.map((value, i) => (
             <ValueRow
