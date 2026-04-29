@@ -41,7 +41,7 @@ export default function Footer() {
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gap: '64px',
-          alignItems: 'end',
+          alignItems: 'center',
           paddingBottom: '24px',
           borderBottom: '1px solid rgba(248,248,248,0.2)',
         }}
@@ -49,8 +49,8 @@ export default function Footer() {
         >
           {/* Left: rotating CTA */}
           <p style={{
-            fontSize: 'clamp(0.94rem, 1.5vw, 1.31rem)',
-            lineHeight: 1.35,
+            fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)',
+            lineHeight: 1.5,
             margin: 0,
             fontWeight: 400,
           }}>

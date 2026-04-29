@@ -192,7 +192,7 @@ function PropertyRow({ property }) {
 
 export default function PortfolioList() {
   return (
-    <section style={{ backgroundColor: '#ffffff' }}>
+    <section style={{ backgroundColor: '#f8f8f8' }}>
       {properties.map((property) => (
         <PropertyRow key={property.id} property={property} />
       ))}

@@ -230,18 +230,18 @@ export default async function PropertyPage({ params }) {
                   </div>
                   <div style={{ padding: '24px 28px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
-                      <h3 style={{ margin: 0, fontFamily: 'var(--font-radnika)', fontSize: '1.125rem', color: '#202831', fontWeight: 500 }}>
+                      <h3 style={{ margin: 0, fontFamily: 'var(--font-radnika)', fontSize: '1.5rem', color: '#6b87a4', fontWeight: 500 }}>
                         {p.name}
                       </h3>
                     </div>
-                    <p style={{ margin: '0 0 16px', fontSize: '0.85rem', color: '#75797c', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                    <p style={{ margin: '0 0 16px', fontSize: '0.96rem', color: '#75797c', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                       {p.description}
                     </p>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                       {p.tags.map((tag, i) => (
                         <span
                           key={i}
-                          style={{ fontSize: '0.68rem', fontWeight: 600, padding: '4px 12px', borderRadius: '999px', border: '1px solid #e4e4e4', color: '#75797c', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+                          style={{ fontSize: '0.68rem', fontWeight: 600, padding: '4px 12px', borderRadius: '999px', border: '1px solid rgba(107,135,164,0.35)', color: '#6b87a4', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                         >
                           {tag.type === 'people' ? `${tag.count} guests` : tag}
                         </span>

@@ -4,11 +4,11 @@ export default function PortfolioHero() {
   return (
     <section
       style={{
-        backgroundColor: '#F8F8F8',
+        backgroundColor: '#f8f8f8',
         minHeight: '260px',
         display: 'flex',
         alignItems: 'flex-end',
-        paddingTop: '100px',
+        paddingTop: '140px',
       }}
     >
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 w-full pb-12">
