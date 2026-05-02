@@ -81,8 +81,8 @@ function FAQItem({ q, a, isOpen, onToggle }) {
       >
         <div className="overflow-hidden">
           <p
-            className="pb-6 md:pb-8 pr-10 md:pr-16 text-[1.04rem] md:text-[1.06rem] leading-[1.7] max-w-[65ch] text-justify"
-            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#202831', hyphens: 'auto' }}
+            className="pb-6 md:pb-8 pr-10 md:pr-16 text-[clamp(0.98rem,2.46vw,1.06rem)] leading-[1.7] max-w-[65ch] text-justify"
+            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c', hyphens: 'auto' }}
           >
             {a}
           </p>
@@ -121,7 +121,7 @@ export default function AboutFAQ() {
             </h2>
 
             <p
-              className="mt-6 max-w-[380px] text-[1.01rem] md:text-[1.06rem] leading-relaxed text-justify"
+              className="mt-6 max-w-[380px] text-[clamp(0.98rem,2.46vw,1.06rem)] leading-relaxed text-justify"
               style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c', hyphens: 'auto' }}
             >
               A few things people often ask us. If your question is not here, write to us directly and we will get back to you.

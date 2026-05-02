@@ -66,7 +66,7 @@ function ActivityRow({ activity, delay }) {
           ●
         </span>
         <span
-          className="text-[0.98rem] md:text-[1.03rem] leading-[1.4] max-w-[26ch]"
+          className="text-[1.15rem] md:text-[1.3rem] lg:text-[1.4rem] leading-[1.4] max-w-[26ch]"
           style={{
             fontFamily: 'var(--font-garet)',
             fontWeight: 700,

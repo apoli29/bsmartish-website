@@ -28,7 +28,7 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer style={{ backgroundColor: '#6b87a4', color: '#F8F8F8', fontFamily: 'var(--font-aileron)' }}>
+    <footer id="footer" style={{ backgroundColor: '#6b87a4', color: '#F8F8F8', fontFamily: 'var(--font-aileron)' }}>
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 py-8 md:py-10">
 
         {/* Main row */}
@@ -51,7 +51,7 @@ export default function Footer() {
             fontWeight: 400,
             maxWidth: '520px',
           }}>
-            Are you interested in{' '}
+            <span>Are you interested in{' '}</span>
             <span style={{
               fontWeight: 700,
               transition: 'opacity 0.4s ease',

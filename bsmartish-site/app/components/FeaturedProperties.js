@@ -4,9 +4,9 @@ import { SocialTooltip } from '@/app/components/SocialTooltip'
 import FadeIn from '@/app/components/FadeIn'
 
 const properties = [
-  { name: 'Alegria',    src: '/Images/Website.images/Home/sec.4/alegria.sec4.webp',    href: '/portfolio/alegria-apartment'    },
-  { name: 'Matosinhos', src: '/Images/Website.images/Home/sec.4/matosinhos.sec4.webp', href: '/portfolio/matosinhos-apartment' },
   { name: 'Paranhos',   src: '/Images/Website.images/Home/sec.4/paranhos.sec4.webp',   href: '/portfolio/paranhos-apartment'   },
+  { name: 'Matosinhos', src: '/Images/Website.images/Home/sec.4/matosinhos.sec4.webp', href: '/portfolio/matosinhos-apartment' },
+  { name: 'Alegria',    src: '/Images/Website.images/Home/sec.4/alegria.sec4.webp',    href: '/portfolio/alegria-apartment'    },
 ]
 
 export default function FeaturedProperties() {

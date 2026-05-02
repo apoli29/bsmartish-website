@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { LanguageSwitcher, LanguageSwitcherMobile } from './LanguageSwitcher'
 
 const links = [
   { label: 'Home', href: '/' },
@@ -57,7 +58,7 @@ export default function Header() {
               </Link>
 
               {/* Desktop nav */}
-              <nav className="hidden md:flex items-center gap-7 lg:gap-10">
+              <nav className="hidden md:flex items-center gap-7 lg:gap-10" style={{ alignItems: 'center' }}>
                 {links.map(({ label, href, scroll }) => {
                   const isActive = pathname === href
                   const navClass = "flex flex-col items-center gap-[5px] text-white tracking-[0.12em] uppercase hover:opacity-75 transition-opacity text-[11px] lg:text-[13px]"

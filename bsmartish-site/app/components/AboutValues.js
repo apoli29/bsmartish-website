@@ -88,7 +88,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
         >
           <div
             style={{
-              backgroundColor: '#202831',
+              backgroundColor: '#6b87a4',
               minHeight: '72px',
               display: 'flex',
               alignItems: 'center',
@@ -98,7 +98,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
             }}
           >
             <span
-              className="text-[1.3rem] leading-none"
+              className="text-[1.18rem] leading-none"
               style={{ fontFamily: 'var(--font-garet)', fontWeight: 800, color: '#f8f8f8' }}
             >
               {value.name}
@@ -127,7 +127,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
         >
           <div className="overflow-hidden">
             <p
-              className="text-[1rem] leading-[1.7] px-6 pt-4 pb-5 text-justify"
+              className="text-[0.98rem] leading-[1.7] px-6 pt-4 pb-5 text-justify"
               style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c', hyphens: 'auto' }}
             >
               {value.description}
@@ -181,7 +181,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
             bottom: 0,
             left: 0,
             width: isOpen ? RECT_WIDTH : '100%',
-            backgroundColor: '#202831',
+            backgroundColor: '#6b87a4',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -192,7 +192,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
           }}
         >
           <span
-            className="leading-none text-[1.45rem] md:text-[1.75rem] lg:text-[2rem]"
+            className="leading-none text-[1.28rem] md:text-[1.52rem] lg:text-[1.72rem]"
             style={{
               fontFamily: 'var(--font-garet)',
               fontWeight: 800,

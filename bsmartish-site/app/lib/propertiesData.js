@@ -76,7 +76,7 @@ export const properties = [
   {
     id: 2,
     slug: 'matosinhos-apartment',
-    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1501.300648505338!2d-8.692920578700004!3d41.186862606208095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd246f2e1d005c71%3A0x9486cd6a40a80636!2sMercado%20Municipal%20de%20Matosinhos!5e0!3m2!1spt-PT!2spt!4v1777492879892!5m2!1spt-PT!2spt',
+    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d750.6554831361739!2d-8.693174930304805!3d41.186412598207866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd246f31db654475%3A0x65968db4f47e25c0!2sR.%20Conde%20S%C3%A3o%20Salvador%20378%2C%204450-038%20Matosinhos!5e0!3m2!1spt-PT!2spt!4v1777644306104!5m2!1spt-PT!2spt',
     bookingLinks: {
       idealista: 'https://www.idealista.pt/imovel/34888612/',
       airbnb: 'https://airbnb.es/h/bsmartishmatosinhos',

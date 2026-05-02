@@ -43,7 +43,7 @@ export default function AboutDistinction() {
                 hyphens: 'auto',
               }}
             >
-              Our trajectory sets us apart, positioning us as urban renovation specialists with deep niche expertise. We are uniquely capable of developing complex, reliable, and high-standard real estate projects across various sectors — through the application of exceptional and efficient procedures that consistently guarantee the best results.
+              Our trajectory sets us apart, positioning us as urban renovation specialists with deep niche expertise. We are uniquely capable of developing complex, reliable, and high-standard real estate projects across various sectors, through the application of exceptional and efficient procedures that consistently guarantee the best results.
             </p>
           </FrostedGlassCard>
         </FadeIn>

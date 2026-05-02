@@ -25,7 +25,7 @@ export default function HeroSection() {
             className="text-[#F8F8F8] leading-[1.1] max-w-2xl mb-6 text-[2.2rem] md:text-[2.9rem] lg:text-[3.5rem]"
             style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500 }}
           >
-            Developing urban renovation projects for almost 30 years
+            Developing urban renovation projects for 20 years
           </h1>
         </FadeIn>
 

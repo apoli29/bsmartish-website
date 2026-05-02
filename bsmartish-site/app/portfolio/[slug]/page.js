@@ -65,16 +65,66 @@ export default async function PropertyPage({ params }) {
   return (
     <main className="pt-24 md:pt-28 lg:pt-32" style={{ backgroundColor: '#f8f8f8', fontFamily: 'var(--font-aileron)' }}>
 
+      {/* Mobile-only hero header */}
+      <div className="block md:hidden px-8 pt-6 pb-8" style={{ backgroundColor: '#f8f8f8', borderBottom: '1px solid #e4e4e4' }}>
+        <FadeIn delay={0}>
+          <p style={{ ...eyebrow, marginBottom: '10px' }}>About This Property</p>
+          <h1 style={{ margin: 0, fontFamily: 'var(--font-radnika)', fontSize: 'clamp(1.75rem, 7vw, 2.25rem)', color: '#6b87a4', fontWeight: 500, lineHeight: 1.1 }}>
+            {property.name} {property.specs.type}
+          </h1>
+        </FadeIn>
+      </div>
+
+      {/* Mobile-only: full property details — before gallery */}
+      <div className="block md:hidden px-8 py-8" style={{ borderBottom: '1px solid #e4e4e4' }}>
+        <FadeIn delay={0}>
+          <p style={{ ...eyebrow, marginBottom: '0' }}>Property Details</p>
+          <div style={{ ...detailRow, borderTop: '1px solid #e4e4e4', marginTop: '16px' }}>
+            <div style={detailLabel}>Property Name</div>
+            <div style={detailValue}>{property.name} {property.specs.type}</div>
+          </div>
+          <div style={detailRow}>
+            <div style={detailLabel}>Location</div>
+            <div style={detailValue}>{property.location}</div>
+          </div>
+          <div style={detailRow}>
+            <div style={detailLabel}>Built Year</div>
+            <div style={detailValue}>{property.specs.year}</div>
+          </div>
+          <div style={detailRow}>
+            <div style={detailLabel}>Sqm.</div>
+            <div style={detailValue}>{property.specs.area}</div>
+          </div>
+          <div style={{ ...detailRow, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+            <div>
+              <div style={detailLabel}>Bedroom</div>
+              <div style={detailValue}>{property.specs.beds}</div>
+            </div>
+            <div>
+              <div style={detailLabel}>Bathroom</div>
+              <div style={detailValue}>{property.specs.baths}</div>
+            </div>
+            <div>
+              <div style={detailLabel}>Garage</div>
+              <div style={detailValue}>{property.specs.garage}</div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+
+      {/* ── Overview + Gallery (reordered on mobile) ── */}
+      <div className="flex flex-col">
+
       {/* ── Overview + Specs ── */}
-      <section style={{ borderBottom: '1px solid #e4e4e4' }}>
+      <section className="order-2 md:order-1" style={{ borderBottom: '1px solid #e4e4e4' }}>
         <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 py-12 md:py-16 lg:py-[72px]">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] lg:grid-cols-[1fr_340px] gap-10 md:gap-12 lg:gap-20 items-start">
 
             {/* Left: overview text */}
             <FadeIn delay={0}>
               <div>
-                <p style={eyebrow}>About This Property</p>
-                <h1 style={{ margin: '0 0 32px', fontFamily: 'var(--font-radnika)', fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: '#6b87a4', fontWeight: 500, lineHeight: 1.1 }}>
+                <p className="hidden md:block" style={eyebrow}>About This Property</p>
+                <h1 className="hidden md:block" style={{ margin: '0 0 32px', fontFamily: 'var(--font-radnika)', fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: '#6b87a4', fontWeight: 500, lineHeight: 1.1 }}>
                   {property.name} {property.specs.type}
                 </h1>
                 {property.moreDetails && property.moreDetails.intro.map((para, i) => (
@@ -82,7 +132,7 @@ export default async function PropertyPage({ params }) {
                     key={i}
                     style={{
                       margin: i < property.moreDetails.intro.length - 1 ? '0 0 14px' : '0 0 28px',
-                      fontSize: '1.075rem',
+                      fontSize: 'clamp(0.98rem, 2.46vw, 1.20rem)',
                       color: '#75797c',
                       lineHeight: 1.8,
                       fontFamily: 'var(--font-aileron)',
@@ -105,7 +155,8 @@ export default async function PropertyPage({ params }) {
               </div>
             </FadeIn>
 
-            {/* Right: property details */}
+            {/* Right: property details — desktop only (mobile version is above) */}
+            <div className="hidden md:block">
             <FadeIn delay={150}>
               <div style={{ paddingTop: '29px' }}>
                 <p style={{ ...eyebrow, marginBottom: '0' }}>Property Details</p>
@@ -145,26 +196,16 @@ export default async function PropertyPage({ params }) {
                   </div>
                 </div>
 
-                <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, fontSize: '0.8rem', color: '#202831', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-                    Book with us
-                  </span>
-                  <SocialTooltip items={[
-                    { href: property.bookingLinks.idealista, ariaLabel: 'Idealista', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/idealista.png', imgSize: 23 },
-                    { href: property.bookingLinks.airbnb, ariaLabel: 'Airbnb', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/air.bnb.png', imgSize: 29 },
-                    { href: property.bookingLinks.spotahome, ariaLabel: 'Spotahome', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/spotahome.png', imgSize: 23 },
-                    { href: property.bookingLinks.flatio, ariaLabel: 'Flatio', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/flatio.png', imgSize: 23 },
-                  ]} />
-                </div>
               </div>
             </FadeIn>
+            </div>
 
           </div>
         </div>
       </section>
 
       {/* ── Photo Gallery ── */}
-      <section style={{ borderBottom: '1px solid #e4e4e4' }}>
+      <section className="order-1 md:order-2" style={{ borderBottom: '1px solid #e4e4e4' }}>
         <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 py-12 md:py-16 lg:py-[72px]">
           <FadeIn delay={0}>
             <p style={eyebrow}>Gallery</p>
@@ -173,8 +214,23 @@ export default async function PropertyPage({ params }) {
           <FadeIn delay={150}>
             <PropertyGallery photos={property.gallery} />
           </FadeIn>
+          <FadeIn delay={250}>
+            <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <span style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, fontSize: '0.8rem', color: '#202831', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+                Book with us
+              </span>
+              <SocialTooltip items={[
+                { href: property.bookingLinks.idealista, ariaLabel: 'Idealista', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/idealista.png', imgSize: 23 },
+                { href: property.bookingLinks.airbnb, ariaLabel: 'Airbnb', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/air.bnb.png', imgSize: 29 },
+                { href: property.bookingLinks.spotahome, ariaLabel: 'Spotahome', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/spotahome.png', imgSize: 23 },
+                { href: property.bookingLinks.flatio, ariaLabel: 'Flatio', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/flatio.png', imgSize: 23 },
+              ]} />
+            </div>
+          </FadeIn>
         </div>
       </section>
+
+      </div>{/* end reorder wrapper */}
 
       {/* ── More Details ── */}
       {property.moreDetails && (

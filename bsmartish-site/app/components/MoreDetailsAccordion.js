@@ -99,7 +99,7 @@ export default function MoreDetailsAccordion({ moreDetails }) {
                       </span>
                       <span style={{
                         fontFamily: 'var(--font-aileron)',
-                        fontSize: '1rem',
+                        fontSize: 'clamp(0.98rem, 2.46vw, 1.11rem)',
                         color: '#202831',
                         lineHeight: 1.6,
                       }}>

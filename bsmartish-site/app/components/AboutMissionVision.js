@@ -11,7 +11,7 @@ const items = [
   {
     label: 'Our Vision',
     text:
-      'To be a reference in urban renovation and the real estate sector in general, recognized for the ability to create high-value properties that balance design, functionality, and ethics, and for offering excellence in service — personalized and focused on the well-being and convenience of every resident.',
+      'To be a reference in urban rehabilitation and in the real estate sector in general, recognized for the ability to create properties of value, which balance design, functionality, and ethics, and for offering a service of excellence, personalized and focused on the well-being and convenience of each resident.',
   },
 ]
 
@@ -66,7 +66,7 @@ function StatementRow({ item, delay }) {
           ●
         </span>
         <span
-          className="text-[0.98rem] md:text-[1.03rem]"
+          className="text-[1.15rem] md:text-[1.3rem] lg:text-[1.4rem]"
           style={{
             fontFamily: 'var(--font-garet)',
             fontWeight: 700,
