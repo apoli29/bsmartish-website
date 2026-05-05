@@ -8,7 +8,7 @@ const IMAGES = [
   'amh5svunor2lamgcbekb.webp',
   'qwoegxcqsa.webp',
   'ny9iigp3wuyi7a5otvbo.webp',
-  'poraitxnq5totssxlrii.webp',
+  'utyfcnb.webp',
   'vbysrw6jgohnpnfhp0yn.webp',
   'retogrkldbads.webp',
   'fhgertdcvv.webp',
@@ -19,15 +19,14 @@ const IMAGES = [
   'fsggrhervj.webp',
   'swdeohewhu.webp',
   'rewoitjgeba.webp',
-  'izlfrspnzfu16qugtmtm.webp',
   'hjewfpvbr.webp',
   'vdfnsjknw6.webp',
-  'ym5i0tsvsqqlxph4ndtv.webp',
+  'ytfvkjlh.webp',
   'asccnefg.webp',
   'sjnvwjerv.webp',
   'pj6vrlrakjglreckwuhn.webp',
-  'kydpjriyasdw8usyr0fy.webp',
   'cn1lc7yfim415qmsgoqh.webp',
+  'ertvmsxzv.webp',
 ]
 
 const IMAGE_SRCS = IMAGES.map(f => `/images/Website.images/Home/sec.2/${f}`)
@@ -191,8 +190,9 @@ export default function CarouselSection() {
   return (
     <>
       <section
+        id="projects-carousel"
         className="w-full overflow-hidden"
-        style={{ backgroundColor: '#f8f8f8', paddingTop: '52px', paddingBottom: '52px' }}
+        style={{ backgroundColor: '#f8f8f8', paddingTop: '52px', paddingBottom: '52px', scrollMarginTop: '28vh' }}
       >
         <div
           ref={trackRef}

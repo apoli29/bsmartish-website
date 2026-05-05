@@ -8,7 +8,7 @@ import { LanguageSwitcher, LanguageSwitcherMobile } from './LanguageSwitcher'
 const links = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Mid-term Rentals', href: '/mid-term-rentals-in-porto' },
   { label: 'Contact Us', href: '#footer', scroll: true },
 ]
 
@@ -36,11 +36,11 @@ export default function Header() {
           <header
             className="w-full transition-all duration-500"
             style={{
-              backgroundColor: (solid || pathname.startsWith('/portfolio')) ? '#6b87a4' : 'transparent',
-              backdropFilter: (!solid && !pathname.startsWith('/portfolio')) ? 'blur(14px)' : 'none',
-              WebkitBackdropFilter: (!solid && !pathname.startsWith('/portfolio')) ? 'blur(14px)' : 'none',
-              border: (!solid && !pathname.startsWith('/portfolio')) ? '1px solid rgba(255,255,255,0.18)' : 'none',
-              boxShadow: (solid || pathname.startsWith('/portfolio')) ? '0 4px 24px rgba(0,0,0,0.12)' : 'none',
+              backgroundColor: (solid || pathname.startsWith('/mid-term-rentals-in-porto')) ? '#6b87a4' : 'transparent',
+              backdropFilter: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'blur(14px)' : 'none',
+              WebkitBackdropFilter: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'blur(14px)' : 'none',
+              border: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? '1px solid rgba(255,255,255,0.18)' : 'none',
+              boxShadow: (solid || pathname.startsWith('/mid-term-rentals-in-porto')) ? '0 4px 24px rgba(0,0,0,0.12)' : 'none',
               borderRadius: menuOpen ? '4px 4px 0 0' : '4px',
             }}
           >

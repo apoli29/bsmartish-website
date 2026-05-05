@@ -1,3 +1,8 @@
+export const metadata = {
+  title: 'BSMARTISH - Mid-Term Rentals & Urban Renovation Porto',
+  description: 'Real estate company with 20 years of expertise focused on mid-term, fully furnished apartments in Porto and urban renovation projects.',
+}
+
 import HeroSection from '@/app/components/HeroSection'
 import CarouselSection from '@/app/components/CarouselSection'
 import ImpactWidget from '@/app/components/ImpactWidget'

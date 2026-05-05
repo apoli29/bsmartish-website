@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 const activities = [
@@ -7,11 +8,13 @@ const activities = [
     title: 'Portfolio Development & Management',
     text:
       'We develop real estate urban renovation projects and operate them within the market through a mid-term rental strategy.',
+    cta: { label: 'Explore our mid-rental properties in Porto', href: '/mid-term-rentals-in-porto' },
   },
   {
     title: 'Third-Party Project Management & Consultancy',
     text:
       'We partner with investors to deliver tailored real estate projects, providing hands-on guidance from acquisition and concept design through to execution and monetisation.',
+    cta: { label: 'Explore some of the projects we developed', href: '/#projects-carousel', center: true },
   },
 ]
 
@@ -79,18 +82,48 @@ function ActivityRow({ activity, delay }) {
       </div>
 
       {/* Body */}
-      <p
-        className="text-[1.04rem] md:text-[1.08rem] lg:text-[1.12rem] leading-[1.75] text-justify max-w-[65ch]"
-        style={{
-          fontFamily: 'var(--font-aileron)',
-          fontWeight: 400,
-          color: '#75797c',
-          hyphens: 'auto',
-          ...anim(100),
-        }}
-      >
-        {activity.text}
-      </p>
+      <div style={anim(100)}>
+        <p
+          className="text-[1.04rem] md:text-[1.08rem] lg:text-[1.12rem] leading-[1.75] text-justify max-w-[65ch]"
+          style={{
+            fontFamily: 'var(--font-aileron)',
+            fontWeight: 400,
+            color: '#75797c',
+            hyphens: 'auto',
+          }}
+        >
+          {activity.text}
+        </p>
+        {activity.cta && (
+          <Link
+            href={activity.cta.href}
+            className="group flex items-center gap-2 transition-all"
+            onClick={activity.cta.center ? (e) => {
+              e.preventDefault()
+              const id = activity.cta.href.split('#')[1]
+              const el = document.getElementById(id)
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+              else window.location.href = activity.cta.href
+            } : undefined}
+            style={{
+              display: 'inline-flex',
+              marginTop: '1.25rem',
+              fontFamily: 'var(--font-aileron)',
+              fontWeight: 600,
+              fontSize: '0.8rem',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: '#202831',
+              textDecoration: 'none',
+            }}
+          >
+            <span style={{ borderBottom: '1px solid #202831', paddingBottom: '1px' }}>
+              {activity.cta.label}
+            </span>
+            <span className="transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+        )}
+      </div>
     </div>
   )
 }

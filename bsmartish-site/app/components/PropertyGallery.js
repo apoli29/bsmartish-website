@@ -22,7 +22,7 @@ const SLIDE_CSS = `
   }
 `
 
-export default function PropertyGallery({ photos }) {
+export default function PropertyGallery({ photos, propertyName }) {
   const [modalOpen, setModalOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [mounted, setMounted] = useState(false)
@@ -147,14 +147,14 @@ export default function PropertyGallery({ photos }) {
         <div className="sm:hidden flex flex-col gap-3">
           <button style={cellBtn()} onClick={() => openModal(0)} aria-label="Open photo 1">
             {gridPhotos[0]
-              ? <img src={gridPhotos[0]} alt="Property photo 1" style={{ ...imgStyle('100%'), aspectRatio: '1/1' }} />
+              ? <img src={gridPhotos[0]} alt={`${propertyName} apartment — photo 1 — mid-term rental Porto`} style={{ ...imgStyle('100%'), aspectRatio: '1/1' }} />
               : <div style={{ aspectRatio: '1/1', backgroundColor: '#c4c8cc' }} />}
           </button>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             {[1, 2].map((i) => (
               <button key={i} style={cellBtn()} onClick={() => openModal(i)} aria-label={`Open photo ${i + 1}`}>
                 {gridPhotos[i]
-                  ? <img src={gridPhotos[i]} alt={`Property photo ${i + 1}`} style={{ ...imgStyle('100%'), aspectRatio: '1/1' }} />
+                  ? <img src={gridPhotos[i]} alt={`${propertyName} apartment — photo ${i + 1} — mid-term rental Porto`} style={{ ...imgStyle('100%'), aspectRatio: '1/1' }} />
                   : <div style={{ aspectRatio: '1/1', backgroundColor: '#c4c8cc' }} />}
               </button>
             ))}
@@ -167,7 +167,7 @@ export default function PropertyGallery({ photos }) {
             {[0, 1].map((i) => (
               <button key={i} style={cellBtn()} onClick={() => openModal(i)} aria-label={`Open photo ${i + 1}`}>
                 {gridPhotos[i]
-                  ? <img src={gridPhotos[i]} alt={`Property photo ${i + 1}`} style={imgStyle('380px')} />
+                  ? <img src={gridPhotos[i]} alt={`${propertyName} apartment — photo ${i + 1} — mid-term rental Porto`} style={imgStyle('380px')} />
                   : <div style={{ height: '380px', backgroundColor: '#c4c8cc' }} />}
               </button>
             ))}
@@ -176,7 +176,7 @@ export default function PropertyGallery({ photos }) {
             {[2, 3, 4].map((i) => (
               <button key={i} style={cellBtn()} onClick={() => openModal(i)} aria-label={`Open photo ${i + 1}`}>
                 {gridPhotos[i]
-                  ? <img src={gridPhotos[i]} alt={`Property photo ${i + 1}`} style={imgStyle('220px')} />
+                  ? <img src={gridPhotos[i]} alt={`${propertyName} apartment — photo ${i + 1} — mid-term rental Porto`} style={imgStyle('220px')} />
                   : <div style={{ height: '220px', backgroundColor: '#c4c8cc' }} />}
               </button>
             ))}

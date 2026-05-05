@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 const defaultItems = [
   {
-    href: 'https://www.airbnb.com/users/show/17887083',
+    href: 'https://www.airbnb.com/users/profile/1470751082133656177?previous_page_name=PdpHomeMarketplace&locale=en&_set_bev_on_new_domain=1776797230_KKmE2MPABYjMTzwz&set_everest_cookie_on_new_domain=1776797229.EAYjVlMDU4YTQxMTA5OT.avGC8Xz-NKOetkvjxPDv0QzwxblIexDsUiWpxelMv_k',
     ariaLabel: 'Airbnb',
     svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/air.bnb.png',
     imgSize: 38,

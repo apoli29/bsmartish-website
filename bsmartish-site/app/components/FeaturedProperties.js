@@ -4,9 +4,9 @@ import { SocialTooltip } from '@/app/components/SocialTooltip'
 import FadeIn from '@/app/components/FadeIn'
 
 const properties = [
-  { name: 'Paranhos',   src: '/Images/Website.images/Home/sec.4/paranhos.sec4.webp',   href: '/portfolio/paranhos-apartment'   },
-  { name: 'Matosinhos', src: '/Images/Website.images/Home/sec.4/matosinhos.sec4.webp', href: '/portfolio/matosinhos-apartment' },
-  { name: 'Alegria',    src: '/Images/Website.images/Home/sec.4/alegria.sec4.webp',    href: '/portfolio/alegria-apartment'    },
+  { name: 'Paranhos',   src: '/Images/Website.images/Home/sec.4/paranhos.sec4.webp',   href: '/mid-term-rentals-in-porto/paranhos-apartment'   },
+  { name: 'Matosinhos', src: '/Images/Website.images/Home/sec.4/matosinhos.sec4.webp', href: '/mid-term-rentals-in-porto/matosinhos-apartment' },
+  { name: 'Alegria',    src: '/Images/Website.images/Home/sec.4/alegria.sec4.webp',    href: '/mid-term-rentals-in-porto/alegria-apartment'    },
 ]
 
 export default function FeaturedProperties() {
@@ -35,16 +35,16 @@ export default function FeaturedProperties() {
         </FadeIn>
 
         {/* Images grid */}
-        <FadeIn delay={150} className="flex flex-col md:flex-row gap-4 w-full">
-          {properties.map(({ name, src, href }) => (
+        <div className="flex flex-col md:flex-row gap-4 w-full">
+          {properties.map(({ name, src, href }, i) => (
+            <FadeIn key={name} delay={150 + i * 130} className="w-full md:flex-1">
             <Link
-              key={name}
               href={href}
-              className="relative w-full md:flex-1 overflow-hidden group aspect-[4/3] md:aspect-[3/4]"
+              className="relative block w-full overflow-hidden group aspect-[4/3] md:aspect-[3/4]"
             >
               <Image
                 src={src}
-                alt={name}
+                alt={`${name} apartment — mid-term rental Porto`}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -70,13 +70,14 @@ export default function FeaturedProperties() {
                 </span>
               </div>
             </Link>
+            </FadeIn>
           ))}
-        </FadeIn>
+        </div>
 
         {/* Footer: View all (esq) + Book with us (dir) */}
         <FadeIn delay={300} className="flex flex-col gap-4 mt-6 sm:flex-row sm:items-center sm:justify-between sm:mt-4">
           <a
-            href="/portfolio"
+            href="/mid-term-rentals-in-porto"
             className="group flex items-center gap-2 text-[0.8rem] uppercase tracking-[0.1em] transition-all"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#202831' }}
           >

@@ -6,15 +6,15 @@ import FadeIn from '@/app/components/FadeIn'
 const faqs = [
   {
     q: 'What types of properties does BSMARTISH renovate?',
-    a: 'We focus on urban properties suited to mid-term residential rental — typically apartments and small buildings in central locations. We renovate both for our own portfolio and on behalf of investors and owners who commission us to develop their projects.',
+    a: 'We focus on urban properties suited to midterm residential rental, typically apartments and small buildings in central locations. We renovate both for our own portfolio and on behalf of investors and owners who commission us to develop their projects.',
   },
   {
     q: 'What is a mid-term rent and who is it for?',
-    a: 'Mid-term rentals cover stays typically ranging from one to twelve months. These are designed for relocating professionals, families in transition, digital nomads, or long-term travelers seeking a fully furnished, ready-to-live home with greater flexibility than a traditional long-term lease.',
+    a: 'Midterm rentals cover stays typically ranging from one to twelve months. These are designed for relocating professionals, families in transition, digital nomads, or long term travelers seeking a fully furnished home ready to move into, with greater flexibility than a traditional long term lease.',
   },
   {
     q: 'Can I commission a renovation project for my own property?',
-    a: 'Yes. We work with property owners who want to renovate their building to a high standard — whether to live in it, to rent it, or to sell it. We bring the same procedures and standards we apply to our own portfolio.',
+    a: 'Yes. We work with property owners who want to renovate their building to a high standard, whether to live in it, to rent it, or to sell it. We bring the same procedures and standards we apply to our own portfolio.',
   },
   {
     q: 'Where are your projects located?',

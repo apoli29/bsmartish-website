@@ -1,5 +1,19 @@
+'use client'
+
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
+
+function handleSweep(e) {
+  const el = e.currentTarget
+  if (el.classList.contains('sweeping')) return
+  el.classList.add('sweeping')
+  const onEnd = (ev) => {
+    if (ev.animationName !== 'light-sweep-full') return
+    el.classList.remove('sweeping')
+    el.removeEventListener('animationend', onEnd)
+  }
+  el.addEventListener('animationend', onEnd)
+}
 
 export default function HeroSection() {
   return (
@@ -22,10 +36,10 @@ export default function HeroSection() {
 
         <FadeIn delay={100}>
           <h1
-            className="text-[#F8F8F8] leading-[1.1] max-w-2xl mb-6 text-[2.2rem] md:text-[2.9rem] lg:text-[3.5rem]"
-            style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500 }}
+            className="text-[#F8F8F8] leading-[1.1] max-w-2xl mb-[21.6px] md:mb-6"
+            style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, fontSize: 'clamp(2.1rem, 6vw, 3.5rem)' }}
           >
-            Developing urban renovation projects for 20 years
+            Developing urban<br />renovation projects<br />for 20 years.
           </h1>
         </FadeIn>
 
@@ -34,7 +48,7 @@ export default function HeroSection() {
             className="text-[#F8F8F8] max-w-xl mb-10 leading-relaxed text-[1rem] md:text-[1.05rem] lg:text-[1.1rem]"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, opacity: 0.9 }}
           >
-            We use our expertise to build mid-term rental properties and to help investors develop their own urban renovation projects.
+            We use our expertise to build mid-term rental properties and to help investors develop their own urban renovation projects in Porto.
           </p>
         </FadeIn>
 
@@ -42,7 +56,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/about"
-              className="px-7 py-3 text-[#F8F8F8] rounded transition-all text-[0.8rem] uppercase tracking-[0.1em] hover:bg-white hover:text-[#202831]"
+              className="px-7 py-3 text-[#F8F8F8] rounded text-[0.8rem] uppercase tracking-[0.1em] overflow-hidden relative btn-sweep" onMouseEnter={handleSweep}
               style={{
                 border: '1px solid rgba(248,248,248,0.55)',
                 fontFamily: 'var(--font-aileron)',
@@ -52,8 +66,8 @@ export default function HeroSection() {
               About us
             </Link>
             <Link
-              href="/portfolio"
-              className="px-7 py-3 text-[#F8F8F8] rounded transition-all text-[0.8rem] uppercase tracking-[0.1em] hover:opacity-80"
+              href="/mid-term-rentals-in-porto"
+              className="px-7 py-3 text-[#F8F8F8] rounded text-[0.8rem] uppercase tracking-[0.1em] overflow-hidden relative btn-sweep" onMouseEnter={handleSweep}
               style={{
                 backgroundColor: '#202831',
                 fontFamily: 'var(--font-aileron)',

@@ -57,7 +57,7 @@ const RECT_WIDTH = 'clamp(220px, 32%, 360px)'
 function ValueRow({ value, index, isOpen, onToggle }) {
   const [ref, inView] = useInView(0.25)
   const [isMobile, setIsMobile] = useState(false)
-  const baseDelay = 80 * index
+  const baseDelay = 220 * index
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)')
@@ -70,7 +70,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
   const fadeStyle = {
     opacity: inView ? 1 : 0,
     transform: inView ? 'translateY(0)' : 'translateY(12px)',
-    transition: `opacity 700ms ${EASE} ${baseDelay}ms, transform 700ms ${EASE} ${baseDelay}ms`,
+    transition: `opacity 1200ms ${EASE} ${baseDelay}ms, transform 1200ms ${EASE} ${baseDelay}ms`,
   }
 
   if (isMobile) {

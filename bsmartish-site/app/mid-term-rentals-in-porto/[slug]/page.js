@@ -8,6 +8,26 @@ import { SocialTooltip } from '@/app/components/SocialTooltip'
 import TiltCard from '@/app/components/TiltCard'
 import MoreDetailsAccordion from '@/app/components/MoreDetailsAccordion'
 
+const slugMetadata = {
+  'paranhos-apartment': {
+    title: 'Paranhos Apartment - Mid-Term Rental in Porto | BSMARTISH',
+    description: 'Modern, fully furnished apartment in Paranhos, Porto. Mid-term rental 1-12 months. University area with direct access to city centre.',
+  },
+  'matosinhos-apartment': {
+    title: 'Matosinhos Apartment - Mid-Term Rental in Porto | BSMARTISH',
+    description: 'Modern, fully furnished apartment in Matosinhos, Porto. Mid-term rental 1-12 months. Premium location, near beach and direct access to the city centre.',
+  },
+  'alegria-apartment': {
+    title: 'Alegria Apartment - Mid-Term Rental in Porto | BSMARTISH',
+    description: 'Modern, fully furnished apartment in Alegria, Porto. Mid-term rental 1-12 months. City centre location with soundproof double glazed windows.',
+  },
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params
+  return slugMetadata[slug] ?? {}
+}
+
 export async function generateStaticParams() {
   return properties.map((p) => ({ slug: p.slug }))
 }
@@ -69,9 +89,9 @@ export default async function PropertyPage({ params }) {
       <div className="block md:hidden px-8 pt-6 pb-8" style={{ backgroundColor: '#f8f8f8', borderBottom: '1px solid #e4e4e4' }}>
         <FadeIn delay={0}>
           <p style={{ ...eyebrow, marginBottom: '10px' }}>About This Property</p>
-          <h1 style={{ margin: 0, fontFamily: 'var(--font-radnika)', fontSize: 'clamp(1.75rem, 7vw, 2.25rem)', color: '#6b87a4', fontWeight: 500, lineHeight: 1.1 }}>
+          <h2 style={{ margin: 0, fontFamily: 'var(--font-radnika)', fontSize: 'clamp(1.75rem, 7vw, 2.25rem)', color: '#6b87a4', fontWeight: 500, lineHeight: 1.1 }}>
             {property.name} {property.specs.type}
-          </h1>
+          </h2>
         </FadeIn>
       </div>
 
@@ -88,7 +108,7 @@ export default async function PropertyPage({ params }) {
             <div style={detailValue}>{property.location}</div>
           </div>
           <div style={detailRow}>
-            <div style={detailLabel}>Built Year</div>
+            <div style={detailLabel}>{property.specs.yearLabel || 'Built Year'}</div>
             <div style={detailValue}>{property.specs.year}</div>
           </div>
           <div style={detailRow}>
@@ -142,11 +162,11 @@ export default async function PropertyPage({ params }) {
                     {para}
                   </p>
                 ))}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                   {property.tags.map((tag, i) => (
                     <span
                       key={i}
-                      style={{ fontSize: '0.7rem', fontWeight: 600, padding: '6px 16px', borderRadius: '999px', border: '1px solid #6b87a4', color: '#6b87a4', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+                      style={{ fontSize: '0.69rem', fontWeight: 600, padding: '5px 14px', borderRadius: '999px', border: '1px solid #6b87a4', color: '#6b87a4', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                     >
                       {tag.type === 'people' ? `${tag.count} guests` : tag}
                     </span>
@@ -172,7 +192,7 @@ export default async function PropertyPage({ params }) {
                 </div>
 
                 <div style={detailRow}>
-                  <div style={detailLabel}>Built Year</div>
+                  <div style={detailLabel}>{property.specs.yearLabel || 'Built Year'}</div>
                   <div style={detailValue}>{property.specs.year}</div>
                 </div>
 
@@ -197,6 +217,27 @@ export default async function PropertyPage({ params }) {
                 </div>
 
               </div>
+
+              {property.price && (
+                <div style={{ marginTop: '20px' }}>
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      backgroundColor: '#202831',
+                      color: '#F8F8F8',
+                      fontFamily: 'var(--font-aileron)',
+                      fontWeight: 600,
+                      fontSize: '0.8rem',
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      padding: '12px 28px',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    €{property.price} / month
+                  </span>
+                </div>
+              )}
             </FadeIn>
             </div>
 
@@ -212,7 +253,7 @@ export default async function PropertyPage({ params }) {
             <h2 style={sectionH2}>Property Spaces</h2>
           </FadeIn>
           <FadeIn delay={150}>
-            <PropertyGallery photos={property.gallery} />
+            <PropertyGallery photos={property.gallery} propertyName={property.name} />
           </FadeIn>
           <FadeIn delay={250}>
             <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -286,11 +327,11 @@ export default async function PropertyPage({ params }) {
           <FadeIn delay={150}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {related.map((p) => (
-                <Link key={p.id} href={`/portfolio/${p.slug}`} style={{ textDecoration: 'none' }}>
+                <Link key={p.id} href={`/mid-term-rentals-in-porto/${p.slug}`} style={{ textDecoration: 'none' }}>
                   <TiltCard style={{ border: '1px solid #e4e4e4', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#ffffff' }}>
                     <div style={{ height: '220px', backgroundColor: '#c4c8cc' }}>
                       {p.image && (
-                        <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <img src={p.image} alt={`${p.name} apartment — mid-term rental Porto`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       )}
                     </div>
                     <div style={{ padding: '24px 28px' }}>

@@ -1,6 +1,20 @@
+'use client'
+
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
 import { properties } from '@/app/lib/propertiesData'
+
+function handleSweep(e) {
+  const el = e.currentTarget
+  if (el.classList.contains('sweeping')) return
+  el.classList.add('sweeping')
+  const onEnd = (ev) => {
+    if (ev.animationName !== 'light-sweep-full') return
+    el.classList.remove('sweeping')
+    el.removeEventListener('animationend', onEnd)
+  }
+  el.addEventListener('animationend', onEnd)
+}
 
 function LocationPinIcon() {
   return (
@@ -38,7 +52,7 @@ function PropertyRow({ property }) {
 
           {/* Image — top on mobile, right on md+ */}
           <Link
-            href={`/portfolio/${property.slug}`}
+            href={`/mid-term-rentals-in-porto/${property.slug}`}
             className="group order-first md:order-last md:flex-shrink-0 relative rounded-[8px] overflow-hidden block no-underline w-full min-h-[220px] md:w-[52%] md:min-h-[360px]"
             style={{ backgroundColor: '#d0d0d0' }}
           >
@@ -95,7 +109,7 @@ function PropertyRow({ property }) {
             </div>
 
             {/* Title — clickable */}
-            <Link href={`/portfolio/${property.slug}`} style={{ textDecoration: 'none' }}>
+            <Link href={`/mid-term-rentals-in-porto/${property.slug}`} style={{ textDecoration: 'none' }}>
               <h2
                 style={{
                   margin: 0,
@@ -127,7 +141,7 @@ function PropertyRow({ property }) {
             </p>
 
             {/* Tags */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '4px' }}>
               {property.tags.map((tag, i) => (
                 <span
                   key={i}
@@ -135,8 +149,8 @@ function PropertyRow({ property }) {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '5px',
-                    fontSize: '0.79rem',
-                    padding: '4px 12px',
+                    fontSize: '0.76rem',
+                    padding: '4px 11px',
                     borderRadius: '999px',
                     border: '1px solid rgba(107, 135, 164, 0.35)',
                     fontFamily: 'var(--font-aileron)',
@@ -160,8 +174,8 @@ function PropertyRow({ property }) {
             {/* CTA */}
             <div style={{ marginTop: '8px' }}>
               <Link
-                href={`/portfolio/${property.slug}`}
-                className="inline-block px-7 py-3 rounded transition-all text-[0.8rem] uppercase tracking-[0.1em] hover:opacity-80"
+                href={`/mid-term-rentals-in-porto/${property.slug}`}
+                className="inline-block px-7 py-3 rounded text-[0.8rem] uppercase tracking-[0.1em] overflow-hidden relative btn-sweep" onMouseEnter={handleSweep}
                 style={{
                   backgroundColor: '#202831',
                   color: '#F8F8F8',

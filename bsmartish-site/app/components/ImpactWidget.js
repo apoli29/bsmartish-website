@@ -1,4 +1,5 @@
 import FadeIn from '@/app/components/FadeIn'
+import CountUp from '@/app/components/CountUp'
 
 const stats = [
   { value: '+10',    label: 'Curated Projects'    },
@@ -41,7 +42,7 @@ export default function ImpactWidget() {
                     className="leading-none mb-1 md:mb-[6px] text-[clamp(2rem,5.5vw,3.4rem)] whitespace-nowrap"
                     style={{ fontFamily: 'var(--font-garet)', fontWeight: 800, color: '#202831' }}
                   >
-                    <span>{value}</span>
+                    <CountUp value={value} delay={150} duration={2000 + i * 540} />
                   </p>
                   <p
                     className="text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] uppercase tracking-[0.15em]"
