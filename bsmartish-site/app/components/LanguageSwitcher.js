@@ -1,153 +1,72 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useLang } from '@/app/i18n-provider'
 
-const LANGS = ['EN', 'PT', 'ES', 'FR', 'IT', 'DE']
+const LANGS = ['EN', 'PT']
 
 export function LanguageSwitcher() {
-  const [open, setOpen] = useState(false)
-  const [lang, setLang] = useState('EN')
-  const [hovered, setHovered] = useState(null)
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const stored = localStorage.getItem('bsmartish-lang')
-    if (stored && LANGS.includes(stored)) setLang(stored)
-  }, [])
-
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
-    const onDown = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
-    if (open) {
-      document.addEventListener('keydown', onKey)
-      document.addEventListener('mousedown', onDown)
-    }
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.removeEventListener('mousedown', onDown)
-    }
-  }, [open])
-
-  const select = (code) => {
-    setLang(code)
-    localStorage.setItem('bsmartish-lang', code)
-    setOpen(false)
-  }
+  const [lang, setLang] = useLang()
+  const next = LANGS.find(c => c !== lang)
 
   return (
-    <div ref={ref} style={{ position: 'relative' }}>
-      <button
-        onClick={() => setOpen(v => !v)}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        className="flex flex-col items-center gap-[5px] text-white tracking-[0.12em] uppercase transition-opacity text-[11px] lg:text-[13px]"
-        style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: 0,
-          fontFamily: 'var(--font-aileron)',
-          opacity: open ? 0.75 : 1,
-          transition: 'opacity 150ms ease',
-        }}
-      >
-        {lang}
-        <span style={{
-          display: 'block',
-          height: '1px',
-          width: '100%',
-          backgroundColor: open ? 'white' : 'transparent',
-          transition: 'background-color 150ms ease',
-        }} />
-      </button>
-
-      {/* Dropdown */}
-      <div
-        role="listbox"
-        aria-label="Select language"
-        style={{
-          position: 'absolute',
-          top: 'calc(100% + 10px)',
-          right: 0,
-          backgroundColor: '#202831',
-          borderRadius: '4px',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.22)',
-          padding: '5px 0',
-          minWidth: '52px',
-          opacity: open ? 1 : 0,
-          transform: open ? 'translateY(0)' : 'translateY(-5px)',
-          pointerEvents: open ? 'auto' : 'none',
-          transition: 'opacity 200ms cubic-bezier(0.16, 1, 0.3, 1), transform 200ms cubic-bezier(0.16, 1, 0.3, 1)',
-          zIndex: 100,
-        }}
-      >
-        {LANGS.map((code) => (
-          <button
-            key={code}
-            role="option"
-            aria-selected={lang === code}
-            onClick={() => select(code)}
-            onMouseEnter={() => setHovered(code)}
-            onMouseLeave={() => setHovered(null)}
-            style={{
-              display: 'block',
-              width: '100%',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: '5px 16px',
-              fontFamily: 'var(--font-aileron)',
-              fontSize: '11px',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: lang === code ? '#6b87a4' : hovered === code ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.72)',
-              textAlign: 'center',
-              transition: 'color 100ms ease',
-            }}
-          >
-            {code}
-          </button>
-        ))}
-      </div>
-    </div>
+    <button
+      onClick={() => setLang(next)}
+      aria-label={`Switch to ${next === 'EN' ? 'English' : 'Portuguese'}`}
+      title={`Switch to ${next === 'EN' ? 'English' : 'Portuguese'}`}
+      className="flex flex-col items-center gap-[1px] tracking-[0.12em] uppercase text-[11px] lg:text-[13px]"
+      style={{
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        padding: '0 0 4px 0',
+        fontFamily: 'var(--font-aileron)',
+        color: 'white',
+      }}
+    >
+      {lang}
+      <span style={{ display: 'block', height: '1px', width: '100%', backgroundColor: 'rgba(255,255,255,0.45)' }} />
+    </button>
   )
 }
 
 export function LanguageSwitcherMobile({ menuOpen }) {
-  const [lang, setLang] = useState('EN')
-
-  useEffect(() => {
-    const stored = localStorage.getItem('bsmartish-lang')
-    if (stored && LANGS.includes(stored)) setLang(stored)
-  }, [])
-
-  const select = (code) => {
-    setLang(code)
-    localStorage.setItem('bsmartish-lang', code)
-  }
+  const [lang, setLang] = useLang()
 
   return (
-    <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
       {LANGS.map((code, i) => (
-        <button
-          key={code}
-          onClick={() => select(code)}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: 0,
-            fontFamily: 'var(--font-aileron)',
-            fontSize: '0.55rem',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            color: lang === code ? '#202831' : '#6b87a4',
-            opacity: menuOpen ? 1 : 0,
-            transition: `opacity 0.3s ease ${i * 40 + 80}ms, color 120ms ease`,
-          }}
-        >
-          {code}
-        </button>
+        <span key={code} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <button
+            onClick={() => setLang(code)}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: lang === code ? 'default' : 'pointer',
+              padding: 0,
+              fontFamily: 'var(--font-aileron)',
+              fontSize: '0.55rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: lang === code ? '#202831' : '#6b87a4',
+              opacity: menuOpen ? 1 : 0,
+              transition: `opacity 0.3s ease ${i * 60 + 120}ms, color 150ms ease`,
+            }}
+            aria-pressed={lang === code}
+            aria-label={`Switch to ${code === 'EN' ? 'English' : 'Portuguese'}`}
+          >
+            {code}
+          </button>
+          {i < LANGS.length - 1 && (
+            <span style={{
+              width: '1px',
+              height: '8px',
+              backgroundColor: 'rgba(107,135,164,0.35)',
+              display: 'block',
+              opacity: menuOpen ? 1 : 0,
+              transition: `opacity 0.3s ease 140ms`,
+            }} />
+          )}
+        </span>
       ))}
     </div>
   )

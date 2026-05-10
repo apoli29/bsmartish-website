@@ -1,13 +1,16 @@
+'use client'
+
 import FadeIn from '@/app/components/FadeIn'
 import CountUp from '@/app/components/CountUp'
-
-const stats = [
-  { value: '+10',    label: 'Curated Projects'    },
-  { value: '+6.2M€', label: 'In Investments'      },
-  { value: '100%',   label: 'Client Satisfaction' },
-]
+import { useTranslations } from 'next-intl'
 
 export default function ImpactWidget() {
+  const t = useTranslations('impact')
+  const stats = [
+    { value: t('stat1Value'), label: t('stat1Label') },
+    { value: t('stat2Value'), label: t('stat2Label') },
+    { value: t('stat3Value'), label: t('stat3Label') },
+  ]
   return (
     <section
       id="impact-widget"
@@ -23,13 +26,13 @@ export default function ImpactWidget() {
               className="mb-4 uppercase tracking-[0.15em] text-[0.7rem]"
               style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
             >
-              Our Track Record
+              {t('eyebrow')}
             </p>
             <h2
               className="text-[2rem] md:text-[2.3rem] lg:text-[2.7rem]"
               style={{ fontFamily: 'var(--font-radnika)', color: '#6b87a4', lineHeight: 1.1 }}
             >
-              A track record that proves our excellence.
+              {t('headline')}
             </h2>
           </FadeIn>
 
@@ -65,7 +68,7 @@ export default function ImpactWidget() {
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#202831' }}
           >
             <span style={{ borderBottom: '1px solid #202831', paddingBottom: '1px' }}>
-              Find out more about us
+              {t('link')}
             </span>
             <span className="transition-transform group-hover:translate-x-1">→</span>
           </a>

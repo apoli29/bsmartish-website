@@ -1,0 +1,97 @@
+{
+  "hero": {
+    "headline": "Developing urban renovation projects for 20 years.",
+    "paragraph": "We use our expertise to build mid-term rental properties and to help investors develop their own urban renovation projects in Porto.",
+    "button1": "About us",
+    "button2": "Our properties"
+  },
+  "impact": {
+    "eyebrow": "Our Track Record",
+    "headline": "A track record that proves our excellence.",
+    "stat1Value": "+10",
+    "stat1Label": "Curated Projects",
+    "stat2Value": "+6.2M€",
+    "stat2Label": "In Investments",
+    "stat3Value": "100%",
+    "stat3Label": "Client Satisfaction",
+    "link": "Find out more about us"
+  },
+  "featured": {
+    "eyebrow": "Featured Properties",
+    "headline": "Our mid-term rental Properties.",
+    "property1": "Paranhos",
+    "property2": "Matosinhos",
+    "property3": "Alegria",
+    "propertyHover": "View →",
+    "viewAll": "View all properties",
+    "bookWith": "Book with us"
+  },
+  "carousel": {
+    "ariaDialog": "Photo gallery",
+    "ariaClose": "Close gallery",
+    "ariaPrev": "Previous photo",
+    "ariaNext": "Next photo",
+    "ariaOpenPhoto": "Open photo {n}"
+  },
+  "aboutMissionVision": {
+    "eyebrow": "Mission & Vision",
+    "headline": "Our Purpose, Built on Two Pillars.",
+    "missionLabel": "Our Mission",
+    "missionText": "To develop urban renovation projects of excellence that transform urban properties into intelligent, functional, and contemporary spaces, while offering medium-term housing solutions that combine comfort, quality of life, and sustainable value for residents.",
+    "visionLabel": "Our Vision",
+    "visionText": "To be a reference in urban rehabilitation and in the real estate sector in general, recognized for the ability to create properties of value, which balance design, functionality, and ethics, and for offering a service of excellence, personalized and focused on the well-being and convenience of each resident."
+  },
+  "aboutWhatWeDo": {
+    "eyebrow": "What We Do",
+    "headline": "Two ways we put our craft to work.",
+    "activity1Title": "Portfolio Development & Management",
+    "activity1Text": "We develop real estate urban renovation projects and operate them within the market through a mid-term rental strategy.",
+    "activity1Cta": "Explore our mid-rental properties in Porto",
+    "activity2Title": "Third-Party Project Management & Consultancy",
+    "activity2Text": "We partner with investors to deliver tailored real estate projects, providing hands-on guidance from acquisition and concept design through to execution and monetisation.",
+    "activity2Cta": "Explore some of the projects we developed"
+  },
+  "aboutValues": {
+    "eyebrow": "Our Values",
+    "headline": "Four values that shape every project.",
+    "value1Name": "Efficiency",
+    "value1Desc": "The fundamental pillar of our expertise. We aim to maximize the potential of every property, transforming spaces into functional and comfortable environments tailored to our residents' daily lives.",
+    "value2Name": "Transparency",
+    "value2Desc": "We prioritize clear and insightful communication regarding our properties, fostering transparent and long-lasting bonds with our residents and partners.",
+    "value3Name": "Ethics",
+    "value3Desc": "We are guided by solid ethical principles and a deep sense of responsibility in how we rehabilitate, value, and manage each property, as well as how we welcome and support our residents.",
+    "value4Name": "Timelessness",
+    "value4Desc": "We develop contemporary urban renovation projects equipped with updated technologies and systems. This ensures all our properties remain current and relevant for many years to come."
+  },
+  "aboutTrajectory": {
+    "eyebrow": "Our Trajectory",
+    "headline": "Mastering urban renovation since 2006.",
+    "spainTitle": "Spain.",
+    "spainText": "Our activity began in 2006, focused on developing urban renovation projects for the long-term rental market. We developed projects everywhere across the country, but mostly in beautiful cities like Barcelona and Girona.",
+    "portoChip": "2017 — today",
+    "portoTitle": "Porto.",
+    "portoText": "In 2017 we relocated our activity to Porto, where we have centralized all our operations to this day. All these years of activity were fundamental to define our identity and our philosophy: essentially how we operate."
+  },
+  "aboutDistinction": {
+    "eyebrow": "What Distinguishes Us",
+    "headline": "Specialists, by trajectory.",
+    "body": "Our trajectory sets us apart, positioning us as urban renovation specialists with deep niche expertise. We are uniquely capable of developing complex, reliable, and high-standard real estate projects across various sectors, through the application of exceptional and efficient procedures that consistently guarantee the best results."
+  },
+  "aboutFAQ": {
+    "eyebrow": "Questions",
+    "headline": "Frequently asked questions.",
+    "intro": "A few things people often ask us. If your question is not here, write to us directly and we will get back to you.",
+    "q1": "What types of properties does BSMARTISH renovate?",
+    "a1": "We focus on urban properties suited to midterm residential rental, typically apartments and small buildings in central locations. We renovate both for our own portfolio and on behalf of investors and owners who commission us to develop their projects.",
+    "q2": "What is a mid-term rent and who is it for?",
+    "a2": "Midterm rentals cover stays typically ranging from one to twelve months. These are designed for relocating professionals, families in transition, digital nomads, or long term travelers seeking a fully furnished home ready to move into, with greater flexibility than a traditional long term lease.",
+    "q3": "Can I commission a renovation project for my own property?",
+    "a3": "Yes. We work with property owners who want to renovate their building to a high standard, whether to live in it, to rent it, or to sell it. We bring the same procedures and standards we apply to our own portfolio.",
+    "q4": "Where are your projects located?",
+    "a4": "Today our operations are centralized in Porto, where most of our active properties and ongoing projects are located.",
+    "q5": "How long does a typical urban renovation project take?",
+    "a5": "Timelines depend on the scope, the building, and any licensing involved. As a general reference, a full apartment renovation typically takes between four and nine months from project start to handover. We share a realistic schedule before any work begins.",
+    "q6": "How can I get in touch about a property or a partnership?",
+    "a6": "The fastest way is the contact section of this site. Tell us briefly whether you are looking to live in one of our properties, to invest, or to commission a renovation, and we will get back to you with the right next step."
+  }
+}

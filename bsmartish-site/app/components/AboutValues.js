@@ -1,29 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-
-const values = [
-  {
-    name: 'Efficiency',
-    description:
-      "The fundamental pillar of our expertise. We aim to maximize the potential of every property, transforming spaces into functional and comfortable environments tailored to our residents' daily lives.",
-  },
-  {
-    name: 'Transparency',
-    description:
-      'We prioritize clear and insightful communication regarding our properties, fostering transparent and long-lasting bonds with our residents and partners.',
-  },
-  {
-    name: 'Ethics',
-    description:
-      'We are guided by solid ethical principles and a deep sense of responsibility in how we rehabilitate, value, and manage each property, as well as how we welcome and support our residents.',
-  },
-  {
-    name: 'Timelessness',
-    description:
-      'We develop contemporary urban renovation projects equipped with updated technologies and systems. This ensures all our properties remain current and relevant for many years to come.',
-  },
-]
+import { useTranslations } from 'next-intl'
 
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
@@ -107,8 +85,8 @@ function ValueRow({ value, index, isOpen, onToggle }) {
               aria-hidden="true"
               className="inline-flex items-center justify-center flex-shrink-0"
               style={{
-                color: isOpen ? '#6b87a4' : '#f8f8f8',
-                transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
+                color: '#f8f8f8',
+                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                 transition: `transform 500ms ${EASE}, color 450ms ${EASE}`,
               }}
             >
@@ -232,8 +210,16 @@ function ValueRow({ value, index, isOpen, onToggle }) {
 }
 
 export default function AboutValues() {
+  const t = useTranslations('aboutValues')
   const [headRef, headIn] = useInView(0.3)
   const [openIndex, setOpenIndex] = useState(-1)
+
+  const values = [
+    { name: t('value1Name'), description: t('value1Desc') },
+    { name: t('value2Name'), description: t('value2Desc') },
+    { name: t('value3Name'), description: t('value3Desc') },
+    { name: t('value4Name'), description: t('value4Desc') },
+  ]
 
   return (
     <section
@@ -255,13 +241,13 @@ export default function AboutValues() {
             className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
           >
-            Our Values
+            {t('eyebrow')}
           </p>
           <h2
             className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] max-w-[820px]"
             style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#6b87a4' }}
           >
-            Four values that shape every project.
+            {t('headline')}
           </h2>
         </div>
 

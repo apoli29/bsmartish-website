@@ -1,19 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-
-const items = [
-  {
-    label: 'Our Mission',
-    text:
-      'To develop urban renovation projects of excellence that transform urban properties into intelligent, functional, and contemporary spaces, while offering medium-term housing solutions that combine comfort, quality of life, and sustainable value for residents.',
-  },
-  {
-    label: 'Our Vision',
-    text:
-      'To be a reference in urban rehabilitation and in the real estate sector in general, recognized for the ability to create properties of value, which balance design, functionality, and ethics, and for offering a service of excellence, personalized and focused on the well-being and convenience of each resident.',
-  },
-]
+import { useTranslations } from 'next-intl'
 
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
@@ -96,7 +84,13 @@ function StatementRow({ item, delay }) {
 }
 
 export default function AboutMissionVision() {
+  const t = useTranslations('aboutMissionVision')
   const [headRef, headIn] = useInView(0.3)
+
+  const items = [
+    { label: t('missionLabel'), text: t('missionText') },
+    { label: t('visionLabel'), text: t('visionText') },
+  ]
 
   const headStyle = (d) => ({
     opacity: headIn ? 1 : 0,
@@ -112,7 +106,6 @@ export default function AboutMissionVision() {
     >
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-14 md:pb-18 lg:pb-22">
 
-        {/* Eyebrow + Headline */}
         <div ref={headRef}>
           <p
             className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
@@ -123,7 +116,7 @@ export default function AboutMissionVision() {
               ...headStyle(0),
             }}
           >
-            Mission &amp; Vision
+            {t('eyebrow')}
           </p>
           <h2
             className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] max-w-[820px]"
@@ -134,11 +127,10 @@ export default function AboutMissionVision() {
               ...headStyle(120),
             }}
           >
-            Our Purpose, Built on Two Pillars.
+            {t('headline')}
           </h2>
         </div>
 
-        {/* Rows */}
         <div
           className="mt-12 md:mt-16 lg:mt-20"
           style={{ borderTop: '1px solid #e2e2e2' }}

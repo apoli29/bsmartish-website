@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
+import { useTranslations } from 'next-intl'
 
 function handleSweep(e) {
   const el = e.currentTarget
@@ -16,6 +17,7 @@ function handleSweep(e) {
 }
 
 export default function HeroSection() {
+  const t = useTranslations('hero')
   return (
     <section className="relative min-h-screen flex flex-col justify-center">
 
@@ -39,7 +41,7 @@ export default function HeroSection() {
             className="text-[#F8F8F8] leading-[1.1] max-w-2xl mb-[21.6px] md:mb-6"
             style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, fontSize: 'clamp(2.1rem, 6vw, 3.5rem)' }}
           >
-            Developing urban<br />renovation projects<br />for 20 years.
+            {t('headline')}
           </h1>
         </FadeIn>
 
@@ -48,7 +50,7 @@ export default function HeroSection() {
             className="text-[#F8F8F8] max-w-xl mb-10 leading-relaxed text-[1rem] md:text-[1.05rem] lg:text-[1.1rem]"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, opacity: 0.9 }}
           >
-            We use our expertise to build mid-term rental properties and to help investors develop their own urban renovation projects in Porto.
+            {t('paragraph')}
           </p>
         </FadeIn>
 
@@ -63,7 +65,7 @@ export default function HeroSection() {
                 fontWeight: 600,
               }}
             >
-              About us
+              {t('button1')}
             </Link>
             <Link
               href="/mid-term-rentals-in-porto"
@@ -74,7 +76,7 @@ export default function HeroSection() {
                 fontWeight: 600,
               }}
             >
-              Our properties
+              {t('button2')}
             </Link>
           </div>
         </FadeIn>

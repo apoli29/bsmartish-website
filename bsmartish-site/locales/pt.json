@@ -1,0 +1,97 @@
+{
+  "hero": {
+    "headline": "20 anos a desenvolver projectos de reabilitação urbana.",
+    "paragraph": "Usamos a nossa experiência para construir imóveis de arrendamento de médio prazo e ajudar investidores a desenvolver os seus próprios projetos de reabilitação urbana no Porto.",
+    "button1": "Sobre nós",
+    "button2": "As nossas propriedades"
+  },
+  "impact": {
+    "eyebrow": "O Nosso Historial",
+    "headline": "Um historial de excelência comprovada.",
+    "stat1Value": "+10",
+    "stat1Label": "Projetos Desenvolvidos",
+    "stat2Value": "+6,2M€",
+    "stat2Label": "Em Investimentos",
+    "stat3Value": "100%",
+    "stat3Label": "Satisfação do Cliente",
+    "link": "Saber mais sobre nós"
+  },
+  "featured": {
+    "eyebrow": "Propriedades em Destaque",
+    "headline": "As nossas Propriedades para arrendamento a médio prazo.",
+    "property1": "Paranhos",
+    "property2": "Matosinhos",
+    "property3": "Alegria",
+    "propertyHover": "Ver →",
+    "viewAll": "Ver todas as propriedades",
+    "bookWith": "Reserve connosco"
+  },
+  "carousel": {
+    "ariaDialog": "Galeria de fotografias",
+    "ariaClose": "Fechar galeria",
+    "ariaPrev": "Fotografia anterior",
+    "ariaNext": "Próxima fotografia",
+    "ariaOpenPhoto": "Abrir fotografia {n}"
+  },
+  "aboutMissionVision": {
+    "eyebrow": "Missão & Visão",
+    "headline": "O Nosso Propósito, em Dois Pilares.",
+    "missionLabel": "A Nossa Missão",
+    "missionText": "Desenvolver projetos de renovação urbana de excelência, que transformem imóveis urbanos em espaços inteligentes, funcionais, contemporâneos, assim como oferecer soluções de habitação de médio prazo que combinam conforto, qualidade de vida e valorização sustentável para os residentes.",
+    "visionLabel": "A Nossa Visão",
+    "visionText": "Ser uma referência na reabilitação urbana e no setor imobiliário em geral, reconhecidos pela capacidade de criar imóveis de valor, que equilibrem design, funcionalidade e ética, e por oferecer um serviço de excelência, personalizado e focado no bem-estar e na comodidade de cada residente."
+  },
+  "aboutWhatWeDo": {
+    "eyebrow": "O Que Fazemos",
+    "headline": "Aplicamos o nosso know-how através de duas formas.",
+    "activity1Title": "Desenvolvimento e Gestão de Portfolio",
+    "activity1Text": "Desenvolvemos projetos de renovação urbana imobiliária, posteriormente explorados no mercado através de uma estratégia de arrendamento de médio prazo.",
+    "activity1Cta": "Explore as nossas propriedades de arrendamento a médio prazo no Porto",
+    "activity2Title": "Gestão de Projetos e Consultoria para Terceiros",
+    "activity2Text": "Colaboramos com investidores para desenvolver projetos imobiliários personalizados, prestando acompanhamento direto desde a aquisição e conceção do projeto até à execução e monetização.",
+    "activity2Cta": "Explore alguns dos projetos que desenvolvemos"
+  },
+  "aboutValues": {
+    "eyebrow": "Os Nossos Valores",
+    "headline": "Quatro valores que moldam cada projeto.",
+    "value1Name": "Eficiência",
+    "value1Desc": "O pilar fundamental do nosso expertise. Procuramos maximizar o potencial de cada imóvel, transformando espaços em ambientes funcionais, confortáveis e adaptados ao dia a dia dos nossos residentes.",
+    "value2Name": "Transparência",
+    "value2Desc": "Priorizamos uma comunicação clara e esclarecedora sobre os nossos imóveis, e a criação de vínculos claros e duradouros com os nossos residentes ou parceiros.",
+    "value3Name": "Ética",
+    "value3Desc": "Guiamo-nos por princípios éticos sólidos, com um profundo sentido de responsabilidade na forma como reabilitamos, valorizamos e gerimos cada imóvel e como recebemos e acompanhamos a estadia dos nossos residentes.",
+    "value4Name": "Intemporalidade",
+    "value4Desc": "Desenvolvemos projetos na área da renovação urbana totalmente contemporâneos e equipados com tecnologias e sistemas atualizados. Desta forma, asseguramos que todos os nossos imóveis se mantêm atuais ao longo de vários anos."
+  },
+  "aboutTrajectory": {
+    "eyebrow": "A Nossa Trajectória",
+    "headline": "Especialistas em renovação urbana desde 2006.",
+    "spainTitle": "Espanha.",
+    "spainText": "A nossa atividade teve início em 2006, com foco no desenvolvimento de projetos de renovação urbana para serem explorados no mercado de arrendamento de longa duração. Desenvolvemos projetos por todo o país, com destaque em belas cidades como Barcelona e Girona.",
+    "portoChip": "2017 — hoje",
+    "portoTitle": "Porto.",
+    "portoText": "Em 2017 transferimos a nossa atividade para o Porto, e possuímos, atualmente, todas as nossas operações centralizadas na cidade. Estes anos de atividade foram fundamentais para definir a nossa identidade e filosofia: essencialmente a forma como operamos."
+  },
+  "aboutDistinction": {
+    "eyebrow": "O Que Nos Distingue",
+    "headline": "Especialistas, pela trajectória.",
+    "body": "A nossa trajectória distingue-nos, posicionando-nos como especialistas em renovação urbana com profundo conhecimento de nicho. Somos capazes de desenvolver projetos imobiliários complexos, fiáveis e de elevada qualidade em vários sectores, através da aplicação de procedimentos excecionais e eficientes que garantem consistentemente os melhores resultados."
+  },
+  "aboutFAQ": {
+    "eyebrow": "Perguntas",
+    "headline": "Perguntas frequentes.",
+    "intro": "Algumas das questões que nos colocam com mais frequência. Se a sua pergunta não está aqui, escreva-nos diretamente e respondemos.",
+    "q1": "Que tipo de imóveis a BSMARTISH renova?",
+    "a1": "Focamo-nos em imóveis urbanos adequados ao arrendamento residencial de médio prazo, tipicamente apartamentos e pequenos edifícios em localizações centrais. Renovamos tanto para o nosso próprio portfolio como em nome de investidores e proprietários que nos encomendam o desenvolvimento dos seus projetos.",
+    "q2": "O que é o arrendamento de médio prazo e a quem se destina?",
+    "a2": "O arrendamento de médio prazo abrange estadias tipicamente entre um e doze meses. Destina-se a profissionais em relocalização, famílias em transição, nómadas digitais ou viajantes de longa duração que procuram uma casa totalmente mobilada e pronta a habitar, com maior flexibilidade do que um contrato de arrendamento tradicional.",
+    "q3": "Posso encomendar um projeto de renovação para o meu imóvel?",
+    "a3": "Sim. Trabalhamos com proprietários que pretendem renovar o seu imóvel com elevada qualidade, seja para habitar, arrendar ou vender. Aplicamos os mesmos procedimentos e padrões que usamos no nosso próprio portfolio.",
+    "q4": "Onde se localizam os vossos projetos?",
+    "a4": "Atualmente as nossas operações estão centralizadas no Porto, onde se encontra a maioria das nossas propriedades ativas e projetos em curso.",
+    "q5": "Quanto tempo demora um projeto de renovação urbana típico?",
+    "a5": "Os prazos dependem da dimensão do projeto, do edifício e dos licenciamentos envolvidos. Como referência geral, uma renovação completa de apartamento demora tipicamente entre quatro e nove meses, desde o início do projeto até à entrega. Partilhamos um cronograma realista antes de qualquer trabalho começar.",
+    "q6": "Como posso contactar sobre uma propriedade ou uma parceria?",
+    "a6": "A forma mais rápida é através da secção de contacto deste site. Diga-nos brevemente se procura habitar uma das nossas propriedades, investir ou encomendar uma renovação, e respondemos com o próximo passo mais adequado."
+  }
+}

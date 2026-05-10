@@ -1,7 +1,12 @@
+'use client'
+
 import FadeIn from '@/app/components/FadeIn'
 import { FrostedGlassCard } from '@/app/components/ui/interactive-frosted-glass-card'
+import { useTranslations } from 'next-intl'
 
 export default function AboutDistinction() {
+  const t = useTranslations('aboutDistinction')
+
   return (
     <section
       id="about-distinction"
@@ -24,14 +29,14 @@ export default function AboutDistinction() {
               className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
               style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#f8f8f8' }}
             >
-              What Distinguishes Us
+              {t('eyebrow')}
             </p>
 
             <h2
               className="leading-[1.1] text-[2rem] md:text-[2.6rem] lg:text-[3.1rem] max-w-[820px]"
               style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#f8f8f8' }}
             >
-              Specialists, by trajectory.
+              {t('headline')}
             </h2>
 
             <p
@@ -43,7 +48,7 @@ export default function AboutDistinction() {
                 hyphens: 'auto',
               }}
             >
-              Our trajectory sets us apart, positioning us as urban renovation specialists with deep niche expertise. We are uniquely capable of developing complex, reliable, and high-standard real estate projects across various sectors, through the application of exceptional and efficient procedures that consistently guarantee the best results.
+              {t('body')}
             </p>
           </FrostedGlassCard>
         </FadeIn>

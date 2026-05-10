@@ -2,21 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-
-const activities = [
-  {
-    title: 'Portfolio Development & Management',
-    text:
-      'We develop real estate urban renovation projects and operate them within the market through a mid-term rental strategy.',
-    cta: { label: 'Explore our mid-rental properties in Porto', href: '/mid-term-rentals-in-porto' },
-  },
-  {
-    title: 'Third-Party Project Management & Consultancy',
-    text:
-      'We partner with investors to deliver tailored real estate projects, providing hands-on guidance from acquisition and concept design through to execution and monetisation.',
-    cta: { label: 'Explore some of the projects we developed', href: '/#projects-carousel', center: true },
-  },
-]
+import { useTranslations } from 'next-intl'
 
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
@@ -97,7 +83,7 @@ function ActivityRow({ activity, delay }) {
         {activity.cta && (
           <Link
             href={activity.cta.href}
-            className="group flex items-center gap-2 transition-all"
+            className="group flex items-start gap-2 transition-all"
             onClick={activity.cta.center ? (e) => {
               e.preventDefault()
               const id = activity.cta.href.split('#')[1]
@@ -117,10 +103,15 @@ function ActivityRow({ activity, delay }) {
               textDecoration: 'none',
             }}
           >
-            <span style={{ borderBottom: '1px solid #202831', paddingBottom: '1px' }}>
+            <span style={{
+              textDecoration: 'underline',
+              textDecorationColor: '#202831',
+              textDecorationThickness: '1px',
+              textUnderlineOffset: '3px',
+            }}>
               {activity.cta.label}
             </span>
-            <span className="transition-transform group-hover:translate-x-1">→</span>
+            <span className="transition-transform group-hover:translate-x-1" style={{ flexShrink: 0, lineHeight: 'inherit' }}>→</span>
           </Link>
         )}
       </div>
@@ -129,7 +120,21 @@ function ActivityRow({ activity, delay }) {
 }
 
 export default function AboutWhatWeDo() {
+  const t = useTranslations('aboutWhatWeDo')
   const [headRef, headIn] = useInView(0.3)
+
+  const activities = [
+    {
+      title: t('activity1Title'),
+      text: t('activity1Text'),
+      cta: { label: t('activity1Cta'), href: '/mid-term-rentals-in-porto' },
+    },
+    {
+      title: t('activity2Title'),
+      text: t('activity2Text'),
+      cta: { label: t('activity2Cta'), href: '/#projects-carousel', center: true },
+    },
+  ]
 
   const headStyle = (d) => ({
     opacity: headIn ? 1 : 0,
@@ -145,7 +150,6 @@ export default function AboutWhatWeDo() {
     >
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-14 md:pb-18 lg:pb-22">
 
-        {/* Eyebrow + Headline */}
         <div ref={headRef}>
           <p
             className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
@@ -156,7 +160,7 @@ export default function AboutWhatWeDo() {
               ...headStyle(0),
             }}
           >
-            What We Do
+            {t('eyebrow')}
           </p>
           <h2
             className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] max-w-[820px]"
@@ -167,11 +171,10 @@ export default function AboutWhatWeDo() {
               ...headStyle(120),
             }}
           >
-            Two ways we put our craft to work.
+            {t('headline')}
           </h2>
         </div>
 
-        {/* Rows */}
         <div
           className="mt-12 md:mt-16 lg:mt-20"
           style={{ borderTop: '1px solid #e2e2e2' }}

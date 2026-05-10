@@ -3,6 +3,7 @@ import './globals.css'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import PageTransition from '@/app/components/PageTransition'
+import { I18nProvider } from '@/app/i18n-provider'
 
 const radnika = localFont({
   src: [
@@ -35,13 +36,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en"
+      suppressHydrationWarning
       className={`${radnika.variable} ${garet.variable} ${aileron.variable}`}
     >
       <body>
-        <Header />
-        <PageTransition>{children}</PageTransition>
-        <Footer />
+        <I18nProvider>
+          <Header />
+          <PageTransition>{children}</PageTransition>
+          <Footer />
+        </I18nProvider>
       </body>
     </html>
   )

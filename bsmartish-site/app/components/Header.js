@@ -78,6 +78,8 @@ export default function Header() {
                     </Link>
                   )
                 })}
+                <span className="-mx-3.5 lg:-mx-5" style={{ width: '0', height: '10px', borderRight: '1px solid rgba(255,255,255,0.25)', alignSelf: 'center', flexShrink: 0, marginBottom: '3px' }} />
+                <LanguageSwitcher />
               </nav>
 
               {/* Hamburger / X — mobile only */}
@@ -148,11 +150,9 @@ export default function Header() {
                 })}
               </nav>
 
-              {/* Bottom detail */}
+              {/* Bottom detail — language switcher replaces Porto · Portugal on mobile */}
               <div style={{ margin: '0 32px', borderTop: '1px solid rgba(0,0,0,0.07)', padding: '10px 0 16px' }}>
-                <span style={{ fontFamily: 'var(--font-aileron)', fontSize: '0.55rem', color: '#75797c', letterSpacing: '0.18em', textTransform: 'uppercase', opacity: 0.55 }}>
-                  Porto · Portugal
-                </span>
+                <LanguageSwitcherMobile menuOpen={menuOpen} />
               </div>
             </div>
           </header>

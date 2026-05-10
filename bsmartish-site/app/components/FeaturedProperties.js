@@ -1,15 +1,18 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { SocialTooltip } from '@/app/components/SocialTooltip'
 import FadeIn from '@/app/components/FadeIn'
-
-const properties = [
-  { name: 'Paranhos',   src: '/Images/Website.images/Home/sec.4/paranhos.sec4.webp',   href: '/mid-term-rentals-in-porto/paranhos-apartment'   },
-  { name: 'Matosinhos', src: '/Images/Website.images/Home/sec.4/matosinhos.sec4.webp', href: '/mid-term-rentals-in-porto/matosinhos-apartment' },
-  { name: 'Alegria',    src: '/Images/Website.images/Home/sec.4/alegria.sec4.webp',    href: '/mid-term-rentals-in-porto/alegria-apartment'    },
-]
+import { useTranslations } from 'next-intl'
 
 export default function FeaturedProperties() {
+  const t = useTranslations('featured')
+  const properties = [
+    { name: t('property1'), src: '/Images/Website.images/Home/sec.4/paranhos.sec4.webp',   href: '/mid-term-rentals-in-porto/paranhos-apartment'   },
+    { name: t('property2'), src: '/Images/Website.images/Home/sec.4/matosinhos.sec4.webp', href: '/mid-term-rentals-in-porto/matosinhos-apartment' },
+    { name: t('property3'), src: '/Images/Website.images/Home/sec.4/alegria.sec4.webp',    href: '/mid-term-rentals-in-porto/alegria-apartment'    },
+  ]
   return (
     <section
       id="featured-properties"
@@ -24,13 +27,13 @@ export default function FeaturedProperties() {
             className="mb-3 uppercase tracking-[0.15em] text-[0.7rem]"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
           >
-            Featured Properties
+            {t('eyebrow')}
           </p>
           <h2
             className="text-[2rem] md:text-[2.4rem] lg:text-[2.8rem]"
             style={{ fontFamily: 'var(--font-radnika)', color: '#6b87a4', lineHeight: 1.1 }}
           >
-            Our rental properties
+            {t('headline')}
           </h2>
         </FadeIn>
 
@@ -66,7 +69,7 @@ export default function FeaturedProperties() {
                   className="text-[0.75rem] transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                   style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#f8f8f8' }}
                 >
-                  View →
+                  {t('propertyHover')}
                 </span>
               </div>
             </Link>
@@ -82,7 +85,7 @@ export default function FeaturedProperties() {
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#202831' }}
           >
             <span style={{ borderBottom: '1px solid #202831', paddingBottom: '1px' }}>
-              View all properties
+              {t('viewAll')}
             </span>
             <span className="transition-transform group-hover:translate-x-1">→</span>
           </a>
@@ -97,7 +100,7 @@ export default function FeaturedProperties() {
                 textTransform: 'uppercase',
               }}
             >
-              Book with us
+              {t('bookWith')}
             </span>
             <SocialTooltip />
           </div>

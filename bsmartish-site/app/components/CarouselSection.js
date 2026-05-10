@@ -3,6 +3,7 @@
 import { useRef, useEffect, useCallback, useState } from 'react'
 import Image from 'next/image'
 import { createPortal } from 'react-dom'
+import { useTranslations } from 'next-intl'
 
 const IMAGES = [
   'amh5svunor2lamgcbekb.webp',
@@ -56,6 +57,7 @@ const SLIDE_CSS = `
 `
 
 export default function CarouselSection() {
+  const t = useTranslations('carousel')
   const trackRef  = useRef(null)
   const cardWRef  = useRef(348)
   const posRef    = useRef(0)
@@ -204,7 +206,7 @@ export default function CarouselSection() {
               key={i}
               data-card
               onClick={() => openModal(i % IMAGES.length)}
-              aria-label={`Open photo ${(i % IMAGES.length) + 1}`}
+              aria-label={t('ariaOpenPhoto', { n: (i % IMAGES.length) + 1 })}
               className="relative flex-shrink-0 overflow-hidden rounded"
               style={{
                 width: `${cardW}px`,
@@ -223,6 +225,7 @@ export default function CarouselSection() {
                 sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 30vw"
                 quality={100}
                 priority={i < 5}
+                loading={i === 0 ? 'eager' : undefined}
               />
               <div
                 className="absolute inset-0 transition-opacity duration-300"
@@ -238,7 +241,7 @@ export default function CarouselSection() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Photo gallery"
+          aria-label={t('ariaDialog')}
           style={{
             position: 'fixed',
             inset: 0,
@@ -280,7 +283,7 @@ export default function CarouselSection() {
           {/* Close */}
           <button
             onClick={closeModal}
-            aria-label="Close gallery"
+            aria-label={t('ariaClose')}
             style={{
               position: 'absolute',
               top: '20px',
@@ -351,7 +354,7 @@ export default function CarouselSection() {
           {/* Prev */}
           <button
             onClick={(e) => { e.stopPropagation(); prev() }}
-            aria-label="Previous photo"
+            aria-label={t('ariaPrev')}
             style={arrowBtn('left')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -362,7 +365,7 @@ export default function CarouselSection() {
           {/* Next */}
           <button
             onClick={(e) => { e.stopPropagation(); next() }}
-            aria-label="Next photo"
+            aria-label={t('ariaNext')}
             style={arrowBtn('right')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
