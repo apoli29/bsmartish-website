@@ -49,7 +49,7 @@ export default function Header() {
             <div className="pl-1 md:pl-1 lg:pl-2 pr-7 md:pr-8 lg:pr-10 h-[64px] md:h-[72px] lg:h-[80px] flex items-center justify-between">
 
               {/* Logo */}
-              <Link href="/" className="flex-shrink-0 flex items-center" onClick={() => setMenuOpen(false)}>
+              <Link href="/" className="flex-shrink-0 h-[64px] md:h-[72px] lg:h-[80px] overflow-hidden flex items-center" onClick={() => setMenuOpen(false)}>
                 <div className="w-[198px] md:w-[231px] lg:w-[264px]">
                   <img
                     src="/images/Logo/logo.png"
