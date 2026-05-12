@@ -1,6 +1,10 @@
+'use client'
+
 import FadeIn from '@/app/components/FadeIn'
+import { useTranslations } from 'next-intl'
 
 export default function PortfolioHero() {
+  const t = useTranslations('portfolio')
   return (
     <section
       style={{
@@ -25,7 +29,7 @@ export default function PortfolioHero() {
                 letterSpacing: '0.18em',
               }}
             >
-              Our Portfolio
+              {t('eyebrow')}
             </span>
           </div>
         </FadeIn>
@@ -40,7 +44,7 @@ export default function PortfolioHero() {
               lineHeight: 1.1,
             }}
           >
-            Our Properties
+            {t('headline')}
           </h1>
         </FadeIn>
       </div>

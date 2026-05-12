@@ -46,6 +46,7 @@ export default function AboutDistinction() {
                 fontWeight: 400,
                 color: 'rgba(248,248,248,0.96)',
                 hyphens: 'auto',
+                textAlignLast: 'left',
               }}
             >
               {t('body')}

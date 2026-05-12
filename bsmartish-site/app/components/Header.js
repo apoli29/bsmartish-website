@@ -4,16 +4,18 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { LanguageSwitcher, LanguageSwitcherMobile } from './LanguageSwitcher'
-
-const links = [
-  { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Mid-term Rentals', href: '/mid-term-rentals-in-porto' },
-  { label: 'Contact Us', href: '#footer', scroll: true },
-]
+import { useTranslations } from 'next-intl'
 
 export default function Header() {
+  const t = useTranslations('header')
   const pathname = usePathname()
+
+  const links = [
+    { label: t('home'), href: '/' },
+    { label: t('about'), href: '/about' },
+    { label: t('rentals'), href: '/mid-term-rentals-in-porto' },
+    { label: t('contact'), href: '#footer', scroll: true },
+  ]
   const [menuOpen, setMenuOpen] = useState(false)
   const [solid, setSolid] = useState(false)
 

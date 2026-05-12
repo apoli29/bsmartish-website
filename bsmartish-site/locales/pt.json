@@ -1,5 +1,5 @@
 {
-  "hero": {
+"hero": {
     "headline": "20 anos a desenvolver projectos de reabilitação urbana.",
     "paragraph": "Usamos a nossa experiência para construir imóveis de arrendamento de médio prazo e ajudar investidores a desenvolver os seus próprios projetos de reabilitação urbana no Porto.",
     "button1": "Sobre nós",
@@ -18,7 +18,7 @@
   },
   "featured": {
     "eyebrow": "Propriedades em Destaque",
-    "headline": "As nossas Propriedades para arrendamento a médio prazo.",
+    "headline": "As nossas Propriedades de arrendamento a médio prazo.",
     "property1": "Paranhos",
     "property2": "Matosinhos",
     "property3": "Alegria",
@@ -75,23 +75,77 @@
   "aboutDistinction": {
     "eyebrow": "O Que Nos Distingue",
     "headline": "Especialistas, pela trajectória.",
-    "body": "A nossa trajectória distingue-nos, posicionando-nos como especialistas em renovação urbana com profundo conhecimento de nicho. Somos capazes de desenvolver projetos imobiliários complexos, fiáveis e de elevada qualidade em vários sectores, através da aplicação de procedimentos excecionais e eficientes que garantem consistentemente os melhores resultados."
+    "body": "O que nos distingue é a nossa trajetória, que nos permite assumir uma posição de especialistas em renovação urbana com um conhecimento de nicho dentro do mercado. Somos capazes de desenvolver projetos imobiliários complexos, fiáveis e de elevada qualidade em vários sectores, através da aplicação de procedimentos excecionais e eficientes que garantem consistentemente os melhores resultados."
   },
   "aboutFAQ": {
     "eyebrow": "Perguntas",
     "headline": "Perguntas frequentes.",
-    "intro": "Algumas das questões que nos colocam com mais frequência. Se a sua pergunta não está aqui, escreva-nos diretamente e respondemos.",
+    "intro_pre": "As questões que nos colocam com mais frequência. Se não encontrar a resposta que procura, ",
+    "intro_link": "entre em contacto connosco",
+    "intro_post": " diretamente.",
     "q1": "Que tipo de imóveis a BSMARTISH renova?",
-    "a1": "Focamo-nos em imóveis urbanos adequados ao arrendamento residencial de médio prazo, tipicamente apartamentos e pequenos edifícios em localizações centrais. Renovamos tanto para o nosso próprio portfolio como em nome de investidores e proprietários que nos encomendam o desenvolvimento dos seus projetos.",
+    "a1": "Para o nosso portfolio, focamo-nos em imóveis urbanos, adequados para arrendamento de médio prazo. No entanto, também desenvolvemos outros projetos com perfis distintos juntamente aos nossos investidores e proprietários parceiros.",
     "q2": "O que é o arrendamento de médio prazo e a quem se destina?",
-    "a2": "O arrendamento de médio prazo abrange estadias tipicamente entre um e doze meses. Destina-se a profissionais em relocalização, famílias em transição, nómadas digitais ou viajantes de longa duração que procuram uma casa totalmente mobilada e pronta a habitar, com maior flexibilidade do que um contrato de arrendamento tradicional.",
+    "a2": "O arrendamento de médio prazo consiste em estadias com uma duração de um e doze meses. Este tipo de arrendamento destina-se, normalmente, a profissionais em relocalização, famílias em transição, nómadas digitais ou viajantes de longa duração, que procuram uma casa totalmente mobilada e pronta a habitar, com maior flexibilidade do que um contrato de arrendamento tradicional.",
     "q3": "Posso encomendar um projeto de renovação para o meu imóvel?",
-    "a3": "Sim. Trabalhamos com proprietários que pretendem renovar o seu imóvel com elevada qualidade, seja para habitar, arrendar ou vender. Aplicamos os mesmos procedimentos e padrões que usamos no nosso próprio portfolio.",
-    "q4": "Onde se localizam os vossos projetos?",
-    "a4": "Atualmente as nossas operações estão centralizadas no Porto, onde se encontra a maioria das nossas propriedades ativas e projetos em curso.",
-    "q5": "Quanto tempo demora um projeto de renovação urbana típico?",
-    "a5": "Os prazos dependem da dimensão do projeto, do edifício e dos licenciamentos envolvidos. Como referência geral, uma renovação completa de apartamento demora tipicamente entre quatro e nove meses, desde o início do projeto até à entrega. Partilhamos um cronograma realista antes de qualquer trabalho começar.",
-    "q6": "Como posso contactar sobre uma propriedade ou uma parceria?",
-    "a6": "A forma mais rápida é através da secção de contacto deste site. Diga-nos brevemente se procura habitar uma das nossas propriedades, investir ou encomendar uma renovação, e respondemos com o próximo passo mais adequado."
+    "a3": "Sim. Trabalhamos com proprietários que pretendem recorrer a um serviço de elevada qualidade para renovar o seu imóvel, seja para habitar, arrendar ou vender. Aplicamos os mesmos procedimentos e padrões que usamos no nosso próprio portfolio.",
+    "q4": "Em que locais desenvolvem os vossos projetos?",
+    "a4": "Atualmente as nossas operações estão centralizadas no Porto, onde se encontram a maioria das nossas atividades e dos nossos projetos em curso.",
+    "q5": "Quanto tempo costuma demorar um projeto de renovação urbana?",
+    "a5": "Os prazos dependem da dimensão do projeto, do edifício e dos licenciamentos envolvidos. Como referência geral, uma renovação completa de apartamento demora tipicamente entre quatro e nove meses, desde o início do projeto até à entrega. Antes de iniciar qualquer trabalho, partilhamos sempre um cronograma realista e detalhado.",
+    "q6": "Como nos posso contactar sobre uma propriedade ou parceria?",
+    "a6_pre": "A forma mais rápida de nos contactar é através da nossa ",
+    "a6_link": "secção de contacto",
+    "a6_post": ". Diga-nos o que procura, seja habitar uma das nossas propriedades, investir ou encomendar uma renovação, e entraremos em contacto com o próximo passo."
+  },
+  "header": {
+    "home": "Início",
+    "about": "Sobre Nós",
+    "rentals": "Arrendamento de Médio Prazo",
+    "contact": "Contacte-nos"
+  },
+  "portfolio": {
+    "eyebrow": "O Nosso Portfólio",
+    "headline": "As Nossas Propriedades",
+    "viewProperty": "Ver Propriedade"
+  },
+  "footer": {
+    "ctaPrefix": "Está interessado em ",
+    "variation1": "arrendar uma das nossas propriedades?",
+    "variation2": "adquirir uma das nossas propriedades?",
+    "variation3": "recorrer ao nosso serviço de renovação urbana?",
+    "contactLabel": "Contacte-nos",
+    "copyright": "© 2026 BSMARTISH. Todos os direitos reservados."
+  },
+  "propertyPage": {
+    "aboutEyebrow": "Sobre Esta Propriedade",
+    "detailsEyebrow": "Detalhes da Propriedade",
+    "labelPropertyName": "Nome da Propriedade",
+    "labelLocation": "Localização",
+    "labelSqm": "m²",
+    "labelBedroom": "Quarto",
+    "labelBathroom": "Casa de Banho",
+    "labelGarage": "Garagem",
+    "labelBuiltYear": "Ano de Construção",
+    "labelRenovationYear": "Ano de Renovação",
+    "guests": "hóspedes",
+    "perMonth": "/ mês",
+    "characteristicsTitle": "Características",
+    "compositionTitle": "Composição",
+    "highlightsTitle": "Destaques",
+    "conditionsTitle": "Condições",
+    "bookNow": "Reservar Agora",
+    "availableOn": "Disponível em",
+    "getInTouch": "Entre em Contacto",
+    "backToPortfolio": "Voltar ao Portfólio",
+    "galleryEyebrow": "Galeria",
+    "galleryHeading": "Espaços da Propriedade",
+    "moreDetailsEyebrow": "Outros Detalhes",
+    "moreDetailsHeading": "Detalhe da Propriedade",
+    "locationEyebrow": "Localização",
+    "exploreMoreEyebrow": "Explore outros apartamentos",
+    "exploreMoreHeading": "Outras Propriedades",
+    "bookWith": "Reserve connosco"
+  }
   }
 }

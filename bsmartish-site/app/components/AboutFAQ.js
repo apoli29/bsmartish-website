@@ -74,7 +74,21 @@ export default function AboutFAQ() {
     { q: t('q3'), a: t('a3') },
     { q: t('q4'), a: t('a4') },
     { q: t('q5'), a: t('a5') },
-    { q: t('q6'), a: t('a6') },
+    {
+      q: t('q6'),
+      a: (
+        <>
+          {t('a6_pre')}
+          <a
+            href="#footer"
+            style={{ color: '#6b87a4', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+          >
+            {t('a6_link')}
+          </a>
+          {t('a6_post')}
+        </>
+      ),
+    },
   ]
 
   return (
@@ -105,7 +119,11 @@ export default function AboutFAQ() {
               className="mt-6 max-w-[380px] text-[clamp(0.98rem,2.46vw,1.06rem)] leading-relaxed text-justify"
               style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c', hyphens: 'auto' }}
             >
-              {t('intro')}
+              {t('intro_pre')}
+              <a href="#footer" style={{ color: '#6b87a4', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+                {t('intro_link')}
+              </a>
+              {t('intro_post')}
             </p>
           </FadeIn>
 

@@ -1,16 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-const variations = [
-  'renting one of our properties?',
-  'buying one of our properties?',
-  'our urban renovation expertise?',
-]
+import { useTranslations } from 'next-intl'
 
 export default function Footer() {
+  const t = useTranslations('footer')
   const [index, setIndex] = useState(0)
   const [visible, setVisible] = useState(true)
+
+  const variations = [t('variation1'), t('variation2'), t('variation3')]
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -49,9 +47,8 @@ export default function Footer() {
             lineHeight: 1.5,
             margin: 0,
             fontWeight: 400,
-            maxWidth: '520px',
           }}>
-            <span>Are you interested in{' '}</span>
+            <span>{t('ctaPrefix')}</span>
             <span style={{
               fontWeight: 700,
               transition: 'opacity 0.4s ease',
@@ -74,7 +71,7 @@ export default function Footer() {
               textTransform: 'uppercase',
               opacity: 0.55,
             }}>
-              Contact us
+              {t('contactLabel')}
             </p>
             <a
               href="tel:+351936920210"
@@ -111,7 +108,7 @@ export default function Footer() {
             opacity: 0.5,
             letterSpacing: '0.04em',
           }}>
-            © 2026 BSMARTISH. All rights reserved.
+            {t('copyright')}
           </p>
 
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>

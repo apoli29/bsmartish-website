@@ -75,16 +75,18 @@
   "aboutDistinction": {
     "eyebrow": "What Distinguishes Us",
     "headline": "Specialists, by trajectory.",
-    "body": "Our trajectory sets us apart, positioning us as urban renovation specialists with deep niche expertise. We are uniquely capable of developing complex, reliable, and high-standard real estate projects across various sectors, through the application of exceptional and efficient procedures that consistently guarantee the best results."
+    "body": "What sets us apart is our trajectory, positioning us as specialists in urban renovation with niche market expertise. We develop complex, reliable, and high-standard real estate projects across various sectors, through the application of exceptional and efficient procedures that consistently guarantee the best results."
   },
   "aboutFAQ": {
     "eyebrow": "Questions",
     "headline": "Frequently asked questions.",
-    "intro": "A few things people often ask us. If your question is not here, write to us directly and we will get back to you.",
+    "intro_pre": "A few things people often ask us. If your question is not here, ",
+    "intro_link": "get in touch with us",
+    "intro_post": " directly and we will get back to you.",
     "q1": "What types of properties does BSMARTISH renovate?",
-    "a1": "We focus on urban properties suited to midterm residential rental, typically apartments and small buildings in central locations. We renovate both for our own portfolio and on behalf of investors and owners who commission us to develop their projects.",
+    "a1": "For our own portfolio, we focus on urban properties suited to mid-term rentals, typically apartments and small buildings. However, we also develop other projects with different profiles alongside our partner investors and property owners.",
     "q2": "What is a mid-term rent and who is it for?",
-    "a2": "Midterm rentals cover stays typically ranging from one to twelve months. These are designed for relocating professionals, families in transition, digital nomads, or long term travelers seeking a fully furnished home ready to move into, with greater flexibility than a traditional long term lease.",
+    "a2": "Midterm rentals cover stays typically ranging from one to twelve months. These are usually designed for relocating professionals, families in transition, digital nomads, or long term travelers seeking a fully furnished home ready to move into, with greater flexibility than a traditional long term lease.",
     "q3": "Can I commission a renovation project for my own property?",
     "a3": "Yes. We work with property owners who want to renovate their building to a high standard, whether to live in it, to rent it, or to sell it. We bring the same procedures and standards we apply to our own portfolio.",
     "q4": "Where are your projects located?",
@@ -92,6 +94,58 @@
     "q5": "How long does a typical urban renovation project take?",
     "a5": "Timelines depend on the scope, the building, and any licensing involved. As a general reference, a full apartment renovation typically takes between four and nine months from project start to handover. We share a realistic schedule before any work begins.",
     "q6": "How can I get in touch about a property or a partnership?",
-    "a6": "The fastest way is the contact section of this site. Tell us briefly whether you are looking to live in one of our properties, to invest, or to commission a renovation, and we will get back to you with the right next step."
+    "a6_pre": "The fastest way is through our ",
+    "a6_link": "contact section",
+    "a6_post": ". Tell us what you are looking for, whether living in one of our properties, investing, or commissioning a renovation, and we will get back to you with the right next step."
+  },
+  "header": {
+    "home": "Home",
+    "about": "About Us",
+    "rentals": "Mid-term Rentals",
+    "contact": "Contact Us"
+  },
+  "portfolio": {
+    "eyebrow": "Our Portfolio",
+    "headline": "Our Properties",
+    "viewProperty": "View Property"
+  },
+  "footer": {
+    "ctaPrefix": "Are you interested in ",
+    "variation1": "renting one of our properties?",
+    "variation2": "buying one of our properties?",
+    "variation3": "our urban renovation expertise?",
+    "contactLabel": "Contact us",
+    "copyright": "© 2026 BSMARTISH. All rights reserved."
+  },
+  "propertyPage": {
+    "aboutEyebrow": "About This Property",
+    "detailsEyebrow": "Property Details",
+    "labelPropertyName": "Property Name",
+    "labelLocation": "Location",
+    "labelSqm": "Sqm.",
+    "labelBedroom": "Bedroom",
+    "labelBathroom": "Bathroom",
+    "labelGarage": "Garage",
+    "labelBuiltYear": "Built Year",
+    "labelRenovationYear": "Renovation Year",
+    "guests": "guests",
+    "perMonth": "/ month",
+    "characteristicsTitle": "Characteristics",
+    "compositionTitle": "Composition",
+    "highlightsTitle": "Highlights",
+    "conditionsTitle": "Conditions",
+    "bookNow": "Book Now",
+    "availableOn": "Available on",
+    "getInTouch": "Get in Touch",
+    "backToPortfolio": "Back to Portfolio",
+    "galleryEyebrow": "Gallery",
+    "galleryHeading": "Property Spaces",
+    "moreDetailsEyebrow": "More Details",
+    "moreDetailsHeading": "Property Breakdown",
+    "locationEyebrow": "Location",
+    "exploreMoreEyebrow": "Explore More",
+    "exploreMoreHeading": "Other Properties",
+    "bookWith": "Book with us"
+  }
   }
 }

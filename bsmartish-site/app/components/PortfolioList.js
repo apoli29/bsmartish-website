@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
+import { useTranslations, useLocale } from 'next-intl'
 import { properties } from '@/app/lib/propertiesData'
 
 function handleSweep(e) {
@@ -45,6 +46,10 @@ function PersonIcon() {
 }
 
 function PropertyRow({ property }) {
+  const t = useTranslations('portfolio')
+  const locale = useLocale()
+  const description = locale === 'pt' && property.ptDescription ? property.ptDescription : property.description
+  const displayTags = locale === 'pt' && property.ptTags ? property.ptTags : property.tags
   return (
     <div style={{ borderTop: '1px solid #e0e0e0', padding: '40px 0 48px' }}>
       <FadeIn delay={0}>
@@ -137,12 +142,12 @@ function PropertyRow({ property }) {
                 textAlign: 'justify',
               }}
             >
-              {property.description}
+              {description}
             </p>
 
             {/* Tags */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '4px' }}>
-              {property.tags.map((tag, i) => (
+              {displayTags.map((tag, i) => (
                 <span
                   key={i}
                   style={{
@@ -184,7 +189,7 @@ function PropertyRow({ property }) {
                   textDecoration: 'none',
                 }}
               >
-                View Property
+                {t('viewProperty')}
               </Link>
             </div>
           </div>

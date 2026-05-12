@@ -1,12 +1,7 @@
 'use client'
 import { useState } from 'react'
-
-const subsections = [
-  { label: 'Main Characteristics', key: 'characteristics' },
-  { label: 'Composition', key: 'composition' },
-  { label: 'Highlights', key: 'highlights' },
-  { label: 'Conditions', key: 'conditions' },
-]
+import { useTranslations } from 'next-intl'
+import { useLang } from '@/app/i18n-provider'
 
 const ChevronIcon = ({ isOpen }) => (
   <svg
@@ -22,9 +17,21 @@ const ChevronIcon = ({ isOpen }) => (
   </svg>
 )
 
-export default function MoreDetailsAccordion({ moreDetails }) {
+export default function MoreDetailsAccordion({ moreDetails, ptMoreDetails }) {
   const [openKey, setOpenKey] = useState('characteristics')
   const [hoveredKey, setHoveredKey] = useState(null)
+  const t = useTranslations('propertyPage')
+  const [lang] = useLang()
+  const isPT = lang === 'PT'
+
+  const activeDetails = isPT && ptMoreDetails ? ptMoreDetails : moreDetails
+
+  const subsections = [
+    { label: isPT ? t('characteristicsTitle') : 'Main Characteristics', key: 'characteristics' },
+    { label: isPT ? t('compositionTitle') : 'Composition', key: 'composition' },
+    { label: isPT ? t('highlightsTitle') : 'Highlights', key: 'highlights' },
+    { label: isPT ? t('conditionsTitle') : 'Conditions', key: 'conditions' },
+  ]
 
   const toggle = (key) => setOpenKey(openKey === key ? null : key)
 
@@ -33,7 +40,9 @@ export default function MoreDetailsAccordion({ moreDetails }) {
       {subsections.map(({ label, key }) => {
         const isOpen = openKey === key
         const isHovered = hoveredKey === key
-        const items = moreDetails[key]
+        const items = activeDetails[key]
+
+        if (!items) return null
 
         return (
           <div key={key} style={{ borderBottom: '1px solid #e4e4e4' }}>
