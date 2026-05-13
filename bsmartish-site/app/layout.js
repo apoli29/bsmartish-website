@@ -4,6 +4,7 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import PageTransition from '@/app/components/PageTransition'
 import { I18nProvider } from '@/app/i18n-provider'
+import { Analytics } from '@vercel/analytics/react'
 
 const radnika = localFont({
   src: [
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
           <PageTransition>{children}</PageTransition>
           <Footer />
         </I18nProvider>
+        <Analytics />
       </body>
     </html>
   )
