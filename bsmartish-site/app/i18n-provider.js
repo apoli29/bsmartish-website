@@ -53,7 +53,7 @@ export function I18nProvider({ children }) {
 
   return (
     <LangContext.Provider value={{ lang, setLang }}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider locale={locale} messages={messages} timeZone="Europe/Lisbon">
         {children}
       </NextIntlClientProvider>
     </LangContext.Provider>
