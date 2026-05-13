@@ -2,10 +2,10 @@
 
 import FadeIn from '@/app/components/FadeIn'
 import { FrostedGlassCard } from '@/app/components/ui/interactive-frosted-glass-card'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 export default function AboutTrajectory() {
-  const t = useTranslations('aboutTrajectory')
+  const { t } = useTranslation('aboutTrajectory')
 
   return (
     <section

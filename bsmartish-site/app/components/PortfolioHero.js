@@ -1,10 +1,10 @@
 'use client'
 
 import FadeIn from '@/app/components/FadeIn'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 export default function PortfolioHero() {
-  const t = useTranslations('portfolio')
+  const { t } = useTranslation('portfolio')
   return (
     <section
       style={{

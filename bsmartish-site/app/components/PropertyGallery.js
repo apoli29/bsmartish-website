@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import { useLocale } from '@/app/i18n-provider'
 
 const SLIDE_CSS = `
   @keyframes slide-out-left {
@@ -23,6 +24,7 @@ const SLIDE_CSS = `
 `
 
 export default function PropertyGallery({ photos, propertyName }) {
+  const locale = useLocale()
   const [modalOpen, setModalOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [mounted, setMounted] = useState(false)
@@ -215,7 +217,7 @@ export default function PropertyGallery({ photos, propertyName }) {
             <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
             <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
           </svg>
-          View all {validPhotos.length} photos
+          {locale === 'pt' ? 'Ver todas as fotos' : 'View all photos'}
         </button>
       </div>
 

@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useTranslations, useLocale } from 'next-intl'
-import { useLang } from '@/app/i18n-provider'
+import { useTranslation, useLocale, useLang } from '@/app/i18n-provider'
 import TiltCard from '@/app/components/TiltCard'
 import { SocialTooltip } from '@/app/components/SocialTooltip'
 
@@ -26,7 +25,7 @@ const sectionH2 = {
 }
 
 export function BookWithUs({ bookingLinks }) {
-  const t = useTranslations('propertyPage')
+  const { t } = useTranslation('propertyPage')
   return (
     <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', gap: '12px' }}>
       <span style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, fontSize: '0.8rem', color: '#202831', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
@@ -43,7 +42,7 @@ export function BookWithUs({ bookingLinks }) {
 }
 
 export function GalleryHeading() {
-  const t = useTranslations('propertyPage')
+  const { t } = useTranslation('propertyPage')
   return (
     <>
       <p style={eyebrow}>{t('galleryEyebrow')}</p>
@@ -53,7 +52,7 @@ export function GalleryHeading() {
 }
 
 export function MoreDetailsHeading() {
-  const t = useTranslations('propertyPage')
+  const { t } = useTranslation('propertyPage')
   return (
     <>
       <p style={eyebrow}>{t('moreDetailsEyebrow')}</p>
@@ -63,7 +62,7 @@ export function MoreDetailsHeading() {
 }
 
 export function ExploreMoreHeading() {
-  const t = useTranslations('propertyPage')
+  const { t } = useTranslation('propertyPage')
   return (
     <>
       <p style={eyebrow}>{t('exploreMoreEyebrow')}</p>
@@ -73,7 +72,7 @@ export function ExploreMoreHeading() {
 }
 
 export function LocationHeading({ location }) {
-  const t = useTranslations('propertyPage')
+  const { t } = useTranslation('propertyPage')
   return (
     <>
       <p style={eyebrow}>{t('locationEyebrow')}</p>
@@ -83,7 +82,7 @@ export function LocationHeading({ location }) {
 }
 
 export function RelatedPropertiesSection({ related }) {
-  const t = useTranslations('propertyPage')
+  const { t } = useTranslation('propertyPage')
   const [lang] = useLang()
   const locale = useLocale()
   const isPt = locale === 'pt' || lang === 'PT'

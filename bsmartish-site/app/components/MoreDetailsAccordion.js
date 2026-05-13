@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
-import { useLang } from '@/app/i18n-provider'
+import { useTranslation, useLang } from '@/app/i18n-provider'
 
 const ChevronIcon = ({ isOpen }) => (
   <svg
@@ -20,7 +19,7 @@ const ChevronIcon = ({ isOpen }) => (
 export default function MoreDetailsAccordion({ moreDetails, ptMoreDetails }) {
   const [openKey, setOpenKey] = useState('characteristics')
   const [hoveredKey, setHoveredKey] = useState(null)
-  const t = useTranslations('propertyPage')
+  const { t } = useTranslation('propertyPage')
   const [lang] = useLang()
   const isPT = lang === 'PT'
 

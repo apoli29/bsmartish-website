@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { LanguageSwitcher, LanguageSwitcherMobile } from './LanguageSwitcher'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 export default function Header() {
-  const t = useTranslations('header')
+  const { t } = useTranslation('header')
   const pathname = usePathname()
 
   const links = [

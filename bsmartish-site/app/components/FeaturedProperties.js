@@ -4,10 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { SocialTooltip } from '@/app/components/SocialTooltip'
 import FadeIn from '@/app/components/FadeIn'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 export default function FeaturedProperties() {
-  const t = useTranslations('featured')
+  const { t } = useTranslation('featured')
   const properties = [
     { name: t('property1'), src: '/images/website.images/Home/sec.4/paranhos.sec4.webp',   href: '/mid-term-rentals-in-porto/paranhos-apartment'   },
     { name: t('property2'), src: '/images/website.images/Home/sec.4/matosinhos.sec4.webp', href: '/mid-term-rentals-in-porto/matosinhos-apartment' },

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import FadeIn from '@/app/components/FadeIn'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 function FAQItem({ q, a, isOpen, onToggle }) {
   return (
@@ -65,7 +65,7 @@ function FAQItem({ q, a, isOpen, onToggle }) {
 }
 
 export default function AboutFAQ() {
-  const t = useTranslations('aboutFAQ')
+  const { t } = useTranslation('aboutFAQ')
   const [openIndex, setOpenIndex] = useState(0)
 
   const faqs = [

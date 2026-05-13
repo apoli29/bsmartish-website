@@ -18,7 +18,7 @@ export const properties = [
     description:
       'One of the most modern-looking buildings you will find in Porto, embodying a minimalistic approach that combines a clean architectural exterior with a functional, elegant, and high-standard interior. Located in Paranhos, a privileged location due to its direct access to the city center, the University Polo, shopping hubs, major healthcare facilities, and diverse dining options.',
     ptDescription:
-      'Um dos edifícios de arquitetura mais contemporânea que encontrará no Porto, com uma abordagem minimalista que conjuga um exterior clean com um interior funcional, elegante e de elevado padrão. Situado em Paranhos, uma localização privilegiada pelo acesso direto ao centro da cidade, ao Polo Universitário, a centros comerciais, às principais unidades de saúde e a uma diversificada oferta gastronómica.',
+      'Um dos edifícios mais contemporâneos que encontrará no Porto, com uma abordagem minimalista que conjuga um exterior clean com um interior funcional, elegante e de elevado padrão. Situado em Paranhos, uma localização privilegiada pelo acesso direto ao centro da cidade, ao Polo Universitário, a centros comerciais, às principais unidades de saúde e a uma diversificada oferta gastronómica.',
     longDescription:
       'One of the most modern-looking buildings you will find in Porto, embodying a minimalistic approach that combines a clean architectural exterior with a functional, elegant, and high-standard interior. Located in Paranhos, a privileged location due to its direct access to the city center, the University Polo, shopping hubs, major healthcare facilities, and diverse dining options.',
     tags: [

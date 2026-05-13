@@ -2,10 +2,10 @@
 
 import FadeIn from '@/app/components/FadeIn'
 import CountUp from '@/app/components/CountUp'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 export default function ImpactWidget() {
-  const t = useTranslations('impact')
+  const { t } = useTranslation('impact')
   const stats = [
     { value: t('stat1Value'), label: t('stat1Label') },
     { value: t('stat2Value'), label: t('stat2Label') },

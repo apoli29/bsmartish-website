@@ -1,7 +1,6 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
-import { useLang } from '@/app/i18n-provider'
+import { useTranslation, useLang } from '@/app/i18n-provider'
 import FadeIn from '@/app/components/FadeIn'
 
 const eyebrow = {
@@ -39,7 +38,7 @@ const detailRow = {
 }
 
 export default function PropertyMobileSections({ property }) {
-  const t = useTranslations('propertyPage')
+  const { t } = useTranslation('propertyPage')
   const [lang] = useLang()
   const isPT = lang === 'PT'
 

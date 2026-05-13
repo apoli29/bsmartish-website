@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
@@ -210,7 +210,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
 }
 
 export default function AboutValues() {
-  const t = useTranslations('aboutValues')
+  const { t } = useTranslation('aboutValues')
   const [headRef, headIn] = useInView(0.3)
   const [openIndex, setOpenIndex] = useState(-1)
 

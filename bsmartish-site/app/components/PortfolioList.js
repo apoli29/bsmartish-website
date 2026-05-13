@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
-import { useTranslations, useLocale } from 'next-intl'
+import { useTranslation, useLocale } from '@/app/i18n-provider'
 import { properties } from '@/app/lib/propertiesData'
 
 function handleSweep(e) {
@@ -46,7 +46,7 @@ function PersonIcon() {
 }
 
 function PropertyRow({ property }) {
-  const t = useTranslations('portfolio')
+  const { t } = useTranslation('portfolio')
   const locale = useLocale()
   const description = locale === 'pt' && property.ptDescription ? property.ptDescription : property.description
   const displayTags = locale === 'pt' && property.ptTags ? property.ptTags : property.tags

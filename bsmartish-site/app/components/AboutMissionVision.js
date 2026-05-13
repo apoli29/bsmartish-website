@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
@@ -84,7 +84,7 @@ function StatementRow({ item, delay }) {
 }
 
 export default function AboutMissionVision() {
-  const t = useTranslations('aboutMissionVision')
+  const { t } = useTranslation('aboutMissionVision')
   const [headRef, headIn] = useInView(0.3)
 
   const items = [

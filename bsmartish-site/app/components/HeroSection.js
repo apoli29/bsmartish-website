@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 function handleSweep(e) {
   const el = e.currentTarget
@@ -17,7 +17,7 @@ function handleSweep(e) {
 }
 
 export default function HeroSection() {
-  const t = useTranslations('hero')
+  const { t } = useTranslation('hero')
   return (
     <section className="relative min-h-screen flex flex-col justify-center">
 

@@ -3,7 +3,7 @@
 import { useRef, useEffect, useCallback, useState } from 'react'
 import Image from 'next/image'
 import { createPortal } from 'react-dom'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 const IMAGES = [
   'amh5svunor2lamgcbekb.webp',
@@ -57,7 +57,7 @@ const SLIDE_CSS = `
 `
 
 export default function CarouselSection() {
-  const t = useTranslations('carousel')
+  const { t } = useTranslation('carousel')
   const trackRef  = useRef(null)
   const cardWRef  = useRef(348)
   const posRef    = useRef(0)

@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 export default function Footer() {
-  const t = useTranslations('footer')
+  const { t } = useTranslation('footer')
   const [index, setIndex] = useState(0)
   const [visible, setVisible] = useState(true)
 

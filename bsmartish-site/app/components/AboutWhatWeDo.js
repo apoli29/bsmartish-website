@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslation } from '@/app/i18n-provider'
 
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
@@ -120,7 +120,7 @@ function ActivityRow({ activity, delay }) {
 }
 
 export default function AboutWhatWeDo() {
-  const t = useTranslations('aboutWhatWeDo')
+  const { t } = useTranslation('aboutWhatWeDo')
   const [headRef, headIn] = useInView(0.3)
 
   const activities = [

@@ -1,17 +1,16 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect } from 'react'
-import { NextIntlClientProvider } from 'next-intl'
 import enMessages from '../locales/en.json'
 
 const LangContext = createContext({ lang: 'EN', setLang: () => {} })
+const TranslationContext = createContext(enMessages)
 
 const LANGS = ['EN', 'PT']
 
 export function I18nProvider({ children }) {
   const [lang, setLangState] = useState('EN')
   const [messages, setMessages] = useState(enMessages)
-  // locale only advances after messages are ready, preventing the flash
   const [locale, setLocale] = useState('en')
 
   useEffect(() => {
@@ -22,17 +21,13 @@ export function I18nProvider({ children }) {
 
   useEffect(() => {
     if (lang === 'EN') {
-      // spread creates a new reference so React always detects the state change
       setMessages({ ...enMessages })
-      console.log('Messages loaded: EN', Object.keys(enMessages))
       setLocale('en')
       return
     }
     import(`../locales/${lang.toLowerCase()}.json`)
       .then((m) => {
-        // update messages and locale atomically once the import resolves
         setMessages(m.default)
-        console.log('Messages loaded:', lang, Object.keys(m.default))
         setLocale(lang.toLowerCase())
       })
       .catch(() => {
@@ -41,7 +36,6 @@ export function I18nProvider({ children }) {
       })
   }, [lang])
 
-  // keep the html[lang] attribute in sync for accessibility / SEO
   useEffect(() => {
     document.documentElement.lang = locale
   }, [locale])
@@ -53,9 +47,9 @@ export function I18nProvider({ children }) {
 
   return (
     <LangContext.Provider value={{ lang, setLang }}>
-      <NextIntlClientProvider locale={locale} messages={messages} timeZone="Europe/Lisbon">
+      <TranslationContext.Provider value={messages}>
         {children}
-      </NextIntlClientProvider>
+      </TranslationContext.Provider>
     </LangContext.Provider>
   )
 }
@@ -63,4 +57,16 @@ export function I18nProvider({ children }) {
 export function useLang() {
   const { lang, setLang } = useContext(LangContext)
   return [lang, setLang]
+}
+
+export function useLocale() {
+  const { lang } = useContext(LangContext)
+  return lang.toLowerCase()
+}
+
+export function useTranslation(namespace) {
+  const messages = useContext(TranslationContext)
+  const scope = namespace ? (messages[namespace] ?? {}) : messages
+  const t = (key) => scope[key] ?? key
+  return { t }
 }
