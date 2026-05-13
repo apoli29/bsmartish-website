@@ -32,11 +32,7 @@ export const metadata = {
   title: 'BSMARTISH',
   description: 'Urban renovations — high-end properties in Porto.',
   icons: {
-    icon: [
-      { url: '/favicon.png', type: 'image/png' },
-    ],
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/favicon.ico',
   },
 }
 
