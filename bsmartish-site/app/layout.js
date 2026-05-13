@@ -5,6 +5,7 @@ import Footer from '@/app/components/Footer'
 import PageTransition from '@/app/components/PageTransition'
 import { I18nProvider } from '@/app/i18n-provider'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const radnika = localFont({
   src: [
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </I18nProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
