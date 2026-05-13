@@ -33,10 +33,10 @@ export function BookWithUs({ bookingLinks }) {
         {t('bookWith')}
       </span>
       <SocialTooltip items={[
-        { href: bookingLinks.idealista, ariaLabel: 'Idealista', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/idealista.png', imgSize: 23 },
-        { href: bookingLinks.airbnb, ariaLabel: 'Airbnb', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/air.bnb.png', imgSize: 29 },
-        { href: bookingLinks.spotahome, ariaLabel: 'Spotahome', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/spotahome.png', imgSize: 23 },
-        { href: bookingLinks.flatio, ariaLabel: 'Flatio', svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/flatio.png', imgSize: 23 },
+        { href: bookingLinks.idealista, ariaLabel: 'Idealista', svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/idealista.png', imgSize: 23 },
+        { href: bookingLinks.airbnb, ariaLabel: 'Airbnb', svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/air.bnb.png', imgSize: 29 },
+        { href: bookingLinks.spotahome, ariaLabel: 'Spotahome', svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/spotahome.png', imgSize: 23 },
+        { href: bookingLinks.flatio, ariaLabel: 'Flatio', svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/flatio.png', imgSize: 23 },
       ]} />
     </div>
   )

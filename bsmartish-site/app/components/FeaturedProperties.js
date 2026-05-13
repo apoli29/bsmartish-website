@@ -9,9 +9,9 @@ import { useTranslations } from 'next-intl'
 export default function FeaturedProperties() {
   const t = useTranslations('featured')
   const properties = [
-    { name: t('property1'), src: '/Images/Website.images/Home/sec.4/paranhos.sec4.webp',   href: '/mid-term-rentals-in-porto/paranhos-apartment'   },
-    { name: t('property2'), src: '/Images/Website.images/Home/sec.4/matosinhos.sec4.webp', href: '/mid-term-rentals-in-porto/matosinhos-apartment' },
-    { name: t('property3'), src: '/Images/Website.images/Home/sec.4/alegria.sec4.webp',    href: '/mid-term-rentals-in-porto/alegria-apartment'    },
+    { name: t('property1'), src: '/images/website.images/Home/sec.4/paranhos.sec4.webp',   href: '/mid-term-rentals-in-porto/paranhos-apartment'   },
+    { name: t('property2'), src: '/images/website.images/Home/sec.4/matosinhos.sec4.webp', href: '/mid-term-rentals-in-porto/matosinhos-apartment' },
+    { name: t('property3'), src: '/images/website.images/Home/sec.4/alegria.sec4.webp',    href: '/mid-term-rentals-in-porto/alegria-apartment'    },
   ]
   return (
     <section

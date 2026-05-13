@@ -24,7 +24,7 @@ export default function HeroSection() {
       {/* Imagem de fundo */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/Images/Website.images/Home/Home.image.sec1.webp')" }}
+        style={{ backgroundImage: "url('/images/website.images/Home/home.image.sec1.webp')" }}
       />
 
       {/* Overlay Deep Urban */}

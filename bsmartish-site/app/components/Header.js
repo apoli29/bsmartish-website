@@ -52,7 +52,7 @@ export default function Header() {
               <Link href="/" className="flex-shrink-0 h-[64px] md:h-[72px] lg:h-[80px] overflow-hidden flex items-center" onClick={() => setMenuOpen(false)}>
                 <div className="w-[198px] md:w-[231px] lg:w-[264px]">
                   <img
-                    src="/images/Logo/logo.png"
+                    src="/images/logo/logo.png"
                     alt="BSMARTISH"
                     style={{ width: '100%', height: 'auto', display: 'block' }}
                   />

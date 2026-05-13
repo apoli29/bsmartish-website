@@ -7,23 +7,23 @@ import { I18nProvider } from '@/app/i18n-provider'
 
 const radnika = localFont({
   src: [
-    { path: '../public/Fonts/Radnika-Medium.otf.otf', weight: '500', style: 'normal' },
+    { path: '../public/fonts/Radnika-Medium.otf.otf', weight: '500', style: 'normal' },
   ],
   variable: '--font-radnika',
 })
 
 const garet = localFont({
   src: [
-    { path: '../public/Fonts/Garet-Heavy.woff2', weight: '800', style: 'normal' },
+    { path: '../public/fonts/Garet-Heavy.woff2', weight: '800', style: 'normal' },
   ],
   variable: '--font-garet',
 })
 
 const aileron = localFont({
   src: [
-    { path: '../public/Fonts/Aileron-Regular.otf.otf', weight: '400', style: 'normal' },
-    { path: '../public/Fonts/Aileron-SemiBold.otf.otf', weight: '600', style: 'normal' },
-    { path: '../public/Fonts/Aileron-Bold.otf.otf', weight: '700', style: 'normal' },
+    { path: '../public/fonts/Aileron-Regular.otf.otf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/Aileron-SemiBold.otf.otf', weight: '600', style: 'normal' },
+    { path: '../public/fonts/Aileron-Bold.otf.otf', weight: '700', style: 'normal' },
   ],
   variable: '--font-aileron',
 })

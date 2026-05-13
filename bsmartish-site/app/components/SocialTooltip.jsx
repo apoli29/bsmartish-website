@@ -7,25 +7,25 @@ const defaultItems = [
   {
     href: 'https://www.airbnb.com/users/profile/1470751082133656177?previous_page_name=PdpHomeMarketplace&locale=en&_set_bev_on_new_domain=1776797230_KKmE2MPABYjMTzwz&set_everest_cookie_on_new_domain=1776797229.EAYjVlMDU4YTQxMTA5OT.avGC8Xz-NKOetkvjxPDv0QzwxblIexDsUiWpxelMv_k',
     ariaLabel: 'Airbnb',
-    svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/air.bnb.png',
+    svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/air.bnb.png',
     imgSize: 38,
   },
   {
     href: 'https://www.spotahome.com/porto/for-rent:apartments/1478660',
     ariaLabel: 'Spotahome',
-    svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/spotahome.png',
+    svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/spotahome.png',
     imgSize: 30,
   },
   {
     href: 'https://www.idealista.pt/pro/bsmartish',
     ariaLabel: 'Idealista',
-    svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/idealista.png',
+    svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/idealista.png',
     imgSize: 30,
   },
   {
     href: 'https://www.flatio.com/owner/24976',
     ariaLabel: 'Flatio',
-    svgUrl: '/images/Website.images/Home/sec.4/logos.pltf-to-rent/flatio.png',
+    svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/flatio.png',
     imgSize: 30,
   },
 ]

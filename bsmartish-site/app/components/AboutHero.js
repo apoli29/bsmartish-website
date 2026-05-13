@@ -65,7 +65,7 @@ export default function AboutHero() {
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/Website.images/About%20us/img.sec.1.webp')" }}
+        style={{ backgroundImage: "url('/images/website.images/about-us/img.sec.1.webp')" }}
       />
 
       {/* Dark gradient overlay */}

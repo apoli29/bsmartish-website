@@ -30,7 +30,7 @@ const IMAGES = [
   'ertvmsxzv.webp',
 ]
 
-const IMAGE_SRCS = IMAGES.map(f => `/images/Website.images/Home/sec.2/${f}`)
+const IMAGE_SRCS = IMAGES.map(f => `/images/website.images/Home/sec.2/${f}`)
 
 const GAP = 16
 const SPEED_DESKTOP = 0.28
@@ -218,7 +218,7 @@ export default function CarouselSection() {
               }}
             >
               <Image
-                src={`/images/Website.images/Home/sec.2/${img}`}
+                src={`/images/website.images/Home/sec.2/${img}`}
                 alt=""
                 fill
                 className="object-cover"

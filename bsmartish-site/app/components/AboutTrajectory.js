@@ -36,7 +36,7 @@ export default function AboutTrajectory() {
           <FadeIn delay={150} className="w-full lg:flex-1">
             <FrostedGlassCard
               className="w-full min-h-[320px] md:min-h-[360px] lg:min-h-[400px]"
-              image="/images/Website.images/About us/photo2.webp"
+              image="/images/website.images/about-us/photo2.webp"
               imageSizes="(max-width: 1024px) 100vw, 720px"
               overlayOpacity={0.72}
               contentClassName="pt-7 px-7 pb-8 md:pt-9 md:px-9 md:pb-10 lg:pt-10 lg:px-10 lg:pb-12 flex flex-col gap-8 lg:gap-0 lg:justify-between h-full"
@@ -75,7 +75,7 @@ export default function AboutTrajectory() {
           <FadeIn delay={300} className="w-full lg:flex-1">
             <FrostedGlassCard
               className="w-full min-h-[320px] md:min-h-[360px] lg:min-h-[400px]"
-              image="/images/Website.images/About us/photo1.webp"
+              image="/images/website.images/about-us/photo1.webp"
               imageSizes="(max-width: 1024px) 100vw, 720px"
               overlayOpacity={0.72}
               contentClassName="pt-7 px-7 pb-8 md:pt-9 md:px-9 md:pb-10 lg:pt-10 lg:px-10 lg:pb-12 flex flex-col gap-8 lg:gap-0 lg:justify-between h-full"

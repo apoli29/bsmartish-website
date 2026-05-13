@@ -23,7 +23,7 @@ export default function AboutPage() {
       <section aria-hidden="true" className="w-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/Website.images/About us/separator.webp"
+          src="/images/website.images/about-us/separator.webp"
           alt=""
           className="w-full h-auto block"
         />

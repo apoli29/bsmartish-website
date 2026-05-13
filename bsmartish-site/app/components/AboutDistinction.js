@@ -19,7 +19,7 @@ export default function AboutDistinction() {
           <FrostedGlassCard
             tiltStrength={0.8}
             className="w-full min-h-[240px] md:min-h-[270px] lg:min-h-[300px]"
-            image="/images/Website.images/About us/photo6.webp"
+            image="/images/website.images/about-us/photo6.webp"
             imageSizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1280px"
             imagePosition="center 62%"
             overlayOpacity={0.72}
