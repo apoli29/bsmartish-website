@@ -9,7 +9,7 @@ export const properties = [
       spotahome: 'https://www.spotahome.com/porto/for-rent:apartments/1491376',
       flatio: 'https://www.flatio.es/alquiler/piso/120808-oporto',
     },
-    price: '1,350',
+    price: '1,400',
     name: 'Paranhos',
     ptName: 'Apartamento de Paranhos',
     subtitle: 'Ultra-Modern Urban Apartment',
