@@ -33,13 +33,6 @@ const aileron = localFont({
 export const metadata = {
   title: 'BSMARTISH',
   description: 'Urban renovations — high-end properties in Porto.',
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon.png', sizes: '900x900', type: 'image/png' },
-    ],
-    apple: '/favicon.png',
-  },
 }
 
 export default function RootLayout({ children }) {
