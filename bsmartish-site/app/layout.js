@@ -31,8 +31,24 @@ const aileron = localFont({
 })
 
 export const metadata = {
+  metadataBase: new URL('https://www.bsmartish.com'),
   title: 'BSMARTISH',
   description: 'Urban renovations — high-end properties in Porto.',
+  openGraph: {
+    type: 'website',
+    siteName: 'BSMARTISH',
+    locale: 'en_US',
+    title: 'BSMARTISH Urban Renovation',
+    description: 'Urban renovations — high-end properties in Porto.',
+    url: '/',
+    images: [{ url: '/og/default.jpg', width: 1200, height: 630, alt: 'BSMARTISH — urban renovation in Porto' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BSMARTISH Urban Renovation',
+    description: 'Urban renovations — high-end properties in Porto.',
+    images: ['/og/default.jpg'],
+  },
 }
 
 export default function RootLayout({ children }) {

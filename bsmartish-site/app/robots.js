@@ -1,6 +1,6 @@
 export default function robots() {
   return {
     rules: { allow: '/' },
-    sitemap: 'https://bsmartish.com/sitemap.xml',
+    sitemap: 'https://www.bsmartish.com/sitemap.xml',
   }
 }

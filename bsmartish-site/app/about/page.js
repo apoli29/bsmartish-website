@@ -1,6 +1,20 @@
+const title = 'About Us - BSMARTISH'
+const description = 'Since 2006, we develop independent and partnered urban renovation projects and renting apartments. Nowadays, we focus our activity on Porto. Learn more about our philosophy.'
+
 export const metadata = {
-  title: 'About Us - BSMARTISH',
-  description: 'Since 2006, we develop independent and partnered urban renovation projects and renting apartments. Nowadays, we focus our activity on Porto. Learn more about our philosophy.',
+  title,
+  description,
+  alternates: { canonical: '/about' },
+  openGraph: {
+    type: 'website',
+    siteName: 'BSMARTISH',
+    locale: 'en_US',
+    title,
+    description,
+    url: '/about',
+    images: [{ url: '/og/default.jpg', width: 1200, height: 630, alt: 'BSMARTISH — urban renovation in Porto' }],
+  },
+  twitter: { card: 'summary_large_image', title, description, images: ['/og/default.jpg'] },
 }
 
 import Image from 'next/image'

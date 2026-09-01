@@ -25,7 +25,36 @@ const slugMetadata = {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  return slugMetadata[slug] ?? {}
+  const meta = slugMetadata[slug]
+  if (!meta) return {}
+
+  const url = `/mid-term-rentals-in-porto/${slug}`
+  const image = {
+    url: `/og/${slug}.jpg`,
+    width: 1200,
+    height: 630,
+    alt: `${getPropertyBySlug(slug)?.name ?? 'BSMARTISH'} apartment — mid-term rental in Porto`,
+  }
+
+  return {
+    ...meta,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'website',
+      siteName: 'BSMARTISH',
+      locale: 'en_US',
+      title: meta.title,
+      description: meta.description,
+      url,
+      images: [image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: meta.title,
+      description: meta.description,
+      images: [image.url],
+    },
+  }
 }
 
 export async function generateStaticParams() {
