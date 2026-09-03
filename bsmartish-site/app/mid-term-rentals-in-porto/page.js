@@ -19,10 +19,13 @@ export const metadata = {
 
 import PortfolioHero from '@/app/components/PortfolioHero'
 import PortfolioList from '@/app/components/PortfolioList'
+import JsonLd from '@/app/components/JsonLd'
+import { graph, portfolioSchema } from '@/app/lib/schema'
 
 export default function PortfolioPage() {
   return (
     <main>
+      <JsonLd data={graph(portfolioSchema())} />
       <PortfolioHero />
       <PortfolioList />
     </main>

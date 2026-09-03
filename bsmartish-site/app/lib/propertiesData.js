@@ -182,7 +182,7 @@ export const properties = [
       baths: '2',
       type: 'Apartment',
       ptType: 'Apartamento',
-      status: 'For Sale',
+      status: 'For Rent',
       year: '2022',
       yearLabel: 'Renovation Year',
       floor: '5',

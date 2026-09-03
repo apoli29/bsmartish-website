@@ -7,6 +7,8 @@ import MoreDetailsAccordion from '@/app/components/MoreDetailsAccordion'
 import PropertyMobileSections from '@/app/components/PropertyMobileSections'
 import PropertyOverviewSection from '@/app/components/PropertyOverviewSection'
 import { BookWithUs, GalleryHeading, MoreDetailsHeading, ExploreMoreHeading, LocationHeading, RelatedPropertiesSection } from '@/app/components/PropertyPageHeadings'
+import JsonLd from '@/app/components/JsonLd'
+import { graph, apartmentSchema, propertyBreadcrumbSchema } from '@/app/lib/schema'
 
 const slugMetadata = {
   'paranhos-apartment': {
@@ -113,6 +115,8 @@ export default async function PropertyPage({ params }) {
 
   return (
     <main className="pt-24 md:pt-28 lg:pt-32" style={{ backgroundColor: '#f8f8f8', fontFamily: 'var(--font-aileron)' }}>
+
+      <JsonLd data={graph(apartmentSchema(slug), propertyBreadcrumbSchema(slug))} />
 
       <PropertyMobileSections property={property} />
 

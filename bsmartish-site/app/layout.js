@@ -6,6 +6,8 @@ import PageTransition from '@/app/components/PageTransition'
 import { I18nProvider } from '@/app/i18n-provider'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import JsonLd from '@/app/components/JsonLd'
+import { graph, organizationSchema, webSiteSchema } from '@/app/lib/schema'
 
 const radnika = localFont({
   src: [
@@ -65,6 +67,7 @@ export default function RootLayout({ children }) {
       className={`${radnika.variable} ${garet.variable} ${aileron.variable}`}
     >
       <body>
+        <JsonLd data={graph(organizationSchema(), webSiteSchema())} />
         <I18nProvider>
           <Header />
           <PageTransition>{children}</PageTransition>

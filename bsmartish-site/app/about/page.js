@@ -25,10 +25,13 @@ import AboutMissionVision from '@/app/components/AboutMissionVision'
 import AboutValues from '@/app/components/AboutValues'
 import AboutDistinction from '@/app/components/AboutDistinction'
 import AboutFAQ from '@/app/components/AboutFAQ'
+import JsonLd from '@/app/components/JsonLd'
+import { graph, aboutPageSchema, faqSchema } from '@/app/lib/schema'
 
 export default function AboutPage() {
   return (
     <main>
+      <JsonLd data={graph(aboutPageSchema(), faqSchema())} />
       <AboutHero />
       <AboutTrajectory />
       <AboutWhatWeDo />

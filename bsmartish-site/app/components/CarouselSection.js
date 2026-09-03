@@ -4,33 +4,11 @@ import { useRef, useEffect, useCallback, useState } from 'react'
 import Image from 'next/image'
 import { createPortal } from 'react-dom'
 import { useTranslation } from '@/app/i18n-provider'
+import { HOME_GALLERY_FILES, HOME_GALLERY_SRCS } from '@/app/lib/homeGalleryImages'
 
-const IMAGES = [
-  'amh5svunor2lamgcbekb.webp',
-  'qwoegxcqsa.webp',
-  'ny9iigp3wuyi7a5otvbo.webp',
-  'utyfcnb.webp',
-  'vbysrw6jgohnpnfhp0yn.webp',
-  'retogrkldbads.webp',
-  'fhgertdcvv.webp',
-  'ffqz1kq3bjh4xr9egm6y.webp',
-  'rwtibvm.webp',
-  'etywsf.webp',
-  'qvptaroidm60lupaeoik.webp',
-  'fsggrhervj.webp',
-  'swdeohewhu.webp',
-  'rewoitjgeba.webp',
-  'hjewfpvbr.webp',
-  'vdfnsjknw6.webp',
-  'ytfvkjlh.webp',
-  'asccnefg.webp',
-  'sjnvwjerv.webp',
-  'pj6vrlrakjglreckwuhn.webp',
-  'cn1lc7yfim415qmsgoqh.webp',
-  'ertvmsxzv.webp',
-]
+const IMAGES = HOME_GALLERY_FILES
 
-const IMAGE_SRCS = IMAGES.map(f => `/images/website.images/Home/sec.2/${f}`)
+const IMAGE_SRCS = HOME_GALLERY_SRCS
 
 const GAP = 16
 const SPEED_DESKTOP = 0.28
