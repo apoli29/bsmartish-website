@@ -34,6 +34,13 @@ export const metadata = {
   metadataBase: new URL('https://www.bsmartish.com'),
   title: 'BSMARTISH',
   description: 'Urban renovations — high-end properties in Porto.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon.png', sizes: '900x900', type: 'image/png' },
+    ],
+    apple: '/favicon.png',
+  },
   openGraph: {
     type: 'website',
     siteName: 'BSMARTISH',
