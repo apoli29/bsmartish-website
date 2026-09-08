@@ -34,12 +34,14 @@ function EnglishBody() {
           writing before any contract is signed.
         </P>
         <P>
-          Prices shown on property pages are monthly rent in euros. Residential letting is exempt
-          from VAT under Article 9(29) of the Portuguese VAT Code, so no VAT is added. Where a
-          property page states a one-off administrative fee, a security deposit, or a cap on the
-          utilities included, those amounts are stated on that page and are payable in addition to
-          the monthly rent. We will always set out the full cost in writing before you commit to
-          anything.
+          We do not publish rents on this website. The rent for a property is quoted on the booking
+          platform where it is listed, or by us on request. Residential letting is exempt from VAT
+          under Article 9(29) of the Portuguese VAT Code, so no VAT is added to it.
+        </P>
+        <P>
+          Where a property page states a one-off administrative fee, a security deposit, or a cap
+          on the utilities included, those amounts apply in addition to the rent. We will always set
+          out the full cost in writing, itemised, before you commit to anything.
         </P>
         <P>
           Photographs show the actual property unless they are marked otherwise. Photographs of
@@ -182,12 +184,16 @@ function CorpoPortugues() {
           pormenores são confirmados por escrito antes da assinatura de qualquer contrato.
         </P>
         <P>
-          Os preços indicados nas páginas dos imóveis correspondem à renda mensal, em euros. O
-          arrendamento para habitação está isento de IVA nos termos do artigo 9.º, n.º 29, do Código
-          do IVA, pelo que não acresce IVA. Quando a página de um imóvel indique uma taxa
-          administrativa única, um depósito de caução ou um limite de despesas incluídas, esses
-          valores estão indicados nessa página e são devidos para além da renda mensal. Apresentamos
-          sempre o custo total por escrito antes de assumir qualquer compromisso.
+          Não publicamos rendas neste site. A renda de cada imóvel é indicada na plataforma de
+          reserva onde está anunciado, ou por nós mediante pedido. O arrendamento para habitação
+          está isento de IVA nos termos do artigo 9.º, n.º 29, do Código do IVA, pelo que não lhe
+          acresce IVA.
+        </P>
+        <P>
+          Quando a página de um imóvel indique uma taxa administrativa única, um depósito de caução
+          ou um limite de despesas incluídas, esses valores são devidos para além da renda.
+          Apresentamos sempre o custo total por escrito e discriminado antes de assumir qualquer
+          compromisso.
         </P>
         <P>
           As fotografias mostram o imóvel real, salvo indicação em contrário. As fotografias de

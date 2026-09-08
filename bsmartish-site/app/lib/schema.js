@@ -242,17 +242,13 @@ export function apartmentSchema(slug) {
     offers: {
       '@type': 'Offer',
       url,
-      price: Number(property.price.replace(/,/g, '')),
+      // No price is published here. The rent is no longer shown on the property
+      // pages, and leaving it in the structured data would let search engines
+      // keep displaying a figure the page itself does not state.
       priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
       businessFunction: 'http://purl.org/goodrelations/v1#LeaseOut',
       description: offerTerms(property),
-      priceSpecification: {
-        '@type': 'UnitPriceSpecification',
-        price: Number(property.price.replace(/,/g, '')),
-        priceCurrency: 'EUR',
-        unitCode: 'MON',
-      },
       leaseLength: {
         '@type': 'QuantitativeValue',
         minValue: 1,

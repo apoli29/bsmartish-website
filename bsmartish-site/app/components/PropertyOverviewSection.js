@@ -146,38 +146,6 @@ export default function PropertyOverviewSection({ property }) {
                 </div>
               </div>
 
-              {property.price && (
-                <div style={{ marginTop: '20px' }}>
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      backgroundColor: '#202831',
-                      color: '#F8F8F8',
-                      fontFamily: 'var(--font-aileron)',
-                      fontWeight: 600,
-                      fontSize: '0.8rem',
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      padding: '12px 28px',
-                      borderRadius: '4px',
-                    }}
-                  >
-                    €{property.price} {t('perMonth')}
-                  </span>
-                  <p
-                    style={{
-                      margin: '10px 0 0',
-                      fontFamily: 'var(--font-aileron)',
-                      fontSize: '0.78rem',
-                      lineHeight: 1.6,
-                      color: 'var(--color-slate-gray-text)',
-                      maxWidth: '46ch',
-                    }}
-                  >
-                    {t('priceNote')}
-                  </p>
-                </div>
-              )}
             </FadeIn>
           </div>
 
