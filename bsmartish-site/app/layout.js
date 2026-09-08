@@ -63,14 +63,21 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html
+      lang="en"
       suppressHydrationWarning
       className={`${radnika.variable} ${garet.variable} ${aileron.variable}`}
     >
       <body>
+        {/* WCAG 2.4.1 — lets keyboard users skip the fixed header and nav. */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <JsonLd data={graph(organizationSchema(), webSiteSchema())} />
         <I18nProvider>
           <Header />
-          <PageTransition>{children}</PageTransition>
+          <div id="main-content" tabIndex={-1}>
+            <PageTransition>{children}</PageTransition>
+          </div>
           <Footer />
         </I18nProvider>
         <Analytics />

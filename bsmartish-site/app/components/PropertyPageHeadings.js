@@ -10,7 +10,7 @@ const eyebrow = {
   fontFamily: 'var(--font-aileron)',
   fontSize: '0.7rem',
   fontWeight: 600,
-  color: '#6b87a4',
+  color: 'var(--color-slate-blue-text)',
   letterSpacing: '0.18em',
   textTransform: 'uppercase',
 }
@@ -101,14 +101,14 @@ export function RelatedPropertiesSection({ related }) {
               <h3 style={{ margin: '0 0 10px', fontFamily: 'var(--font-radnika)', fontSize: '1.5rem', color: '#6b87a4', fontWeight: 500 }}>
                 {p.name}
               </h3>
-              <p style={{ margin: '0 0 16px', fontSize: '0.96rem', color: '#75797c', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+              <p style={{ margin: '0 0 16px', fontSize: '0.96rem', color: 'var(--color-slate-gray-text)', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {isPt && p.ptDescription ? p.ptDescription : p.description}
               </p>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 {p.tags.map((tag, i) => (
                   <span
                     key={i}
-                    style={{ fontSize: '0.68rem', fontWeight: 600, padding: '4px 12px', borderRadius: '999px', border: '1px solid rgba(107,135,164,0.35)', color: '#6b87a4', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+                    style={{ fontSize: '0.68rem', fontWeight: 600, padding: '4px 12px', borderRadius: '999px', border: '1px solid rgba(107,135,164,0.35)', color: 'var(--color-slate-blue-text)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                   >
                     {tag.type === 'people' ? `${tag.count} ${t('guests')}` : tag}
                   </span>

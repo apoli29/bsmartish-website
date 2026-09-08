@@ -67,6 +67,15 @@ export function useLocale() {
 export function useTranslation(namespace) {
   const messages = useContext(TranslationContext)
   const scope = namespace ? (messages[namespace] ?? {}) : messages
-  const t = (key) => scope[key] ?? key
+  // Supports {placeholder} interpolation: t('ariaOpenPhoto', { n: 3 }).
+  // Without this, strings like "Open photo {n}" were rendered verbatim, which
+  // gave every carousel thumbnail the same meaningless accessible name.
+  const t = (key, params) => {
+    const value = scope[key] ?? key
+    if (!params || typeof value !== 'string') return value
+    return value.replace(/\{(\w+)\}/g, (match, name) =>
+      Object.prototype.hasOwnProperty.call(params, name) ? String(params[name]) : match
+    )
+  }
   return { t }
 }

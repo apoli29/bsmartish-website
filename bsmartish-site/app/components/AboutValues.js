@@ -98,6 +98,8 @@ function ValueRow({ value, index, isOpen, onToggle }) {
         </button>
         <div
           className="grid"
+          inert={!isOpen}
+          aria-hidden={isOpen ? undefined : 'true'}
           style={{
             gridTemplateRows: isOpen ? '1fr' : '0fr',
             transition: `grid-template-rows 500ms ${EASE}`,
@@ -106,7 +108,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
           <div className="overflow-hidden">
             <p
               className="text-[0.98rem] leading-[1.7] px-6 pt-4 pb-5 text-justify"
-              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c', hyphens: 'auto' }}
+              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: 'var(--color-slate-gray-text)', hyphens: 'auto' }}
             >
               {value.description}
             </p>
@@ -142,7 +144,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
             style={{
               fontFamily: 'var(--font-aileron)',
               fontWeight: 400,
-              color: '#75797c',
+              color: 'var(--color-slate-gray-text)',
               opacity: isOpen ? 1 : 0,
               transform: isOpen ? 'translateX(0)' : 'translateX(-10px)',
               transition: `opacity 400ms ${EASE} ${isOpen ? '200ms' : '0ms'}, transform 400ms ${EASE} ${isOpen ? '200ms' : '0ms'}`,
@@ -239,7 +241,7 @@ export default function AboutValues() {
         >
           <p
             className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
-            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
+            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
           >
             {t('eyebrow')}
           </p>

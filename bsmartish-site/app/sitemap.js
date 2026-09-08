@@ -34,5 +34,11 @@ export default function sitemap() {
       priority: 0.8,
     },
     ...propertyPages,
+    ...['/privacy-policy', '/cookie-policy', '/terms', '/legal-notice'].map((path) => ({
+      url: `${BASE_URL}${path}`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    })),
   ]
 }

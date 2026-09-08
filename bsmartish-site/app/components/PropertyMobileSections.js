@@ -8,7 +8,7 @@ const eyebrow = {
   fontFamily: 'var(--font-aileron)',
   fontSize: '0.7rem',
   fontWeight: 600,
-  color: '#6b87a4',
+  color: 'var(--color-slate-blue-text)',
   letterSpacing: '0.18em',
   textTransform: 'uppercase',
 }
@@ -17,7 +17,7 @@ const detailLabel = {
   fontFamily: 'var(--font-aileron)',
   fontSize: '0.65rem',
   fontWeight: 600,
-  color: '#6b87a4',
+  color: 'var(--color-slate-blue-text)',
   letterSpacing: '0.16em',
   textTransform: 'uppercase',
   marginBottom: '7px',

@@ -1,20 +1,42 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '@/app/i18n-provider'
+import { legalEntity as E } from '@/app/lib/legalEntity'
+
+// Surface colour: the brand blue #6b87a4 darkened just enough that white text
+// on it reaches WCAG AA (4.92:1 instead of 3.51:1). See globals.css.
+const SURFACE = 'var(--color-slate-blue-surface)'
+const ON_SURFACE = '#FFFFFF'
+
+// Number of full rotations of the headline before it settles. Auto-updating
+// text that runs forever fails WCAG 2.2.2 (Pause, Stop, Hide); stopping after
+// one complete cycle — plus pausing on hover/focus and honouring the OS
+// "reduce motion" setting — keeps the effect without trapping the reader.
+const CYCLES = 1
 
 export default function Footer() {
   const { t } = useTranslation('footer')
   const [index, setIndex] = useState(0)
   const [visible, setVisible] = useState(true)
+  const [paused, setPaused] = useState(false)
+  const stepsRef = useRef(0)
 
   const variations = [t('variation1'), t('variation2'), t('variation3')]
+  const maxSteps = variations.length * CYCLES
 
   useEffect(() => {
+    if (paused) return
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reducedMotion) return
 
     const interval = setInterval(() => {
+      if (stepsRef.current >= maxSteps) {
+        clearInterval(interval)
+        return
+      }
+      stepsRef.current += 1
       setVisible(false)
       setTimeout(() => {
         setIndex((i) => (i + 1) % variations.length)
@@ -23,10 +45,45 @@ export default function Footer() {
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [paused, maxSteps, variations.length])
+
+  const linkStyle = {
+    color: ON_SURFACE,
+    textDecoration: 'none',
+    fontSize: '0.8rem',
+    fontWeight: 500,
+    // WCAG 2.5.8 (Target Size, Minimum): pointer targets need 24x24 CSS px.
+    display: 'inline-flex',
+    alignItems: 'center',
+    minHeight: '24px',
+    padding: '2px 0',
+  }
+
+  const legalLinks = [
+    { href: '/privacy-policy', label: t('privacy') },
+    { href: '/cookie-policy', label: t('cookies') },
+    { href: '/terms', label: t('terms') },
+    { href: '/legal-notice', label: t('legalNotice') },
+  ]
+
+  // Only the identification lines that have actually been filled in are shown,
+  // so the site never displays a half-completed legal block to the public.
+  const identityLines = [
+    E.legalName,
+    E.address,
+    E.taxNumber ? `${t('taxLabel')} ${E.taxNumber}` : null,
+    E.registryOffice && E.registryNumber
+      ? `${t('registryLabel')} ${E.registryOffice}, ${E.registryNumber}`
+      : null,
+    E.amiLicence ? `AMI ${E.amiLicence}` : null,
+    E.rnalNumber ? `${t('rnalLabel')} ${E.rnalNumber}` : null,
+  ].filter(Boolean)
 
   return (
-    <footer id="footer" style={{ backgroundColor: '#6b87a4', color: '#F8F8F8', fontFamily: 'var(--font-aileron)' }}>
+    <footer
+      id="footer"
+      style={{ backgroundColor: SURFACE, color: ON_SURFACE, fontFamily: 'var(--font-aileron)' }}
+    >
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 py-8 md:py-10">
 
         {/* Main row */}
@@ -38,8 +95,12 @@ export default function Footer() {
             gap: '40px',
             alignItems: 'center',
             paddingBottom: '20px',
-            borderBottom: '1px solid rgba(248,248,248,0.2)',
+            borderBottom: '1px solid rgba(255,255,255,0.28)',
           }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
         >
           {/* Left: rotating CTA */}
           <p style={{
@@ -49,46 +110,125 @@ export default function Footer() {
             fontWeight: 400,
           }}>
             <span>{t('ctaPrefix')}</span>
-            <span style={{
-              fontWeight: 700,
-              transition: 'opacity 0.4s ease',
-              opacity: visible ? 1 : 0,
-            }}>
+            <span
+              aria-hidden="true"
+              style={{
+                fontWeight: 700,
+                transition: 'opacity 0.4s ease',
+                opacity: visible ? 1 : 0,
+              }}
+            >
               {variations[index]}
             </span>
+            {/* Screen readers get every option once, statically, instead of a
+                sentence that silently rewrites itself every three seconds. */}
+            <span className="sr-only">{variations.join(' ')}</span>
           </p>
 
           {/* Right: contact */}
           <div
             className="footer-contact"
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}
           >
             <p style={{
               margin: '0 0 6px',
               fontWeight: 600,
-              fontSize: '0.65rem',
+              fontSize: '0.68rem',
               letterSpacing: '0.16em',
               textTransform: 'uppercase',
-              opacity: 0.55,
+              color: ON_SURFACE,
             }}>
               {t('contactLabel')}
             </p>
-            <a
-              href="tel:+351936920210"
-              style={{ color: '#F8F8F8', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }}
-              className="footer-link"
-            >
-              +351 936 920 210
+            <a href={`tel:${E.phoneHref}`} style={linkStyle} className="footer-link">
+              {E.phone}
             </a>
-            <a
-              href="mailto:hello@bsmartish.com"
-              style={{ color: '#F8F8F8', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }}
-              className="footer-link"
-            >
-              hello@bsmartish.com
+            <a href={`mailto:${E.email}`} style={linkStyle} className="footer-link">
+              {E.email}
             </a>
+            <p style={{
+              margin: '4px 0 0',
+              fontSize: '0.68rem',
+              color: ON_SURFACE,
+              textAlign: 'right',
+              maxWidth: '260px',
+            }}>
+              {t('callCost')}
+            </p>
           </div>
         </div>
+
+        {/* Legal navigation */}
+        <nav
+          aria-label={t('legalNavLabel')}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '10px 24px',
+            paddingTop: '18px',
+            paddingBottom: '16px',
+          }}
+        >
+          {legalLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="footer-link"
+              style={{
+                color: ON_SURFACE,
+                textDecoration: 'none',
+                fontSize: '0.75rem',
+                fontWeight: 500,
+                letterSpacing: '0.06em',
+                display: 'inline-flex',
+                alignItems: 'center',
+                minHeight: '24px',
+              }}
+            >
+              {label}
+            </Link>
+          ))}
+
+          {/* DL 156/2005 (as amended by DL 74/2017): a supplier with a website
+              must display a visible link to the electronic complaints book. */}
+          <a
+            href={E.complaintsBookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+            style={{
+              color: ON_SURFACE,
+              textDecoration: 'none',
+              fontSize: '0.75rem',
+              fontWeight: 500,
+              letterSpacing: '0.06em',
+              display: 'inline-flex',
+              alignItems: 'center',
+              minHeight: '24px',
+            }}
+          >
+            {t('complaintsBook')}
+            <span className="sr-only"> {t('opensNewTab')}</span>
+          </a>
+        </nav>
+
+        {/* Business identification — DL 7/2004, art. 10 */}
+        {identityLines.length > 0 && (
+          <address
+            style={{
+              fontStyle: 'normal',
+              fontSize: '0.72rem',
+              lineHeight: 1.7,
+              color: ON_SURFACE,
+              paddingBottom: '14px',
+              maxWidth: '70ch',
+            }}
+          >
+            {identityLines.map((line) => (
+              <span key={line} style={{ display: 'block' }}>{line}</span>
+            ))}
+          </address>
+        )}
 
         {/* Bottom bar */}
         <div
@@ -98,6 +238,7 @@ export default function Footer() {
             justifyContent: 'space-between',
             alignItems: 'center',
             paddingTop: '14px',
+            borderTop: '1px solid rgba(255,255,255,0.22)',
             gap: '16px',
           }}
         >
@@ -105,7 +246,7 @@ export default function Footer() {
             margin: 0,
             fontSize: '0.72rem',
             fontWeight: 400,
-            opacity: 0.5,
+            color: ON_SURFACE,
             letterSpacing: '0.04em',
           }}>
             {t('copyright')}
@@ -116,31 +257,41 @@ export default function Footer() {
               href="https://www.instagram.com/bsmartish"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram"
-              style={{ color: '#F8F8F8', opacity: 0.65, transition: 'opacity 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.opacity = 1}
-              onMouseLeave={e => e.currentTarget.style.opacity = 0.65}
+              style={{
+                color: ON_SURFACE,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '28px',
+                height: '28px',
+              }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                 <circle cx="12" cy="12" r="4"/>
                 <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
               </svg>
+              <span className="sr-only">Instagram {t('opensNewTab')}</span>
             </a>
             <a
               href="https://www.linkedin.com/company/bsmartish"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              style={{ color: '#F8F8F8', opacity: 0.65, transition: 'opacity 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.opacity = 1}
-              onMouseLeave={e => e.currentTarget.style.opacity = 0.65}
+              style={{
+                color: ON_SURFACE,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '28px',
+                height: '28px',
+              }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
                 <rect x="2" y="9" width="4" height="12"/>
                 <circle cx="4" cy="4" r="2"/>
               </svg>
+              <span className="sr-only">LinkedIn {t('opensNewTab')}</span>
             </a>
           </div>
         </div>
@@ -157,6 +308,7 @@ export default function Footer() {
           .footer-contact {
             align-items: flex-start !important;
           }
+          .footer-contact p:last-child { text-align: left !important; }
           .footer-bottom {
             flex-direction: column;
             align-items: flex-start !important;

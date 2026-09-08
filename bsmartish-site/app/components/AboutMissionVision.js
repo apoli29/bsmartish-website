@@ -49,7 +49,7 @@ function StatementRow({ item, delay }) {
       <div className="flex items-start gap-3" style={anim(0)}>
         <span
           className="shrink-0 mt-[0.35em] text-[0.45rem]"
-          style={{ color: '#6b87a4' }}
+          style={{ color: 'var(--color-slate-blue-text)' }}
         >
           ●
         </span>
@@ -72,7 +72,7 @@ function StatementRow({ item, delay }) {
         style={{
           fontFamily: 'var(--font-aileron)',
           fontWeight: 400,
-          color: '#75797c',
+          color: 'var(--color-slate-gray-text)',
           hyphens: 'auto',
           ...anim(100),
         }}
@@ -112,7 +112,7 @@ export default function AboutMissionVision() {
             style={{
               fontFamily: 'var(--font-aileron)',
               fontWeight: 600,
-              color: '#6b87a4',
+              color: 'var(--color-slate-blue-text)',
               ...headStyle(0),
             }}
           >

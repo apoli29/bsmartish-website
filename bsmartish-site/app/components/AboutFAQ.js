@@ -50,11 +50,16 @@ function FAQItem({ q, a, isOpen, onToggle }) {
       <div
         className="grid transition-[grid-template-rows] duration-400 ease-out"
         style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+        // A collapsed panel is only clipped visually, so without `inert` its
+        // text and its link stay in the tab order and are read out by screen
+        // readers as if the answer were open (WCAG 1.3.2 / 2.4.3).
+        inert={!isOpen}
+        aria-hidden={isOpen ? undefined : 'true'}
       >
         <div className="overflow-hidden">
           <p
             className="pb-6 md:pb-8 pr-10 md:pr-16 text-[clamp(0.98rem,2.46vw,1.06rem)] leading-[1.7] max-w-[65ch] text-justify"
-            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c', hyphens: 'auto' }}
+            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: 'var(--color-slate-gray-text)', hyphens: 'auto' }}
           >
             {a}
           </p>
@@ -81,7 +86,7 @@ export default function AboutFAQ() {
           {t('a6_pre')}
           <a
             href="#footer"
-            style={{ color: '#6b87a4', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+            style={{ color: 'var(--color-slate-blue-text)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
           >
             {t('a6_link')}
           </a>
@@ -104,7 +109,7 @@ export default function AboutFAQ() {
           <FadeIn>
             <p
               className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
-              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
+              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
             >
               {t('eyebrow')}
             </p>
@@ -117,10 +122,10 @@ export default function AboutFAQ() {
 
             <p
               className="mt-6 max-w-[380px] text-[clamp(0.98rem,2.46vw,1.06rem)] leading-relaxed text-justify"
-              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: '#75797c', hyphens: 'auto' }}
+              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 400, color: 'var(--color-slate-gray-text)', hyphens: 'auto' }}
             >
               {t('intro_pre')}
-              <a href="#footer" style={{ color: '#6b87a4', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+              <a href="#footer" style={{ color: 'var(--color-slate-blue-text)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
                 {t('intro_link')}
               </a>
               {t('intro_post')}

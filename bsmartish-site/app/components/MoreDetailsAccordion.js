@@ -46,6 +46,8 @@ export default function MoreDetailsAccordion({ moreDetails, ptMoreDetails }) {
         return (
           <div key={key} style={{ borderBottom: '1px solid #e4e4e4' }}>
             <button
+              type="button"
+              aria-expanded={isOpen}
               onClick={() => toggle(key)}
               onMouseEnter={() => setHoveredKey(key)}
               onMouseLeave={() => setHoveredKey(null)}
@@ -67,7 +69,7 @@ export default function MoreDetailsAccordion({ moreDetails, ptMoreDetails }) {
                 fontFamily: 'var(--font-aileron)',
                 fontSize: '0.85rem',
                 fontWeight: 700,
-                color: '#6b87a4',
+                color: 'var(--color-slate-blue-text)',
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
               }}>
@@ -77,6 +79,10 @@ export default function MoreDetailsAccordion({ moreDetails, ptMoreDetails }) {
             </button>
 
             <div
+              // Collapsed panels are clipped, not removed — `inert` keeps their
+              // content out of the tab order and the accessibility tree.
+              inert={!isOpen}
+              aria-hidden={isOpen ? undefined : 'true'}
               style={{
                 display: 'grid',
                 gridTemplateRows: isOpen ? '1fr' : '0fr',
@@ -97,7 +103,7 @@ export default function MoreDetailsAccordion({ moreDetails, ptMoreDetails }) {
                       }}
                     >
                       <span style={{
-                        color: '#6b87a4',
+                        color: 'var(--color-slate-blue-text)',
                         flexShrink: 0,
                         fontWeight: 600,
                         fontSize: '0.8rem',

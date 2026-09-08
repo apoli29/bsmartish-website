@@ -47,7 +47,7 @@ export function LanguageSwitcherMobile({ menuOpen }) {
               fontSize: '0.55rem',
               letterSpacing: '0.18em',
               textTransform: 'uppercase',
-              color: lang === code ? '#202831' : '#6b87a4',
+              color: lang === code ? '#202831' : 'var(--color-slate-blue-text)',
               opacity: menuOpen ? 1 : 0,
               transition: `opacity 0.3s ease ${i * 60 + 120}ms, color 150ms ease`,
             }}

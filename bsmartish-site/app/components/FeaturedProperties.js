@@ -25,7 +25,7 @@ export default function FeaturedProperties() {
         <FadeIn className="mb-10 md:mb-12">
           <p
             className="mb-3 uppercase tracking-[0.15em] text-[0.7rem]"
-            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
+            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
           >
             {t('eyebrow')}
           </p>
@@ -43,6 +43,7 @@ export default function FeaturedProperties() {
             <FadeIn key={name} delay={150 + i * 130} className="w-full md:flex-1">
             <Link
               href={href}
+              aria-label={`${name} — view this mid-term rental property`}
               className="relative block w-full overflow-hidden group aspect-[4/3] md:aspect-[3/4]"
             >
               <Image
@@ -56,6 +57,15 @@ export default function FeaturedProperties() {
               <div
                 className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-20"
                 style={{ backgroundColor: 'rgba(32, 40, 49, 0.40)' }}
+              />
+              {/* Bottom scrim. The flat overlay above lightens to 20% on hover,
+                  which leaves white 13.6px text sitting on an unpredictable
+                  photograph — this gradient guarantees the label stays legible
+                  in every state (WCAG 1.4.3). */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
+                style={{ background: 'linear-gradient(to top, rgba(16,20,25,0.78), rgba(16,20,25,0))' }}
               />
               {/* Property name — bottom left */}
               <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between">

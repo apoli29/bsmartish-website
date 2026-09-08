@@ -6,6 +6,7 @@ import FadeIn from '@/app/components/FadeIn'
 import MoreDetailsAccordion from '@/app/components/MoreDetailsAccordion'
 import PropertyMobileSections from '@/app/components/PropertyMobileSections'
 import PropertyOverviewSection from '@/app/components/PropertyOverviewSection'
+import MapEmbed from '@/app/components/MapEmbed'
 import { BookWithUs, GalleryHeading, MoreDetailsHeading, ExploreMoreHeading, LocationHeading, RelatedPropertiesSection } from '@/app/components/PropertyPageHeadings'
 import JsonLd from '@/app/components/JsonLd'
 import { graph, apartmentSchema, propertyBreadcrumbSchema } from '@/app/lib/schema'
@@ -68,7 +69,7 @@ const eyebrow = {
   fontFamily: 'var(--font-aileron)',
   fontSize: '0.7rem',
   fontWeight: 600,
-  color: '#6b87a4',
+  color: 'var(--color-slate-blue-text)',
   letterSpacing: '0.18em',
   textTransform: 'uppercase',
 }
@@ -77,7 +78,7 @@ const detailLabel = {
   fontFamily: 'var(--font-aileron)',
   fontSize: '0.65rem',
   fontWeight: 600,
-  color: '#6b87a4',
+  color: 'var(--color-slate-blue-text)',
   letterSpacing: '0.16em',
   textTransform: 'uppercase',
   marginBottom: '7px',
@@ -163,23 +164,7 @@ export default async function PropertyPage({ params }) {
             <LocationHeading location={property.location} />
           </FadeIn>
           <FadeIn delay={150}>
-            <div style={{ width: '100%', height: '420px', borderRadius: '12px', overflow: 'hidden' }}>
-              {property.mapSrc ? (
-                <iframe
-                  src={property.mapSrc}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, display: 'block' }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              ) : (
-                <div style={{ width: '100%', height: '100%', backgroundColor: '#d4d8dc', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontFamily: 'var(--font-aileron)', color: '#9a9ea1', fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Map coming soon</span>
-                </div>
-              )}
-            </div>
+            <MapEmbed src={property.mapSrc} location={property.location} />
           </FadeIn>
         </div>
       </section>

@@ -24,7 +24,7 @@ export default function ImpactWidget() {
           <FadeIn className="flex flex-col lg:w-[30%] shrink-0">
             <p
               className="mb-4 uppercase tracking-[0.15em] text-[0.7rem]"
-              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
+              style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
             >
               {t('eyebrow')}
             </p>
@@ -49,7 +49,7 @@ export default function ImpactWidget() {
                   </p>
                   <p
                     className="text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] uppercase tracking-[0.15em]"
-                    style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#75797c', maxWidth: '120px', lineHeight: 1.3 }}
+                    style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-gray-text)', maxWidth: '120px', lineHeight: 1.3 }}
                   >
                     {label}
                   </p>

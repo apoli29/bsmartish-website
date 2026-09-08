@@ -1,5 +1,5 @@
 {
-"hero": {
+  "hero": {
     "headline": "20 anos a desenvolver projectos de reabilitação urbana.",
     "paragraph": "Usamos a nossa experiência para construir imóveis de arrendamento de médio prazo e ajudar investidores a desenvolver os seus próprios projetos de reabilitação urbana no Porto.",
     "button1": "Sobre nós",
@@ -7,13 +7,13 @@
   },
   "impact": {
     "eyebrow": "O Nosso Historial",
-    "headline": "Um historial de excelência comprovada.",
+    "headline": "Um historial construído ao longo de duas décadas.",
     "stat1Value": "+10",
     "stat1Label": "Projetos Desenvolvidos",
     "stat2Value": "+6,2M€",
     "stat2Label": "Em Investimentos",
-    "stat3Value": "100%",
-    "stat3Label": "Satisfação do Cliente",
+    "stat3Value": "20",
+    "stat3Label": "Anos de Experiência",
     "link": "Saber mais sobre nós"
   },
   "featured": {
@@ -31,7 +31,10 @@
     "ariaClose": "Fechar galeria",
     "ariaPrev": "Fotografia anterior",
     "ariaNext": "Próxima fotografia",
-    "ariaOpenPhoto": "Abrir fotografia {n}"
+    "ariaOpenPhoto": "Abrir fotografia {n} de {total} — projeto de renovação urbana da BSMARTISH",
+    "ariaPhotoAlt": "Projeto de renovação urbana da BSMARTISH — fotografia {n} de {total}",
+    "pause": "Pausa",
+    "play": "Reproduzir"
   },
   "aboutMissionVision": {
     "eyebrow": "Missão & Visão",
@@ -75,7 +78,7 @@
   "aboutDistinction": {
     "eyebrow": "O Que Nos Distingue",
     "headline": "Especialistas, pela trajectória.",
-    "body": "O que nos distingue é a nossa trajetória, que nos permite assumir uma posição de especialistas em renovação urbana com um conhecimento de nicho dentro do mercado. Somos capazes de desenvolver projetos imobiliários complexos, fiáveis e de elevada qualidade em vários sectores, através da aplicação de procedimentos excecionais e eficientes que garantem consistentemente os melhores resultados."
+    "body": "O que nos distingue é o nosso percurso, que nos posiciona como especialistas em renovação urbana com conhecimento de um mercado de nicho. Desenvolvemos projetos imobiliários complexos, fiáveis e de elevado padrão em vários setores, através da aplicação de procedimentos rigorosos e eficientes, concebidos para entregar resultados consistentes."
   },
   "aboutFAQ": {
     "eyebrow": "Perguntas",
@@ -115,7 +118,18 @@
     "variation2": "adquirir uma das nossas propriedades?",
     "variation3": "recorrer ao nosso serviço de renovação urbana?",
     "contactLabel": "Contacte-nos",
-    "copyright": "© 2026 BSMARTISH. Todos os direitos reservados."
+    "copyright": "© 2026 BSMARTISH. Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "cookies": "Política de Cookies",
+    "terms": "Termos e Condições",
+    "legalNotice": "Informação Legal",
+    "complaintsBook": "Livro de Reclamações",
+    "legalNavLabel": "Informação legal",
+    "opensNewTab": "(abre num novo separador)",
+    "callCost": "Chamada para a rede móvel nacional.",
+    "taxLabel": "NIF",
+    "registryLabel": "Registo comercial:",
+    "rnalLabel": "Registo de Alojamento Local"
   },
   "propertyPage": {
     "aboutEyebrow": "Sobre Esta Propriedade",
@@ -145,6 +159,14 @@
     "locationEyebrow": "Localização",
     "exploreMoreEyebrow": "Explore outros apartamentos",
     "exploreMoreHeading": "Outras Propriedades",
-    "bookWith": "Reserve connosco"
+    "bookWith": "Reserve connosco",
+    "priceNote": "Renda mensal. O arrendamento habitacional está isento de IVA. Consulte “Condições” abaixo para o depósito e a taxa administrativa única."
+  },
+  "map": {
+    "notice": "Este mapa é fornecido pela Google. Para proteger a sua privacidade, só é carregado se o pedir — ao carregá-lo, o seu endereço IP é enviado para a Google, que poderá guardar cookies no seu dispositivo.",
+    "loadButton": "Carregar mapa",
+    "policyLink": "Ler a nossa política de cookies",
+    "frameTitle": "Mapa Google com a localização do imóvel em {location}",
+    "unavailable": "Mapa brevemente"
   }
 }

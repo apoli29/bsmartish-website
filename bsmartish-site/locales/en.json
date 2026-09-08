@@ -7,13 +7,13 @@
   },
   "impact": {
     "eyebrow": "Our Track Record",
-    "headline": "A track record that proves our excellence.",
+    "headline": "A track record built over two decades.",
     "stat1Value": "+10",
     "stat1Label": "Curated Projects",
     "stat2Value": "+6.2M€",
     "stat2Label": "In Investments",
-    "stat3Value": "100%",
-    "stat3Label": "Client Satisfaction",
+    "stat3Value": "20",
+    "stat3Label": "Years of Experience",
     "link": "Find out more about us"
   },
   "featured": {
@@ -31,7 +31,10 @@
     "ariaClose": "Close gallery",
     "ariaPrev": "Previous photo",
     "ariaNext": "Next photo",
-    "ariaOpenPhoto": "Open photo {n}"
+    "ariaOpenPhoto": "Open photo {n} of {total} — urban renovation project by BSMARTISH",
+    "ariaPhotoAlt": "Urban renovation project by BSMARTISH — photo {n} of {total}",
+    "pause": "Pause",
+    "play": "Play"
   },
   "aboutMissionVision": {
     "eyebrow": "Mission & Vision",
@@ -75,7 +78,7 @@
   "aboutDistinction": {
     "eyebrow": "What Distinguishes Us",
     "headline": "Specialists, by trajectory.",
-    "body": "What sets us apart is our trajectory, positioning us as specialists in urban renovation with niche market expertise. We develop complex, reliable, and high-standard real estate projects across various sectors, through the application of exceptional and efficient procedures that consistently guarantee the best results."
+    "body": "What sets us apart is our trajectory, positioning us as specialists in urban renovation with niche market expertise. We develop complex, reliable, and high-standard real estate projects across various sectors, through the application of rigorous and efficient procedures designed to deliver consistent results."
   },
   "aboutFAQ": {
     "eyebrow": "Questions",
@@ -115,7 +118,18 @@
     "variation2": "buying one of our properties?",
     "variation3": "our urban renovation expertise?",
     "contactLabel": "Contact us",
-    "copyright": "© 2026 BSMARTISH. All rights reserved."
+    "copyright": "© 2026 BSMARTISH. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "terms": "Terms & Conditions",
+    "legalNotice": "Legal Notice",
+    "complaintsBook": "Complaints Book",
+    "legalNavLabel": "Legal information",
+    "opensNewTab": "(opens in a new tab)",
+    "callCost": "Call to a Portuguese mobile network — standard national rates apply.",
+    "taxLabel": "NIF",
+    "registryLabel": "Commercial registry:",
+    "rnalLabel": "Local Accommodation reg."
   },
   "propertyPage": {
     "aboutEyebrow": "About This Property",
@@ -145,6 +159,14 @@
     "locationEyebrow": "Location",
     "exploreMoreEyebrow": "Explore More",
     "exploreMoreHeading": "Other Properties",
-    "bookWith": "Book with us"
+    "bookWith": "Book with us",
+    "priceNote": "Monthly rent. Residential letting is VAT-exempt. See “Conditions” below for the deposit and the one-off administrative fee."
+  },
+  "map": {
+    "notice": "This map is provided by Google. To protect your privacy it is not loaded until you ask for it — loading it sends your IP address to Google and lets Google store cookies on your device.",
+    "loadButton": "Load map",
+    "policyLink": "Read our cookie policy",
+    "frameTitle": "Google map showing the location of the property in {location}",
+    "unavailable": "Map coming soon"
   }
 }

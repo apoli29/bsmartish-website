@@ -5,7 +5,11 @@ import { cn } from '@/lib/utils'
 
 const defaultItems = [
   {
-    href: 'https://www.airbnb.com/users/profile/1470751082133656177?previous_page_name=PdpHomeMarketplace&locale=en&_set_bev_on_new_domain=1776797230_KKmE2MPABYjMTzwz&set_everest_cookie_on_new_domain=1776797229.EAYjVlMDU4YTQxMTA5OT.avGC8Xz-NKOetkvjxPDv0QzwxblIexDsUiWpxelMv_k',
+    // Bare profile URL. The original link carried copied session parameters
+    // (`_set_bev_on_new_domain`, `set_everest_cookie_on_new_domain`) that exist
+    // only to make Airbnb plant cookies on arrival — nothing we should be
+    // forwarding our visitors into.
+    href: 'https://www.airbnb.com/users/profile/1470751082133656177',
     ariaLabel: 'Airbnb',
     svgUrl: '/images/website.images/Home/sec.4/logos.pltf-to-rent/air.bnb.png',
     imgSize: 38,
@@ -43,7 +47,7 @@ const SocialTooltip = React.forwardRef(({ className, items: customItems, ...prop
       <li key={index} className="group">
         <a
           href={item.href}
-          aria-label={item.ariaLabel}
+          aria-label={`${item.ariaLabel} — opens in a new tab`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center rounded-full bg-white overflow-hidden"
@@ -65,7 +69,8 @@ const SocialTooltip = React.forwardRef(({ className, items: customItems, ...prop
         >
           <img
             src={item.svgUrl}
-            alt={item.ariaLabel}
+            alt=""
+            aria-hidden="true"
             className="object-contain"
             style={{
               width: `${item.imgSize}px`,

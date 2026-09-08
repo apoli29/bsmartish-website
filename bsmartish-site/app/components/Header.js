@@ -38,7 +38,11 @@ export default function Header() {
           <header
             className="w-full transition-all duration-500"
             style={{
-              backgroundColor: (solid || pathname.startsWith('/mid-term-rentals-in-porto')) ? '#6b87a4' : 'transparent',
+              backgroundColor: (solid || pathname.startsWith('/mid-term-rentals-in-porto')) ? 'var(--color-slate-blue-surface)' : 'transparent',
+              // A translucent scrim behind the nav in its "transparent" state:
+              // white 11-13px text over an arbitrary hero photograph has no
+              // guaranteed contrast ratio at all without it (WCAG 1.4.3).
+              backgroundImage: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'linear-gradient(rgba(32,40,49,0.55), rgba(32,40,49,0.55))' : 'none',
               backdropFilter: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'blur(14px)' : 'none',
               WebkitBackdropFilter: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'blur(14px)' : 'none',
               border: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? '1px solid rgba(255,255,255,0.18)' : 'none',
@@ -89,6 +93,8 @@ export default function Header() {
                 className="md:hidden flex flex-col justify-center items-center gap-[5px] p-2"
                 onClick={() => setMenuOpen(prev => !prev)}
                 aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu"
               >
                 <span className="block w-6 h-[1.5px] bg-white transition-all duration-300 origin-center"
                   style={{ transform: menuOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
@@ -101,14 +107,21 @@ export default function Header() {
 
             {/* Mobile dropdown — canvas white, partial panel */}
             <div
+              id="mobile-menu"
               className="md:hidden overflow-hidden"
+              // `inert` keeps the collapsed menu out of the tab order and out of
+              // the accessibility tree. Without it a keyboard user tabs through
+              // four invisible links after the hamburger (WCAG 2.4.3 / 4.1.2).
+              inert={!menuOpen}
+              aria-hidden={menuOpen ? undefined : 'true'}
               style={{
                 backgroundColor: '#F8F8F8',
                 maxHeight: menuOpen ? '280px' : '0px',
                 opacity: menuOpen ? 1 : 0,
-                transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease',
+                visibility: menuOpen ? 'visible' : 'hidden',
+                transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0s linear ' + (menuOpen ? '0s' : '0.4s'),
                 borderRadius: '0 0 4px 4px',
-                borderTop: '1px solid #6b87a4',
+                borderTop: '1px solid var(--color-slate-blue-surface)',
               }}
             >
               <nav className="flex flex-col items-start gap-[20px] px-8 pt-7 pb-5">
@@ -119,7 +132,7 @@ export default function Header() {
                     fontSize: '0.72rem',
                     letterSpacing: '0.18em',
                     textTransform: 'uppercase',
-                    color: isActive ? '#202831' : '#6b87a4',
+                    color: isActive ? '#202831' : 'var(--color-slate-blue-text)',
                     textDecoration: 'none',
                     opacity: menuOpen ? 1 : 0,
                     transition: `opacity 0.3s ease ${index * 50 + 80}ms`,

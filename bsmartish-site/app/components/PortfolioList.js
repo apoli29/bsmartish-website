@@ -24,7 +24,7 @@ function LocationPinIcon() {
       height="13"
       viewBox="0 0 24 24"
       fill="currentColor"
-      style={{ color: '#6b87a4', flexShrink: 0 }}
+      style={{ color: 'var(--color-slate-blue-text)', flexShrink: 0 }}
     >
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
     </svg>
@@ -104,7 +104,7 @@ function PropertyRow({ property }) {
                   fontFamily: 'var(--font-aileron)',
                   fontWeight: 600,
                   fontSize: '0.68rem',
-                  color: '#6b87a4',
+                  color: 'var(--color-slate-blue-text)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.14em',
                 }}
@@ -136,7 +136,7 @@ function PropertyRow({ property }) {
                 fontFamily: 'var(--font-aileron)',
                 fontWeight: 400,
                 fontSize: '0.96rem',
-                color: '#75797c',
+                color: 'var(--color-slate-gray-text)',
                 lineHeight: 1.6,
                 maxWidth: '480px',
                 textAlign: 'justify',
@@ -160,7 +160,7 @@ function PropertyRow({ property }) {
                     border: '1px solid rgba(107, 135, 164, 0.35)',
                     fontFamily: 'var(--font-aileron)',
                     fontWeight: 400,
-                    color: '#6b87a4',
+                    color: 'var(--color-slate-blue-text)',
                     backgroundColor: 'transparent',
                   }}
                 >

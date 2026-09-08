@@ -34,6 +34,8 @@ export default function PropertyGallery({ photos, propertyName }) {
   const navigating = useRef(false)
   const touchStartX = useRef(null)
   const didSwipe = useRef(false)
+  const lastFocused = useRef(null)
+  const dialogRef = useRef(null)
 
   useEffect(() => setMounted(true), [])
 
@@ -41,6 +43,7 @@ export default function PropertyGallery({ photos, propertyName }) {
   const gridPhotos = validPhotos.slice(0, 5)
 
   const openModal = (index = 0) => {
+    lastFocused.current = document.activeElement
     setActiveIndex(index)
     setOutgoing(null)
     setTransitionDir(0)
@@ -48,7 +51,13 @@ export default function PropertyGallery({ photos, propertyName }) {
     setModalOpen(true)
   }
 
-  const closeModal = useCallback(() => setModalOpen(false), [])
+  const closeModal = useCallback(() => {
+    setModalOpen(false)
+    // Return focus to whatever opened the lightbox (WCAG 2.4.3).
+    if (lastFocused.current && typeof lastFocused.current.focus === 'function') {
+      lastFocused.current.focus()
+    }
+  }, [])
 
   const prev = useCallback(() => {
     if (navigating.current) return
@@ -86,10 +95,32 @@ export default function PropertyGallery({ photos, propertyName }) {
       if (e.key === 'Escape') closeModal()
       if (e.key === 'ArrowLeft') prev()
       if (e.key === 'ArrowRight') next()
+      // Trap Tab inside the dialog (WCAG 2.1.2).
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [modalOpen, closeModal, prev, next])
+
+  useEffect(() => {
+    if (!modalOpen) return
+    const id = requestAnimationFrame(() => {
+      dialogRef.current?.querySelector('button')?.focus()
+    })
+    return () => cancelAnimationFrame(id)
+  }, [modalOpen])
 
   useEffect(() => {
     document.body.style.overflow = modalOpen ? 'hidden' : ''
@@ -224,9 +255,10 @@ export default function PropertyGallery({ photos, propertyName }) {
       {/* ── Fullscreen Modal ── */}
       {mounted && modalOpen && createPortal(
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
-          aria-label="Property photo gallery"
+          aria-label={`${propertyName} — property photo gallery`}
           style={{
             position: 'fixed',
             inset: 0,
@@ -256,7 +288,7 @@ export default function PropertyGallery({ photos, propertyName }) {
             transform: 'translateX(-50%)',
             fontFamily: 'var(--font-aileron)',
             fontSize: '0.72rem',
-            color: 'rgba(255,255,255,0.45)',
+            color: 'rgba(255,255,255,0.86)',
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
             zIndex: 1001,
@@ -324,7 +356,7 @@ export default function PropertyGallery({ photos, propertyName }) {
             <img
               key={`in-${activeIndex}-${transitionKey.current}`}
               src={validPhotos[activeIndex]}
-              alt={`Property photo ${activeIndex + 1}`}
+              alt={`${propertyName} apartment — photo ${activeIndex + 1} of ${validPhotos.length}`}
               style={{
                 position: 'absolute',
                 inset: 0,

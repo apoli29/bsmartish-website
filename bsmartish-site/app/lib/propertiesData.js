@@ -5,7 +5,7 @@ export const properties = [
     mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1501.3463993945666!2d-8.609939604577535!3d41.184867156661596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd24643159ecaf3f%3A0xdff04d905b4d5e7d!2s4200-550%20Porto!5e0!3m2!1spt-PT!2spt!4v1777896555430!5m2!1spt-PT!2spt',
     bookingLinks: {
       idealista: 'https://www.idealista.pt/imovel/34457200/',
-      airbnb: 'https://www.airbnb.com/users/profile/1470751082133656177?previous_page_name=PdpHomeMarketplace&locale=en&_set_bev_on_new_domain=1776797230_KKmE2MPABYjMTzwz&set_everest_cookie_on_new_domain=1776797229.EAYjVlMDU4YTQxMTA5OT.avGC8Xz-NKOetkvjxPDv0QzwxblIexDsUiWpxelMv_k',
+      airbnb: 'https://www.airbnb.com/users/profile/1470751082133656177',
       spotahome: 'https://www.spotahome.com/porto/for-rent:apartments/1491376',
       flatio: 'https://www.flatio.es/alquiler/piso/120808-oporto',
     },
@@ -138,7 +138,7 @@ export const properties = [
     mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1814.2561436565452!2d-8.692038358446707!3d41.18608973309975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd246f31b43ed1f5%3A0xa60c6b18bce815c8!2s4450-038%20Matosinhos!5e0!3m2!1spt-PT!2spt!4v1777896408666!5m2!1spt-PT!2spt',
     bookingLinks: {
       idealista: 'https://www.idealista.pt/imovel/34888612/',
-      airbnb: 'https://www.airbnb.com/users/profile/1470751082133656177?previous_page_name=PdpHomeMarketplace&locale=en&_set_bev_on_new_domain=1776797230_KKmE2MPABYjMTzwz&set_everest_cookie_on_new_domain=1776797229.EAYjVlMDU4YTQxMTA5OT.avGC8Xz-NKOetkvjxPDv0QzwxblIexDsUiWpxelMv_k',
+      airbnb: 'https://www.airbnb.com/users/profile/1470751082133656177',
       spotahome: 'https://www.spotahome.com/porto/for-rent:apartments/1553828',
       flatio: 'https://www.flatio.es/alquiler/piso/127332-matosinhos',
     },
@@ -273,7 +273,7 @@ export const properties = [
     mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.4741844462674!2d-8.606274522915147!3d41.14600327133167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2464ef75aa9125%3A0x9f0fae5dc7c9639b!2s4000-041%20Porto!5e0!3m2!1spt-PT!2spt!4v1777896592568!5m2!1spt-PT!2spt',
     bookingLinks: {
       idealista: 'https://www.idealista.pt/imovel/34305390/',
-      airbnb: 'https://www.airbnb.com/users/profile/1470751082133656177?previous_page_name=PdpHomeMarketplace&locale=en&_set_bev_on_new_domain=1776797230_KKmE2MPABYjMTzwz&set_everest_cookie_on_new_domain=1776797229.EAYjVlMDU4YTQxMTA5OT.avGC8Xz-NKOetkvjxPDv0QzwxblIexDsUiWpxelMv_k',
+      airbnb: 'https://www.airbnb.com/users/profile/1470751082133656177',
       spotahome: 'https://www.spotahome.com/porto/for-rent:apartments/1478660',
       flatio: 'https://www.flatio.es/alquiler/piso/120807-oporto',
     },

@@ -8,7 +8,7 @@ const eyebrow = {
   fontFamily: 'var(--font-aileron)',
   fontSize: '0.7rem',
   fontWeight: 600,
-  color: '#6b87a4',
+  color: 'var(--color-slate-blue-text)',
   letterSpacing: '0.18em',
   textTransform: 'uppercase',
 }
@@ -17,7 +17,7 @@ const detailLabel = {
   fontFamily: 'var(--font-aileron)',
   fontSize: '0.65rem',
   fontWeight: 600,
-  color: '#6b87a4',
+  color: 'var(--color-slate-blue-text)',
   letterSpacing: '0.16em',
   textTransform: 'uppercase',
   marginBottom: '7px',
@@ -82,7 +82,7 @@ export default function PropertyOverviewSection({ property }) {
                   style={{
                     margin: i < intro.length - 1 ? '0 0 14px' : '0 0 28px',
                     fontSize: 'clamp(0.98rem, 2.46vw, 1.20rem)',
-                    color: '#75797c',
+                    color: 'var(--color-slate-gray-text)',
                     lineHeight: 1.8,
                     fontFamily: 'var(--font-aileron)',
                     textAlign: 'justify',
@@ -95,7 +95,7 @@ export default function PropertyOverviewSection({ property }) {
                 {tags.map((tag, i) => (
                   <span
                     key={i}
-                    style={{ fontSize: '0.69rem', fontWeight: 600, padding: '5px 14px', borderRadius: '999px', border: '1px solid #6b87a4', color: '#6b87a4', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+                    style={{ fontSize: '0.69rem', fontWeight: 600, padding: '5px 14px', borderRadius: '999px', border: '1px solid #6b87a4', color: 'var(--color-slate-blue-text)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                   >
                     {tag.type === 'people' ? `${tag.count} ${t('guests')}` : tag}
                   </span>
@@ -164,6 +164,18 @@ export default function PropertyOverviewSection({ property }) {
                   >
                     €{property.price} {t('perMonth')}
                   </span>
+                  <p
+                    style={{
+                      margin: '10px 0 0',
+                      fontFamily: 'var(--font-aileron)',
+                      fontSize: '0.78rem',
+                      lineHeight: 1.6,
+                      color: 'var(--color-slate-gray-text)',
+                      maxWidth: '46ch',
+                    }}
+                  >
+                    {t('priceNote')}
+                  </p>
                 </div>
               )}
             </FadeIn>

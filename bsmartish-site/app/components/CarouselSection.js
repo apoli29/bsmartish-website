@@ -45,6 +45,8 @@ export default function CarouselSection() {
   const pausedRef = useRef(false)
 
   // Lightbox state
+  const [autoPlay, setAutoPlay]       = useState(true)
+  const [reducedMotion, setReducedMotion] = useState(false)
   const [modalOpen, setModalOpen]     = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [mounted, setMounted]         = useState(false)
@@ -54,8 +56,23 @@ export default function CarouselSection() {
   const navigating    = useRef(false)
   const touchStartX   = useRef(null)
   const didSwipe      = useRef(false)
+  const lastFocused   = useRef(null)
+  const dialogRef     = useRef(null)
 
   useEffect(() => setMounted(true), [])
+
+  // WCAG 2.3.3 — the strip must not scroll at all if the visitor has asked the
+  // operating system to reduce motion.
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const apply = () => {
+      setReducedMotion(mq.matches)
+      if (mq.matches) setAutoPlay(false)
+    }
+    apply()
+    mq.addEventListener('change', apply)
+    return () => mq.removeEventListener('change', apply)
+  }, [])
 
   useEffect(() => {
     const update = () => {
@@ -91,15 +108,20 @@ export default function CarouselSection() {
     return () => cancelAnimationFrame(rafRef.current)
   }, [tick])
 
-  // Pause carousel while modal is open
+  // Pause the strip while the lightbox is open, while the visitor is hovering or
+  // tabbing through it, and whenever autoplay is switched off.
   useEffect(() => {
-    pausedRef.current = modalOpen
+    pausedRef.current = modalOpen || !autoPlay
+  }, [modalOpen, autoPlay])
+
+  useEffect(() => {
     document.body.style.overflow = modalOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [modalOpen])
 
   // Lightbox helpers
   const openModal = useCallback((index) => {
+    lastFocused.current = document.activeElement
     setActiveIndex(index)
     setOutgoing(null)
     setTransitionDir(0)
@@ -107,7 +129,14 @@ export default function CarouselSection() {
     setModalOpen(true)
   }, [])
 
-  const closeModal = useCallback(() => setModalOpen(false), [])
+  const closeModal = useCallback(() => {
+    setModalOpen(false)
+    // WCAG 2.4.3 — send focus back to the thumbnail that opened the lightbox,
+    // instead of dropping the keyboard user at the top of the document.
+    if (lastFocused.current && typeof lastFocused.current.focus === 'function') {
+      lastFocused.current.focus()
+    }
+  }, [])
 
   const prev = useCallback(() => {
     if (navigating.current) return
@@ -137,10 +166,34 @@ export default function CarouselSection() {
       if (e.key === 'Escape')      closeModal()
       if (e.key === 'ArrowLeft')   prev()
       if (e.key === 'ArrowRight')  next()
+      // Keep Tab inside the dialog. A modal that lets focus wander behind it is
+      // unusable with a keyboard or a screen reader (WCAG 2.1.2).
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [modalOpen, closeModal, prev, next])
+
+  // Move focus into the dialog when it opens.
+  useEffect(() => {
+    if (!modalOpen) return
+    const id = requestAnimationFrame(() => {
+      dialogRef.current?.querySelector('button')?.focus()
+    })
+    return () => cancelAnimationFrame(id)
+  }, [modalOpen])
 
   const arrowBtn = (side) => ({
     position: 'absolute',
@@ -178,13 +231,24 @@ export default function CarouselSection() {
           ref={trackRef}
           className="flex"
           style={{ gap: `${GAP}px`, willChange: 'transform' }}
+          onMouseEnter={() => { pausedRef.current = true }}
+          onMouseLeave={() => { pausedRef.current = modalOpen || !autoPlay }}
+          onFocusCapture={() => { pausedRef.current = true }}
+          onBlurCapture={() => { pausedRef.current = modalOpen || !autoPlay }}
         >
-          {[...IMAGES, ...IMAGES].map((img, i) => (
+          {[...IMAGES, ...IMAGES].map((img, i) => {
+            // The strip is rendered twice so it can loop seamlessly. The second
+            // copy is visual only — hiding it from assistive technology stops
+            // screen readers announcing all 22 photographs a second time.
+            const isDuplicate = i >= IMAGES.length
+            return (
             <button
               key={i}
               data-card
               onClick={() => openModal(i % IMAGES.length)}
-              aria-label={t('ariaOpenPhoto', { n: (i % IMAGES.length) + 1 })}
+              aria-hidden={isDuplicate ? 'true' : undefined}
+              tabIndex={isDuplicate ? -1 : 0}
+              aria-label={t('ariaOpenPhoto', { n: (i % IMAGES.length) + 1, total: IMAGES.length })}
               className="relative flex-shrink-0 overflow-hidden rounded"
               style={{
                 width: `${cardW}px`,
@@ -210,13 +274,55 @@ export default function CarouselSection() {
                 style={{ backgroundColor: 'rgba(32,40,49,0.15)' }}
               />
             </button>
-          ))}
+            )
+          })}
         </div>
+
+        {/* WCAG 2.2.2 (Pause, Stop, Hide): moving content that starts on its own
+            and runs for more than five seconds must offer a way to stop it. */}
+        {!reducedMotion && (
+          <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 mt-4 flex justify-end">
+            <button
+              type="button"
+              onClick={() => setAutoPlay((v) => !v)}
+              aria-pressed={!autoPlay}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'none',
+                border: '1px solid #cfd4d9',
+                borderRadius: '999px',
+                padding: '7px 16px',
+                cursor: 'pointer',
+                fontFamily: 'var(--font-aileron)',
+                fontSize: '0.7rem',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'var(--color-slate-gray-text)',
+              }}
+            >
+              {autoPlay ? (
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <rect x="5" y="4" width="5" height="16" rx="1" />
+                  <rect x="14" y="4" width="5" height="16" rx="1" />
+                </svg>
+              ) : (
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6 4l14 8-14 8z" />
+                </svg>
+              )}
+              {autoPlay ? t('pause') : t('play')}
+            </button>
+          </div>
+        )}
       </section>
 
       {/* Lightbox */}
       {mounted && modalOpen && createPortal(
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label={t('ariaDialog')}
@@ -249,7 +355,7 @@ export default function CarouselSection() {
             transform: 'translateX(-50%)',
             fontFamily: 'var(--font-aileron)',
             fontSize: '0.72rem',
-            color: 'rgba(255,255,255,0.45)',
+            color: 'rgba(255,255,255,0.86)',
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
             zIndex: 1001,
@@ -314,7 +420,7 @@ export default function CarouselSection() {
             <img
               key={`in-${activeIndex}-${transitionKey.current}`}
               src={IMAGE_SRCS[activeIndex]}
-              alt={`Photo ${activeIndex + 1}`}
+              alt={t('ariaPhotoAlt', { n: activeIndex + 1, total: IMAGE_SRCS.length })}
               style={{
                 position: 'absolute',
                 inset: 0,

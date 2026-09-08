@@ -18,7 +18,7 @@ export default function AboutTrajectory() {
         <FadeIn>
           <p
             className="mb-4 md:mb-5 uppercase tracking-[0.15em] text-[0.7rem]"
-            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#6b87a4' }}
+            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
           >
             {t('eyebrow')}
           </p>

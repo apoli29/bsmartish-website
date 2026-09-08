@@ -24,7 +24,7 @@ export default function PortfolioHero() {
                 fontFamily: 'var(--font-aileron)',
                 fontWeight: 600,
                 fontSize: '0.7rem',
-                color: '#6b87a4',
+                color: 'var(--color-slate-blue-text)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.18em',
               }}
