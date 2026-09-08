@@ -137,9 +137,12 @@ export default function PrivacyPolicyPage() {
           <LI>Aggregated analytics statistics: retained by Vercel for up to 12 months.</LI>
           <LI>Server and Cloudflare security logs: typically 30 days.</LI>
           <LI>
-            Email correspondence: for as long as needed to deal with your enquiry, and afterwards
-            only where we have to keep it — Portuguese tax and accounting law requires supporting
-            documents relating to a contract to be kept for 10 years.
+            Email correspondence: there is no contact form, no mailing list and no customer
+            database behind this website. If you write to us, your message sits in our mailbox and
+            nowhere else, for as long as we need it to deal with your enquiry. Afterwards we keep
+            it only where the law requires — Portuguese tax and accounting rules oblige us to
+            retain documents supporting a contract for 10 years. You can ask us to delete
+            correspondence that is not covered by that obligation.
           </LI>
           <LI>
             Your language preference: stored only in your own browser, until you clear your

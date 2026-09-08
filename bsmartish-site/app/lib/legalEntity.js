@@ -51,12 +51,16 @@ export const legalEntity = {
   // (matching third-party buyers/sellers or landlords/tenants for a fee).
   // Renting out your OWN properties and managing renovation projects for
   // investors is NOT mediation and needs no AMI. Leave null if you have none.
-  amiLicence: null, // TODO or leave null
+  // CONFIRMED 2026-09: BSMARTISH does not carry out mediation — it lets its own
+  // properties and provides project management/consultancy. No AMI required.
+  amiLicence: null,
 
   // RNAL / Alojamento Local registration number — REQUIRED, and required to be
   // shown in ALL advertising (DL 128/2014, art. 18), if you let any unit for
   // stays of LESS than 30 days. Leave null if your minimum stay is 30+ days.
-  rnalNumber: null, // TODO or leave null
+  // CONFIRMED 2026-09: minimum stay is 30 days, so the lettings fall outside
+  // the Alojamento Local regime. No RNAL registration or number required.
+  rnalNumber: null,
 
   // ── Consumer dispute resolution ───────────────────────────────────────────
   // Lei 144/2015, art. 18 obliges you to tell consumers, on your website, which

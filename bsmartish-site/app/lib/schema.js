@@ -48,7 +48,14 @@ const SERVICES = [
 
 export function organizationSchema() {
   return {
-    '@type': ['RealEstateAgent', 'LocalBusiness'],
+    // NOT RealEstateAgent. In Portugal "mediação imobiliária" — matching
+    // third-party buyers/sellers or landlords/tenants for a commission — is a
+    // regulated activity requiring an AMI licence (Lei 15/2013). BSMARTISH lets
+    // its own properties and manages renovation projects, which is not
+    // mediation, so the markup should not announce an agency it is not.
+    // ProfessionalService is a subtype of LocalBusiness, so local SEO signals
+    // are unaffected. Revert this one line if an AMI licence is ever obtained.
+    '@type': ['ProfessionalService', 'LocalBusiness'],
     '@id': ORG_ID,
     name: 'BSMARTISH Urban Renovation',
     alternateName: 'BSMARTISH',
