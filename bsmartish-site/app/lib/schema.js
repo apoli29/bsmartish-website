@@ -24,7 +24,7 @@ const PORTFOLIO_PATH = '/mid-term-rentals-in-porto'
 // ─────────────────────────────────────────────────────────────
 
 const ORG_DESCRIPTION =
-  'Mid-term rentals & real estate developer in Porto. Fully furnished serviced apartments for stays from 1 to 12 months, and urban renovation projects developed both independently and in partnership with investors, since 2006.'
+  'Mid-term rentals & real estate developer in Porto. Fully furnished serviced apartments for stays from 30 days to 12 months, and urban renovation projects developed both independently and in partnership with investors, since 2006.'
 
 // Legenda partilhada pelas 22 fotos do carrossel. Diz o que são — projetos de
 // renovação urbana da empresa — sem atribuir nome ou local a nenhuma delas.
@@ -286,7 +286,7 @@ export function propertyBreadcrumbSchema(slug) {
 // ─────────────────────────────────────────────────────────────
 
 const PORTFOLIO_DESCRIPTION =
-  'Fully furnished and serviced apartments for mid-term rentals in Porto: Paranhos, Matosinhos and Alegria. Flexible stays from 1 to 12 months. For expatriates, digital nomads and students.'
+  'Fully furnished and serviced apartments for mid-term rentals in Porto: Paranhos, Matosinhos and Alegria. Flexible stays from 30 days to 12 months. For expatriates, digital nomads and students.'
 
 export function portfolioSchema() {
   return {

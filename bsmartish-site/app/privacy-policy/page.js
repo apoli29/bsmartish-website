@@ -99,6 +99,17 @@ export default function PrivacyPolicyPage() {
             acting as our processor.
           </LI>
           <LI>
+            <strong>Cloudflare, Inc.</strong> — sits in front of the site, filtering malicious
+            traffic and serving pages from a location near you. It processes your IP address and
+            request data for that purpose, and sets a short-lived bot-detection cookie, as our
+            processor. See our <A href="/cookie-policy">Cookie Policy</A>.
+          </LI>
+          <LI>
+            <strong>Google Search Console</strong> — reports how our pages appear in Google
+            search results. It runs no code on this site, sets no cookie and gives us only
+            aggregate statistics, so it does not receive personal data about you from us.
+          </LI>
+          <LI>
             <strong>Google Ireland Limited</strong> — the location maps on property pages. These
             maps are blocked by default. Nothing is sent to Google until you click &ldquo;Load
             map&rdquo;; once you do, Google receives your IP address and may set cookies in your
@@ -124,7 +135,7 @@ export default function PrivacyPolicyPage() {
       <Section id="retention" heading="5. How long we keep it">
         <UL>
           <LI>Aggregated analytics statistics: retained by Vercel for up to 12 months.</LI>
-          <LI>Server logs: typically 30 days.</LI>
+          <LI>Server and Cloudflare security logs: typically 30 days.</LI>
           <LI>
             Email correspondence: for as long as needed to deal with your enquiry, and afterwards
             only where we have to keep it — Portuguese tax and accounting law requires supporting

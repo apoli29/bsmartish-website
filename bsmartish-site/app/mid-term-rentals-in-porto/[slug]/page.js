@@ -14,15 +14,15 @@ import { graph, apartmentSchema, propertyBreadcrumbSchema } from '@/app/lib/sche
 const slugMetadata = {
   'paranhos-apartment': {
     title: 'Paranhos Apartment - Mid-Term Rental in Porto | BSMARTISH',
-    description: 'Modern, fully furnished apartment in Paranhos, Porto. Mid-term rental 1-12 months. University area with direct access to city centre.',
+    description: 'Modern, fully furnished apartment in Paranhos, Porto. Mid-term rental from 30 days to 12 months. University area with direct access to city centre.',
   },
   'matosinhos-apartment': {
     title: 'Matosinhos Apartment - Mid-Term Rental in Porto | BSMARTISH',
-    description: 'Modern, fully furnished apartment in Matosinhos, Porto. Mid-term rental 1-12 months. Premium location, near beach and direct access to the city centre.',
+    description: 'Modern, fully furnished apartment in Matosinhos, Porto. Mid-term rental from 30 days to 12 months. Premium location, near beach and direct access to the city centre.',
   },
   'alegria-apartment': {
     title: 'Alegria Apartment - Mid-Term Rental in Porto | BSMARTISH',
-    description: 'Modern, fully furnished apartment in Alegria, Porto. Mid-term rental 1-12 months. City centre location with soundproof double glazed windows.',
+    description: 'Modern, fully furnished apartment in Alegria, Porto. Mid-term rental from 30 days to 12 months. City centre location with soundproof double glazed windows.',
   },
 }
 

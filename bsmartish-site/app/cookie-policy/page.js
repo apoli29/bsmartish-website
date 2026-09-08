@@ -53,9 +53,10 @@ export default function CookiePolicyPage() {
         </P>
         <P>
           We deliberately built the site so that nothing non-essential is stored without you
-          asking. That means no banner is needed, and you get to read the site without dismissing
-          a pop-up. If we ever add anything that does require consent, a consent tool will appear
-          here first.
+          asking. What is stored is either a preference you set yourself or a security measure
+          needed to serve the site at all — both of which the rules exempt. That means no banner
+          is needed, and you get to read the site without dismissing a pop-up. If we ever add
+          anything that does require consent, a consent tool will appear here first.
         </P>
       </Section>
 
@@ -80,14 +81,35 @@ export default function CookiePolicyPage() {
                 </td>
                 <td style={cell}>Until you clear your browser data</td>
               </tr>
+              <tr>
+                <td style={cell}><code>__cf_bm</code></td>
+                <td style={cell}>Cookie, set by Cloudflare</td>
+                <td style={cell}>
+                  Tells automated bots apart from real visitors. Cloudflare protects this site
+                  from attacks and abusive traffic; this cookie is what makes that possible. It
+                  is a security measure, not a tracking or advertising cookie, and it cannot be
+                  used to identify you or follow you across other websites.
+                </td>
+                <td style={cell}>30 minutes</td>
+              </tr>
             </tbody>
           </table>
         </div>
         <P>
-          That is the complete list. This entry is a user-preference store set as a direct result
-          of an action you took, which is one of the cases the ePrivacy rules exempt from consent.
-          It stays in your browser, is never transmitted to us, and contains no identifier.
+          That is the complete list, and both entries are exempt from the consent requirement:
         </P>
+        <UL>
+          <LI>
+            <code>bsmartish-lang</code> is a user-preference store, written only as a direct
+            result of an action you took. It stays in your browser, is never transmitted to us,
+            and contains no identifier.
+          </LI>
+          <LI>
+            <code>__cf_bm</code> is strictly necessary to deliver the site securely — a service
+            you asked for by visiting it. Blocking it would mean serving the site without
+            protection against automated abuse.
+          </LI>
+        </UL>
       </Section>
 
       <Section id="analytics" heading="3. Analytics without cookies">
@@ -123,7 +145,23 @@ export default function CookiePolicyPage() {
         </P>
       </Section>
 
-      <Section id="external" heading="5. Links to booking platforms">
+      <Section id="infrastructure" heading="5. Cloudflare and Google Search Console">
+        <P>
+          This site sits behind <strong>Cloudflare</strong>, which filters malicious traffic
+          before it reaches our server and speeds the site up by serving it from a location near
+          you. Cloudflare necessarily sees your IP address and the request itself, and sets the
+          security cookie listed above. It acts as our processor and does not use this traffic to
+          build advertising profiles.
+        </P>
+        <P>
+          We also use <strong>Google Search Console</strong>, which reports how our pages perform
+          in Google search results. It runs no code on this website, sets no cookie, and shows us
+          only aggregated search statistics — never anything that identifies an individual
+          visitor.
+        </P>
+      </Section>
+
+      <Section id="external" heading="6. Links to booking platforms">
         <P>
           Idealista, Airbnb, Spotahome and Flatio are links, not embeds. Nothing from those sites
           runs on bsmartish.com. Their cookies only come into play once you click through and land
@@ -131,7 +169,7 @@ export default function CookiePolicyPage() {
         </P>
       </Section>
 
-      <Section id="control" heading="6. How to remove what is stored">
+      <Section id="control" heading="7. How to remove what is stored">
         <UL>
           <LI>
             To clear the saved language preference, clear site data for bsmartish.com in your
@@ -147,7 +185,7 @@ export default function CookiePolicyPage() {
         </UL>
       </Section>
 
-      <Section id="contact" heading="7. Questions">
+      <Section id="contact" heading="8. Questions">
         <P>
           Write to <A href={`mailto:${E.privacyEmail}`}>{E.privacyEmail}</A>.
         </P>

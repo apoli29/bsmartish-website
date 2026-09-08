@@ -64,7 +64,7 @@ export const properties = [
         'Perfect for those looking for a flexible housing solution, with services included, parking, and excellent connection to the entire city of Porto.',
       ],
       characteristics: [
-        'Flexible lease from 1 to 12 months',
+        'Flexible lease from 30 days up to 12 months',
         'Fully furnished and equipped apartment',
         'Air conditioning, heating and double-glazed Windows',
         'High-speed internet and television',
@@ -101,7 +101,7 @@ export const properties = [
         'Ideal para quem procura uma solução habitacional flexível, com serviços incluídos, estacionamento e uma excelente ligação a toda a cidade do Porto.',
       ],
       characteristics: [
-        'Contrato flexível de 1 a 12 meses',
+        'Contrato flexível de 30 dias até 12 meses',
         'Apartamento totalmente mobilado e equipado',
         'Ar condicionado, aquecimento e janelas de vidro duplo',
         'Internet de alta velocidade e televisão',
@@ -199,7 +199,7 @@ export const properties = [
         'Perfect for professionals, expatriates, or temporary stays with a high level of comfort, with clear, simple conditions and no surprises.',
       ],
       characteristics: [
-        'Flexible lease from 1 to 12 months',
+        'Flexible lease from 30 days up to 12 months',
         'Fully furnished and equipped apartment',
         'Air conditioning, heating and double-glazed Windows',
         'High-speed internet and television',
@@ -236,7 +236,7 @@ export const properties = [
         'Ideal para profissionais, expatriados ou estadias temporárias de elevado conforto, com condições claras e simples, sem surpresas.',
       ],
       characteristics: [
-        'Contrato flexível de 1 a 12 meses',
+        'Contrato flexível de 30 dias até 12 meses',
         'Apartamento totalmente mobilado e equipado',
         'Ar condicionado, aquecimento e janelas de vidro duplo',
         'Internet de alta velocidade e televisão',
@@ -332,7 +332,7 @@ export const properties = [
         'Ideal solution for professional stays with everything included, without additional concerns.',
       ],
       characteristics: [
-        'Flexible lease from 1 to 12 months',
+        'Flexible lease from 30 days up to 12 months',
         'Fully furnished and equipped apartment',
         'Air conditioning, heating and double-glazed Windows',
         'High-speed internet and television',
@@ -369,7 +369,7 @@ export const properties = [
         'Uma solução ideal para estadias profissionais com tudo incluído, sem preocupações adicionais.',
       ],
       characteristics: [
-        'Contrato flexível de 1 a 12 meses',
+        'Contrato flexível de 30 dias até 12 meses',
         'Apartamento totalmente mobilado e equipado',
         'Ar condicionado, aquecimento e janelas de vidro duplo',
         'Internet de alta velocidade e televisão',
