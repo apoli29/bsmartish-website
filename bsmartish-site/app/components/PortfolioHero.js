@@ -36,7 +36,7 @@ export default function PortfolioHero() {
         <FadeIn delay={150}>
           <h1
             style={{
-              fontFamily: 'var(--font-radnika)',
+              fontFamily: 'var(--font-hanken)',
               fontWeight: 500,
               color: '#6b87a4',
               fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',

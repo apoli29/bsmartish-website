@@ -34,7 +34,7 @@ export default function AboutDistinction() {
 
             <h2
               className="leading-[1.1] text-[2rem] md:text-[2.6rem] lg:text-[3.1rem] max-w-[820px]"
-              style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#f8f8f8' }}
+              style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#f8f8f8' }}
             >
               {t('headline')}
             </h2>

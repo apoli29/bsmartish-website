@@ -73,7 +73,7 @@ export default function PropertyOverviewSection({ property }) {
           <FadeIn delay={0}>
             <div>
               <p className="hidden md:block" style={eyebrow}>{t('aboutEyebrow')}</p>
-              <h1 className="hidden md:block" style={{ margin: '0 0 32px', fontFamily: 'var(--font-radnika)', fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: '#6b87a4', fontWeight: 500, lineHeight: 1.1 }}>
+              <h1 className="hidden md:block" style={{ margin: '0 0 32px', fontFamily: 'var(--font-hanken)', fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: '#6b87a4', fontWeight: 500, lineHeight: 1.1 }}>
                 {propertyName}
               </h1>
               {intro.map((para, i) => (

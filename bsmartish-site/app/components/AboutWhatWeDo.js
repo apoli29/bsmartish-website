@@ -165,7 +165,7 @@ export default function AboutWhatWeDo() {
           <h2
             className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] max-w-[820px]"
             style={{
-              fontFamily: 'var(--font-radnika)',
+              fontFamily: 'var(--font-hanken)',
               fontWeight: 500,
               color: '#6b87a4',
               ...headStyle(120),

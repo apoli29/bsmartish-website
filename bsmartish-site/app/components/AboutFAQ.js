@@ -18,7 +18,7 @@ function FAQItem({ q, a, isOpen, onToggle }) {
       >
         <span
           className="text-[1.05rem] md:text-[1.15rem] lg:text-[1.2rem] leading-snug"
-          style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#202831' }}
+          style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#202831' }}
         >
           {q}
         </span>
@@ -115,7 +115,7 @@ export default function AboutFAQ() {
             </p>
             <h2
               className="text-[2rem] md:text-[2.4rem] lg:text-[2.8rem] leading-[1.1] max-w-[420px]"
-              style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#6b87a4' }}
+              style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#6b87a4' }}
             >
               {t('headline')}
             </h2>

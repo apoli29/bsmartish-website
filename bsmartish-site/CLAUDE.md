@@ -30,9 +30,18 @@ we won't eventually go back to different sections to make improvements.
     - Accent/Call-to-Action: `Deep Urban (#202831)`
     - Text/Neutral: `Slate Gray (#75797c)`
 - **Typography:**
-    - Headings (H1): `Radnika Font`
+    - Headings (H1): `Hanken Grotesk` — CSS variable `--font-hanken`
     - Sub-headings & CTAs: `Garet`
     - Body Text: `Aileron`
+
+    > **Do not reintroduce Radnika.** It was removed in September 2026 for
+    > licensing reasons: the freely circulated Radnika Medium is licensed for
+    > personal use only, which does not cover a company website, and does not
+    > cover self-hosting it as a webfont. Hanken Grotesk is by the same designer
+    > (Alfredo Marco Pradil, Hanken Design Co.) and is published under the SIL
+    > Open Font License 1.1, which permits commercial use and embedding. The
+    > licence text ships at `public/fonts/HankenGrotesk-OFL.txt` and the
+    > `@font-face` rules live at the top of `app/globals.css`.
 
 ## 4. Site Map & Sections
 

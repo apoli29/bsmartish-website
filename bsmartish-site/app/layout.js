@@ -9,13 +9,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import JsonLd from '@/app/components/JsonLd'
 import { graph, organizationSchema, webSiteSchema } from '@/app/lib/schema'
 
-const radnika = localFont({
-  src: [
-    { path: '../public/fonts/Radnika-Medium.otf.otf', weight: '500', style: 'normal' },
-  ],
-  variable: '--font-radnika',
-})
-
 const garet = localFont({
   src: [
     { path: '../public/fonts/Garet-Heavy.woff2', weight: '800', style: 'normal' },
@@ -65,8 +58,21 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${radnika.variable} ${garet.variable} ${aileron.variable}`}
+      className={`${garet.variable} ${aileron.variable}`}
     >
+      <head>
+        {/* Hanken Grotesk is declared by hand in globals.css (two unicode-range
+            subsets), so it does not get next/font's automatic preloading.
+            Preloading the latin subset keeps headings from flashing in the
+            fallback face on first paint. */}
+        <link
+          rel="preload"
+          href="/fonts/HankenGrotesk-Medium-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         {/* WCAG 2.4.1 — lets keyboard users skip the fixed header and nav. */}
         <a href="#main-content" className="skip-link">

@@ -62,7 +62,7 @@ const GlassCard = forwardRef(function GlassCard(
           {title && (
             <h3
               className="leading-[1.05] text-[1.2rem] md:text-[1.45rem] lg:text-[1.75rem]"
-              style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#F8F8F8' }}
+              style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#F8F8F8' }}
             >
               {title}
             </h3>

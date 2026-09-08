@@ -39,7 +39,7 @@ export default function HeroSection() {
         <FadeIn delay={100}>
           <h1
             className="text-[#F8F8F8] leading-[1.1] max-w-2xl mb-[21.6px] md:mb-6"
-            style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, fontSize: 'clamp(2.1rem, 6vw, 3.5rem)' }}
+            style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, fontSize: 'clamp(2.1rem, 6vw, 3.5rem)' }}
           >
             {t('headline').includes('for 20 years.')
                 ? <>{t('headline').replace(' for 20 years.', '')}<br />{'for 20 years.'}</>

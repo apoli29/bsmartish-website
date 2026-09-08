@@ -31,7 +31,7 @@ export default function FeaturedProperties() {
           </p>
           <h2
             className="text-[2rem] md:text-[2.4rem] lg:text-[2.8rem]"
-            style={{ fontFamily: 'var(--font-radnika)', color: '#6b87a4', lineHeight: 1.1 }}
+            style={{ fontFamily: 'var(--font-hanken)', color: '#6b87a4', lineHeight: 1.1 }}
           >
             {t('headline')}
           </h2>

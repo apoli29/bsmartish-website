@@ -17,7 +17,7 @@ const eyebrow = {
 
 const sectionH2 = {
   margin: '0 0 32px',
-  fontFamily: 'var(--font-radnika)',
+  fontFamily: 'var(--font-hanken)',
   fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
   color: '#6b87a4',
   fontWeight: 500,
@@ -98,7 +98,7 @@ export function RelatedPropertiesSection({ related }) {
               )}
             </div>
             <div style={{ padding: '24px 28px' }}>
-              <h3 style={{ margin: '0 0 10px', fontFamily: 'var(--font-radnika)', fontSize: '1.5rem', color: '#6b87a4', fontWeight: 500 }}>
+              <h3 style={{ margin: '0 0 10px', fontFamily: 'var(--font-hanken)', fontSize: '1.5rem', color: '#6b87a4', fontWeight: 500 }}>
                 {p.name}
               </h3>
               <p style={{ margin: '0 0 16px', fontSize: '0.96rem', color: 'var(--color-slate-gray-text)', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>

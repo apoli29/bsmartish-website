@@ -100,7 +100,7 @@ const detailRow = {
 
 const sectionH2 = {
   margin: '0 0 32px',
-  fontFamily: 'var(--font-radnika)',
+  fontFamily: 'var(--font-hanken)',
   fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
   color: '#6b87a4',
   fontWeight: 500,

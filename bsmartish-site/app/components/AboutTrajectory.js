@@ -24,7 +24,7 @@ export default function AboutTrajectory() {
           </p>
           <h2
             className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] max-w-[820px]"
-            style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#6b87a4' }}
+            style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#6b87a4' }}
           >
             {t('headline')}
           </h2>
@@ -57,7 +57,7 @@ export default function AboutTrajectory() {
               <div className="max-w-[440px]">
                 <h3
                   className="leading-none text-[2.4rem] md:text-[2.8rem] lg:text-[3rem]"
-                  style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#f8f8f8' }}
+                  style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#f8f8f8' }}
                 >
                   {t('spainTitle')}
                 </h3>
@@ -96,7 +96,7 @@ export default function AboutTrajectory() {
               <div className="max-w-[440px]">
                 <h3
                   className="leading-none text-[2.4rem] md:text-[2.8rem] lg:text-[3rem]"
-                  style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#f8f8f8' }}
+                  style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#f8f8f8' }}
                 >
                   {t('portoTitle')}
                 </h3>

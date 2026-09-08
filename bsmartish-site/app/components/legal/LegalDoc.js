@@ -41,7 +41,7 @@ export function LegalDoc({ en, pt, lastUpdated }) {
 
           <h1
             className="text-[2rem] md:text-[2.4rem] lg:text-[2.8rem] leading-[1.1]"
-            style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#6b87a4' }}
+            style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#6b87a4' }}
           >
             {doc.title}
           </h1>
@@ -85,7 +85,7 @@ export function Section({ id, heading, children }) {
     <section id={id} className="mb-12">
       <h2
         className="text-[1.25rem] md:text-[1.4rem] leading-snug mb-4"
-        style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500, color: '#202831' }}
+        style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#202831' }}
       >
         {heading}
       </h2>

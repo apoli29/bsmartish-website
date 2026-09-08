@@ -102,7 +102,7 @@ export const FrostedGlassCard = ({
               {title && (
                 <h3
                   className="text-white leading-none text-[2rem] md:text-[2.4rem] lg:text-[2.75rem]"
-                  style={{ fontFamily: 'var(--font-radnika)', fontWeight: 500 }}
+                  style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500 }}
                 >
                   {title}
                 </h3>
