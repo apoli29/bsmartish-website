@@ -1,5 +1,5 @@
-const title = 'Mid-Term Rentals in Porto - BSMARTISH Properties'
-const description = 'The best modern, fully furnished apartments for mid-term rental in Porto. Stays from 1 to 12 months. Ideal for professionals and digital nomads.'
+const title = 'Mid-Term Rental Apartments in Porto - BSMARTISH'
+const description = 'The best modern, fully furnished apartments for mid-term rentals in Porto. Stays from 1 to 12 months. Ideal for professionals and digital nomads.'
 
 export const metadata = {
   title,

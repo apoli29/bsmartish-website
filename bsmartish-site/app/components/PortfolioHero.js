@@ -47,6 +47,21 @@ export default function PortfolioHero() {
             {t('headline')}
           </h1>
         </FadeIn>
+        <FadeIn delay={250}>
+          <p
+            style={{
+              fontFamily: 'var(--font-aileron)',
+              fontWeight: 400,
+              color: '#75797c',
+              fontSize: 'clamp(1rem, 2vw, 1.125rem)',
+              lineHeight: 1.6,
+              maxWidth: '640px',
+              marginTop: '16px',
+            }}
+          >
+            {t('subheadline')}
+          </p>
+        </FadeIn>
       </div>
     </section>
   )

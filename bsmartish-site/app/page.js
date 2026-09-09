@@ -1,5 +1,5 @@
-const title = 'BSMARTISH Urban Renovation - Mid-Term Rentals Porto'
-const description = 'Real estate company with 20 years of expertise focused on mid-term, fully furnished apartments in Porto and urban renovation projects.'
+const title = 'BSMARTISH - Urban Renovation Specialists in Porto'
+const description = 'Real estate company with 20 years of expertise in mid-term rental apartments and urban renovation projects in Porto.'
 
 export const metadata = {
   title,
