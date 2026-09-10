@@ -59,25 +59,25 @@ export default function Footer() {
     padding: '2px 0',
   }
 
+  // Ordem e designações conforme o documento 01 (Rodapé legal), que manda:
+  //   Informação Legal | Política de Privacidade | Política de Cookies |
+  //   Informação ao Consumidor | Livro de Reclamações
+  // "Informação ao Consumidor" está em falta porque não foi fornecido texto
+  // para essa página. Não é inventada aqui — acrescentar assim que chegar.
   const legalLinks = [
-    { href: '/privacy-policy', label: t('privacy') },
-    { href: '/cookie-policy', label: t('cookies') },
-    { href: '/terms', label: t('terms') },
-    { href: '/legal-notice', label: t('legalNotice') },
+    { href: '/legal-notice', label: 'Informação Legal' },
+    { href: '/privacy-policy', label: 'Política de Privacidade' },
+    { href: '/cookie-policy', label: 'Política de Cookies' },
   ]
 
-  // Only the identification lines that have actually been filled in are shown,
-  // so the site never displays a half-completed legal block to the public.
+  // Texto exato do documento 01 (Rodapé legal). Não reescrever nem traduzir:
+  // é uma declaração jurídica de identificação, exigida pelo art. 10.º do
+  // DL 7/2004, e a versão portuguesa é a que vincula.
   const identityLines = [
-    E.legalName,
-    E.address,
-    E.taxNumber ? `${t('taxLabel')} ${E.taxNumber}` : null,
-    E.registryOffice && E.registryNumber
-      ? `${t('registryLabel')} ${E.registryOffice}, ${E.registryNumber}`
-      : null,
-    E.amiLicence ? `AMI ${E.amiLicence}` : null,
-    E.rnalNumber ? `${t('rnalLabel')} ${E.rnalNumber}` : null,
-  ].filter(Boolean)
+    'BSMARTISH · www.bsmartish.pt · www.bsmartish.com',
+    `BSMARTISH URBAN RENOVATION é uma marca registada e titulada por: ${E.legalName}, pessoa coletiva n.º ${E.taxNumber}, com sede em ${E.address}.`,
+    `Contacto: ${E.email} | ${E.phone}`,
+  ]
 
   return (
     <footer
@@ -207,7 +207,7 @@ export default function Footer() {
               minHeight: '24px',
             }}
           >
-            {t('complaintsBook')}
+            Livro de Reclamações
             <span className="sr-only"> {t('opensNewTab')}</span>
           </a>
         </nav>
@@ -249,7 +249,7 @@ export default function Footer() {
             color: ON_SURFACE,
             letterSpacing: '0.04em',
           }}>
-            {t('copyright')}
+            © 2026 BSMARTISH. Todos os direitos reservados.
           </p>
 
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>

@@ -1,8 +1,8 @@
 import PrivacyDoc from './PrivacyDoc'
 
-const title = 'Privacy Policy - BSMARTISH'
+const title = 'Política de Privacidade - BSMARTISH'
 const description =
-  'How BSMARTISH collects, uses and protects personal data on bsmartish.com, and the rights you have under the GDPR.'
+  'Como a Neptunevictory Lda trata dados pessoais através de bsmartish.pt e bsmartish.com: finalidades, fundamentos jurídicos, destinatários, conservação e direitos dos titulares.'
 
 export const metadata = {
   title,
@@ -12,7 +12,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     siteName: 'BSMARTISH',
-    locale: 'en_US',
+    locale: 'pt_PT',
     title,
     description,
     url: '/privacy-policy',

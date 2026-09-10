@@ -1,8 +1,8 @@
 import CookieDoc from './CookieDoc'
 
-const title = 'Cookie Policy - BSMARTISH'
+const title = 'Política de Cookies - BSMARTISH'
 const description =
-  'What bsmartish.com stores on your device: your language choice, one security cookie, and third-party maps that only load if you ask for them.'
+  'Cookies e tecnologias semelhantes em bsmartish.pt e bsmartish.com: inventário, categorias, consentimento e como alterar as suas escolhas.'
 
 export const metadata = {
   title,
@@ -12,7 +12,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     siteName: 'BSMARTISH',
-    locale: 'en_US',
+    locale: 'pt_PT',
     title,
     description,
     url: '/cookie-policy',

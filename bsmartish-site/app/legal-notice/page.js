@@ -1,8 +1,8 @@
 import LegalNoticeDoc from './LegalNoticeDoc'
 
-const title = 'Legal Notice - BSMARTISH'
+const title = 'Informação Legal - BSMARTISH'
 const description =
-  'Company identification, registration details, licences and consumer complaint channels for BSMARTISH.'
+  'Titular e responsável pelos websites bsmartish.pt e bsmartish.com, contactos, objeto, propriedade intelectual e lei aplicável.'
 
 export const metadata = {
   title,
@@ -12,7 +12,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     siteName: 'BSMARTISH',
-    locale: 'en_US',
+    locale: 'pt_PT',
     title,
     description,
     url: '/legal-notice',

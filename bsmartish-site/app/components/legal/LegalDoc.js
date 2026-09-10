@@ -5,28 +5,20 @@ import { useLang } from '@/app/i18n-provider'
 
 // Shell shared by every legal page.
 //
-// Each document supplies BOTH languages as `en` and `pt` objects, side by side
-// in the same file. That is deliberate: legal texts that live in separate files
-// drift apart, and two versions of a privacy policy that say different things
-// is worse than having only one. Editing one language and not the other is
-// immediately visible in the diff.
+// The documents themselves are counsel-drafted and are reproduced verbatim in
+// Portuguese. They are NOT translated here: a translation of a legal text is a
+// new legal text, and the two versions would have to be kept in agreement by
+// someone qualified to do it. English-speaking visitors get a short notice
+// instead, which is our wording, not a restatement of the document.
 
 const wrap = {
   backgroundColor: '#f8f8f8',
   fontFamily: 'var(--font-aileron)',
 }
 
-const CHROME = {
-  en: { updated: 'Last updated:', back: '← Back to bsmartish.com' },
-  pt: { updated: 'Última atualização:', back: '← Voltar a bsmartish.com' },
-}
-
-export function LegalDoc({ en, pt, lastUpdated }) {
+export function LegalDoc({ eyebrow, title, intro, lastUpdated, children }) {
   const [lang] = useLang()
-  const isPt = lang === 'PT'
-  const doc = isPt ? pt : en
-  const chrome = isPt ? CHROME.pt : CHROME.en
-  const stamp = isPt ? lastUpdated.pt : lastUpdated.en
+  const isEn = lang !== 'PT'
 
   return (
     <main className="pt-28 md:pt-32 lg:pt-36 pb-16 md:pb-20 lg:pb-24" style={wrap}>
@@ -36,42 +28,76 @@ export function LegalDoc({ en, pt, lastUpdated }) {
             className="mb-4 uppercase tracking-[0.15em] text-[0.7rem]"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
           >
-            {doc.eyebrow}
+            {eyebrow}
           </p>
 
           <h1
             className="text-[2rem] md:text-[2.4rem] lg:text-[2.8rem] leading-[1.1]"
             style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#6b87a4' }}
           >
-            {doc.title}
+            {title}
           </h1>
 
-          {doc.intro && (
+          <p
+            className="mt-5 text-[0.85rem]"
+            style={{ color: 'var(--color-slate-gray-text)' }}
+          >
+            BSMARTISH · www.bsmartish.pt · www.bsmartish.com
+          </p>
+
+          {isEn && (
+            <p
+              lang="en"
+              className="mt-8 text-[0.9rem] leading-[1.65]"
+              style={{
+                color: '#202831',
+                backgroundColor: '#e7eaed',
+                border: '1px solid #cfd4d9',
+                borderRadius: '6px',
+                padding: '16px 20px',
+                maxWidth: '65ch',
+              }}
+            >
+              This document is published in Portuguese, which is the language of the law that
+              governs it and the only version that is legally binding. If you would like it
+              explained in English, write to{' '}
+              <a
+                href="mailto:hello@bsmartish.com"
+                style={{ color: 'var(--color-slate-blue-text)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+              >
+                hello@bsmartish.com
+              </a>{' '}
+              and we will help.
+            </p>
+          )}
+
+          {intro && (
             <p
               className="mt-6 text-[1rem] leading-[1.7]"
               style={{ color: 'var(--color-slate-gray-text)', maxWidth: '65ch' }}
             >
-              {doc.intro}
+              {intro}
             </p>
           )}
 
-          {stamp && (
+          <div className="mt-12 legal-body" lang="pt">{children}</div>
+
+          {lastUpdated && (
             <p
-              className="mt-6 text-[0.75rem] uppercase tracking-[0.14em]"
+              className="mt-10 text-[0.75rem] uppercase tracking-[0.14em]"
               style={{ color: 'var(--color-slate-gray-text)', fontWeight: 600 }}
+              lang="pt"
             >
-              {chrome.updated} {stamp}
+              Última atualização: {lastUpdated}
             </p>
           )}
 
-          <div className="mt-12 legal-body">{doc.body}</div>
-
-          <p className="mt-16 text-[0.85rem]">
+          <p className="mt-14 text-[0.85rem]">
             <Link
               href="/"
               style={{ color: 'var(--color-slate-blue-text)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
             >
-              {chrome.back}
+              {isEn ? '← Back to bsmartish.com' : '← Voltar a bsmartish.com'}
             </Link>
           </p>
         </div>
@@ -114,7 +140,7 @@ export function LI({ children }) {
   return <li className="mb-2">{children}</li>
 }
 
-export function A({ href, children, external = false, newTabLabel = '(opens in a new tab)' }) {
+export function A({ href, children, external = false }) {
   const style = {
     color: 'var(--color-slate-blue-text)',
     textDecoration: 'underline',
@@ -124,7 +150,7 @@ export function A({ href, children, external = false, newTabLabel = '(opens in a
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" style={style}>
         {children}
-        <span className="sr-only"> {newTabLabel}</span>
+        <span className="sr-only"> (abre num novo separador)</span>
       </a>
     )
   }
@@ -135,31 +161,11 @@ export function A({ href, children, external = false, newTabLabel = '(opens in a
   )
 }
 
-// Rows whose value is falsy are dropped, so a field not yet filled in
-// legalEntity.js never renders as an empty placeholder.
-export function DataTable({ rows }) {
-  const present = rows.filter(([, value]) => Boolean(value))
-  if (present.length === 0) return null
-  return (
-    <div className="mb-4 overflow-x-auto">
-      <table className="text-[1rem] leading-[1.7]" style={{ borderCollapse: 'collapse' }}>
-        <tbody>
-          {present.map(([label, value]) => (
-            <tr key={label} style={{ borderBottom: '1px solid #e4e4e4' }}>
-              <th
-                scope="row"
-                className="pr-8 py-3 text-left align-top whitespace-nowrap"
-                style={{ fontWeight: 600, color: '#202831' }}
-              >
-                {label}
-              </th>
-              <td className="py-3 align-top">{value}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
+// A field the counsel documents left as [PREENCHER] and that we have now
+// filled from verified fact. Rendered as ordinary text — the marker exists so
+// these are greppable when the documents are next reviewed.
+export function Filled({ children }) {
+  return <>{children}</>
 }
 
 export const CELL_HEAD = {
