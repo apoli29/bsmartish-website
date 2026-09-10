@@ -2,16 +2,15 @@
 
 // Documento 02 — INFORMAÇÃO LEGAL.
 // Texto reproduzido na íntegra a partir do documento fornecido pela empresa.
-// NÃO ALTERAR a redação. Os únicos acrescentos são ligações (mailto/tel) sobre
-// texto que já existia, e a secção 9, que reproduz literalmente o rodapé legal
-// do documento 01 no que respeita ao Livro de Reclamações.
+// NÃO ALTERAR a redação, NÃO ACRESCENTAR secções. A única intervenção são
+// ligações (mailto/tel) colocadas sobre texto que já existia no documento.
 
 import { LegalDoc, Section, P, A } from '@/app/components/legal/LegalDoc'
 import { legalEntity as E, LEGAL_LAST_UPDATED } from '@/app/lib/legalEntity'
 
 export default function LegalNoticeDoc() {
   return (
-    <LegalDoc eyebrow="Informação Legal" title="Informação Legal" lastUpdated={LEGAL_LAST_UPDATED.pt}>
+    <LegalDoc eyebrow="Informação Legal" title="Informação Legal">
       <Section id="titular" heading="1. Titular e responsável pelo website">
         <P>
           Os sítios eletrónicos www.bsmartish.pt e www.bsmartish.com são explorados por
@@ -88,12 +87,8 @@ export default function LegalNoticeDoc() {
         </P>
       </Section>
 
-      <Section id="livro-reclamacoes" heading="8. Livro de Reclamações">
-        <P>
-          <A href={E.complaintsBookUrl} external>
-            Livro de Reclamações Eletrónico — livroreclamacoes.pt
-          </A>
-        </P>
+      <Section id="atualizacao" heading="8. Atualização">
+        <P>Última atualização: {LEGAL_LAST_UPDATED.pt}</P>
       </Section>
     </LegalDoc>
   )

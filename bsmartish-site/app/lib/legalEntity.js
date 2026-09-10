@@ -96,10 +96,12 @@ export const legalEntity = {
 }
 
 // Last substantive review of the legal documents. Update when you edit them.
+// Data que consta dos próprios documentos fornecidos. Só deve mudar quando os
+// documentos forem revistos por quem os redigiu.
 export const LEGAL_LAST_UPDATED = {
-  iso: '2026-09-08',
-  en: '8 September 2026',
-  pt: '8 de setembro de 2026',
+  iso: '2026-09-09',
+  en: '09.09.2026',
+  pt: '09.09.2026',
 }
 
 // True once the operator has filled in the minimum set of identification data

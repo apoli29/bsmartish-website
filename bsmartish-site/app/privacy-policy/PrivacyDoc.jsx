@@ -4,13 +4,15 @@
 // Texto reproduzido na íntegra a partir do documento fornecido pela empresa.
 // NÃO ALTERAR a redação existente.
 //
-// Os campos que o documento deixou como [PREENCHER] foram preenchidos com
-// factos verificados no código e no comportamento real do site. Estão
-// envolvidos em <Filled> para serem localizáveis numa revisão futura. Dois
-// prazos continuam por definir porque dependem de decisão da empresa e não de
-// nada que se possa apurar a partir do site.
+// Os campos [PREENCHER] que correspondem a factos verificáveis no site foram
+// preenchidos e estão envolvidos em <Filled>.
+//
+// Os dois prazos de conservação NÃO foram preenchidos: dependem de uma decisão
+// da empresa, não de nada que se possa apurar a partir do site. Mantêm o
+// marcador original do documento, dentro de <Pendente>, para que fiquem
+// visíveis. ESTA PÁGINA NÃO DEVE SER PUBLICADA ENQUANTO ESTIVEREM POR PREENCHER.
 
-import { LegalDoc, Section, P, UL, LI, A, Filled } from '@/app/components/legal/LegalDoc'
+import { LegalDoc, Section, P, UL, LI, A, Filled, Pendente } from '@/app/components/legal/LegalDoc'
 import { LEGAL_LAST_UPDATED } from '@/app/lib/legalEntity'
 
 export default function PrivacyDoc() {
@@ -164,7 +166,7 @@ export default function PrivacyDoc() {
       <Section id="conservacao" heading="8. Conservação">
         <P>
           Pedidos que não resultem em contrato:{' '}
-          <em>prazo a definir pela sociedade em política interna de conservação.</em>
+          <Pendente>[PREENCHER: PRAZO, recomendado após validação interna]</Pendente>
         </P>
         <P>
           Documentação contratual, contabilística e fiscal: durante os prazos legais aplicáveis e
@@ -182,7 +184,7 @@ export default function PrivacyDoc() {
         </P>
         <P>
           Registos técnicos e de segurança:{' '}
-          <em>prazo a definir pela sociedade em política interna de conservação.</em>
+          <Pendente>[PREENCHER: PRAZO REAL]</Pendente>
         </P>
         <P>
           Os prazos concretos devem ser aprovados numa política interna de conservação e aplicados

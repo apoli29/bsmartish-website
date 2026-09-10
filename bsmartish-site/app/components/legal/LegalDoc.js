@@ -63,7 +63,7 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children }) {
               explained in English, write to{' '}
               <a
                 href="mailto:hello@bsmartish.com"
-                style={{ color: 'var(--color-slate-blue-text)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+                style={{ color: '#202831', textDecoration: 'underline', textUnderlineOffset: '3px' }}
               >
                 hello@bsmartish.com
               </a>{' '}
@@ -166,6 +166,25 @@ export function A({ href, children, external = false }) {
 // these are greppable when the documents are next reviewed.
 export function Filled({ children }) {
   return <>{children}</>
+}
+
+// Um campo [PREENCHER] do documento original que continua por preencher.
+// Marcado visualmente para que não passe despercebido em revisão nem em
+// produção — a alternativa seria inventar conteúdo, que é pior.
+export function Pendente({ children }) {
+  return (
+    <mark
+      style={{
+        backgroundColor: '#fdf2c7',
+        color: '#6b5400',
+        padding: '2px 6px',
+        borderRadius: '3px',
+        fontWeight: 600,
+      }}
+    >
+      {children}
+    </mark>
+  )
 }
 
 export const CELL_HEAD = {
