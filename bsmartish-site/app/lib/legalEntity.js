@@ -15,24 +15,31 @@
 export const legalEntity = {
   // Full registered company name, exactly as it appears at the Registo Comercial
   // (e.g. "BSMARTISH — Renovação Urbana, Lda."). NOT the brand name.
-  legalName: null, // TODO: e.g. 'BSMARTISH — Renovação Urbana, Lda.'
+  legalName: 'Neptunevictory Lda',
 
   // Trading / brand name shown to the public.
   tradingName: 'BSMARTISH',
 
+  // BSMARTISH URBAN RENOVATION is a registered trademark held by the company
+  // above. Stated in the counsel-drafted Informação Legal.
+  trademark: 'BSMARTISH URBAN RENOVATION',
+
   // Registered office (sede social): street, postcode, city, country.
-  address: null, // TODO: e.g. 'Rua Exemplo 123, 4000-000 Porto, Portugal'
+  address: 'Alameda da Granja, 66, 4425-093 Maia, Portugal',
 
   // NIPC / NIF (also serves as the VAT number, prefixed with PT).
-  taxNumber: null, // TODO: e.g. '512345678'
+  taxNumber: '514177152',
 
   // Commercial registry: "matriculada na Conservatória do Registo Comercial
   // de <city> sob o número <n>". In Portugal this is usually the same as the NIPC.
-  registryOffice: null, // TODO: e.g. 'Conservatória do Registo Comercial do Porto'
-  registryNumber: null, // TODO: e.g. '512345678'
+  // Still unknown: the counsel documents give the NIPC but never name the
+  // conservatória or the matrícula number. Both rows are omitted from the
+  // rendered page until filled.
+  registryOffice: null, // TODO
+  registryNumber: null, // TODO
 
   // Share capital (capital social), if a Lda./S.A.
-  shareCapital: null, // TODO: e.g. '5.000,00 €'
+  shareCapital: null, // TODO — not stated in the counsel documents
 
   email: 'hello@bsmartish.com',
   phone: '+351 936 920 210',
@@ -85,7 +92,7 @@ export const legalEntity = {
 
   // Contact point for data protection requests. A DPO is not mandatory for a
   // business of this size; a plain contact address satisfies GDPR art. 13.
-  privacyEmail: 'hello@bsmartish.com',
+  privacyEmail: 'rgpd@bsmartish.com',
 }
 
 // Last substantive review of the legal documents. Update when you edit them.
