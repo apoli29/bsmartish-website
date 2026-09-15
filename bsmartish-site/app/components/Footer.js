@@ -73,6 +73,15 @@ export default function Footer() {
   // Texto exato do documento 01 (Rodapé legal). Não reescrever nem traduzir:
   // é uma declaração jurídica de identificação, exigida pelo art. 10.º do
   // DL 7/2004, e a versão portuguesa é a que vincula.
+  // Nota que explica ao visitante EN por que razão o bloco de identificação
+  // fica em português. Vazia em PT, onde não há nada a explicar.
+  // O email é partido para fora da string para poder ser um link — a chave de
+  // tradução guarda o texto, não a marcação.
+  const legalNote = t('legalNotTranslated')
+  const [noteBefore, noteAfter] = legalNote
+    ? legalNote.split(E.email)
+    : ['', '']
+
   const identityLines = [
     'BSMARTISH · www.bsmartish.pt · www.bsmartish.com',
     `BSMARTISH URBAN RENOVATION é uma marca registada e titulada por: ${E.legalName}, pessoa coletiva n.º ${E.taxNumber}, com sede em ${E.address}.`,
@@ -228,10 +237,47 @@ export default function Footer() {
               textWrap: 'pretty',
             }}
           >
-            {identityLines.map((line) => (
-              <span key={line} style={{ display: 'block' }}>{line}</span>
+            {identityLines.map((line, i) => (
+              <span key={line} style={{ display: 'block' }}>
+                {line}
+                {/* O asterisco marca o bloco inteiro, por isso vai na última
+                    linha, e só quando há nota para que ele remeta. */}
+                {legalNote && i === identityLines.length - 1 && (
+                  <span aria-hidden="true">&nbsp;*</span>
+                )}
+              </span>
             ))}
           </address>
+        )}
+
+        {/* Nota ao visitante EN: o bloco acima fica em português de propósito.
+            Só aparece em EN — em PT o leitor já está a ler a versão vinculativa
+            e a nota não teria a que remeter. */}
+        {legalNote && (
+          <p
+            lang="en"
+            style={{
+              fontSize: '0.68rem',
+              lineHeight: 1.65,
+              color: 'rgba(255,255,255,0.78)',
+              paddingBottom: '14px',
+              maxWidth: '92ch',
+              textWrap: 'pretty',
+            }}
+          >
+            {noteBefore}
+            <a
+              href={`mailto:${E.email}`}
+              style={{
+                color: 'inherit',
+                textDecoration: 'underline',
+                textUnderlineOffset: '2px',
+              }}
+            >
+              {E.email}
+            </a>
+            {noteAfter}
+          </p>
         )}
 
         {/* Bottom bar */}
@@ -253,7 +299,7 @@ export default function Footer() {
             color: ON_SURFACE,
             letterSpacing: '0.04em',
           }}>
-            © 2026 BSMARTISH. Todos os direitos reservados.
+            {t('copyright')}
           </p>
 
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
