@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import { useLang } from '@/app/i18n-provider'
 
 // Shell shared by every legal page.
@@ -17,9 +18,97 @@ const wrap = {
   fontFamily: 'var(--font-aileron)',
 }
 
+// Índice lateral. Estes documentos são longos e a coluna de texto pára nos
+// 820px, o que deixava metade do ecrã vazia em desktop. O índice ocupa esse
+// espaço com algo útil: onde estou, e como salto para outra secção.
+//
+// As secções são lidas do DOM já renderizado em vez de serem declaradas à
+// mão em cada página — assim uma alteração aos documentos do advogado nunca
+// deixa o índice dessincronizado do texto.
+function SectionIndex({ scopeRef, label, deps }) {
+  const [sections, setSections] = useState([])
+  const [active, setActive] = useState(null)
+
+  useEffect(() => {
+    const root = scopeRef.current
+    if (!root) return
+
+    const found = Array.from(root.querySelectorAll('section[id] > h2')).map((h) => ({
+      id: h.parentElement.id,
+      text: h.textContent.trim(),
+    }))
+    setSections(found)
+
+    if (found.length === 0) return
+
+    // Marca como ativa a última secção cujo topo já passou a linha de leitura,
+    // logo abaixo do cabeçalho fixo. Mais estável do que usar as interseções
+    // diretamente, que oscilam quando várias secções curtas ficam visíveis.
+    const onScroll = () => {
+      const line = 140
+      let current = found[0].id
+      for (const s of found) {
+        const el = document.getElementById(s.id)
+        if (el && el.getBoundingClientRect().top <= line) current = s.id
+        else break
+      }
+      setActive(current)
+    }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [scopeRef, deps])
+
+  if (sections.length === 0) return null
+
+  return (
+    <nav
+      aria-label={label}
+      className="hidden lg:block"
+      style={{ position: 'sticky', top: '150px', alignSelf: 'start', maxHeight: 'calc(100vh - 190px)', overflowY: 'auto' }}
+    >
+      <p
+        className="mb-4 uppercase tracking-[0.15em] text-[0.7rem]"
+        style={{ fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
+      >
+        {label}
+      </p>
+      <ul style={{ borderLeft: '1px solid #d8dcdf' }}>
+        {sections.map((s) => {
+          const isActive = s.id === active
+          return (
+            <li key={s.id}>
+              <a
+                href={`#${s.id}`}
+                aria-current={isActive ? 'true' : undefined}
+                className="legal-toc-link block text-[0.8rem] leading-[1.45] py-[6px] pl-4"
+                style={{
+                  color: isActive ? 'var(--color-slate-blue-text)' : 'var(--color-slate-gray-text)',
+                  fontWeight: isActive ? 600 : 400,
+                  borderLeft: `2px solid ${isActive ? 'var(--color-slate-blue-text)' : 'transparent'}`,
+                  marginLeft: '-1px',
+                }}
+              >
+                {s.text}
+              </a>
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+}
+
 export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enContent, enTitle, enDisclaimer }) {
   const [lang] = useLang()
   const isEn = lang !== 'PT'
+
+  // O índice segue o documento que o visitante está de facto a ler: a tradução
+  // EN quando existe, senão o original PT.
+  const enRef = useRef(null)
+  const ptRef = useRef(null)
+  const primaryRef = isEn && enContent ? enRef : ptRef
 
   // Resolve last updated — accepts either a string or { en, pt } object
   const lastUpdatedDisplay = lastUpdated && typeof lastUpdated === 'object'
@@ -32,7 +121,7 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enConte
 
   return (
     <main className="pt-28 md:pt-32 lg:pt-36 pb-16 md:pb-20 lg:pb-24" style={wrap}>
-      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 lg:grid lg:grid-cols-[minmax(0,820px)_minmax(200px,240px)] lg:gap-16 xl:gap-20">
         <div style={{ maxWidth: '820px' }}>
           <p
             className="mb-4 uppercase tracking-[0.15em] text-[0.7rem]"
@@ -123,7 +212,7 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enConte
 
           {/* EN content (official translation from counsel) */}
           {isEn && enContent && (
-            <div className="mt-12 legal-body" lang="en">
+            <div className="mt-12 legal-body" lang="en" ref={enRef}>
               {enContent}
             </div>
           )}
@@ -153,6 +242,7 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enConte
             className="legal-body"
             style={{ marginTop: isEn && enContent ? '32px' : '48px' }}
             lang="pt"
+            ref={ptRef}
           >
             {children}
           </div>
@@ -166,6 +256,12 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enConte
             </Link>
           </p>
         </div>
+
+        <SectionIndex
+          scopeRef={primaryRef}
+          label={isEn ? 'Contents' : 'Índice'}
+          deps={`${lang}-${title}`}
+        />
       </div>
     </main>
   )

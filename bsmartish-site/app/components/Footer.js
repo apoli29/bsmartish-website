@@ -221,7 +221,11 @@ export default function Footer() {
               lineHeight: 1.7,
               color: ON_SURFACE,
               paddingBottom: '14px',
-              maxWidth: '70ch',
+              // 70ch partia a linha de identificação em três bocados desiguais
+              // com o rodapé já largo. Mais largura deixa-a respirar, e o
+              // `pretty` evita que a última linha fique com uma palavra órfã.
+              maxWidth: '92ch',
+              textWrap: 'pretty',
             }}
           >
             {identityLines.map((line) => (

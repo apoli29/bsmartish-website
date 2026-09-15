@@ -201,3 +201,19 @@ footer :where(a, button):focus-visible {
 .legal-body h2 {
   scroll-margin-top: 120px;
 }
+
+/* Índice lateral das páginas legais */
+.legal-toc-link {
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.legal-toc-link:hover {
+  color: var(--color-slate-blue-text);
+  border-left-color: #b9c3cd;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legal-toc-link {
+    transition: none;
+  }
+}
