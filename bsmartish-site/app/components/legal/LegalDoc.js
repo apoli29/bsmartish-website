@@ -17,7 +17,7 @@ const wrap = {
   fontFamily: 'var(--font-aileron)',
 }
 
-export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enContent, enTitle }) {
+export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enContent, enTitle, enDisclaimer }) {
   const [lang] = useLang()
   const isEn = lang !== 'PT'
 
@@ -78,9 +78,10 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enConte
                 maxWidth: '65ch',
               }}
             >
-              This English translation is provided for information purposes. The Portuguese
-              version is the official version. In the event of any discrepancy or inconsistency,
-              the Portuguese version shall prevail, without prejudice to any mandatory legal rights.
+              {enDisclaimer ||
+                'This English translation is provided for information purposes. The Portuguese ' +
+                'version is the official version. In the event of any discrepancy or inconsistency, ' +
+                'the Portuguese version shall prevail, without prejudice to any mandatory legal rights.'}
             </p>
           )}
 
@@ -248,6 +249,20 @@ export function Pendente({ children }) {
     >
       {children}
     </mark>
+  )
+}
+
+export function SubSection({ heading, children }) {
+  return (
+    <div className="mb-8 mt-6">
+      <h3
+        className="text-[0.95rem] md:text-[1rem] mb-3 leading-snug"
+        style={{ fontFamily: 'var(--font-hanken)', fontWeight: 600, color: '#202831' }}
+      >
+        {heading}
+      </h3>
+      {children}
+    </div>
   )
 }
 
