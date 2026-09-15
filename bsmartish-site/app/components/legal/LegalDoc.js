@@ -5,20 +5,30 @@ import { useLang } from '@/app/i18n-provider'
 
 // Shell shared by every legal page.
 //
-// The documents themselves are counsel-drafted and are reproduced verbatim in
-// Portuguese. They are NOT translated here: a translation of a legal text is a
-// new legal text, and the two versions would have to be kept in agreement by
-// someone qualified to do it. English-speaking visitors get a short notice
-// instead, which is our wording, not a restatement of the document.
+// Documents are counsel-drafted and reproduced verbatim in Portuguese.
+// When counsel provides an official English translation, pass it via the
+// `enContent` prop — it will be shown to EN visitors, with the PT version
+// below as the legally binding original.
+// When no translation is provided (default), EN visitors see a notice box
+// pointing them to hello@bsmartish.com.
 
 const wrap = {
   backgroundColor: '#f8f8f8',
   fontFamily: 'var(--font-aileron)',
 }
 
-export function LegalDoc({ eyebrow, title, intro, lastUpdated, children }) {
+export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enContent, enTitle }) {
   const [lang] = useLang()
   const isEn = lang !== 'PT'
+
+  // Resolve last updated — accepts either a string or { en, pt } object
+  const lastUpdatedDisplay = lastUpdated && typeof lastUpdated === 'object'
+    ? (isEn ? lastUpdated.en : lastUpdated.pt)
+    : lastUpdated
+  const lastUpdatedLabel = isEn ? 'Last updated' : 'Última atualização'
+
+  const displayTitle   = isEn && enTitle ? enTitle : title
+  const displayEyebrow = isEn && enTitle ? enTitle : eyebrow
 
   return (
     <main className="pt-28 md:pt-32 lg:pt-36 pb-16 md:pb-20 lg:pb-24" style={wrap}>
@@ -28,14 +38,14 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children }) {
             className="mb-4 uppercase tracking-[0.15em] text-[0.7rem]"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
           >
-            {eyebrow}
+            {displayEyebrow}
           </p>
 
           <h1
             className="text-[2rem] md:text-[2.4rem] lg:text-[2.8rem] leading-[1.1]"
             style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#6b87a4' }}
           >
-            {title}
+            {displayTitle}
           </h1>
 
           <p
@@ -45,7 +55,37 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children }) {
             BSMARTISH · www.bsmartish.pt · www.bsmartish.com
           </p>
 
-          {isEn && (
+          {lastUpdatedDisplay && (
+            <p
+              className="mt-2 text-[0.85rem]"
+              style={{ color: 'var(--color-slate-gray-text)' }}
+            >
+              {lastUpdatedLabel}: {lastUpdatedDisplay}
+            </p>
+          )}
+
+          {/* EN: counsel's disclaimer when an official translation is available */}
+          {isEn && enContent && (
+            <p
+              lang="en"
+              className="mt-8 text-[0.9rem] leading-[1.65]"
+              style={{
+                color: '#202831',
+                backgroundColor: '#e7eaed',
+                border: '1px solid #cfd4d9',
+                borderRadius: '6px',
+                padding: '16px 20px',
+                maxWidth: '65ch',
+              }}
+            >
+              This English translation is provided for information purposes. The Portuguese
+              version is the official version. In the event of any discrepancy or inconsistency,
+              the Portuguese version shall prevail, without prejudice to any mandatory legal rights.
+            </p>
+          )}
+
+          {/* EN: fallback notice when no official translation is available */}
+          {isEn && !enContent && (
             <p
               lang="en"
               className="mt-8 text-[0.9rem] leading-[1.65]"
@@ -80,17 +120,41 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children }) {
             </p>
           )}
 
-          <div className="mt-12 legal-body" lang="pt">{children}</div>
-
-          {lastUpdated && (
-            <p
-              className="mt-10 text-[0.75rem] uppercase tracking-[0.14em]"
-              style={{ color: 'var(--color-slate-gray-text)', fontWeight: 600 }}
-              lang="pt"
-            >
-              Última atualização: {lastUpdated}
-            </p>
+          {/* EN content (official translation from counsel) */}
+          {isEn && enContent && (
+            <div className="mt-12 legal-body" lang="en">
+              {enContent}
+            </div>
           )}
+
+          {/* Divider between EN translation and PT original */}
+          {isEn && enContent && (
+            <div style={{ marginTop: '56px', paddingTop: '28px', borderTop: '2px solid #cfd4d9' }}>
+              <p
+                lang="en"
+                className="text-[0.75rem] uppercase tracking-[0.14em]"
+                style={{ fontWeight: 700, color: 'var(--color-slate-blue-text)' }}
+              >
+                Original Portuguese version — legally binding
+              </p>
+              <p
+                lang="pt"
+                className="mt-1 text-[0.75rem] uppercase tracking-[0.14em]"
+                style={{ fontWeight: 600, color: 'var(--color-slate-gray-text)' }}
+              >
+                Versão portuguesa — juridicamente vinculativa
+              </p>
+            </div>
+          )}
+
+          {/* PT content — always rendered */}
+          <div
+            className="legal-body"
+            style={{ marginTop: isEn && enContent ? '32px' : '48px' }}
+            lang="pt"
+          >
+            {children}
+          </div>
 
           <p className="mt-14 text-[0.85rem]">
             <Link

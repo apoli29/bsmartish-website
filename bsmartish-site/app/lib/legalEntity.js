@@ -25,21 +25,22 @@ export const legalEntity = {
   trademark: 'BSMARTISH URBAN RENOVATION',
 
   // Registered office (sede social): street, postcode, city, country.
-  address: 'Alameda da Granja, 66, 4425-093 Maia, Portugal',
+  // Format matches the counsel-drafted documents (no comma after street number).
+  address: 'Alameda da Granja 66, 4425-093 Maia, Portugal',
 
   // NIPC / NIF (also serves as the VAT number, prefixed with PT).
   taxNumber: '514177152',
 
-  // Commercial registry: "matriculada na Conservatória do Registo Comercial
-  // de <city> sob o número <n>". In Portugal this is usually the same as the NIPC.
-  // Still unknown: the counsel documents give the NIPC but never name the
-  // conservatória or the matrícula number. Both rows are omitted from the
-  // rendered page until filled.
-  registryOffice: null, // TODO
-  registryNumber: null, // TODO
+  // Commercial registry: "matrícula n.º 514 177 152" as stated in the
+  // counsel-drafted Informação Legal (setembro de 2026). In Portugal the NIPC
+  // doubles as the commercial registry number. The conservatória is not named
+  // in the counsel document, so registryOffice remains null.
+  registryOffice: null,
+  registryNumber: '514177152',
 
-  // Share capital (capital social), if a Lda./S.A.
-  shareCapital: null, // TODO — not stated in the counsel documents
+  // Share capital (capital social) confirmed in the counsel document:
+  // "capital social de €5.000". Stored in PT format; use €5,000 for EN.
+  shareCapital: '€5.000',
 
   email: 'hello@bsmartish.com',
   phone: '+351 936 920 210',
@@ -100,8 +101,8 @@ export const legalEntity = {
 // documentos forem revistos por quem os redigiu.
 export const LEGAL_LAST_UPDATED = {
   iso: '2026-09-09',
-  en: '09.09.2026',
-  pt: '09.09.2026',
+  en: 'September 2026',
+  pt: 'setembro de 2026',
 }
 
 // True once the operator has filled in the minimum set of identification data
