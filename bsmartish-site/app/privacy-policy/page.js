@@ -1,24 +1,12 @@
 import PrivacyDoc from './PrivacyDoc'
+import { legalMetadata } from '@/app/lib/legalRoutes'
 
-const title = 'Política de Privacidade - BSMARTISH'
-const description =
-  'Como a Neptunevictory Lda trata dados pessoais através de bsmartish.pt e bsmartish.com: finalidades, fundamentos jurídicos, destinatários, conservação e direitos dos titulares.'
-
-export const metadata = {
-  title,
-  description,
-  alternates: { canonical: '/privacy-policy' },
-  robots: { index: true, follow: true },
-  openGraph: {
-    type: 'website',
-    siteName: 'BSMARTISH',
-    locale: 'pt_PT',
-    title,
-    description,
-    url: '/privacy-policy',
-  },
-}
+export const metadata = legalMetadata(
+  'privacy',
+  'en',
+  'How Neptunevictory, Lda. processes personal data through bsmartish.com and bsmartish.pt: purposes, legal bases, recipients, retention and your rights.'
+)
 
 export default function PrivacyPolicyPage() {
-  return <PrivacyDoc />
+  return <PrivacyDoc pageLang="en" />
 }

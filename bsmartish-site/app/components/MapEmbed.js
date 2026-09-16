@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslation } from '@/app/i18n-provider'
+import { useLang, useTranslation } from '@/app/i18n-provider'
+import { legalHref } from '@/app/lib/legalRoutes'
 
 /**
  * Google Maps embed behind a consent gate.
@@ -18,6 +19,7 @@ import { useTranslation } from '@/app/i18n-provider'
  */
 export default function MapEmbed({ src, location }) {
   const { t } = useTranslation('map')
+  const [lang] = useLang()
   const [loaded, setLoaded] = useState(false)
 
   const frame = {
@@ -147,7 +149,7 @@ export default function MapEmbed({ src, location }) {
       </button>
 
       <a
-        href="/cookie-policy"
+        href={legalHref('cookies', lang)}
         style={{
           fontFamily: 'var(--font-aileron)',
           fontSize: '0.78rem',

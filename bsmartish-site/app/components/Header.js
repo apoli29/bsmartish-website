@@ -39,10 +39,6 @@ export default function Header() {
             className="w-full transition-all duration-500"
             style={{
               backgroundColor: (solid || pathname.startsWith('/mid-term-rentals-in-porto')) ? 'var(--color-slate-blue-surface)' : 'transparent',
-              // A translucent scrim behind the nav in its "transparent" state:
-              // white 11-13px text over an arbitrary hero photograph has no
-              // guaranteed contrast ratio at all without it (WCAG 1.4.3).
-              backgroundImage: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'linear-gradient(rgba(32,40,49,0.55), rgba(32,40,49,0.55))' : 'none',
               backdropFilter: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'blur(14px)' : 'none',
               WebkitBackdropFilter: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'blur(14px)' : 'none',
               border: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? '1px solid rgba(255,255,255,0.18)' : 'none',

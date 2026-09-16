@@ -197,23 +197,298 @@ footer :where(a, button):focus-visible {
   }
 }
 
-/* Legal pages: readable measure and spacing for long-form text. */
-.legal-body h2 {
-  scroll-margin-top: 120px;
+/* ── Páginas legais ────────────────────────────────────────────────────────────
+   Uma faixa na cor da marca no topo (o cabeçalho fixo é branco e precisa de um
+   fundo escuro por baixo), depois texto corrido em canvas white com o índice à
+   esquerda. Nota: estas regras não estão em nenhum @layer, pelo que ganham às
+   utilities do Tailwind — nunca definir `display` nas classes que também usam
+   `hidden` / `lg:hidden`. */
+
+.legal-page {
+  background: var(--color-canvas-white);
+  font-family: var(--font-aileron);
+  color: var(--color-slate-gray-text);
 }
 
-/* Índice lateral das páginas legais */
+.legal-wrap {
+  max-width: var(--breakpoint-xl, 1280px);
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+@media (min-width: 768px) { .legal-wrap { padding-left: 3.5rem; padding-right: 3.5rem; } }
+@media (min-width: 1024px) { .legal-wrap { padding-left: 5rem; padding-right: 5rem; } }
+
+.legal-kicker {
+  margin: 0 0 1rem;
+  font-family: var(--font-aileron);
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-slate-blue-text);
+}
+.legal-kicker--light { color: rgba(248, 248, 248, 0.72); }
+
+/* Hero */
+.legal-hero {
+  background-color: var(--color-slate-blue-surface);
+  color: #f8f8f8;
+  /* Cabeçalho fixo: 64/72/80px de altura + 16/20px de margem superior. */
+  padding: 8.5rem 0 3.5rem;
+}
+@media (min-width: 768px) { .legal-hero { padding: 10rem 0 4rem; } }
+@media (min-width: 1024px) { .legal-hero { padding: 11rem 0 4.5rem; } }
+
+.legal-title {
+  margin: 0;
+  font-family: var(--font-hanken);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #fff;
+  max-width: 16ch;
+}
+
+.legal-rise {
+  animation: legal-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes legal-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Corpo */
+.legal-grid {
+  padding-top: 3.5rem;
+  padding-bottom: 6rem;
+}
+@media (min-width: 1024px) {
+  .legal-grid {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 720px);
+    gap: 5.5rem;
+    padding-top: 5rem;
+  }
+}
+
+.legal-aside {
+  position: sticky;
+  top: 130px;
+  align-self: start;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.legal-toc {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid #dde1e5;
+}
 .legal-toc-link {
+  display: block;
+  margin-left: -1px;
+  padding: 0.4rem 0 0.4rem 1rem;
+  border-left: 1px solid transparent;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--color-slate-gray-text);
+  text-decoration: none;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
-
-.legal-toc-link:hover {
-  color: var(--color-slate-blue-text);
-  border-left-color: #b9c3cd;
+.legal-toc-link:hover { color: var(--color-deep-urban); border-left-color: #b9c3cd; }
+.legal-toc-link.is-active {
+  color: var(--color-deep-urban);
+  font-weight: 600;
+  border-left-color: var(--color-slate-blue);
 }
 
+.legal-toc-mobile {
+  margin-bottom: 2.5rem;
+  border-top: 1px solid #dde1e5;
+  border-bottom: 1px solid #dde1e5;
+}
+.legal-toc-mobile summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+}
+.legal-toc-mobile summary::-webkit-details-marker { display: none; }
+.legal-toc-chevron {
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--color-slate-blue-text);
+  border-bottom: 1.5px solid var(--color-slate-blue-text);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.3s ease;
+}
+.legal-toc-mobile[open] .legal-toc-chevron { transform: translateY(2px) rotate(-135deg); }
+.legal-toc-mobile .legal-toc { margin-bottom: 1.25rem; }
+
+.legal-main { min-width: 0; }
+
+.legal-note {
+  margin: 0 0 3.5rem;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 2px solid var(--color-slate-blue);
+  max-width: 62ch;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--color-deep-urban);
+}
+.legal-note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+.legal-section {
+  scroll-margin-top: 120px;
+  padding-top: 2.25rem;
+  margin-bottom: 2.75rem;
+  border-top: 1px solid #e1e4e7;
+}
+.legal-body > .legal-section:first-child,
+.legal-body > :first-child > .legal-section:first-child { border-top: 0; padding-top: 0; }
+
+.legal-section h2 {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-hanken);
+  font-weight: 500;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-deep-urban);
+}
+.legal-num {
+  display: inline-block;
+  min-width: 2.4ch;
+  color: var(--color-slate-blue);
+  font-variant-numeric: tabular-nums;
+}
+
+.legal-p,
+.legal-ul {
+  margin: 0 0 1rem;
+  max-width: 66ch;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+/* Justificado com hifenização (o `lang` de cada bloco escolhe o dicionário),
+   para não abrir rios de espaço em linhas com palavras longas. */
+.legal-p,
+.legal-ul,
+.legal-note {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.legal-ul { padding-left: 1.1rem; list-style: none; }
+.legal-ul li { position: relative; margin-bottom: 0.45rem; }
+.legal-ul li::before {
+  content: '';
+  position: absolute;
+  left: -1.1rem;
+  top: 0.8em;
+  width: 6px;
+  height: 1px;
+  background: var(--color-slate-blue);
+}
+
+.legal-sub { margin: 1.75rem 0 2rem; }
+.legal-sub h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-aileron);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--color-deep-urban);
+}
+
+.legal-a {
+  color: var(--color-slate-blue-text);
+  text-decoration: underline;
+  text-decoration-color: rgba(91, 115, 139, 0.4);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+.legal-a:hover { color: var(--color-deep-urban); text-decoration-color: currentColor; }
+
+.legal-pending {
+  background: #fdf2c7;
+  color: #6b5400;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.legal-original {
+  margin: 4rem 0 3rem;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--color-deep-urban);
+}
+.legal-original .legal-kicker { margin-bottom: 0.3rem; color: var(--color-deep-urban); }
+.legal-original-sub {
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-slate-gray-text);
+}
+
+.legal-next {
+  margin-top: 4.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-deep-urban);
+}
+.legal-next ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 640px) { .legal-next ul { grid-template-columns: 1fr 1fr; } }
+.legal-next-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.35rem 1.4rem;
+  background: #fff;
+  border: 1px solid #e1e4e7;
+  border-radius: 4px;
+  font-family: var(--font-hanken);
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--color-deep-urban);
+  text-decoration: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.legal-arrow { color: var(--color-slate-blue); transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+.legal-next-card:hover { border-color: var(--color-slate-blue); }
+.legal-next-card:hover .legal-arrow { transform: translateX(4px); }
+.legal-back {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-slate-blue-text);
+  text-decoration: none;
+}
+.legal-back:hover { color: var(--color-deep-urban); }
+
 @media (prefers-reduced-motion: reduce) {
-  .legal-toc-link {
-    transition: none;
-  }
+  .legal-rise { animation: none; }
+  .legal-toc-link,
+  .legal-a,
+  .legal-arrow,
+  .legal-next-card,
+  .legal-toc-chevron { transition: none; }
 }

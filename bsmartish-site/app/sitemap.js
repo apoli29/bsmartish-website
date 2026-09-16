@@ -1,3 +1,5 @@
+import { LEGAL_PAGES } from '@/app/lib/legalRoutes'
+
 const BASE_URL = 'https://www.bsmartish.com'
 
 const propertySlugs = [
@@ -34,7 +36,7 @@ export default function sitemap() {
       priority: 0.8,
     },
     ...propertyPages,
-    ...['/legal-notice', '/privacy-policy', '/cookie-policy'].map((path) => ({
+    ...LEGAL_PAGES.flatMap((p) => [p.en.path, p.pt.path]).map((path) => ({
       url: `${BASE_URL}${path}`,
       lastModified: new Date(),
       changeFrequency: 'yearly',

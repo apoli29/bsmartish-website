@@ -1,8 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useLang } from '@/app/i18n-provider'
+import { LEGAL_PAGES, legalHref } from '@/app/lib/legalRoutes'
+import { legalEntity as E } from '@/app/lib/legalEntity'
 
 // Shell shared by every legal page.
 //
@@ -10,22 +13,59 @@ import { useLang } from '@/app/i18n-provider'
 // When counsel provides an official English translation, pass it via the
 // `enContent` prop — it will be shown to EN visitors, with the PT version
 // below as the legally binding original.
-// When no translation is provided (default), EN visitors see a notice box
+// When no translation is provided (default), EN visitors see a notice
 // pointing them to hello@bsmartish.com.
+//
+// Each document is served from two routes (see app/lib/legalRoutes.js). The
+// route decides the language on arrival; switching language afterwards moves
+// the visitor to the route of the other language.
 
-const wrap = {
-  backgroundColor: '#f8f8f8',
-  fontFamily: 'var(--font-aileron)',
+const COPY = {
+  en: {
+    eyebrow: 'Legal Information',
+    contents: 'Contents',
+    others: 'Other legal documents',
+    back: 'Back to the homepage',
+  },
+  pt: {
+    eyebrow: 'Informação Legal',
+    contents: 'Índice',
+    others: 'Outros documentos legais',
+    back: 'Voltar à página inicial',
+  },
 }
 
-// Índice lateral. Estes documentos são longos e a coluna de texto pára nos
-// 820px, o que deixava metade do ecrã vazia em desktop. O índice ocupa esse
-// espaço com algo útil: onde estou, e como salto para outra secção.
-//
-// As secções são lidas do DOM já renderizado em vez de serem declaradas à
-// mão em cada página — assim uma alteração aos documentos do advogado nunca
-// deixa o índice dessincronizado do texto.
-function SectionIndex({ scopeRef, label, deps }) {
+// Mantém o idioma do site alinhado com o URL da página legal.
+function usePageLanguage(docKey, pageLang) {
+  const [lang, setLang] = useLang()
+  const router = useRouter()
+  const pageUpper = pageLang === 'pt' ? 'PT' : 'EN'
+  const [synced, setSynced] = useState(false)
+
+  // Chegar a /politica-de-privacidade significa ler em português, e vice-versa.
+  useEffect(() => {
+    setLang(pageUpper)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageUpper])
+
+  // Depois de alinhado, uma troca no seletor de idioma leva à rota equivalente.
+  useEffect(() => {
+    if (!synced) {
+      if (lang === pageUpper) setSynced(true)
+      return
+    }
+    if (lang !== pageUpper) router.replace(legalHref(docKey, lang))
+  }, [lang, pageUpper, synced, docKey, router])
+
+  // Até alinhar, renderiza na língua do URL — evita um piscar de conteúdo EN
+  // numa página PT enquanto o provider lê a preferência guardada.
+  return (synced ? lang : pageUpper) === 'PT' ? 'pt' : 'en'
+}
+
+// Índice. As secções são lidas do DOM já renderizado em vez de serem
+// declaradas à mão em cada página — assim uma alteração aos documentos do
+// advogado nunca deixa o índice dessincronizado do texto.
+function useSections(scopeRef, deps) {
   const [sections, setSections] = useState([])
   const [active, setActive] = useState(null)
 
@@ -38,12 +78,10 @@ function SectionIndex({ scopeRef, label, deps }) {
       text: h.textContent.trim(),
     }))
     setSections(found)
-
     if (found.length === 0) return
 
-    // Marca como ativa a última secção cujo topo já passou a linha de leitura,
-    // logo abaixo do cabeçalho fixo. Mais estável do que usar as interseções
-    // diretamente, que oscilam quando várias secções curtas ficam visíveis.
+    // Ativa a última secção cujo topo já passou a linha de leitura, logo
+    // abaixo do cabeçalho fixo.
     const onScroll = () => {
       const line = 140
       let current = found[0].id
@@ -60,49 +98,64 @@ function SectionIndex({ scopeRef, label, deps }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [scopeRef, deps])
 
-  if (sections.length === 0) return null
+  return [sections, active]
+}
 
+function TocList({ sections, active, onPick }) {
   return (
-    <nav
-      aria-label={label}
-      className="hidden lg:block"
-      style={{ position: 'sticky', top: '150px', alignSelf: 'start', maxHeight: 'calc(100vh - 190px)', overflowY: 'auto' }}
-    >
-      <p
-        className="mb-4 uppercase tracking-[0.15em] text-[0.7rem]"
-        style={{ fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
-      >
-        {label}
-      </p>
-      <ul style={{ borderLeft: '1px solid #d8dcdf' }}>
-        {sections.map((s) => {
-          const isActive = s.id === active
-          return (
-            <li key={s.id}>
-              <a
-                href={`#${s.id}`}
-                aria-current={isActive ? 'true' : undefined}
-                className="legal-toc-link block text-[0.8rem] leading-[1.45] py-[6px] pl-4"
-                style={{
-                  color: isActive ? 'var(--color-slate-blue-text)' : 'var(--color-slate-gray-text)',
-                  fontWeight: isActive ? 600 : 400,
-                  borderLeft: `2px solid ${isActive ? 'var(--color-slate-blue-text)' : 'transparent'}`,
-                  marginLeft: '-1px',
-                }}
-              >
-                {s.text}
-              </a>
-            </li>
-          )
-        })}
-      </ul>
-    </nav>
+    <ol className="legal-toc">
+      {sections.map((s) => {
+        const isActive = s.id === active
+        return (
+          <li key={s.id}>
+            <a
+              href={`#${s.id}`}
+              aria-current={isActive ? 'true' : undefined}
+              className={`legal-toc-link${isActive ? ' is-active' : ''}`}
+              onClick={onPick}
+            >
+              {s.text}
+            </a>
+          </li>
+        )
+      })}
+    </ol>
   )
 }
 
-export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enContent, enTitle, enDisclaimer }) {
-  const [lang] = useLang()
-  const isEn = lang !== 'PT'
+function SectionIndex({ scopeRef, label, deps }) {
+  const [sections, active] = useSections(scopeRef, deps)
+  const mobileRef = useRef(null)
+  if (sections.length === 0) return null
+
+  return (
+    <>
+      <nav aria-label={label} className="legal-aside hidden lg:block">
+        <p className="legal-kicker">{label}</p>
+        <TocList sections={sections} active={active} />
+      </nav>
+
+      <details ref={mobileRef} className="legal-toc-mobile lg:hidden">
+        <summary>
+          <span className="legal-kicker" style={{ margin: 0 }}>{label}</span>
+          <span aria-hidden="true" className="legal-toc-chevron" />
+        </summary>
+        <nav aria-label={label}>
+          <TocList
+            sections={sections}
+            active={active}
+            onPick={() => mobileRef.current?.removeAttribute('open')}
+          />
+        </nav>
+      </details>
+    </>
+  )
+}
+
+export function LegalDoc({ docKey, pageLang, title, children, enContent, enTitle, enDisclaimer }) {
+  const locale = usePageLanguage(docKey, pageLang)
+  const isEn = locale === 'en'
+  const c = COPY[locale]
 
   // O índice segue o documento que o visitante está de facto a ler: a tradução
   // EN quando existe, senão o original PT.
@@ -110,63 +163,34 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enConte
   const ptRef = useRef(null)
   const primaryRef = isEn && enContent ? enRef : ptRef
 
-  // Resolve last updated — accepts either a string or { en, pt } object
-  const lastUpdatedDisplay = lastUpdated && typeof lastUpdated === 'object'
-    ? (isEn ? lastUpdated.en : lastUpdated.pt)
-    : lastUpdated
-  const lastUpdatedLabel = isEn ? 'Last updated' : 'Última atualização'
-
-  const displayTitle   = isEn && enTitle ? enTitle : title
-  const displayEyebrow = isEn && enTitle ? enTitle : eyebrow
+  const displayTitle = isEn && enTitle ? enTitle : title
+  const others = LEGAL_PAGES.filter((p) => p.key !== docKey)
 
   return (
-    <main className="pt-28 md:pt-32 lg:pt-36 pb-16 md:pb-20 lg:pb-24" style={wrap}>
-      <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 lg:grid lg:grid-cols-[minmax(0,820px)_minmax(200px,240px)] lg:gap-16 xl:gap-20">
-        <div style={{ maxWidth: '820px' }}>
-          <p
-            className="mb-4 uppercase tracking-[0.15em] text-[0.7rem]"
-            style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: 'var(--color-slate-blue-text)' }}
-          >
-            {displayEyebrow}
-          </p>
-
-          <h1
-            className="text-[2rem] md:text-[2.4rem] lg:text-[2.8rem] leading-[1.1]"
-            style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#6b87a4' }}
-          >
-            {displayTitle}
-          </h1>
-
-          <p
-            className="mt-5 text-[0.85rem]"
-            style={{ color: 'var(--color-slate-gray-text)' }}
-          >
-            BSMARTISH · www.bsmartish.pt · www.bsmartish.com
-          </p>
-
-          {lastUpdatedDisplay && (
-            <p
-              className="mt-2 text-[0.85rem]"
-              style={{ color: 'var(--color-slate-gray-text)' }}
-            >
-              {lastUpdatedLabel}: {lastUpdatedDisplay}
+    <main className="legal-page">
+      {/* ── Cabeçalho do documento ───────────────────────────────────────── */}
+      <header className="legal-hero">
+        <div className="legal-wrap">
+          {/* No documento «Informação Legal» o rótulo repetiria o título. */}
+          {displayTitle !== c.eyebrow && (
+            <p className="legal-kicker legal-kicker--light legal-rise" style={{ '--d': '80ms' }}>
+              {c.eyebrow}
             </p>
           )}
+          <h1 className="legal-title legal-rise" style={{ '--d': '140ms' }}>
+            {displayTitle}
+          </h1>
+        </div>
+      </header>
 
+      {/* ── Corpo ────────────────────────────────────────────────────────── */}
+      <div className="legal-wrap legal-grid">
+        <SectionIndex scopeRef={primaryRef} label={c.contents} deps={`${locale}-${title}`} />
+
+        <div className="legal-main">
           {/* EN: counsel's disclaimer when an official translation is available */}
           {isEn && enContent && (
-            <p
-              lang="en"
-              className="mt-8 text-[0.9rem] leading-[1.65]"
-              style={{
-                color: '#202831',
-                backgroundColor: '#e7eaed',
-                border: '1px solid #cfd4d9',
-                borderRadius: '6px',
-                padding: '16px 20px',
-                maxWidth: '65ch',
-              }}
-            >
+            <p lang="en" className="legal-note">
               {enDisclaimer ||
                 'This English translation is provided for information purposes. The Portuguese ' +
                 'version is the official version. In the event of any discrepancy or inconsistency, ' +
@@ -176,150 +200,102 @@ export function LegalDoc({ eyebrow, title, intro, lastUpdated, children, enConte
 
           {/* EN: fallback notice when no official translation is available */}
           {isEn && !enContent && (
-            <p
-              lang="en"
-              className="mt-8 text-[0.9rem] leading-[1.65]"
-              style={{
-                color: '#202831',
-                backgroundColor: '#e7eaed',
-                border: '1px solid #cfd4d9',
-                borderRadius: '6px',
-                padding: '16px 20px',
-                maxWidth: '65ch',
-              }}
-            >
+            <p lang="en" className="legal-note">
               This document is published in Portuguese, which is the language of the law that
               governs it and the only version that is legally binding. If you would like it
               explained in English, write to{' '}
-              <a
-                href="mailto:hello@bsmartish.com"
-                style={{ color: '#202831', textDecoration: 'underline', textUnderlineOffset: '3px' }}
-              >
-                hello@bsmartish.com
-              </a>{' '}
-              and we will help.
+              <a href={`mailto:${E.email}`}>{E.email}</a> and we will help.
             </p>
           )}
 
-          {intro && (
-            <p
-              className="mt-6 text-[1rem] leading-[1.7]"
-              style={{ color: 'var(--color-slate-gray-text)', maxWidth: '65ch' }}
-            >
-              {intro}
-            </p>
-          )}
-
-          {/* EN content (official translation from counsel) */}
           {isEn && enContent && (
-            <div className="mt-12 legal-body" lang="en" ref={enRef}>
+            <div className="legal-body" lang="en" ref={enRef}>
               {enContent}
             </div>
           )}
 
-          {/* Divider between EN translation and PT original */}
           {isEn && enContent && (
-            <div style={{ marginTop: '56px', paddingTop: '28px', borderTop: '2px solid #cfd4d9' }}>
-              <p
-                lang="en"
-                className="text-[0.75rem] uppercase tracking-[0.14em]"
-                style={{ fontWeight: 700, color: 'var(--color-slate-blue-text)' }}
-              >
-                Original Portuguese version — legally binding
-              </p>
-              <p
-                lang="pt"
-                className="mt-1 text-[0.75rem] uppercase tracking-[0.14em]"
-                style={{ fontWeight: 600, color: 'var(--color-slate-gray-text)' }}
-              >
-                Versão portuguesa — juridicamente vinculativa
-              </p>
+            <div className="legal-original">
+              <p lang="en" className="legal-kicker">Original Portuguese version — legally binding</p>
+              <p lang="pt" className="legal-original-sub">Versão portuguesa — juridicamente vinculativa</p>
             </div>
           )}
 
           {/* PT content — always rendered */}
-          <div
-            className="legal-body"
-            style={{ marginTop: isEn && enContent ? '32px' : '48px' }}
-            lang="pt"
-            ref={ptRef}
-          >
+          <div className="legal-body" lang="pt" ref={ptRef}>
             {children}
           </div>
 
-          <p className="mt-14 text-[0.85rem]">
-            <Link
-              href="/"
-              style={{ color: 'var(--color-slate-blue-text)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
-            >
-              {isEn ? '← Back to bsmartish.com' : '← Voltar a bsmartish.com'}
+          {/* ── Outros documentos ─────────────────────────────────────────── */}
+          <nav aria-label={c.others} className="legal-next">
+            <p className="legal-kicker">{c.others}</p>
+            <ul>
+              {others.map((p) => (
+                <li key={p.key}>
+                  <Link href={p[locale].path} className="legal-next-card">
+                    <span>{p[locale].title}</span>
+                    <span aria-hidden="true" className="legal-arrow">→</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link href="/" className="legal-back">
+              <span aria-hidden="true">←</span> {c.back}
             </Link>
-          </p>
+          </nav>
         </div>
-
-        <SectionIndex
-          scopeRef={primaryRef}
-          label={isEn ? 'Contents' : 'Índice'}
-          deps={`${lang}-${title}`}
-        />
       </div>
     </main>
   )
 }
 
+// Os títulos do advogado vêm como «3. Destinatários». O número é separado
+// visualmente, mas o texto do h2 continua igual (o índice lê textContent).
+function splitNumber(heading) {
+  if (typeof heading !== 'string') return [null, heading]
+  const m = heading.match(/^(\d+\.)\s+(.*)$/)
+  return m ? [m[1], m[2]] : [null, heading]
+}
+
 export function Section({ id, heading, children }) {
+  const [num, text] = splitNumber(heading)
   return (
-    <section id={id} className="mb-12">
-      <h2
-        className="text-[1.25rem] md:text-[1.4rem] leading-snug mb-4"
-        style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#202831' }}
-      >
-        {heading}
+    <section id={id} className="legal-section">
+      <h2>
+        {num && <span className="legal-num">{num}</span>}
+        {num && ' '}
+        {text}
       </h2>
-      <div style={{ color: 'var(--color-slate-gray-text)' }}>{children}</div>
+      <div className="legal-section-body">{children}</div>
     </section>
   )
 }
 
 export function P({ children }) {
-  return (
-    <p className="mb-4 text-[1rem] leading-[1.7]" style={{ maxWidth: '65ch' }}>
-      {children}
-    </p>
-  )
+  return <p className="legal-p">{children}</p>
 }
 
 export function UL({ children }) {
-  return (
-    <ul className="mb-4 pl-5 text-[1rem] leading-[1.7] list-disc" style={{ maxWidth: '65ch' }}>
-      {children}
-    </ul>
-  )
+  return <ul className="legal-ul">{children}</ul>
 }
 
 export function LI({ children }) {
-  return <li className="mb-2">{children}</li>
+  return <li>{children}</li>
 }
 
 export function A({ href, children, external = false }) {
-  const style = {
-    color: 'var(--color-slate-blue-text)',
-    textDecoration: 'underline',
-    textUnderlineOffset: '3px',
-  }
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" style={style}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="legal-a">
         {children}
         <span className="sr-only"> (abre num novo separador)</span>
       </a>
     )
   }
-  return (
-    <Link href={href} style={style}>
-      {children}
-    </Link>
-  )
+  if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+    return <a href={href} className="legal-a">{children}</a>
+  }
+  return <Link href={href} className="legal-a">{children}</Link>
 }
 
 // A field the counsel documents left as [PREENCHER] and that we have now
@@ -333,46 +309,14 @@ export function Filled({ children }) {
 // Marcado visualmente para que não passe despercebido em revisão nem em
 // produção — a alternativa seria inventar conteúdo, que é pior.
 export function Pendente({ children }) {
-  return (
-    <mark
-      style={{
-        backgroundColor: '#fdf2c7',
-        color: '#6b5400',
-        padding: '2px 6px',
-        borderRadius: '3px',
-        fontWeight: 600,
-      }}
-    >
-      {children}
-    </mark>
-  )
+  return <mark className="legal-pending">{children}</mark>
 }
 
 export function SubSection({ heading, children }) {
   return (
-    <div className="mb-8 mt-6">
-      <h3
-        className="text-[0.95rem] md:text-[1rem] mb-3 leading-snug"
-        style={{ fontFamily: 'var(--font-hanken)', fontWeight: 600, color: '#202831' }}
-      >
-        {heading}
-      </h3>
+    <div className="legal-sub">
+      <h3>{heading}</h3>
       {children}
     </div>
   )
-}
-
-export const CELL_HEAD = {
-  fontWeight: 600,
-  color: '#202831',
-  textAlign: 'left',
-  padding: '10px 24px 10px 0',
-  borderBottom: '1px solid #cfd4d9',
-  whiteSpace: 'nowrap',
-}
-
-export const CELL = {
-  padding: '12px 24px 12px 0',
-  borderBottom: '1px solid #e4e4e4',
-  verticalAlign: 'top',
 }

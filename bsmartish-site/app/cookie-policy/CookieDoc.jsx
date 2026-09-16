@@ -9,61 +9,24 @@
 // verificado num browser: uma entrada de armazenamento local e um cookie de
 // segurança da Cloudflare. Nada mais é escrito no dispositivo do visitante.
 
-import { LegalDoc, Section, P, UL, LI, A, Filled, CELL, CELL_HEAD } from '@/app/components/legal/LegalDoc'
+import { LegalDoc, Section, P, UL, LI, A, Filled } from '@/app/components/legal/LegalDoc'
 import { LEGAL_LAST_UPDATED } from '@/app/lib/legalEntity'
+import { legalHref } from '@/app/lib/legalRoutes'
 
-const INVENTARIO = [
-  {
-    nome: 'bsmartish-lang (armazenamento local)',
-    fornecedor: 'BSMARTISH (próprio)',
-    finalidade: 'Memorizar o idioma escolhido pelo utilizador (português ou inglês). Só é escrito quando o utilizador clica no seletor de idioma.',
-    categoria: 'Preferências, definida por ação expressa do utilizador',
-    duracao: 'Até o utilizador limpar os dados de navegação',
-    dominio: 'bsmartish.pt · bsmartish.com',
-    tipo: 'Armazenamento local (não é cookie)',
-  },
-  {
-    nome: '__cf_bm (cookie)',
-    fornecedor: 'Cloudflare, Inc.',
-    finalidade: 'Distinguir tráfego automatizado de visitantes reais, para proteção do website contra abuso.',
-    categoria: 'Estritamente necessário (segurança)',
-    duracao: '30 minutos',
-    dominio: 'bsmartish.pt · bsmartish.com',
-  },
-  {
-    nome: 'Vercel Web Analytics',
-    fornecedor: 'Vercel Inc.',
-    finalidade: 'Contagem agregada de visitas e páginas vistas.',
-    categoria: 'Analítico, sem cookies nem identificadores',
-    duracao: 'Nada é escrito no dispositivo do utilizador',
-    dominio: 'bsmartish.pt · bsmartish.com',
-  },
-  {
-    nome: 'Vercel Speed Insights',
-    fornecedor: 'Vercel Inc.',
-    finalidade: 'Medição do desempenho de carregamento das páginas.',
-    categoria: 'Analítico, sem cookies nem identificadores',
-    duracao: 'Nada é escrito no dispositivo do utilizador',
-    dominio: 'bsmartish.pt · bsmartish.com',
-  },
-  {
-    nome: 'Google Maps',
-    fornecedor: 'Google Ireland Limited',
-    finalidade: 'Mapa de localização nas páginas dos imóveis.',
-    categoria: 'Terceiros, sujeito a consentimento',
-    duracao: 'Bloqueado; só carrega, e só então cria cookies da Google, se o utilizador premir «Carregar mapa»',
-    dominio: 'google.com',
-  },
-]
-
-export default function CookieDoc() {
+export default function CookieDoc({ pageLang }) {
   return (
-    <LegalDoc eyebrow="Informação Legal" title="Política de Cookies" lastUpdated={LEGAL_LAST_UPDATED.pt}>
+    <LegalDoc
+      docKey="cookies"
+      pageLang={pageLang}
+      title="Política de Cookies"
+      enTitle="Cookie Policy"
+      lastUpdated={LEGAL_LAST_UPDATED}
+    >
       <Section id="ambito" heading="1. Âmbito">
         <P>
           Esta Política explica a utilização de cookies e tecnologias semelhantes em
           www.bsmartish.pt e www.bsmartish.com. Deve ser lida em conjunto com a{' '}
-          <A href="/privacy-policy">Política de Privacidade</A>.
+          <A href={legalHref('privacy', 'pt')}>Política de Privacidade</A>.
         </P>
       </Section>
 
@@ -102,29 +65,33 @@ export default function CookieDoc() {
         </P>
 
         <Filled>
-          <div className="overflow-x-auto mb-6">
-            <table style={{ borderCollapse: 'collapse', fontSize: '0.92rem', lineHeight: 1.6 }}>
-              <thead>
-                <tr>
-                  {['Nome', 'Fornecedor', 'Finalidade', 'Categoria', 'Duração', 'Domínio'].map((h) => (
-                    <th key={h} scope="col" style={CELL_HEAD}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {INVENTARIO.map((c) => (
-                  <tr key={c.nome}>
-                    <td style={CELL}>{c.nome}</td>
-                    <td style={CELL}>{c.fornecedor}</td>
-                    <td style={CELL}>{c.finalidade}</td>
-                    <td style={CELL}>{c.categoria}</td>
-                    <td style={CELL}>{c.duracao}</td>
-                    <td style={CELL}>{c.dominio}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <P>
+            O website utiliza uma entrada de armazenamento local denominada bsmartish-lang, definida
+            pela própria BSMARTISH, que memoriza o idioma escolhido pelo utilizador (português ou
+            inglês). Esta entrada, que não é um cookie, só é escrita quando o utilizador clica no
+            seletor de idioma e enquadra-se na categoria de preferências, por resultar de uma ação
+            expressa do utilizador. Aplica-se aos domínios bsmartish.pt e bsmartish.com e mantém-se
+            até o utilizador limpar os dados de navegação.
+          </P>
+          <P>
+            É também utilizado o cookie __cf_bm, fornecido pela Cloudflare, Inc., que distingue o
+            tráfego automatizado dos visitantes reais para proteger o website contra abuso. Trata-se
+            de um cookie estritamente necessário, de segurança, associado aos domínios bsmartish.pt e
+            bsmartish.com, com a duração de 30 minutos.
+          </P>
+          <P>
+            Para a contagem agregada de visitas e páginas vistas e para a medição do desempenho de
+            carregamento das páginas, o website recorre aos serviços Vercel Web Analytics e Vercel
+            Speed Insights, fornecidos pela Vercel Inc. nos domínios bsmartish.pt e bsmartish.com.
+            Ambos são de natureza analítica, funcionam sem cookies nem identificadores e nada
+            escrevem no dispositivo do utilizador.
+          </P>
+          <P>
+            Por fim, as páginas dos imóveis incluem um mapa de localização do Google Maps, fornecido
+            pela Google Ireland Limited (google.com). Por se tratar de um serviço de terceiros sujeito
+            a consentimento, o mapa está bloqueado por defeito: só é carregado, e só então são criados
+            cookies da Google, se o utilizador premir «Carregar mapa».
+          </P>
         </Filled>
 
         <P>

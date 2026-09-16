@@ -120,9 +120,12 @@
     "contactLabel": "Contact us",
     "copyright": "© 2026 BSMARTISH. All rights reserved.",
     "legalNavLabel": "Legal information",
+    "legalNotice": "Legal Information",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "complaintsBook": "Complaints Book",
     "opensNewTab": "(opens in a new tab)",
-    "callCost": "Call to a Portuguese mobile network — standard national rates apply.",
-    "legalNotTranslated": "*The legal identification above is published in Portuguese. Legal identification statements are not translated: the Portuguese wording is the one that is legally binding. If you need any of this information explained in English, write to hello@bsmartish.com and we will be glad to help."
+    "callCost": "Call to a Portuguese mobile network — standard national rates apply."
   },
   "propertyPage": {
     "aboutEyebrow": "About This Property",

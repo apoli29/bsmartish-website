@@ -120,9 +120,12 @@
     "contactLabel": "Contacte-nos",
     "copyright": "© 2026 BSMARTISH. Todos os direitos reservados.",
     "legalNavLabel": "Informação legal",
+    "legalNotice": "Informação Legal",
+    "privacy": "Política de Privacidade",
+    "cookies": "Política de Cookies",
+    "complaintsBook": "Livro de Reclamações",
     "opensNewTab": "(abre num novo separador)",
-    "callCost": "Chamada para a rede móvel nacional.",
-    "legalNotTranslated": ""
+    "callCost": "Chamada para a rede móvel nacional."
   },
   "propertyPage": {
     "aboutEyebrow": "Sobre Esta Propriedade",

@@ -636,10 +636,11 @@ function EnSections() {
 
 // ─── Export principal ─────────────────────────────────────────────────────────
 
-export default function PrivacyDoc() {
+export default function PrivacyDoc({ pageLang }) {
   return (
     <LegalDoc
-      eyebrow="Informação Legal"
+      docKey="privacy"
+      pageLang={pageLang}
       title="Política de Privacidade"
       enTitle="Privacy Policy"
       lastUpdated={LEGAL_LAST_UPDATED}

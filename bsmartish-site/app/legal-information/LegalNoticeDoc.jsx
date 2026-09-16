@@ -270,10 +270,11 @@ function EnSections() {
 
 // ─── Export principal ─────────────────────────────────────────────────────────
 
-export default function LegalNoticeDoc() {
+export default function LegalNoticeDoc({ pageLang }) {
   return (
     <LegalDoc
-      eyebrow="Informação Legal"
+      docKey="legalNotice"
+      pageLang={pageLang}
       title="Informação Legal"
       enTitle="Legal Information"
       lastUpdated={LEGAL_LAST_UPDATED}

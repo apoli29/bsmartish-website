@@ -1,24 +1,12 @@
 import CookieDoc from './CookieDoc'
+import { legalMetadata } from '@/app/lib/legalRoutes'
 
-const title = 'Política de Cookies - BSMARTISH'
-const description =
-  'Cookies e tecnologias semelhantes em bsmartish.pt e bsmartish.com: inventário, categorias, consentimento e como alterar as suas escolhas.'
-
-export const metadata = {
-  title,
-  description,
-  alternates: { canonical: '/cookie-policy' },
-  robots: { index: true, follow: true },
-  openGraph: {
-    type: 'website',
-    siteName: 'BSMARTISH',
-    locale: 'pt_PT',
-    title,
-    description,
-    url: '/cookie-policy',
-  },
-}
+export const metadata = legalMetadata(
+  'cookies',
+  'en',
+  'Cookies and similar technologies on bsmartish.com and bsmartish.pt: inventory, categories, consent and how to change your choices.'
+)
 
 export default function CookiePolicyPage() {
-  return <CookieDoc />
+  return <CookieDoc pageLang="en" />
 }

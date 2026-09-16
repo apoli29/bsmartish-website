@@ -2,91 +2,67 @@
 
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
-import { useTranslation } from '@/app/i18n-provider'
+import { useLang, useTranslation } from '@/app/i18n-provider'
 import { legalEntity as E } from '@/app/lib/legalEntity'
+import { LEGAL_PAGES, legalHref } from '@/app/lib/legalRoutes'
 
 // Surface colour: the brand blue #6b87a4 darkened just enough that white text
 // on it reaches WCAG AA (4.92:1 instead of 3.51:1). See globals.css.
 const SURFACE = 'var(--color-slate-blue-surface)'
 const ON_SURFACE = '#FFFFFF'
 
-// Number of full rotations of the headline before it settles. Auto-updating
-// text that runs forever fails WCAG 2.2.2 (Pause, Stop, Hide); stopping after
-// one complete cycle — plus pausing on hover/focus and honouring the OS
-// "reduce motion" setting — keeps the effect without trapping the reader.
-const CYCLES = 1
-
 export default function Footer() {
   const { t } = useTranslation('footer')
+  const [lang] = useLang()
   const [index, setIndex] = useState(0)
   const [visible, setVisible] = useState(true)
+  const [inView, setInView] = useState(false)
   const [paused, setPaused] = useState(false)
-  const stepsRef = useRef(0)
+  const ctaRef = useRef(null)
 
   const variations = [t('variation1'), t('variation2'), t('variation3')]
-  const maxSteps = variations.length * CYCLES
+  const count = variations.length
 
+  // Only rotate while the headline is on screen. Starting on page load meant
+  // the effect was invisible to anyone who had not reached the footer yet.
   useEffect(() => {
-    if (paused) return
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reducedMotion) return
+    const el = ctaRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.6 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
+  // Fade out, swap the phrase, fade back in. Pauses on hover or keyboard focus
+  // (WCAG 2.2.2) and stays still under the OS "reduce motion" setting.
+  useEffect(() => {
+    if (!inView || paused) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    let swap
     const interval = setInterval(() => {
-      if (stepsRef.current >= maxSteps) {
-        clearInterval(interval)
-        return
-      }
-      stepsRef.current += 1
       setVisible(false)
-      setTimeout(() => {
-        setIndex((i) => (i + 1) % variations.length)
+      swap = setTimeout(() => {
+        setIndex((i) => (i + 1) % count)
         setVisible(true)
       }, 400)
     }, 3000)
 
-    return () => clearInterval(interval)
-  }, [paused, maxSteps, variations.length])
+    return () => {
+      clearInterval(interval)
+      clearTimeout(swap)
+      // Never leave the phrase faded out if we stop mid-transition.
+      setVisible(true)
+    }
+  }, [inView, paused, count])
 
-  const linkStyle = {
-    color: ON_SURFACE,
-    textDecoration: 'none',
-    fontSize: '0.8rem',
-    fontWeight: 500,
-    // WCAG 2.5.8 (Target Size, Minimum): pointer targets need 24x24 CSS px.
-    display: 'inline-flex',
-    alignItems: 'center',
-    minHeight: '24px',
-    padding: '2px 0',
-  }
-
-  // Ordem e designações conforme o documento 01 (Rodapé legal), que manda:
-  //   Informação Legal | Política de Privacidade | Política de Cookies |
-  //   Informação ao Consumidor | Livro de Reclamações
-  // "Informação ao Consumidor" está em falta porque não foi fornecido texto
-  // para essa página. Não é inventada aqui — acrescentar assim que chegar.
-  const legalLinks = [
-    { href: '/legal-notice', label: 'Informação Legal' },
-    { href: '/privacy-policy', label: 'Política de Privacidade' },
-    { href: '/cookie-policy', label: 'Política de Cookies' },
-  ]
-
-  // Texto exato do documento 01 (Rodapé legal). Não reescrever nem traduzir:
-  // é uma declaração jurídica de identificação, exigida pelo art. 10.º do
-  // DL 7/2004, e a versão portuguesa é a que vincula.
-  // Nota que explica ao visitante EN por que razão o bloco de identificação
-  // fica em português. Vazia em PT, onde não há nada a explicar.
-  // O email é partido para fora da string para poder ser um link — a chave de
-  // tradução guarda o texto, não a marcação.
-  const legalNote = t('legalNotTranslated')
-  const [noteBefore, noteAfter] = legalNote
-    ? legalNote.split(E.email)
-    : ['', '']
-
-  const identityLines = [
-    'BSMARTISH · www.bsmartish.pt · www.bsmartish.com',
-    `BSMARTISH URBAN RENOVATION é uma marca registada e titulada por: ${E.legalName}, pessoa coletiva n.º ${E.taxNumber}, com sede em ${E.address}.`,
-    `Contacto: ${E.email} | ${E.phone}`,
-  ]
+  // Ordem conforme o documento 01 (Rodapé legal). A identificação completa da
+  // empresa (DL 7/2004, art. 10.º) está na página Informação Legal, ligada a
+  // partir do rodapé de todas as páginas.
+  const legalLinks = LEGAL_PAGES.map(({ key }) => ({ href: legalHref(key, lang), label: t(key) }))
 
   return (
     <footer
@@ -98,34 +74,17 @@ export default function Footer() {
         {/* Main row */}
         <div
           className="footer-main"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr auto',
-            gap: '40px',
-            alignItems: 'center',
-            paddingBottom: '20px',
-            borderBottom: '1px solid rgba(255,255,255,0.28)',
-          }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
         >
           {/* Left: rotating CTA */}
-          <p style={{
-            fontSize: 'clamp(0.95rem, 1.4vw, 1.25rem)',
-            lineHeight: 1.5,
-            margin: 0,
-            fontWeight: 400,
-          }}>
+          <p ref={ctaRef} className="footer-cta">
             <span>{t('ctaPrefix')}</span>
             <span
               aria-hidden="true"
-              style={{
-                fontWeight: 700,
-                transition: 'opacity 0.4s ease',
-                opacity: visible ? 1 : 0,
-              }}
+              style={{ fontWeight: 700, transition: 'opacity 0.4s ease', opacity: visible ? 1 : 0 }}
             >
               {variations[index]}
             </span>
@@ -135,186 +94,52 @@ export default function Footer() {
           </p>
 
           {/* Right: contact */}
-          <div
-            className="footer-contact"
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}
-          >
-            <p style={{
-              margin: '0 0 6px',
-              fontWeight: 600,
-              fontSize: '0.68rem',
-              letterSpacing: '0.16em',
-              textTransform: 'uppercase',
-              color: ON_SURFACE,
-            }}>
-              {t('contactLabel')}
-            </p>
-            <a href={`tel:${E.phoneHref}`} style={linkStyle} className="footer-link">
+          <div className="footer-contact">
+            <p className="footer-label">{t('contactLabel')}</p>
+            <a href={`tel:${E.phoneHref}`} className="footer-link footer-contact-link">
               {E.phone}
             </a>
-            <a href={`mailto:${E.email}`} style={linkStyle} className="footer-link">
+            <a href={`mailto:${E.email}`} className="footer-link footer-contact-link">
               {E.email}
             </a>
-            <p style={{
-              margin: '4px 0 0',
-              fontSize: '0.68rem',
-              color: ON_SURFACE,
-              textAlign: 'right',
-              maxWidth: '260px',
-            }}>
-              {t('callCost')}
-            </p>
+            <p className="footer-copy">{t('copyright')}</p>
           </div>
         </div>
 
-        {/* Legal navigation */}
-        <nav
-          aria-label={t('legalNavLabel')}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '10px 24px',
-            paddingTop: '18px',
-            paddingBottom: '16px',
-          }}
-        >
-          {legalLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className="footer-link"
-              style={{
-                color: ON_SURFACE,
-                textDecoration: 'none',
-                fontSize: '0.75rem',
-                fontWeight: 500,
-                letterSpacing: '0.06em',
-                display: 'inline-flex',
-                alignItems: 'center',
-                minHeight: '24px',
-              }}
-            >
-              {label}
-            </Link>
-          ))}
+        {/* Bottom bar: legal pages | social */}
+        <div className="footer-bottom">
+          <nav aria-label={t('legalNavLabel')}>
+            <ul className="footer-legal">
+              {legalLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href} className="footer-link footer-small-link">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+              {/* DL 156/2005 (as amended by DL 74/2017): a supplier with a website
+                  must display a visible link to the electronic complaints book. */}
+              <li>
+                <a
+                  href={E.complaintsBookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-link footer-small-link"
+                >
+                  {t('complaintsBook')}
+                  <span aria-hidden="true">&nbsp;↗</span>
+                  <span className="sr-only"> {t('opensNewTab')}</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-          {/* DL 156/2005 (as amended by DL 74/2017): a supplier with a website
-              must display a visible link to the electronic complaints book. */}
-          <a
-            href={E.complaintsBookUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-link"
-            style={{
-              color: ON_SURFACE,
-              textDecoration: 'none',
-              fontSize: '0.75rem',
-              fontWeight: 500,
-              letterSpacing: '0.06em',
-              display: 'inline-flex',
-              alignItems: 'center',
-              minHeight: '24px',
-            }}
-          >
-            Livro de Reclamações
-            <span className="sr-only"> {t('opensNewTab')}</span>
-          </a>
-        </nav>
-
-        {/* Business identification — DL 7/2004, art. 10 */}
-        {identityLines.length > 0 && (
-          <address
-            style={{
-              fontStyle: 'normal',
-              fontSize: '0.72rem',
-              lineHeight: 1.7,
-              color: ON_SURFACE,
-              paddingBottom: '14px',
-              // 70ch partia a linha de identificação em três bocados desiguais
-              // com o rodapé já largo. Mais largura deixa-a respirar, e o
-              // `pretty` evita que a última linha fique com uma palavra órfã.
-              maxWidth: '92ch',
-              textWrap: 'pretty',
-            }}
-          >
-            {identityLines.map((line, i) => (
-              <span key={line} style={{ display: 'block' }}>
-                {line}
-                {/* O asterisco marca o bloco inteiro, por isso vai na última
-                    linha, e só quando há nota para que ele remeta. */}
-                {legalNote && i === identityLines.length - 1 && (
-                  <span aria-hidden="true">&nbsp;*</span>
-                )}
-              </span>
-            ))}
-          </address>
-        )}
-
-        {/* Nota ao visitante EN: o bloco acima fica em português de propósito.
-            Só aparece em EN — em PT o leitor já está a ler a versão vinculativa
-            e a nota não teria a que remeter. */}
-        {legalNote && (
-          <p
-            lang="en"
-            style={{
-              fontSize: '0.68rem',
-              lineHeight: 1.65,
-              color: 'rgba(255,255,255,0.78)',
-              paddingBottom: '14px',
-              maxWidth: '92ch',
-              textWrap: 'pretty',
-            }}
-          >
-            {noteBefore}
-            <a
-              href={`mailto:${E.email}`}
-              style={{
-                color: 'inherit',
-                textDecoration: 'underline',
-                textUnderlineOffset: '2px',
-              }}
-            >
-              {E.email}
-            </a>
-            {noteAfter}
-          </p>
-        )}
-
-        {/* Bottom bar */}
-        <div
-          className="footer-bottom"
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingTop: '14px',
-            borderTop: '1px solid rgba(255,255,255,0.22)',
-            gap: '16px',
-          }}
-        >
-          <p style={{
-            margin: 0,
-            fontSize: '0.72rem',
-            fontWeight: 400,
-            color: ON_SURFACE,
-            letterSpacing: '0.04em',
-          }}>
-            {t('copyright')}
-          </p>
-
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <div className="footer-social-row">
             <a
               href="https://www.instagram.com/bsmartish"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                color: ON_SURFACE,
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '28px',
-                height: '28px',
-              }}
+              className="footer-social"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -327,14 +152,7 @@ export default function Footer() {
               href="https://www.linkedin.com/company/bsmartish"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                color: ON_SURFACE,
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '28px',
-                height: '28px',
-              }}
+              className="footer-social"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
@@ -349,21 +167,97 @@ export default function Footer() {
       </div>
 
       <style>{`
-        .footer-link:hover { text-decoration: underline; }
+        #footer .footer-main {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 40px;
+          align-items: center;
+          padding-bottom: 20px;
+          border-bottom: 1px solid rgba(255,255,255,0.28);
+        }
+        #footer .footer-cta {
+          margin: 0;
+          font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+          line-height: 1.5;
+          font-weight: 400;
+        }
+
+        #footer .footer-contact {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
+        #footer .footer-label {
+          margin: 0 0 4px;
+          font-weight: 600;
+          font-size: 0.65rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+        }
+        /* Muted grey, as in the original footer design. */
+        #footer .footer-copy {
+          margin: 6px 0 0;
+          font-size: 0.72rem;
+          letter-spacing: 0.04em;
+          color: rgba(248,248,248,0.5);
+        }
+
+        #footer .footer-link {
+          color: ${ON_SURFACE};
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          min-height: 24px; /* WCAG 2.5.8 target size */
+        }
+        #footer .footer-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+        #footer .footer-contact-link { font-size: 0.88rem; font-weight: 500; }
+
+        #footer .footer-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 16px;
+          padding-top: 14px;
+        }
+        #footer .footer-legal {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0 22px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+        #footer .footer-small-link { font-size: 0.72rem; letter-spacing: 0.04em; }
+
+        #footer .footer-social-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-right: -5px;
+        }
+        #footer .footer-social {
+          color: ${ON_SURFACE};
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 28px;
+          height: 28px;
+          opacity: 0.65; /* 3.1:1 on the surface, above the 3:1 minimum for icons */
+          transition: opacity 0.2s ease;
+        }
+        #footer .footer-social:hover,
+        #footer .footer-social:focus-visible { opacity: 1; }
+
         @media (max-width: 640px) {
-          .footer-main {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
-          }
-          .footer-contact {
-            align-items: flex-start !important;
-          }
-          .footer-contact p:last-child { text-align: left !important; }
-          .footer-bottom {
-            flex-direction: column;
-            align-items: flex-start !important;
-            gap: 12px !important;
-          }
+          #footer .footer-main { grid-template-columns: 1fr; gap: 16px; }
+          #footer .footer-contact { align-items: flex-start; }
+          #footer .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+          #footer .footer-legal { flex-direction: column; }
+          #footer .footer-social-row { margin: 0 0 0 -5px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          #footer .footer-cta span { transition: none !important; }
         }
       `}</style>
     </footer>
