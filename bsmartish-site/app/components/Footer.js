@@ -117,20 +117,6 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              {/* DL 156/2005 (as amended by DL 74/2017): a supplier with a website
-                  must display a visible link to the electronic complaints book. */}
-              <li>
-                <a
-                  href={E.complaintsBookUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-link footer-small-link"
-                >
-                  {t('complaintsBook')}
-                  <span aria-hidden="true">&nbsp;↗</span>
-                  <span className="sr-only"> {t('opensNewTab')}</span>
-                </a>
-              </li>
             </ul>
           </nav>
 
