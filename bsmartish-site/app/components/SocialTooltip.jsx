@@ -71,6 +71,11 @@ const SocialTooltip = React.forwardRef(({ className, items: customItems, ...prop
             src={item.svgUrl}
             alt=""
             aria-hidden="true"
+            width={item.imgSize}
+            height={item.imgSize}
+            // Sem lazy, o React pré-carrega estes logótipos no <head>, a
+            // competir com a imagem principal da página.
+            loading="lazy"
             className="object-contain"
             style={{
               width: `${item.imgSize}px`,

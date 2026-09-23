@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
 import { useTranslation, useLocale } from '@/app/i18n-provider'
@@ -23,10 +24,16 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col justify-center">
 
-      {/* Imagem de fundo */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/website.images/Home/home.image.sec1.webp')" }}
+      {/* Imagem de fundo — é o LCP da página inicial. Como next/image em vez de
+          background-image em CSS: o browser descobre-a logo no HTML (preload),
+          e é servida redimensionada ao ecrã em vez do original de 5349 px. */}
+      <Image
+        src="/images/website.images/Home/home.image.sec1.webp"
+        alt=""
+        fill
+        preload
+        sizes="100vw"
+        className="object-cover object-center"
       />
 
       {/* Overlay Deep Urban */}

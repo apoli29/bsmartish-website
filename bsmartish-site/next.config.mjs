@@ -2,7 +2,20 @@
 const nextConfig = {
   allowedDevOrigins: ['*.ngrok-free.app', '*.ngrok-free.dev', '*.ngrok.io', '*.ngrok.app', '*.ngrok.dev'],
   images: {
-    qualities: [100, 75],
+    qualities: [100, 85, 75],
+  },
+
+  // Anti-clickjacking: the site may only be framed by itself.
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'self'" },
+        ],
+      },
+    ]
   },
 
   async redirects() {

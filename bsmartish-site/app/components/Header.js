@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
@@ -54,9 +55,15 @@ export default function Header() {
               {/* Logo */}
               <Link href={pageHref('home', locale)} className="flex-shrink-0 h-[64px] md:h-[72px] lg:h-[80px] overflow-hidden flex items-center" onClick={() => setMenuOpen(false)}>
                 <div className="w-[198px] md:w-[231px] lg:w-[264px]">
-                  <img
+                  {/* next/image: dimensões explícitas (sem layout shift) e o
+                      PNG de 900 px servido ao tamanho real do cabeçalho. */}
+                  <Image
                     src="/images/logo/logo.png"
                     alt="BSMARTISH"
+                    width={900}
+                    height={900}
+                    preload
+                    sizes="(max-width: 767px) 198px, (max-width: 1023px) 231px, 264px"
                     style={{ width: '100%', height: 'auto', display: 'block' }}
                   />
                 </div>

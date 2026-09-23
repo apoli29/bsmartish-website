@@ -268,9 +268,10 @@ export default function CarouselSection() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 30vw"
-                quality={100}
-                priority={i < 5}
-                loading={i === 0 ? 'eager' : undefined}
+                // Fica abaixo da dobra: carregamento lazy, para não competir com
+                // a imagem principal (LCP). Qualidade 85: visualmente igual a
+                // 100 nestes tamanhos, com cerca de metade do peso.
+                quality={85}
               />
               <div
                 className="absolute inset-0 transition-opacity duration-300"
