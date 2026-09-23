@@ -62,7 +62,7 @@ export default function Header() {
                     alt="BSMARTISH"
                     width={900}
                     height={900}
-                    preload
+                    loading="eager"
                     sizes="(max-width: 767px) 198px, (max-width: 1023px) 231px, 264px"
                     style={{ width: '100%', height: 'auto', display: 'block' }}
                   />
