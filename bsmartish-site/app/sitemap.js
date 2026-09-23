@@ -1,4 +1,4 @@
-import { LEGAL_PAGES } from '@/app/lib/legalRoutes'
+import { INDEXABLE_LEGAL_PATHS } from '@/app/lib/legalRoutes'
 
 const BASE_URL = 'https://www.bsmartish.com'
 
@@ -36,7 +36,7 @@ export default function sitemap() {
       priority: 0.8,
     },
     ...propertyPages,
-    ...LEGAL_PAGES.flatMap((p) => [p.en.path, p.pt.path]).map((path) => ({
+    ...INDEXABLE_LEGAL_PATHS.map((path) => ({
       url: `${BASE_URL}${path}`,
       lastModified: new Date(),
       changeFrequency: 'yearly',

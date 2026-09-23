@@ -22,12 +22,12 @@ export default function AboutTrajectory() {
           >
             {t('eyebrow')}
           </p>
-          <h2
+          <h1
             className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] max-w-[820px]"
             style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, color: '#6b87a4' }}
           >
             {t('headline')}
-          </h2>
+          </h1>
         </FadeIn>
 
         <div className="mt-10 md:mt-12 lg:mt-14 flex flex-col lg:flex-row gap-4">

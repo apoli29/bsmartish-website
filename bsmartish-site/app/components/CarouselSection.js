@@ -261,7 +261,10 @@ export default function CarouselSection() {
             >
               <Image
                 src={`/images/website.images/Home/sec.2/${img}`}
-                alt=""
+                // Real alt on the first copy so the photos can be indexed; the
+                // looping duplicate stays empty. The button's aria-label still
+                // gives screen readers the accessible name.
+                alt={isDuplicate ? '' : t('ariaPhotoAlt', { n: i + 1, total: IMAGES.length })}
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 30vw"

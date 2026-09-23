@@ -11,8 +11,8 @@ import { legalEntity as E } from '@/app/lib/legalEntity'
 //
 // Documents are counsel-drafted and reproduced verbatim in Portuguese.
 // When counsel provides an official English translation, pass it via the
-// `enContent` prop — it will be shown to EN visitors, with the PT version
-// below as the legally binding original.
+// `enContent` prop — it will be shown to EN visitors, with a link to the PT
+// route as the legally binding original.
 // When no translation is provided (default), EN visitors see a notice
 // pointing them to hello@bsmartish.com.
 //
@@ -167,7 +167,7 @@ export function LegalDoc({ docKey, pageLang, title, children, enContent, enTitle
   const others = LEGAL_PAGES.filter((p) => p.key !== docKey)
 
   return (
-    <main className="legal-page">
+    <main className="legal-page" lang={locale}>
       {/* ── Cabeçalho do documento ───────────────────────────────────────── */}
       <header className="legal-hero">
         <div className="legal-wrap">
@@ -214,17 +214,26 @@ export function LegalDoc({ docKey, pageLang, title, children, enContent, enTitle
             </div>
           )}
 
+          {/* EN with translation: the binding PT original lives on its own
+              route. Repeating it here made the PT page a subset of the EN one,
+              which Google reads as duplicate content. */}
           {isEn && enContent && (
             <div className="legal-original">
               <p lang="en" className="legal-kicker">Original Portuguese version — legally binding</p>
-              <p lang="pt" className="legal-original-sub">Versão portuguesa — juridicamente vinculativa</p>
+              <p lang="pt" className="legal-original-sub">
+                <Link href={legalHref(docKey, 'pt')} className="legal-a" hrefLang="pt">
+                  Versão portuguesa — juridicamente vinculativa
+                </Link>
+              </p>
             </div>
           )}
 
-          {/* PT content — always rendered */}
-          <div className="legal-body" lang="pt" ref={ptRef}>
-            {children}
-          </div>
+          {/* PT content — on the PT route, and on EN routes without a translation */}
+          {!(isEn && enContent) && (
+            <div className="legal-body" lang="pt" ref={ptRef}>
+              {children}
+            </div>
+          )}
 
           {/* ── Outros documentos ─────────────────────────────────────────── */}
           <nav aria-label={c.others} className="legal-next">
