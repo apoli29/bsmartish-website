@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { useTranslation } from '@/app/i18n-provider'
+import { useTranslation, useLocale } from '@/app/i18n-provider'
+import { pageHref } from '@/app/lib/routes'
 
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
@@ -121,18 +122,19 @@ function ActivityRow({ activity, delay }) {
 
 export default function AboutWhatWeDo() {
   const { t } = useTranslation('aboutWhatWeDo')
+  const locale = useLocale()
   const [headRef, headIn] = useInView(0.3)
 
   const activities = [
     {
       title: t('activity1Title'),
       text: t('activity1Text'),
-      cta: { label: t('activity1Cta'), href: '/mid-term-rentals-in-porto' },
+      cta: { label: t('activity1Cta'), href: pageHref('rentals', locale) },
     },
     {
       title: t('activity2Title'),
       text: t('activity2Text'),
-      cta: { label: t('activity2Cta'), href: '/#projects-carousel', center: true },
+      cta: { label: t('activity2Cta'), href: `${pageHref('home', locale)}#projects-carousel`, center: true },
     },
   ]
 

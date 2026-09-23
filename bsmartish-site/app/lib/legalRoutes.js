@@ -32,11 +32,6 @@ export const LEGAL_PAGES = [
   },
 ]
 
-// Rotas que devem ser indexadas: a PT sempre, a EN só quando há tradução.
-export const INDEXABLE_LEGAL_PATHS = LEGAL_PAGES.flatMap((p) =>
-  p.hasEnglish ? [p.en.path, p.pt.path] : [p.pt.path]
-)
-
 const byKey = Object.fromEntries(LEGAL_PAGES.map((p) => [p.key, p]))
 
 // `lang` aceita 'EN'/'PT' (useLang) ou 'en'/'pt' (useLocale).

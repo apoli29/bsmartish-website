@@ -1,9 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { useLang } from '@/app/i18n-provider'
 import { LEGAL_PAGES, legalHref } from '@/app/lib/legalRoutes'
 import { legalEntity as E } from '@/app/lib/legalEntity'
 
@@ -17,8 +15,8 @@ import { legalEntity as E } from '@/app/lib/legalEntity'
 // pointing them to hello@bsmartish.com.
 //
 // Each document is served from two routes (see app/lib/legalRoutes.js). The
-// route decides the language on arrival; switching language afterwards moves
-// the visitor to the route of the other language.
+// route decides the language; the language switcher moves the visitor to the
+// route of the other language.
 
 const COPY = {
   en: {
@@ -33,33 +31,6 @@ const COPY = {
     others: 'Outros documentos legais',
     back: 'Voltar à página inicial',
   },
-}
-
-// Mantém o idioma do site alinhado com o URL da página legal.
-function usePageLanguage(docKey, pageLang) {
-  const [lang, setLang] = useLang()
-  const router = useRouter()
-  const pageUpper = pageLang === 'pt' ? 'PT' : 'EN'
-  const [synced, setSynced] = useState(false)
-
-  // Chegar a /politica-de-privacidade significa ler em português, e vice-versa.
-  useEffect(() => {
-    setLang(pageUpper)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageUpper])
-
-  // Depois de alinhado, uma troca no seletor de idioma leva à rota equivalente.
-  useEffect(() => {
-    if (!synced) {
-      if (lang === pageUpper) setSynced(true)
-      return
-    }
-    if (lang !== pageUpper) router.replace(legalHref(docKey, lang))
-  }, [lang, pageUpper, synced, docKey, router])
-
-  // Até alinhar, renderiza na língua do URL — evita um piscar de conteúdo EN
-  // numa página PT enquanto o provider lê a preferência guardada.
-  return (synced ? lang : pageUpper) === 'PT' ? 'pt' : 'en'
 }
 
 // Índice. As secções são lidas do DOM já renderizado em vez de serem
@@ -153,7 +124,8 @@ function SectionIndex({ scopeRef, label, deps }) {
 }
 
 export function LegalDoc({ docKey, pageLang, title, children, enContent, enTitle, enDisclaimer }) {
-  const locale = usePageLanguage(docKey, pageLang)
+  // O idioma do site vem do URL (i18n-provider), por isso coincide com a rota.
+  const locale = pageLang === 'pt' ? 'pt' : 'en'
   const isEn = locale === 'en'
   const c = COPY[locale]
 

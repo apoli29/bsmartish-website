@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useTranslation, useLocale, useLang } from '@/app/i18n-provider'
+import { propertyHref } from '@/app/lib/routes'
 import TiltCard from '@/app/components/TiltCard'
 import { SocialTooltip } from '@/app/components/SocialTooltip'
 
@@ -90,7 +91,7 @@ export function RelatedPropertiesSection({ related }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {related.map((p) => (
-        <Link key={p.id} href={`/mid-term-rentals-in-porto/${p.slug}`} style={{ textDecoration: 'none' }}>
+        <Link key={p.id} href={propertyHref(p.slug, locale)} style={{ textDecoration: 'none' }}>
           <TiltCard style={{ border: '1px solid #e4e4e4', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#ffffff' }}>
             <div style={{ height: '220px', backgroundColor: '#c4c8cc' }}>
               {p.image && (

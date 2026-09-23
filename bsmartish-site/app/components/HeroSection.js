@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
-import { useTranslation } from '@/app/i18n-provider'
+import { useTranslation, useLocale } from '@/app/i18n-provider'
+import { pageHref } from '@/app/lib/routes'
 
 function handleSweep(e) {
   const el = e.currentTarget
@@ -18,6 +19,7 @@ function handleSweep(e) {
 
 export default function HeroSection() {
   const { t } = useTranslation('hero')
+  const locale = useLocale()
   return (
     <section className="relative min-h-screen flex flex-col justify-center">
 
@@ -60,7 +62,7 @@ export default function HeroSection() {
         <FadeIn delay={400}>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/about"
+              href={pageHref('about', locale)}
               className="px-7 py-3 text-[#F8F8F8] rounded text-[0.8rem] uppercase tracking-[0.1em] overflow-hidden relative btn-sweep" onMouseEnter={handleSweep}
               style={{
                 border: '1px solid rgba(248,248,248,0.55)',
@@ -71,7 +73,7 @@ export default function HeroSection() {
               {t('button1')}
             </Link>
             <Link
-              href="/mid-term-rentals-in-porto"
+              href={pageHref('rentals', locale)}
               className="px-7 py-3 text-[#F8F8F8] rounded text-[0.8rem] uppercase tracking-[0.1em] overflow-hidden relative btn-sweep" onMouseEnter={handleSweep}
               style={{
                 backgroundColor: '#202831',

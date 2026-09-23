@@ -10,6 +10,8 @@
 import { properties, getPropertyBySlug } from '@/app/lib/propertiesData'
 import { HOME_GALLERY_SRCS } from '@/app/lib/homeGalleryImages'
 import en from '../../locales/en.json'
+import pt from '../../locales/pt.json'
+import { PAGES, propertyHref } from '@/app/lib/routes'
 
 export const BASE_URL = 'https://www.bsmartish.com'
 export const ORG_ID = `${BASE_URL}/#organization`
@@ -17,7 +19,7 @@ export const SITE_ID = `${BASE_URL}/#website`
 
 const abs = (path) => `${BASE_URL}${path}`
 
-const PORTFOLIO_PATH = '/mid-term-rentals-in-porto'
+const isPt = (locale) => locale === 'pt'
 
 // ─────────────────────────────────────────────────────────────
 // Organização
@@ -178,12 +180,12 @@ const offerTerms = (property) => {
   ].join(' ')
 }
 
-export function apartmentSchema(slug) {
+export function apartmentSchema(slug, locale = 'en') {
   const property = getPropertyBySlug(slug)
   if (!property) return null
 
   const { specs } = property
-  const url = abs(`${PORTFOLIO_PATH}/${slug}`)
+  const url = abs(propertyHref(slug, locale))
   const address = ADDRESSES[slug]
 
   const yearName =
@@ -192,8 +194,9 @@ export function apartmentSchema(slug) {
   return {
     '@type': ['Apartment', 'Product'],
     '@id': `${url}#apartment`,
-    name: `${property.name} ${specs.type}`,
-    description: property.description,
+    name: isPt(locale) ? property.ptName : `${property.name} ${specs.type}`,
+    description: isPt(locale) ? property.ptDescription : property.description,
+    inLanguage: locale,
     url,
     image: property.gallery.map(abs),
     numberOfRooms: Number(specs.rooms),
@@ -260,25 +263,30 @@ export function apartmentSchema(slug) {
   }
 }
 
-export function propertyBreadcrumbSchema(slug) {
+export function propertyBreadcrumbSchema(slug, locale = 'en') {
   const property = getPropertyBySlug(slug)
   if (!property) return null
 
   return {
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: isPt(locale) ? 'Início' : 'Home',
+        item: abs(PAGES.home[locale]),
+      },
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Mid-Term Rentals in Porto',
-        item: abs(PORTFOLIO_PATH),
+        name: isPt(locale) ? 'Arrendamento de Média Duração no Porto' : 'Mid-Term Rentals in Porto',
+        item: abs(PAGES.rentals[locale]),
       },
       {
         '@type': 'ListItem',
         position: 3,
-        name: `${property.name} ${property.specs.type}`,
-        item: abs(`${PORTFOLIO_PATH}/${slug}`),
+        name: isPt(locale) ? property.ptName : `${property.name} ${property.specs.type}`,
+        item: abs(propertyHref(slug, locale)),
       },
     ],
   }
@@ -288,16 +296,22 @@ export function propertyBreadcrumbSchema(slug) {
 // Listagem
 // ─────────────────────────────────────────────────────────────
 
-const PORTFOLIO_DESCRIPTION =
-  'Fully furnished and serviced apartments for mid-term rentals in Porto: Paranhos, Matosinhos and Alegria. Flexible stays from 30 days to 12 months. For expatriates, digital nomads and students.'
+const PORTFOLIO_DESCRIPTION = {
+  en:
+  'Fully furnished and serviced apartments for mid-term rentals in Porto: Paranhos, Matosinhos and Alegria. Flexible stays from 30 days to 12 months. For expatriates, digital nomads and students.',
+  pt:
+    'Apartamentos totalmente mobilados e com serviços para arrendamento de média duração no Porto: Paranhos, Matosinhos e Alegria. Estadias flexíveis de 30 dias a 12 meses. Para expatriados, nómadas digitais e estudantes.',
+}
 
-export function portfolioSchema() {
+export function portfolioSchema(locale = 'en') {
+  const url = abs(PAGES.rentals[locale])
   return {
     '@type': 'CollectionPage',
-    '@id': `${abs(PORTFOLIO_PATH)}#page`,
-    name: 'Mid-Term Rentals in Porto',
-    description: PORTFOLIO_DESCRIPTION,
-    url: abs(PORTFOLIO_PATH),
+    '@id': `${url}#page`,
+    name: isPt(locale) ? 'Arrendamento de Média Duração no Porto' : 'Mid-Term Rentals in Porto',
+    description: PORTFOLIO_DESCRIPTION[locale],
+    inLanguage: locale,
+    url,
     isPartOf: { '@id': SITE_ID },
     about: { '@id': ORG_ID },
     mainEntity: {
@@ -306,8 +320,8 @@ export function portfolioSchema() {
       itemListElement: properties.map((property, i) => ({
         '@type': 'ListItem',
         position: i + 1,
-        name: `${property.name} ${property.specs.type}`,
-        url: abs(`${PORTFOLIO_PATH}/${property.slug}`),
+        name: isPt(locale) ? property.ptName : `${property.name} ${property.specs.type}`,
+        url: abs(propertyHref(property.slug, locale)),
       })),
     },
   }
@@ -317,14 +331,18 @@ export function portfolioSchema() {
 // About
 // ─────────────────────────────────────────────────────────────
 
-const ABOUT_DESCRIPTION =
-  'Urban renovation specialists in Porto since 2006. We develop, renovate and operate mid-term rental apartments, and manage renovation projects for third-party investors.'
+const ABOUT_DESCRIPTION = {
+  en:
+  'Urban renovation specialists in Porto since 2006. We develop, renovate and operate mid-term rental apartments, and manage renovation projects for third-party investors.',
+  pt:
+    'Especialistas em reabilitação urbana no Porto desde 2006. Desenvolvemos, renovamos e gerimos apartamentos para arrendamento de média duração, e gerimos projetos de reabilitação para investidores terceiros.',
+}
 
 // A 6.ª resposta está partida em três chaves porque no site contém um link.
 // Aqui é reconstruída como texto simples — o schema quer a resposta, não a
 // marcação.
-const faqAnswers = () => {
-  const f = en.aboutFAQ
+const faqAnswers = (locale) => {
+  const f = (isPt(locale) ? pt : en).aboutFAQ
   return [
     [f.q1, f.a1],
     [f.q2, f.a2],
@@ -335,23 +353,26 @@ const faqAnswers = () => {
   ]
 }
 
-export function aboutPageSchema() {
+export function aboutPageSchema(locale = 'en') {
+  const url = abs(PAGES.about[locale])
   return {
     '@type': 'AboutPage',
-    '@id': `${abs('/about')}#page`,
-    name: 'About Us',
-    description: ABOUT_DESCRIPTION,
-    url: abs('/about'),
+    '@id': `${url}#page`,
+    name: isPt(locale) ? 'Sobre Nós' : 'About Us',
+    description: ABOUT_DESCRIPTION[locale],
+    inLanguage: locale,
+    url,
     isPartOf: { '@id': SITE_ID },
     mainEntity: { '@id': ORG_ID },
   }
 }
 
-export function faqSchema() {
+export function faqSchema(locale = 'en') {
   return {
     '@type': 'FAQPage',
-    '@id': `${abs('/about')}#faq`,
-    mainEntity: faqAnswers().map(([question, answer]) => ({
+    '@id': `${abs(PAGES.about[locale])}#faq`,
+    inLanguage: locale,
+    mainEntity: faqAnswers(locale).map(([question, answer]) => ({
       '@type': 'Question',
       name: question,
       acceptedAnswer: { '@type': 'Answer', text: answer },

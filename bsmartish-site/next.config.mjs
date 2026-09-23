@@ -28,10 +28,11 @@ const nextConfig = {
       // Old WordPress site: pages with a real equivalent on the new site keep
       // the value of their inbound links. Everything else (Barcelona and Costa
       // Brava projects, /category/, /feed/) is left to 404 on purpose.
-      { source: '/pt-pt', destination: '/', permanent: true },
-      { source: '/pt-pt/sobre-nos', destination: '/about', permanent: true },
-      { source: '/pt-pt/servicos', destination: '/about', permanent: true },
-      { source: '/pt-pt/os-nossos-projetos', destination: '/mid-term-rentals-in-porto', permanent: true },
+      // The old /pt-pt pages were Portuguese, so they go to the PT routes.
+      { source: '/pt-pt', destination: '/pt', permanent: true },
+      { source: '/pt-pt/sobre-nos', destination: '/pt/sobre-nos', permanent: true },
+      { source: '/pt-pt/servicos', destination: '/pt/sobre-nos', permanent: true },
+      { source: '/pt-pt/os-nossos-projetos', destination: '/pt/arrendamento-media-duracao-porto', permanent: true },
       // The English legal notice moved so its URL matches its title.
       { source: '/legal-notice', destination: '/legal-information', permanent: true },
       // Apex to www on the canonical domain, so a single host serves the site.

@@ -2,10 +2,12 @@
 
 import FadeIn from '@/app/components/FadeIn'
 import CountUp from '@/app/components/CountUp'
-import { useTranslation } from '@/app/i18n-provider'
+import { useTranslation, useLocale } from '@/app/i18n-provider'
+import { pageHref } from '@/app/lib/routes'
 
 export default function ImpactWidget() {
   const { t } = useTranslation('impact')
+  const locale = useLocale()
   const stats = [
     { value: t('stat1Value'), label: t('stat1Label') },
     { value: t('stat2Value'), label: t('stat2Label') },
@@ -63,7 +65,7 @@ export default function ImpactWidget() {
         {/* Link abaixo das estatísticas */}
         <FadeIn delay={150} className="mt-12 md:mt-14">
           <a
-            href="/about"
+            href={pageHref('about', locale)}
             className="group flex items-center gap-2 text-[0.8rem] uppercase tracking-[0.1em] transition-all"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#202831' }}
           >

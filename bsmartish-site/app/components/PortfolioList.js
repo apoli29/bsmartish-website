@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import FadeIn from '@/app/components/FadeIn'
 import { useTranslation, useLocale } from '@/app/i18n-provider'
+import { propertyHref } from '@/app/lib/routes'
 import { properties } from '@/app/lib/propertiesData'
 
 function handleSweep(e) {
@@ -57,7 +58,7 @@ function PropertyRow({ property }) {
 
           {/* Image — top on mobile, right on md+ */}
           <Link
-            href={`/mid-term-rentals-in-porto/${property.slug}`}
+            href={propertyHref(property.slug, locale)}
             className="group order-first md:order-last md:flex-shrink-0 relative rounded-[8px] overflow-hidden block no-underline w-full min-h-[220px] md:w-[52%] md:min-h-[360px]"
             style={{ backgroundColor: '#d0d0d0' }}
           >
@@ -114,7 +115,7 @@ function PropertyRow({ property }) {
             </div>
 
             {/* Title — clickable */}
-            <Link href={`/mid-term-rentals-in-porto/${property.slug}`} style={{ textDecoration: 'none' }}>
+            <Link href={propertyHref(property.slug, locale)} style={{ textDecoration: 'none' }}>
               <h2
                 style={{
                   margin: 0,
@@ -179,7 +180,7 @@ function PropertyRow({ property }) {
             {/* CTA */}
             <div style={{ marginTop: '8px' }}>
               <Link
-                href={`/mid-term-rentals-in-porto/${property.slug}`}
+                href={propertyHref(property.slug, locale)}
                 className="inline-block px-7 py-3 rounded text-[0.8rem] uppercase tracking-[0.1em] overflow-hidden relative btn-sweep" onMouseEnter={handleSweep}
                 style={{
                   backgroundColor: '#202831',

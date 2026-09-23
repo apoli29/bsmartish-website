@@ -4,14 +4,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { SocialTooltip } from '@/app/components/SocialTooltip'
 import FadeIn from '@/app/components/FadeIn'
-import { useTranslation } from '@/app/i18n-provider'
+import { useTranslation, useLocale } from '@/app/i18n-provider'
+import { pageHref, propertyHref } from '@/app/lib/routes'
 
 export default function FeaturedProperties() {
   const { t } = useTranslation('featured')
+  const locale = useLocale()
   const properties = [
-    { name: t('property1'), src: '/images/website.images/Home/sec.4/paranhos.sec4.webp',   href: '/mid-term-rentals-in-porto/paranhos-apartment'   },
-    { name: t('property2'), src: '/images/website.images/Home/sec.4/matosinhos.sec4.webp', href: '/mid-term-rentals-in-porto/matosinhos-apartment' },
-    { name: t('property3'), src: '/images/website.images/Home/sec.4/alegria.sec4.webp',    href: '/mid-term-rentals-in-porto/alegria-apartment'    },
+    { name: t('property1'), src: '/images/website.images/Home/sec.4/paranhos.sec4.webp',   href: propertyHref('paranhos-apartment', locale)   },
+    { name: t('property2'), src: '/images/website.images/Home/sec.4/matosinhos.sec4.webp', href: propertyHref('matosinhos-apartment', locale) },
+    { name: t('property3'), src: '/images/website.images/Home/sec.4/alegria.sec4.webp',    href: propertyHref('alegria-apartment', locale)    },
   ]
   return (
     <section
@@ -89,8 +91,8 @@ export default function FeaturedProperties() {
 
         {/* Footer: View all (esq) + Book with us (dir) */}
         <FadeIn delay={300} className="flex flex-col gap-4 mt-6 sm:flex-row sm:items-center sm:justify-between sm:mt-4">
-          <a
-            href="/mid-term-rentals-in-porto"
+          <Link
+            href={pageHref('rentals', locale)}
             className="group flex items-center gap-2 text-[0.8rem] uppercase tracking-[0.1em] transition-all"
             style={{ fontFamily: 'var(--font-aileron)', fontWeight: 600, color: '#202831' }}
           >
@@ -98,7 +100,7 @@ export default function FeaturedProperties() {
               {t('viewAll')}
             </span>
             <span className="transition-transform group-hover:translate-x-1">→</span>
-          </a>
+          </Link>
           <div className="flex items-center gap-3">
             <span
               style={{

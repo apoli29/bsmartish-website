@@ -4,16 +4,19 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { LanguageSwitcher, LanguageSwitcherMobile } from './LanguageSwitcher'
-import { useTranslation } from '@/app/i18n-provider'
+import { useTranslation, useLocale } from '@/app/i18n-provider'
+import { pageHref, isRentalsPath } from '@/app/lib/routes'
 
 export default function Header() {
   const { t } = useTranslation('header')
   const pathname = usePathname()
+  const locale = useLocale()
+  const onRentals = isRentalsPath(pathname)
 
   const links = [
-    { label: t('home'), href: '/' },
-    { label: t('about'), href: '/about' },
-    { label: t('rentals'), href: '/mid-term-rentals-in-porto' },
+    { label: t('home'), href: pageHref('home', locale) },
+    { label: t('about'), href: pageHref('about', locale) },
+    { label: t('rentals'), href: pageHref('rentals', locale) },
     { label: t('contact'), href: '#footer', scroll: true },
   ]
   const [menuOpen, setMenuOpen] = useState(false)
@@ -38,18 +41,18 @@ export default function Header() {
           <header
             className="w-full transition-all duration-500"
             style={{
-              backgroundColor: (solid || pathname.startsWith('/mid-term-rentals-in-porto')) ? 'var(--color-slate-blue-surface)' : 'transparent',
-              backdropFilter: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'blur(14px)' : 'none',
-              WebkitBackdropFilter: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? 'blur(14px)' : 'none',
-              border: (!solid && !pathname.startsWith('/mid-term-rentals-in-porto')) ? '1px solid rgba(255,255,255,0.18)' : 'none',
-              boxShadow: (solid || pathname.startsWith('/mid-term-rentals-in-porto')) ? '0 4px 24px rgba(0,0,0,0.12)' : 'none',
+              backgroundColor: (solid || onRentals) ? 'var(--color-slate-blue-surface)' : 'transparent',
+              backdropFilter: (!solid && !onRentals) ? 'blur(14px)' : 'none',
+              WebkitBackdropFilter: (!solid && !onRentals) ? 'blur(14px)' : 'none',
+              border: (!solid && !onRentals) ? '1px solid rgba(255,255,255,0.18)' : 'none',
+              boxShadow: (solid || onRentals) ? '0 4px 24px rgba(0,0,0,0.12)' : 'none',
               borderRadius: menuOpen ? '4px 4px 0 0' : '4px',
             }}
           >
             <div className="pl-1 md:pl-1 lg:pl-2 pr-7 md:pr-8 lg:pr-10 h-[64px] md:h-[72px] lg:h-[80px] flex items-center justify-between">
 
               {/* Logo */}
-              <Link href="/" className="flex-shrink-0 h-[64px] md:h-[72px] lg:h-[80px] overflow-hidden flex items-center" onClick={() => setMenuOpen(false)}>
+              <Link href={pageHref('home', locale)} className="flex-shrink-0 h-[64px] md:h-[72px] lg:h-[80px] overflow-hidden flex items-center" onClick={() => setMenuOpen(false)}>
                 <div className="w-[198px] md:w-[231px] lg:w-[264px]">
                   <img
                     src="/images/logo/logo.png"
