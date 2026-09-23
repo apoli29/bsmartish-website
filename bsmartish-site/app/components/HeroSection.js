@@ -50,7 +50,9 @@ export default function HeroSection() {
             JavaScript arranca e volta a mostrá-lo, o que num telemóvel lento fazia
             o título piscar e atrasava o LCP. A animação CSS corre desde a
             primeira pintura, sem depender do JavaScript. */}
-        <div className="hero-rise" style={{ '--d': '100ms' }}>
+        {/* O título (elemento LCP) sobe sem desvanecer: o Chrome só conta um
+            elemento para o LCP quando deixa de ter opacidade 0. */}
+        <div className="hero-rise hero-rise--solid" style={{ '--d': '100ms' }}>
           <h1
             className="text-[#F8F8F8] leading-[1.1] max-w-2xl mb-[21.6px] md:mb-6"
             style={{ fontFamily: 'var(--font-hanken)', fontWeight: 500, fontSize: 'clamp(2.1rem, 6vw, 3.5rem)' }}
