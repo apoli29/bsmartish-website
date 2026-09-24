@@ -24,10 +24,10 @@ export default function PropertyPage({ slug, locale }) {
 
       <JsonLd data={graph(apartmentSchema(slug, locale), propertyBreadcrumbSchema(slug, locale))} />
 
-      <PropertyMobileSections property={property} />
-
       {/* ── Overview + Gallery (reordered on mobile) ── */}
       <div className="flex flex-col">
+
+      <PropertyMobileSections property={property} />
 
       <PropertyOverviewSection property={property} />
 

@@ -57,7 +57,7 @@ export default function PropertyMobileSections({ property }) {
   return (
     <>
       {/* Mobile-only hero header */}
-      <div className="block md:hidden px-8 pt-6 pb-8" style={{ backgroundColor: '#f8f8f8', borderBottom: '1px solid #e4e4e4' }}>
+      <div className="block md:hidden order-first px-8 pt-6 pb-8" style={{ backgroundColor: '#f8f8f8', borderBottom: '1px solid #e4e4e4' }}>
         <FadeIn delay={0}>
           <p style={{ ...eyebrow, marginBottom: '10px' }}>{t('aboutEyebrow')}</p>
           <h2 style={{ margin: 0, fontFamily: 'var(--font-hanken)', fontSize: 'clamp(1.75rem, 7vw, 2.25rem)', color: '#6b87a4', fontWeight: 500, lineHeight: 1.1 }}>
@@ -66,8 +66,8 @@ export default function PropertyMobileSections({ property }) {
         </FadeIn>
       </div>
 
-      {/* Mobile-only: full property details — before gallery */}
-      <div className="block md:hidden px-8 py-8" style={{ borderBottom: '1px solid #e4e4e4' }}>
+      {/* Mobile-only: full property details — after gallery (order-1), before overview (order-2, later in source) */}
+      <div className="block md:hidden order-2 px-8 py-8" style={{ borderBottom: '1px solid #e4e4e4' }}>
         <FadeIn delay={0}>
           <p style={{ ...eyebrow, marginBottom: '0' }}>{t('detailsEyebrow')}</p>
           <div style={{ ...detailRow, borderTop: '1px solid #e4e4e4', marginTop: '16px' }}>
