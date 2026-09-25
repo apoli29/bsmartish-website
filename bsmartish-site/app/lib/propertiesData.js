@@ -316,6 +316,7 @@ export const properties = [
       floor: '2',
       rooms: '4',
       garage: 'N/I',
+      energyClass: 'A',
     },
     image: '/images/website.images/apt.photos/alegria.apt/1.webp',
     gallery: Array.from({ length: 14 }, (_, i) => `/images/website.images/apt.photos/alegria.apt/${i + 1}.webp`),
