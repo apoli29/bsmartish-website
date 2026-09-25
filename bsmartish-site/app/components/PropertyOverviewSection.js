@@ -65,7 +65,7 @@ export default function PropertyOverviewSection({ property }) {
     : property.specs.garage
 
   return (
-    <section className="order-2 md:order-1" style={{ borderBottom: '1px solid #e4e4e4' }}>
+    <section className="order-2" style={{ borderBottom: '1px solid #e4e4e4' }}>
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 py-12 md:py-16 lg:py-[72px]">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] lg:grid-cols-[1fr_340px] gap-10 md:gap-12 lg:gap-20 items-start">
 

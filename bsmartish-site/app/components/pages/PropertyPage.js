@@ -24,7 +24,7 @@ export default function PropertyPage({ slug, locale }) {
 
       <JsonLd data={graph(apartmentSchema(slug, locale), propertyBreadcrumbSchema(slug, locale))} />
 
-      {/* ── Overview + Gallery (reordered on mobile) ── */}
+      {/* ── Gallery first, then overview (mobile splits the overview) ── */}
       <div className="flex flex-col">
 
       <PropertyMobileSections property={property} />
@@ -32,7 +32,7 @@ export default function PropertyPage({ slug, locale }) {
       <PropertyOverviewSection property={property} />
 
       {/* ── Photo Gallery ── */}
-      <section className="order-1 md:order-2" style={{ borderBottom: '1px solid #e4e4e4' }}>
+      <section className="order-first" style={{ borderBottom: '1px solid #e4e4e4' }}>
         <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 py-12 md:py-16 lg:py-[72px]">
           <FadeIn delay={0}>
             <GalleryHeading />
