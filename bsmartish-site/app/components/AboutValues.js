@@ -31,10 +31,42 @@ function useInView(threshold = 0.2) {
 }
 
 const RECT_WIDTH = 'clamp(220px, 32%, 360px)'
+const PEEK = '56px'
+const PEEK_MOBILE = '36px'
+// Ecrãs tácteis: a mesma animação corre sozinha quando a secção entra no
+// ecrã, em dominó de cima para baixo.
+const AUTO_START = 900
+const AUTO_STAGGER = 260
+const AUTO_HOLD = 1600
 
-function ValueRow({ value, index, isOpen, onToggle }) {
+// Hover no retângulo fechado: recua um pouco, um reflexo atravessa-o e a
+// seta desliza para a direita, sinalizando que abre.
+const HOVER_CSS = `
+.av-sheen {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
+  pointer-events: none;
+  background: linear-gradient(105deg, rgba(248,248,248,0) 0%, rgba(248,248,248,0.22) 50%, rgba(248,248,248,0) 100%);
+  animation: av-sheen 1100ms ${EASE} both;
+}
+@keyframes av-sheen { from { transform: translateX(-110%); } to { transform: translateX(270%); } }
+.av-nudge { animation: av-nudge 1400ms ${EASE} 250ms infinite; }
+@keyframes av-nudge { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) { .av-sheen { display: none; } .av-nudge { animation: none; } }
+`
+
+function ValueRow({ value, index, isOpen, onToggle, autoCue }) {
   const [ref, inView] = useInView(0.25)
   const [isMobile, setIsMobile] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [autoPeek, setAutoPeek] = useState(false)
+  const peeking = (hovered || autoPeek) && !isOpen
+
+  useEffect(() => {
+    if (!autoCue) return
+    const start = setTimeout(() => setAutoPeek(true), AUTO_START + AUTO_STAGGER * index)
+    const end = setTimeout(() => setAutoPeek(false), AUTO_START + AUTO_STAGGER * index + AUTO_HOLD)
+    return () => { clearTimeout(start); clearTimeout(end) }
+  }, [autoCue, index])
   const baseDelay = 220 * index
 
   useEffect(() => {
@@ -66,7 +98,11 @@ function ValueRow({ value, index, isOpen, onToggle }) {
         >
           <div
             style={{
-              backgroundColor: '#6b87a4',
+              position: 'relative',
+              overflow: 'hidden',
+              width: peeking ? `calc(100% - ${PEEK_MOBILE})` : '100%',
+              backgroundColor: peeking ? '#5e7a97' : '#6b87a4',
+              transition: `width 620ms ${EASE}, background-color 400ms ${EASE}`,
               minHeight: '72px',
               display: 'flex',
               alignItems: 'center',
@@ -75,6 +111,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
               paddingRight: '20px',
             }}
           >
+            {peeking && <span aria-hidden="true" className="av-sheen" />}
             <span
               className="text-[1.18rem] leading-none"
               style={{ fontFamily: 'var(--font-garet)', fontWeight: 800, color: '#f8f8f8' }}
@@ -90,9 +127,11 @@ function ValueRow({ value, index, isOpen, onToggle }) {
                 transition: `transform 500ms ${EASE}, color 450ms ${EASE}`,
               }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
+              <span className={peeking ? 'av-nudge inline-flex' : 'inline-flex'}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
             </span>
           </div>
         </button>
@@ -128,6 +167,8 @@ function ValueRow({ value, index, isOpen, onToggle }) {
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         className="group relative block w-full text-left cursor-pointer overflow-hidden"
         style={{ minHeight: '132px' }}
       >
@@ -160,17 +201,19 @@ function ValueRow({ value, index, isOpen, onToggle }) {
             top: 0,
             bottom: 0,
             left: 0,
-            width: isOpen ? RECT_WIDTH : '100%',
-            backgroundColor: '#6b87a4',
+            width: isOpen ? RECT_WIDTH : peeking ? `calc(100% - ${PEEK})` : '100%',
+            backgroundColor: peeking ? '#5e7a97' : '#6b87a4',
+            overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '2rem',
             paddingLeft: '28px',
             paddingRight: '24px',
-            transition: `width 620ms ${EASE}`,
+            transition: `width 620ms ${EASE}, background-color 400ms ${EASE}`,
           }}
         >
+          {peeking && <span aria-hidden="true" className="av-sheen" />}
           <span
             className="leading-none text-[1.28rem] md:text-[1.52rem] lg:text-[1.72rem]"
             style={{
@@ -192,6 +235,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
               transition: `transform 500ms ${EASE}, color 450ms ${EASE}`,
             }}
           >
+            <span className={peeking ? 'av-nudge inline-flex' : 'inline-flex'}>
             <svg
               width="22"
               height="22"
@@ -204,6 +248,7 @@ function ValueRow({ value, index, isOpen, onToggle }) {
             >
               <polyline points="6 9 12 15 18 9" />
             </svg>
+            </span>
           </span>
         </div>
       </button>
@@ -215,6 +260,14 @@ export default function AboutValues() {
   const { t } = useTranslation('aboutValues')
   const [headRef, headIn] = useInView(0.3)
   const [openIndex, setOpenIndex] = useState(-1)
+  const [listRef, listIn] = useInView(0.3)
+  const [isTouch, setIsTouch] = useState(false)
+
+  useEffect(() => {
+    const noHover = window.matchMedia('(hover: none)').matches
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    setIsTouch(noHover && !reduced)
+  }, [])
 
   const values = [
     { name: t('value1Name'), description: t('value1Desc') },
@@ -229,6 +282,7 @@ export default function AboutValues() {
       className="w-full"
       style={{ backgroundColor: '#f8f8f8', borderTop: '1px solid #e4e4e4' }}
     >
+      <style>{HOVER_CSS}</style>
       <div className="max-w-screen-xl mx-auto px-8 md:px-14 lg:px-20 pt-14 md:pt-18 lg:pt-22 pb-14 md:pb-18 lg:pb-22">
 
         <div
@@ -253,13 +307,14 @@ export default function AboutValues() {
           </h2>
         </div>
 
-        <ul className="mt-10 md:mt-12 lg:mt-14">
+        <ul ref={listRef} className="mt-10 md:mt-12 lg:mt-14">
           {values.map((value, i) => (
             <ValueRow
               key={value.name}
               value={value}
               index={i}
               isOpen={openIndex === i}
+              autoCue={isTouch && listIn}
               onToggle={() => setOpenIndex(openIndex === i ? -1 : i)}
             />
           ))}
