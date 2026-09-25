@@ -52,6 +52,7 @@ export const properties = [
       rooms: '4',
       garage: '1 Spot',
       ptGarage: '1 Lugar',
+      energyClass: 'B',
     },
     image: '/images/website.images/apt.photos/paranhos.apt/1.webp',
     gallery: Array.from({ length: 20 }, (_, i) => `/images/website.images/apt.photos/paranhos.apt/${i + 1}.webp`),
@@ -68,7 +69,6 @@ export const properties = [
         'Air conditioning, heating and double-glazed Windows',
         'High-speed internet and television',
         'Fortnightly cleaning included',
-        'Expenses included up to €150/month (water, electricity, and internet)',
       ],
       composition: [
         '1 bedroom with double bed and built-in wardrobes with interior lighting',
@@ -88,7 +88,7 @@ export const properties = [
       ],
       conditions: [
         'Deposit: 1 month (returned up to 30 days after departure)',
-        'Administrative fee: €135 (one-time payment at the start of the contract)',
+        'Expenses included up to €150/month (water, electricity, and internet)',
         'Fixed-term contract (not automatically renewable)',
       ],
     },
@@ -105,7 +105,6 @@ export const properties = [
         'Ar condicionado, aquecimento e janelas de vidro duplo',
         'Internet de alta velocidade e televisão',
         'Limpeza quinzenal incluída',
-        'Despesas incluídas até 150 €/mês (água, eletricidade e internet)',
       ],
       composition: [
         '1 quarto com cama de casal e roupeiros embutidos com iluminação interior',
@@ -126,7 +125,7 @@ export const properties = [
       ],
       conditions: [
         'Depósito: 1 mês (devolvido até 30 dias após saída)',
-        'Taxa administrativa: 135 € (pagamento único no início do contrato)',
+        'Despesas incluídas até 150 €/mês (água, eletricidade e internet)',
         'Contrato a termo certo (não renovável automaticamente)',
       ],
     },
@@ -186,6 +185,7 @@ export const properties = [
       floor: '5',
       rooms: '6',
       garage: 'N/I',
+      energyClass: 'B',
     },
     image: '/images/website.images/apt.photos/matosinhos.apt/1.webp',
     gallery: Array.from({ length: 19 }, (_, i) => `/images/website.images/apt.photos/matosinhos.apt/${i + 1}.webp`),
@@ -202,7 +202,6 @@ export const properties = [
         'Air conditioning, heating and double-glazed Windows',
         'High-speed internet and television',
         'Fortnightly cleaning included',
-        'Expenses included up to €150/month (water, electricity, and internet)',
       ],
       composition: [
         '1 bedroom with double bed and built-in wardrobe',
@@ -222,7 +221,7 @@ export const properties = [
       ],
       conditions: [
         'Deposit: 1 month (returned up to 30 days after departure)',
-        'Administrative fee: €200 (one-time payment at the start of the contract)',
+        'Expenses included up to €150/month (water, electricity, and internet)',
         'Fixed-term contract (not automatically renewable)',
       ],
     },
@@ -239,7 +238,6 @@ export const properties = [
         'Ar condicionado, aquecimento e janelas de vidro duplo',
         'Internet de alta velocidade e televisão',
         'Limpeza quinzenal incluída',
-        'Despesas incluídas até 150 €/mês (água, eletricidade e internet)',
       ],
       composition: [
         '1 quarto com cama de casal e roupeiro embutido',
@@ -260,7 +258,7 @@ export const properties = [
       ],
       conditions: [
         'Depósito: 1 mês (devolvido até 30 dias após saída)',
-        'Taxa administrativa: 200 € (pagamento único no início do contrato)',
+        'Despesas incluídas até 150 €/mês (água, eletricidade e internet)',
         'Contrato a termo certo (não renovável automaticamente)',
       ],
     },
@@ -334,7 +332,6 @@ export const properties = [
         'Air conditioning, heating and double-glazed Windows',
         'High-speed internet and television',
         'Fortnightly cleaning included',
-        'Expenses included up to €150/month (water, electricity, and internet)',
       ],
       composition: [
         '1 bedroom with double bed, built-in wardrobe and natural light',
@@ -354,7 +351,7 @@ export const properties = [
       ],
       conditions: [
         'Deposit: 1 month (returned up to 30 days after departure)',
-        'Administrative fee: €135 (one-time payment at the start of the contract)',
+        'Expenses included up to €150/month (water, electricity, and internet)',
         'Fixed-term contract (not automatically renewable)',
       ],
     },
@@ -371,7 +368,6 @@ export const properties = [
         'Ar condicionado, aquecimento e janelas de vidro duplo',
         'Internet de alta velocidade e televisão',
         'Limpeza quinzenal incluída',
-        'Despesas incluídas até 150 €/mês (água, eletricidade e internet)',
       ],
       composition: [
         '1 quarto com cama de casal, roupeiro embutido e luz natural',
@@ -392,7 +388,7 @@ export const properties = [
       ],
       conditions: [
         'Depósito: 1 mês (devolvido até 30 dias após saída)',
-        'Taxa administrativa: 135 € (pagamento único no início do contrato)',
+        'Despesas incluídas até 150 €/mês (água, eletricidade e internet)',
         'Contrato a termo certo (não renovável automaticamente)',
       ],
     },

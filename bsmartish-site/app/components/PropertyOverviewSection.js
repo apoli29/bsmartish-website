@@ -130,6 +130,13 @@ export default function PropertyOverviewSection({ property }) {
                   <div style={detailValue}>{property.specs.area}</div>
                 </div>
 
+                {property.specs.energyClass && (
+                  <div style={detailRow}>
+                    <div style={detailLabel}>{t('labelEnergyClass')}</div>
+                    <div style={detailValue}>{property.specs.energyClass}</div>
+                  </div>
+                )}
+
                 <div style={{ ...detailRow, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
                   <div>
                     <div style={detailLabel}>{t('labelBedroom')}</div>

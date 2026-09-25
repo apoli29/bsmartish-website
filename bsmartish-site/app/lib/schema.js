@@ -171,11 +171,9 @@ const typology = (beds) => `T${beds}`
 // Vão para a oferta, não para as comodidades: são termos do negócio, não
 // características do imóvel.
 const offerTerms = (property) => {
-  const fee = property.slug === 'matosinhos-apartment' ? '€200' : '€135'
   return [
     'Utilities included up to €150/month (water, electricity and internet).',
     'Deposit: 1 month, returned up to 30 days after departure.',
-    `Administrative fee: ${fee}, one-time payment at the start of the contract.`,
     'Fixed-term contract, not automatically renewable.',
   ].join(' ')
 }

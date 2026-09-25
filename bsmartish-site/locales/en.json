@@ -136,6 +136,7 @@
     "labelBedroom": "Bedroom",
     "labelBathroom": "Bathroom",
     "labelGarage": "Garage",
+    "labelEnergyClass": "Energy Class",
     "labelBuiltYear": "Built Year",
     "labelRenovationYear": "Renovation Year",
     "guests": "guests",
